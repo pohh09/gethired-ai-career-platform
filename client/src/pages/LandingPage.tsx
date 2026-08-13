@@ -11,161 +11,176 @@ import {
   BarChart3,
   Building2,
   Zap,
-  Target,
   ChevronDown,
   Layers,
-  Code,
-  Award,
+  Code2,
   Sun,
   Moon,
-  Star,
+  ShieldCheck,
+  Cpu,
+  Database,
+  Server,
+  Workflow,
+  Globe,
+  Layout,
+  CheckCircle2,
+  FileCode,
 } from "lucide-react";
 import { useUIStore } from "../store/uiStore";
 
-const TESTIMONIALS = [
+const PROJECT_HIGHLIGHTS = [
   {
-    name: "Aarav Sharma",
-    role: "Senior Frontend Engineer",
-    company: "Razorpay",
-    avatar: "https://ui-avatars.com/api/?name=Aarav+Sharma&background=6366f1&color=fff",
-    quote: "GetHired's ATS resume score and instant STAR bullet rewriter helped me land 5 senior engineer interviews within two weeks in Bangalore.",
-    rating: 5,
+    title: "Full-Stack MERN Architecture",
+    description:
+      "Built with React, Node.js, Express, and MongoDB, handling RESTful API workflows, JWT authentication, and database persistence.",
+    icon: Server,
+    color: "text-indigo-500 dark:text-indigo-400",
+    bg: "bg-indigo-50 dark:bg-indigo-950/50 border-indigo-100 dark:border-indigo-900/50",
   },
   {
-    name: "Priya Patel",
-    role: "Full Stack Architect",
-    company: "Swiggy",
-    avatar: "https://ui-avatars.com/api/?name=Priya+Patel&background=8b5cf6&color=fff",
-    quote: "The India-first job aggregator combined with the AI Mock Interview simulator gave me the confidence to secure a 42% CTC hike.",
-    rating: 5,
+    title: "AI Pipeline Integration",
+    description:
+      "Integrated Gemini AI APIs for ATS resume scoring, STAR bullet rewriting, keyword extraction, and dynamic mock interview evaluation.",
+    icon: Cpu,
+    color: "text-purple-500 dark:text-purple-400",
+    bg: "bg-purple-50 dark:bg-purple-950/50 border-purple-100 dark:border-purple-900/50",
   },
   {
-    name: "Rohan Mehta",
-    role: "Product Tech Lead",
-    company: "Stripe",
-    avatar: "https://ui-avatars.com/api/?name=Rohan+Mehta&background=10b981&color=fff",
-    quote: "The Kanban tracking board, auto-generated cover letters, and company CRM replaced 3 separate tools for my entire job hunt.",
-    rating: 5,
-  },
-];
-
-const STATS = [
-  {
-    label: "Jobs Indexed",
-    value: "85,000+",
-    icon: Briefcase,
-    color: "text-indigo-500",
-  },
-  {
-    label: "AI Analyses Completed",
-    value: "150,000+",
-    icon: Sparkles,
-    color: "text-purple-500",
-  },
-  {
-    label: "Applications Tracked",
-    value: "40,000+",
-    icon: Target,
-    color: "text-emerald-500",
-  },
-  {
-    label: "Resume Callback Boost",
-    value: "94%",
-    icon: Award,
-    color: "text-amber-500",
+    title: "Production-Style Frontend UX",
+    description:
+      "Modern, responsive interface featuring state management with Zustand & React Query, interactive Kanban boards, and dark mode support.",
+    icon: Layout,
+    color: "text-emerald-500 dark:text-emerald-400",
+    bg: "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-100 dark:border-emerald-900/50",
   },
 ];
 
 const FEATURES = [
   {
-    icon: Bot,
-    title: "AI Career Operating System",
+    icon: FileText,
+    title: "AI Resume Analyzer",
     description:
-      "Single intelligent workspace combining resume tailoring, interview prep, and career roadmaps.",
+      "Analyze resume structure, skills and keywords against target job descriptions using automated ATS parsing algorithms.",
     color: "from-indigo-500 to-purple-600",
   },
   {
     icon: Briefcase,
-    title: "India-First Job Engine",
+    title: "Job Search Engine",
     description:
-      "Unified search across Jooble, JSearch, and Adzuna with multi-field deduplication and term expansion.",
+      "Query and normalize job listings from external providers in one unified interface with deduplication filters.",
     color: "from-blue-500 to-cyan-600",
-  },
-  {
-    icon: FileText,
-    title: "ATS Resume Analyzer",
-    description:
-      "Extract contact details, compute ATS compatibility (0-100), and optimize bullets using STAR method.",
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    icon: Target,
-    title: "AI Job Fit Matching",
-    description:
-      "Compare your resume against any job description to discover exact missing skills and salary estimates.",
-    color: "from-emerald-500 to-teal-600",
-  },
-  {
-    icon: Zap,
-    title: "Mock Interview Simulator",
-    description:
-      "Practice HR, Technical, and Behavioral rounds with live AI feedback on Confidence, Accuracy, and Tone.",
-    color: "from-amber-500 to-orange-600",
   },
   {
     icon: Layers,
     title: "Kanban Application Tracker",
     description:
-      "Interactive drag-and-drop board tracking applications from Saved to Offer with reminders and notes.",
-    color: "from-rose-500 to-red-600",
+      "Track job applications across pipeline stages (Saved, Applied, Interview, Offer) with notes and status transitions.",
+    color: "from-purple-500 to-pink-600",
+  },
+  {
+    icon: Zap,
+    title: "AI Interview Simulator",
+    description:
+      "Practice technical, HR, and behavioral interview questions with real-time AI feedback and scoring.",
+    color: "from-amber-500 to-orange-600",
   },
   {
     icon: BarChart3,
-    title: "Executive Analytics",
+    title: "Analytics & Progress KPIs",
     description:
-      "Real-time charts tracking response rates, interview conversion, salary benchmarks, and skill progress.",
-    color: "from-indigo-600 to-blue-600",
+      "Visualize application activity, interview progress, response rates, and application pipeline stats.",
+    color: "from-emerald-500 to-teal-600",
   },
   {
     icon: Building2,
     title: "Company Workspace Intel",
     description:
-      "Deep dive into company tech stacks, hiring processes, salary ranges, benefits, and news.",
+      "Organize target company profiles, recruiter contacts, tech stacks, and interview preparation notes.",
     color: "from-teal-500 to-emerald-600",
   },
 ];
 
-const STEPS = [
+const ENGINEERING_HIGHLIGHTS = [
   {
-    step: "01",
-    title: "Upload Resume",
-    desc: "Upload your PDF/DOCX resume for automated ATS parsing and skill extraction.",
+    title: "JWT Authentication & Security",
+    description:
+      "Implemented secure JWT authentication, password hashing with bcrypt, protected API routes, and client-side auth state persistence.",
+    icon: ShieldCheck,
   },
   {
-    step: "02",
-    title: "Discover India-First Jobs",
-    desc: "Search across top aggregators with intelligent query expansion.",
+    title: "Gemini AI Assistant Integration",
+    description:
+      "Structured prompt engineering and API integration with Gemini AI for resume keyword matching, STAR rewriting, and interview evaluations.",
+    icon: Cpu,
   },
   {
-    step: "03",
-    title: "AI Fit Match",
-    desc: "Compare your profile against target postings and get missing skill callouts.",
+    title: "External API Aggregation",
+    description:
+      "Connected external job provider APIs (Jooble/JSearch), handling response normalization, payload transformation, and multi-field deduplication.",
+    icon: Globe,
   },
   {
-    step: "04",
-    title: "One-Click Track",
-    desc: "Organize applications on your interactive drag-and-drop Kanban board.",
+    title: "Client & Server State Management",
+    description:
+      "Utilized Zustand for global UI & modal state alongside TanStack React Query for server data fetching, caching, and optimistic updates.",
+    icon: Workflow,
   },
   {
-    step: "05",
-    title: "AI Interview Prep",
-    desc: "Practice mock interview rounds with live feedback on technical accuracy.",
+    title: "Document & File Processing",
+    description:
+      "Implemented PDF/DOCX resume file upload workflows, backend text extraction, and skill keyword parsing pipelines.",
+    icon: FileCode,
   },
   {
-    step: "06",
-    title: "Get Hired",
-    desc: "Secure your dream job offer with confidence and benchmarked compensation.",
+    title: "Dashboard KPIs & Analytics",
+    description:
+      "Built database aggregation pipelines to compute application metrics, interview readiness scores, and visual chart data.",
+    icon: BarChart3,
   },
+];
+
+const TECH_GROUPS = [
+  {
+    category: "Frontend",
+    techs: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Router",
+      "Zustand",
+      "TanStack Query",
+      "Framer Motion",
+    ],
+    color: "border-indigo-200 dark:border-indigo-900/60 bg-indigo-50/60 dark:bg-indigo-950/30",
+    badgeColor: "bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300",
+  },
+  {
+    category: "Backend",
+    techs: ["Node.js", "Express.js", "MongoDB", "Mongoose"],
+    color: "border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/60 dark:bg-emerald-950/30",
+    badgeColor: "bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300",
+  },
+  {
+    category: "AI & APIs",
+    techs: ["Gemini AI", "REST APIs", "External Job APIs"],
+    color: "border-purple-200 dark:border-purple-900/60 bg-purple-50/60 dark:bg-purple-950/30",
+    badgeColor: "bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300",
+  },
+  {
+    category: "Deployment",
+    techs: ["Vercel", "Render"],
+    color: "border-amber-200 dark:border-amber-900/60 bg-amber-50/60 dark:bg-amber-950/30",
+    badgeColor: "bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300",
+  },
+];
+
+const ARCHITECTURE_STEPS = [
+  { label: "React + TypeScript", sub: "Frontend Component Layer", icon: Layout },
+  { label: "Axios / TanStack Query", sub: "Data Fetching & Cache State", icon: Workflow },
+  { label: "Express REST API", sub: "Backend Controller & Middleware", icon: Server },
+  { label: "JWT Auth & Middleware", sub: "Protected Route Controllers", icon: ShieldCheck },
+  { label: "MongoDB & Mongoose", sub: "NoSQL Data Persistence", icon: Database },
+  { label: "Gemini AI + Job APIs", sub: "Third-Party Integrations", icon: Cpu },
 ];
 
 const SHOWCASE_TABS = [
@@ -173,54 +188,44 @@ const SHOWCASE_TABS = [
     id: "dashboard",
     label: "Dashboard",
     title: "Career Command Center",
-    desc: "Executive KPI widgets, today's tasks, and upcoming interview schedules.",
+    desc: "Key application KPIs, interview pipeline, and job activity tracking.",
   },
   {
     id: "ai-workspace",
     label: "AI Workspace",
-    title: "AI Operating System",
-    desc: "70/30 split layout with 4 core modules and sticky context-aware AI Coach.",
+    title: "AI Resume & Interview Assistant",
+    desc: "Interactive workspace with AI resume tailoring and live interview coaching.",
   },
   {
     id: "jobs",
     label: "Discover Jobs",
-    title: "India-First Job Engine",
-    desc: "Jooble & JSearch multi-provider search with deduplication and filters.",
+    title: "Job Search Engine",
+    desc: "Multi-provider job search integration with unified filters and fit matching.",
   },
   {
     id: "resume",
     label: "Resume Analysis",
     title: "ATS Optimization Engine",
-    desc: "Structural score, STAR bullet rewriting, and tailored keyword injections.",
+    desc: "Structural score, STAR bullet rewriting, and missing skill analysis.",
   },
-];
-
-const TECH_STACK = [
-  { name: "React 19", desc: "Modern UI Framework" },
-  { name: "TypeScript", desc: "Type Safety" },
-  { name: "Node.js & Express", desc: "Scalable API Server" },
-  { name: "MongoDB", desc: "NoSQL Database" },
-  { name: "Gemini AI", desc: "Generative Intelligence" },
-  { name: "Tailwind CSS", desc: "Design System" },
-  { name: "Framer Motion", desc: "Smooth Animations" },
 ];
 
 const FAQS = [
   {
-    q: "What makes GetHired different from traditional job boards?",
-    a: "GetHired combines multi-provider job search with an interactive AI Career Operating System that tailors your resume, calculates ATS match scores, simulates live mock interviews, and tracks applications on a Kanban board in one unified workspace.",
+    q: "Is GetHired a real product?",
+    a: "GetHired is a portfolio project built as a production-style full-stack application. It demonstrates authentication, job discovery, AI career tools, application tracking and analytics.",
   },
   {
-    q: "How does the AI Resume Tailoring work?",
-    a: "Our AI parses your resume text and compares it against target job descriptions to calculate an overall fit score (0-100), identify missing keywords, and suggest STAR-formatted metric achievements.",
+    q: "Is the data real?",
+    a: "Some job listings may come from external APIs. Dashboard metrics and showcase examples use demo data.",
   },
   {
-    q: "Is GetHired tailored for Indian job seekers?",
-    a: "Yes! Discover Jobs incorporates Jooble India as its primary engine alongside JSearch and Adzuna, delivering India-first job listings across Bangalore, Mumbai, Delhi NCR, and remote hubs.",
+    q: "What technologies were used?",
+    a: "React, TypeScript, Node.js, Express, MongoDB, Tailwind CSS, Zustand, TanStack Query, Gemini AI and external APIs.",
   },
   {
-    q: "Can I try GetHired for free?",
-    a: "Absolutely! You can sign up and access the AI Workspace, Application Tracker, and Job Search Engine instantly without any hidden fees.",
+    q: "Can I explore the application?",
+    a: "Yes. Use the demo flow or create an account to explore the application.",
   },
 ];
 
@@ -235,6 +240,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
+      {/* HEADER NAVBAR */}
       <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/landing" className="flex items-center gap-2.5">
@@ -245,9 +251,24 @@ export default function LandingPage() {
               Get
               <span className="text-indigo-600 dark:text-indigo-400">Hired</span>
             </span>
+            <span className="hidden sm:inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200/80 dark:border-indigo-800 ml-1">
+              Full-Stack Project
+            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8 text-xs font-extrabold text-slate-600 dark:text-slate-400">
+            <a
+              href="#project-overview"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              Overview
+            </a>
+            <a
+              href="#problem-solution"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              Workflow
+            </a>
             <a
               href="#features"
               className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
@@ -255,16 +276,22 @@ export default function LandingPage() {
               Features
             </a>
             <a
-              href="#how-it-works"
+              href="#engineering"
               className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              How It Works
+              Engineering
             </a>
             <a
-              href="#showcase"
+              href="#architecture"
               className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              Showcase
+              Architecture
+            </a>
+            <a
+              href="#tech-stack"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              Tech Stack
             </a>
             <a
               href="#faq"
@@ -293,39 +320,44 @@ export default function LandingPage() {
               to="/register"
               className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/30 flex items-center gap-1.5 transition-all"
             >
-              <span>Get Started</span>
+              <span>Explore Demo</span>
               <ArrowRight size={14} />
             </Link>
           </div>
         </div>
       </header>
 
-      <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-6 max-w-3xl mx-auto">
+          {/* Small Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold border border-indigo-200/80 dark:border-indigo-800 shadow-2xs">
-            <Sparkles size={14} className="text-indigo-500 animate-pulse" />
-            <span>AI Career Operating System</span>
+            <Code2 size={14} className="text-indigo-500" />
+            <span>Full-Stack MERN + AI Project</span>
           </div>
 
+          {/* Hero Title */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
-            Accelerate Your Job Search with{" "}
+            Your Job Search,{" "}
             <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">
-              AI Intelligence
+              Built Into One Workspace.
             </span>
           </h1>
 
+          {/* Supporting Text */}
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-            Discover India-first jobs, tailor resumes with ATS scoring, practice
-            live mock interviews, and track applications on an interactive
-            Kanban board.
+            GetHired is a full-stack job management platform combining job discovery,
+            AI resume analysis, interview preparation, and application tracking in
+            one workspace.
           </p>
 
+          {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               to="/register"
               className="px-7 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-xl shadow-indigo-600/30 flex items-center gap-2 transition-all hover:scale-105 cursor-pointer"
             >
-              <span>Start Free Trial</span>
+              <span>Explore GetHired</span>
               <ArrowRight size={16} />
             </Link>
 
@@ -335,7 +367,7 @@ export default function LandingPage() {
               className="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-sm shadow-md hover:bg-slate-50 dark:hover:bg-slate-800/80 flex items-center gap-2 transition-all cursor-pointer"
             >
               <Play size={16} className="text-indigo-600 fill-indigo-600" />
-              <span>Explore Live Workspace Demo</span>
+              <span>Explore Demo</span>
             </button>
 
             <a
@@ -352,6 +384,7 @@ export default function LandingPage() {
           </div>
         </div>
 
+        {/* HERO MOCKUP PREVIEW */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -363,13 +396,18 @@ export default function LandingPage() {
               <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
               <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
               <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
-              <span className="ml-2 text-xs font-bold text-slate-400">
-                gethired.ai/dashboard
+              <span className="ml-2 text-xs font-bold text-slate-400 font-mono">
+                gethired-demo.local/dashboard
               </span>
             </div>
-            <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
-              Live Preview
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                Demo Data
+              </span>
+              <span className="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+                Application Preview
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -384,7 +422,7 @@ export default function LandingPage() {
                 </span>
               </p>
               <p className="text-[11px] text-slate-500">
-                Greenhouse & Lever Compliant
+                Parsed Skills & STAR Metrics
               </p>
             </div>
             <div className="p-4 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/50 space-y-1">
@@ -406,124 +444,127 @@ export default function LandingPage() {
                 88% Ready
               </p>
               <p className="text-[11px] text-slate-500">
-                3 Mock Rounds Completed
+                TechNova Labs Preparation
               </p>
             </div>
           </div>
         </motion.div>
       </section>
 
-      <section className="py-12 bg-white/80 dark:bg-slate-900/80 border-y border-slate-200/80 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            {STATS.map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <div key={idx} className="p-4 space-y-2">
-                  <div className="inline-flex p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 shadow-2xs">
-                    <Icon size={24} className={stat.color} />
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-                    {stat.value}
-                  </h3>
-                  <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                    {stat.label}
-                  </p>
+      {/* 2. PROBLEM -> SOLUTION SECTION */}
+      <section
+        id="problem-solution"
+        className="py-16 bg-white dark:bg-slate-900/80 border-y border-slate-200/80 dark:border-slate-800"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Workflow Optimization
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              One Workspace for the Entire Job Search
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+            {/* Problem Box */}
+            <div className="p-6 rounded-3xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-extrabold">
+                <span>Problem</span>
+              </div>
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
+                "Job seekers often switch between job boards, resume tools, spreadsheets, interview platforms and notes."
+              </p>
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-900/30 text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <Globe size={14} className="text-rose-500" />
+                  <span>Job Boards</span>
                 </div>
-              );
-            })}
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-900/30 text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <FileText size={14} className="text-rose-500" />
+                  <span>Resume Tools</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-900/30 text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <BarChart3 size={14} className="text-rose-500" />
+                  <span>Spreadsheets</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-900/30 text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                  <Zap size={14} className="text-rose-500" />
+                  <span>Interview Notes</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Solution Box */}
+            <div className="p-6 rounded-3xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold">
+                <CheckCircle2 size={14} />
+                <span>GetHired Solution</span>
+              </div>
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
+                "GetHired brings these workflows together into a single workspace."
+              </p>
+              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900/30 space-y-2">
+                <div className="flex items-center justify-between text-xs font-extrabold text-indigo-600 dark:text-indigo-400">
+                  <span className="flex items-center gap-2">
+                    <Sparkles size={16} /> Unified Job Workspace
+                  </span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800">Integrated</span>
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between flex-wrap gap-1 pt-1 font-medium">
+                  <span>Discovery</span> → <span>Resume Analyzer</span> → <span>Kanban Tracker</span> → <span>AI Mock Interview</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* 3. BUILT AS A REAL-WORLD FULL-STACK PROJECT */}
       <section
-        id="features"
+        id="project-overview"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
       >
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            Everything You Need
+            Portfolio Context
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Complete Toolkit for Job Seekers
+            Built as a Real-World Full-Stack Project
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
-            From discovering Indian tech jobs to passing technical interviews,
-            GetHired powers your entire job search journey.
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+            GetHired was designed to solve the fragmented job-search workflow by bringing
+            job discovery, resume optimization, interview preparation, and application
+            tracking into one application.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {FEATURES.map((feat, idx) => {
-            const Icon = feat.icon;
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PROJECT_HIGHLIGHTS.map((card, idx) => {
+            const Icon = card.icon;
             return (
-              <motion.div
+              <div
                 key={idx}
-                whileHover={{ y: -4 }}
-                className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-4 flex flex-col justify-between"
+                className={`p-6 rounded-3xl border ${card.bg} shadow-xs space-y-4 flex flex-col justify-between`}
               >
                 <div className="space-y-3">
-                  <div
-                    className={`p-3 rounded-2xl bg-gradient-to-tr ${feat.color} text-white inline-block shadow-md`}
-                  >
-                    <Icon size={22} />
+                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 inline-block shadow-xs">
+                    <Icon size={24} className={card.color} />
                   </div>
-                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
-                    {feat.title}
+                  <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+                    {card.title}
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                    {feat.description}
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                    {card.description}
                   </p>
                 </div>
-
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                  <span>Explore Feature</span>
-                  <ArrowRight size={13} />
-                </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
       </section>
 
-      <section
-        id="how-it-works"
-        className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-              Simple Step-by-Step
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-              How GetHired Works
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STEPS.map((s, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3 relative overflow-hidden"
-              >
-                <span className="text-3xl font-extrabold text-indigo-600/20 dark:text-indigo-400/20 absolute top-4 right-4">
-                  {s.step}
-                </span>
-                <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 inline-block font-extrabold text-xs border border-indigo-200/60 dark:border-indigo-800">
-                  Step {s.step}
-                </div>
-                <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
-                  {s.title}
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                  {s.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* 4. INTERACTIVE SHOWCASE (WITH DEMO DATA BADGE & FICTIONAL COMPANIES) */}
       <section
         id="showcase"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10"
@@ -571,8 +612,8 @@ export default function LandingPage() {
                   {activeTabObj.desc}
                 </p>
               </div>
-              <span className="text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
-                Interactive SaaS Preview
+              <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                DEMO DATA
               </span>
             </div>
 
@@ -581,20 +622,36 @@ export default function LandingPage() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   <div className="p-3.5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40">
-                    <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">Total Tracked</span>
-                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">42 Jobs</span>
+                    <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">
+                      Total Tracked
+                    </span>
+                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">
+                      42 Jobs
+                    </span>
                   </div>
                   <div className="p-3.5 rounded-2xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40">
-                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider block">Interviews</span>
-                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">8 Active</span>
+                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider block">
+                      Interviews
+                    </span>
+                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">
+                      8 Active
+                    </span>
                   </div>
                   <div className="p-3.5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40">
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block">Offers</span>
-                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">2 Offers</span>
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block">
+                      Offers
+                    </span>
+                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">
+                      2 Offers
+                    </span>
                   </div>
                   <div className="p-3.5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/40">
-                    <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">ATS Average</span>
-                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">94 / 100</span>
+                    <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">
+                      ATS Average
+                    </span>
+                    <span className="text-xl font-extrabold text-slate-900 dark:text-slate-100">
+                      94 / 100
+                    </span>
                   </div>
                 </div>
 
@@ -603,14 +660,22 @@ export default function LandingPage() {
                     <span className="font-bold text-slate-300 flex items-center gap-1.5">
                       <Sparkles size={14} className="text-amber-400" /> Upcoming Interview
                     </span>
-                    <span className="text-[10px] bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded-full border border-emerald-500/30">Confirmed</span>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      Confirmed
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-extrabold text-sm text-slate-100">Senior React Engineer</h4>
-                      <p className="text-xs text-slate-400">Stripe • Technical System Design Round</p>
+                      <h4 className="font-extrabold text-sm text-slate-100">
+                        Senior React Engineer
+                      </h4>
+                      <p className="text-xs text-slate-400">
+                        TechNova Labs • Technical System Design Round
+                      </p>
                     </div>
-                    <span className="text-xs font-mono text-indigo-400 bg-indigo-950 px-3 py-1 rounded-xl border border-indigo-800">Tomorrow @ 10:00 AM</span>
+                    <span className="text-xs font-mono text-indigo-400 bg-indigo-950 px-3 py-1 rounded-xl border border-indigo-800">
+                      Tomorrow @ 10:00 AM
+                    </span>
                   </div>
                 </div>
               </div>
@@ -624,28 +689,44 @@ export default function LandingPage() {
                     <span className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
                       <Bot size={15} className="text-indigo-500" /> AI Resume Optimizer
                     </span>
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full">Score 94%</span>
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full">
+                      Score 94%
+                    </span>
                   </div>
                   <div className="space-y-2 text-xs">
                     <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                      <span className="text-[10px] text-slate-400 block font-bold">Original:</span>
-                      <p className="text-slate-500 line-through font-mono">"Architected microservice endpoints."</p>
-                      <span className="text-[10px] text-indigo-500 font-bold block mt-1">STAR Rewritten:</span>
-                      <p className="text-slate-800 dark:text-slate-200 font-medium">"Architected high-throughput Node.js microservice APIs, improving throughput by 42%."</p>
+                      <span className="text-[10px] text-slate-400 block font-bold">
+                        Original:
+                      </span>
+                      <p className="text-slate-500 line-through font-mono">
+                        "Architected microservice endpoints."
+                      </p>
+                      <span className="text-[10px] text-indigo-500 font-bold block mt-1">
+                        STAR Rewritten:
+                      </span>
+                      <p className="text-slate-800 dark:text-slate-200 font-medium">
+                        "Architected high-throughput Node.js microservice APIs, improving throughput by 42%."
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3 flex flex-col justify-between border border-slate-800 shadow-inner">
                   <div className="space-y-2">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">AI Coach Live Assistant</span>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                      AI Coach Assistant
+                    </span>
                     <div className="p-3 rounded-xl bg-slate-800/80 text-xs text-slate-200 border border-slate-700 leading-relaxed font-mono">
-                      "I've evaluated your profile against Stripe's Senior Frontend Engineer posting. You match 94% of core technical requirements!"
+                      "I've evaluated your profile against TechNova Labs' Senior Full Stack Engineer posting. You match 94% of core requirements!"
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-indigo-600/30 text-indigo-300 border border-indigo-500/30">Mock Interview</span>
-                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30">Tailor Resume</span>
+                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-indigo-600/30 text-indigo-300 border border-indigo-500/30">
+                      Mock Interview
+                    </span>
+                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30">
+                      Tailor Resume
+                    </span>
                   </div>
                 </div>
               </div>
@@ -656,29 +737,49 @@ export default function LandingPage() {
               <div className="space-y-3">
                 <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">RZ</div>
+                    <div className="h-9 w-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">
+                      TN
+                    </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">Lead Frontend Engineer</h4>
-                      <p className="text-[11px] text-slate-500">Razorpay • Bangalore, India (Hybrid)</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        Lead Frontend Engineer
+                      </h4>
+                      <p className="text-[11px] text-slate-500">
+                        TechNova Labs • Hybrid
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block">₹32L - ₹42L LPA</span>
-                    <span className="text-[10px] font-bold text-indigo-500">96% Match</span>
+                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block">
+                      ₹32L - ₹42L LPA
+                    </span>
+                    <span className="text-[10px] font-bold text-indigo-500">
+                      96% Match
+                    </span>
                   </div>
                 </div>
 
                 <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-xs">SW</div>
+                    <div className="h-9 w-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-xs">
+                      CP
+                    </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">Senior Full Stack Architect</h4>
-                      <p className="text-[11px] text-slate-500">Swiggy • Remote India</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        Senior Full Stack Architect
+                      </h4>
+                      <p className="text-[11px] text-slate-500">
+                        CloudPeak Systems • Remote
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block">₹28L - ₹38L LPA</span>
-                    <span className="text-[10px] font-bold text-indigo-500">92% Match</span>
+                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block">
+                      ₹28L - ₹38L LPA
+                    </span>
+                    <span className="text-[10px] font-bold text-indigo-500">
+                      92% Match
+                    </span>
                   </div>
                 </div>
               </div>
@@ -689,18 +790,33 @@ export default function LandingPage() {
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">ATS Scan Compatibility Report</h4>
-                    <p className="text-xs text-slate-500">Scanned against 50+ enterprise HR ATS parameters</p>
+                    <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+                      ATS Scan Compatibility Report
+                    </h4>
+                    <p className="text-xs text-slate-500">
+                      Scanned against 50+ enterprise HR ATS parameters
+                    </p>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-extrabold text-sm border border-emerald-500/30">
                     94%
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">✓ React 19</span>
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">✓ TypeScript</span>
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">+ Add Docker</span>
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">+ Add GraphQL</span>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                    ✓ React
+                  </span>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                    ✓ TypeScript
+                  </span>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
+                    ✓ Node.js
+                  </span>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">
+                    + Add Docker
+                  </span>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">
+                    + Add GraphQL
+                  </span>
                 </div>
               </div>
             )}
@@ -708,81 +824,173 @@ export default function LandingPage() {
         </AnimatePresence>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* 5. FEATURES SECTION */}
+      <section
+        id="features"
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+      >
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            Loved by Job Seekers
+            System Features
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Loved by Tech Professionals
+            Core Application Modules
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
-            See how GetHired helps engineers, designers, and managers land high-growth tech roles.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((item, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm space-y-4 flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center gap-1 text-amber-400">
-                  {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} size={15} className="fill-current" />
-                  ))}
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                  "{item.quote}"
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <img
-                  src={item.avatar}
-                  alt={item.name}
-                  className="h-10 w-10 rounded-full object-cover border border-slate-200 dark:border-slate-700"
-                />
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
-                    {item.name}
-                  </h4>
-                  <p className="text-[11px] text-slate-500">
-                    {item.role} @ <span className="font-semibold text-slate-700 dark:text-slate-300">{item.company}</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {FEATURES.map((feat, idx) => {
+            const Icon = feat.icon;
+            return (
+              <motion.div
+                key={idx}
+                whileHover={{ y: -4 }}
+                className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div
+                    className={`p-3 rounded-2xl bg-gradient-to-tr ${feat.color} text-white inline-block shadow-md`}
+                  >
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+                    {feat.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                    {feat.description}
                   </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">
+                  <span>Explore Feature</span>
+                  <ArrowRight size={13} />
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
-      <section className="py-16 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-              Powered by Modern Full-Stack Technologies
+      {/* 6. ENGINEERING HIGHLIGHTS SECTION */}
+      <section
+        id="engineering"
+        className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Technical Implementation
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              What I Built Under the Hood
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Built for speed, reliability, and security.
-            </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {TECH_STACK.map((tech, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ENGINEERING_HIGHLIGHTS.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3"
+                >
+                  <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 inline-block font-extrabold text-xs border border-indigo-200/60 dark:border-indigo-800">
+                    <Icon size={18} />
+                  </div>
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. ARCHITECTURE SECTION */}
+      <section
+        id="architecture"
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+      >
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+            System Design
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            Application Architecture
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+            Designed as a full-stack application with a React frontend, REST API
+            backend, MongoDB persistence, AI integrations and external job providers.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {ARCHITECTURE_STEPS.map((step, idx) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={idx}
+                  className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/70 dark:border-slate-800 space-y-2 relative"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                      <Icon size={16} />
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">
+                      0{idx + 1}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
+                    {step.label}
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-medium">
+                    {step.sub}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. TECH STACK SECTION */}
+      <section
+        id="tech-stack"
+        className="py-16 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center space-y-2">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Technology Stack
+            </span>
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              Built With
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {TECH_GROUPS.map((group, idx) => (
               <div
                 key={idx}
-                className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs flex items-center gap-2"
+                className={`p-5 rounded-3xl border ${group.color} shadow-xs space-y-3`}
               >
-                <Code size={15} className="text-indigo-500" />
-                <div>
-                  <p className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
-                    {tech.name}
-                  </p>
-                  <p className="text-[10px] text-slate-400">{tech.desc}</p>
+                <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+                  {group.category}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.techs.map((t, i) => (
+                    <span
+                      key={i}
+                      className={`text-[11px] font-bold px-2.5 py-1 rounded-xl ${group.badgeColor}`}
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
@@ -790,16 +998,17 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* 9. FAQ SECTION */}
       <section
         id="faq"
         className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
       >
         <div className="text-center space-y-3">
           <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            Frequently Asked Questions
+            Project Overview
           </span>
           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Got Questions? We Have Answers.
+            Frequently Asked Questions
           </h2>
         </div>
 
@@ -814,12 +1023,14 @@ export default function LandingPage() {
                 <button
                   type="button"
                   onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between font-extrabold text-sm text-slate-900 dark:text-slate-100 hover:text-indigo-600 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between font-extrabold text-sm text-slate-900 dark:text-slate-100 hover:text-indigo-600 transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
                     size={18}
-                    className={`transition-transform ${isOpen ? "rotate-180 text-indigo-600" : "text-slate-400"}`}
+                    className={`transition-transform ${
+                      isOpen ? "rotate-180 text-indigo-600" : "text-slate-400"
+                    }`}
                   />
                 </button>
                 {isOpen && (
@@ -833,45 +1044,68 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* 10. FINAL CTA */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl text-center space-y-6 border border-indigo-900/50">
           <div className="inline-flex p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-indigo-300">
             <Sparkles size={28} />
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-            Ready to Supercharge Your Career Growth?
+            Explore the GetHired Project
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
-            Join thousands of job seekers optimizing resumes, discovering Indian
-            tech opportunities, and conquering technical interviews.
+            Explore the complete application and see how the frontend, backend,
+            database, AI integrations and job APIs work together.
           </p>
-          <div className="pt-2">
-            <Link
-              to="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-xl shadow-indigo-600/40 hover:scale-105 transition-all"
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button
+              type="button"
+              onClick={() => navigate("/ai-workspace")}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-xl shadow-indigo-600/40 hover:scale-105 transition-all cursor-pointer"
             >
-              <span>Get Started with GetHired</span>
+              <span>Explore Demo</span>
               <ArrowRight size={18} />
-            </Link>
+            </button>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-sm border border-white/15 transition-all"
+            >
+              <span>View GitHub</span>
+            </a>
           </div>
         </div>
       </section>
 
+      {/* 11. FOOTER */}
       <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>
-            © {new Date().getFullYear()} GetHired AI Career Platform. All rights
-            reserved.
+          <p className="font-semibold">
+            GetHired — Full-Stack MERN + AI Portfolio Project
           </p>
           <div className="flex items-center gap-6 font-bold">
-            <Link to="/landing" className="hover:text-indigo-600">
-              Privacy Policy
-            </Link>
-            <Link to="/landing" className="hover:text-indigo-600">
-              Terms of Service
-            </Link>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-600"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-600"
+            >
+              LinkedIn
+            </a>
             <Link to="/ai-workspace" className="hover:text-indigo-600">
               AI Workspace
+            </Link>
+            <Link to="/login" className="hover:text-indigo-600">
+              Sign In
             </Link>
           </div>
         </div>
