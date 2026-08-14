@@ -25,120 +25,162 @@ import {
   Layout,
   CheckCircle2,
   FileCode,
+  Lock,
+  ArrowDown,
 } from "lucide-react";
 import { useUIStore } from "../store/uiStore";
 
+// 1. PROJECT CAPABILITIES
+const PROJECT_CAPABILITIES = [
+  {
+    title: "Authentication & Protected Routes",
+    description:
+      "JWT authentication, bcrypt password hashing, token verification middleware, and persistent client-side route guards.",
+    icon: Lock,
+    color: "text-indigo-500 dark:text-indigo-400",
+    bg: "bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-900/50",
+  },
+  {
+    title: "AI Career Tools",
+    description:
+      "Gemini AI integration for ATS resume scoring, STAR bullet rewriting, keyword extraction, and dynamic mock interview simulation.",
+    icon: Cpu,
+    color: "text-purple-500 dark:text-purple-400",
+    bg: "bg-purple-50/70 dark:bg-purple-950/40 border-purple-200/80 dark:border-purple-900/50",
+  },
+  {
+    title: "Job Search Integration",
+    description:
+      "External job API aggregation with multi-parameter filtering, data normalization, deduplication logic, and salary insights.",
+    icon: Globe,
+    color: "text-blue-500 dark:text-blue-400",
+    bg: "bg-blue-50/70 dark:bg-blue-950/40 border-blue-200/80 dark:border-blue-900/50",
+  },
+  {
+    title: "Application Tracking",
+    description:
+      "Interactive Kanban board with drag-and-drop stage updates, customizable statuses, notes, reminders, and activity tracking.",
+    icon: Layers,
+    color: "text-emerald-500 dark:text-emerald-400",
+    bg: "bg-emerald-50/70 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-900/50",
+  },
+];
+
+// 2. BUILT AS A REAL-WORLD FULL-STACK PROJECT
 const PROJECT_HIGHLIGHTS = [
   {
-    title: "Full-Stack MERN Architecture",
+    title: "Full-Stack Architecture",
     description:
       "Built with React, Node.js, Express, and MongoDB, handling RESTful API workflows, JWT authentication, and database persistence.",
     icon: Server,
     color: "text-indigo-500 dark:text-indigo-400",
-    bg: "bg-indigo-50 dark:bg-indigo-950/50 border-indigo-100 dark:border-indigo-900/50",
+    bg: "bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-900/50",
   },
   {
-    title: "AI Pipeline Integration",
+    title: "AI-Powered Features",
     description:
       "Integrated Gemini AI APIs for ATS resume scoring, STAR bullet rewriting, keyword extraction, and dynamic mock interview evaluation.",
     icon: Cpu,
     color: "text-purple-500 dark:text-purple-400",
-    bg: "bg-purple-50 dark:bg-purple-950/50 border-purple-100 dark:border-purple-900/50",
+    bg: "bg-purple-50/70 dark:bg-purple-950/40 border-purple-200/80 dark:border-purple-900/50",
   },
   {
-    title: "Production-Style Frontend UX",
+    title: "Production-Style UX",
     description:
       "Modern, responsive interface featuring state management with Zustand & React Query, interactive Kanban boards, and dark mode support.",
     icon: Layout,
     color: "text-emerald-500 dark:text-emerald-400",
-    bg: "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-100 dark:border-emerald-900/50",
+    bg: "bg-emerald-50/70 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-900/50",
   },
 ];
 
+// 3. SYSTEM FEATURES
 const FEATURES = [
   {
     icon: FileText,
     title: "AI Resume Analyzer",
     description:
-      "Analyze resume structure, skills and keywords against target job descriptions using automated ATS parsing algorithms.",
+      "Analyze resume structure, skills and keywords against target job descriptions.",
     color: "from-indigo-500 to-purple-600",
   },
   {
     icon: Briefcase,
-    title: "Job Search Engine",
+    title: "Job Discovery",
     description:
-      "Query and normalize job listings from external providers in one unified interface with deduplication filters.",
+      "Search and normalize job listings from external providers in one unified interface.",
     color: "from-blue-500 to-cyan-600",
   },
   {
     icon: Layers,
-    title: "Kanban Application Tracker",
+    title: "Application Tracker",
     description:
-      "Track job applications across pipeline stages (Saved, Applied, Interview, Offer) with notes and status transitions.",
+      "Track applications through customizable statuses, notes, reminders and a Kanban workflow.",
     color: "from-purple-500 to-pink-600",
   },
   {
     icon: Zap,
-    title: "AI Interview Simulator",
+    title: "AI Interview Prep",
     description:
-      "Practice technical, HR, and behavioral interview questions with real-time AI feedback and scoring.",
+      "Practice HR, behavioral and technical interviews with AI-generated questions and feedback.",
     color: "from-amber-500 to-orange-600",
   },
   {
     icon: BarChart3,
-    title: "Analytics & Progress KPIs",
+    title: "Analytics Dashboard",
     description:
-      "Visualize application activity, interview progress, response rates, and application pipeline stats.",
+      "Visualize application activity, interview progress and job-search performance.",
     color: "from-emerald-500 to-teal-600",
   },
   {
     icon: Building2,
-    title: "Company Workspace Intel",
+    title: "Company Workspace",
     description:
-      "Organize target company profiles, recruiter contacts, tech stacks, and interview preparation notes.",
+      "Organize company information, recruiters, notes and hiring activity.",
     color: "from-teal-500 to-emerald-600",
   },
 ];
 
+// 4. ENGINEERING HIGHLIGHTS
 const ENGINEERING_HIGHLIGHTS = [
   {
-    title: "JWT Authentication & Security",
+    title: "Authentication",
     description:
-      "Implemented secure JWT authentication, password hashing with bcrypt, protected API routes, and client-side auth state persistence.",
+      "JWT authentication, protected routes and persistent client-side auth state.",
     icon: ShieldCheck,
   },
   {
-    title: "Gemini AI Assistant Integration",
+    title: "AI Integration",
     description:
-      "Structured prompt engineering and API integration with Gemini AI for resume keyword matching, STAR rewriting, and interview evaluations.",
+      "Integrated AI-powered resume, interview and career assistance workflows.",
     icon: Cpu,
   },
   {
-    title: "External API Aggregation",
+    title: "Job Aggregation",
     description:
-      "Connected external job provider APIs (Jooble/JSearch), handling response normalization, payload transformation, and multi-field deduplication.",
+      "Integrated external job providers and normalized different API responses.",
     icon: Globe,
   },
   {
-    title: "Client & Server State Management",
+    title: "State Management",
     description:
-      "Utilized Zustand for global UI & modal state alongside TanStack React Query for server data fetching, caching, and optimistic updates.",
+      "Used Zustand and TanStack Query for client and server state management.",
     icon: Workflow,
   },
   {
-    title: "Document & File Processing",
+    title: "File Processing",
     description:
-      "Implemented PDF/DOCX resume file upload workflows, backend text extraction, and skill keyword parsing pipelines.",
+      "Implemented resume upload and parsing workflows.",
     icon: FileCode,
   },
   {
-    title: "Dashboard KPIs & Analytics",
+    title: "Analytics",
     description:
-      "Built database aggregation pipelines to compute application metrics, interview readiness scores, and visual chart data.",
+      "Built dashboard KPIs, charts and application activity tracking.",
     icon: BarChart3,
   },
 ];
 
+// 5. TECH STACK GROUPS
 const TECH_GROUPS = [
   {
     category: "Frontend",
@@ -174,15 +216,47 @@ const TECH_GROUPS = [
   },
 ];
 
+// 6. ARCHITECTURE FLOW STEPS
 const ARCHITECTURE_STEPS = [
-  { label: "React + TypeScript", sub: "Frontend Component Layer", icon: Layout },
-  { label: "Axios / TanStack Query", sub: "Data Fetching & Cache State", icon: Workflow },
-  { label: "Express REST API", sub: "Backend Controller & Middleware", icon: Server },
-  { label: "JWT Auth & Middleware", sub: "Protected Route Controllers", icon: ShieldCheck },
-  { label: "MongoDB & Mongoose", sub: "NoSQL Data Persistence", icon: Database },
-  { label: "Gemini AI + Job APIs", sub: "Third-Party Integrations", icon: Cpu },
+  {
+    step: "01",
+    label: "React + TypeScript",
+    sub: "Frontend UI & Interactive Components",
+    icon: Layout,
+  },
+  {
+    step: "02",
+    label: "Axios / TanStack Query",
+    sub: "Data Fetching, Caching & Mutations",
+    icon: Workflow,
+  },
+  {
+    step: "03",
+    label: "Express REST API",
+    sub: "Backend Route Handlers & Controllers",
+    icon: Server,
+  },
+  {
+    step: "04",
+    label: "Authentication + Business Logic",
+    sub: "JWT Guards, Password Hashing & Middleware",
+    icon: ShieldCheck,
+  },
+  {
+    step: "05",
+    label: "MongoDB",
+    sub: "Mongoose Schemas & Data Persistence",
+    icon: Database,
+  },
+  {
+    step: "06",
+    label: "Gemini AI + External Job APIs",
+    sub: "Prompt Pipelines & Job Data Normalization",
+    icon: Cpu,
+  },
 ];
 
+// 7. SHOWCASE TABS (FICTIONAL COMPANIES)
 const SHOWCASE_TABS = [
   {
     id: "dashboard",
@@ -210,6 +284,7 @@ const SHOWCASE_TABS = [
   },
 ];
 
+// 8. FAQS
 const FAQS = [
   {
     q: "Is GetHired a real product?",
@@ -256,7 +331,7 @@ export default function LandingPage() {
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-xs font-extrabold text-slate-600 dark:text-slate-400">
+          <div className="hidden lg:flex items-center gap-7 text-xs font-extrabold text-slate-600 dark:text-slate-400">
             <a
               href="#project-overview"
               className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
@@ -268,6 +343,12 @@ export default function LandingPage() {
               className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
               Workflow
+            </a>
+            <a
+              href="#capabilities"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              Capabilities
             </a>
             <a
               href="#features"
@@ -305,7 +386,7 @@ export default function LandingPage() {
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -384,7 +465,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* HERO MOCKUP PREVIEW */}
+        {/* HERO MOCKUP PREVIEW WITH DEMO DATA NOTICE */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -397,7 +478,7 @@ export default function LandingPage() {
               <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
               <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
               <span className="ml-2 text-xs font-bold text-slate-400 font-mono">
-                gethired-demo.local/dashboard
+                gethired-workspace.local/dashboard
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -466,16 +547,19 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
             {/* Problem Box */}
-            <div className="p-6 rounded-3xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-extrabold">
-                <span>Problem</span>
+            <div className="p-6 sm:p-8 rounded-3xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40 space-y-5 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-extrabold">
+                  <span>Problem</span>
+                </div>
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
+                  "Job seekers often switch between job boards, resume tools, spreadsheets, interview platforms and notes."
+                </p>
               </div>
-              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
-                "Job seekers often switch between job boards, resume tools, spreadsheets, interview platforms and notes."
-              </p>
-              <div className="grid grid-cols-2 gap-2 pt-2">
+
+              <div className="grid grid-cols-2 gap-2.5 pt-2">
                 <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-900/30 text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-2">
                   <Globe size={14} className="text-rose-500" />
                   <span>Job Boards</span>
@@ -496,23 +580,43 @@ export default function LandingPage() {
             </div>
 
             {/* Solution Box */}
-            <div className="p-6 rounded-3xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold">
-                <CheckCircle2 size={14} />
-                <span>GetHired Solution</span>
+            <div className="p-6 sm:p-8 rounded-3xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40 space-y-5 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold">
+                  <CheckCircle2 size={14} />
+                  <span>GetHired Solution</span>
+                </div>
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
+                  "GetHired brings these workflows together into a single workspace."
+                </p>
               </div>
-              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">
-                "GetHired brings these workflows together into a single workspace."
-              </p>
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900/30 space-y-2">
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900/30 space-y-3 shadow-sm">
                 <div className="flex items-center justify-between text-xs font-extrabold text-indigo-600 dark:text-indigo-400">
                   <span className="flex items-center gap-2">
                     <Sparkles size={16} /> Unified Job Workspace
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800">Integrated</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800">
+                    Integrated
+                  </span>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between flex-wrap gap-1 pt-1 font-medium">
-                  <span>Discovery</span> → <span>Resume Analyzer</span> → <span>Kanban Tracker</span> → <span>AI Mock Interview</span>
+
+                <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300 pt-1">
+                  <span className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">Job Boards</span>
+                  <span>→</span>
+                  <span className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">Resume Tools</span>
+                  <span>→</span>
+                  <span className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">Spreadsheet</span>
+                  <span>→</span>
+                  <span className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800">Interview Prep</span>
+                </div>
+
+                <div className="flex items-center justify-center pt-1 text-indigo-600 dark:text-indigo-400">
+                  <ArrowDown size={16} className="animate-bounce" />
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center text-xs font-extrabold shadow-md">
+                  GetHired Workspace
                 </div>
               </div>
             </div>
@@ -520,38 +624,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. BUILT AS A REAL-WORLD FULL-STACK PROJECT */}
+      {/* 3. PROJECT CAPABILITIES */}
       <section
-        id="project-overview"
+        id="capabilities"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
       >
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            Portfolio Context
+            System Overview
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Built as a Real-World Full-Stack Project
+            Project Capabilities
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-            GetHired was designed to solve the fragmented job-search workflow by bringing
-            job discovery, resume optimization, interview preparation, and application
-            tracking into one application.
+            Core technical features and modular systems implemented across the full-stack codebase.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PROJECT_HIGHLIGHTS.map((card, idx) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {PROJECT_CAPABILITIES.map((card, idx) => {
             const Icon = card.icon;
             return (
               <div
                 key={idx}
-                className={`p-6 rounded-3xl border ${card.bg} shadow-xs space-y-4 flex flex-col justify-between`}
+                className={`p-6 rounded-3xl border ${card.bg} shadow-xs space-y-4 flex flex-col justify-between transition-all hover:shadow-md`}
               >
                 <div className="space-y-3">
                   <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 inline-block shadow-xs">
-                    <Icon size={24} className={card.color} />
+                    <Icon size={22} className={card.color} />
                   </div>
-                  <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
                     {card.title}
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
@@ -564,7 +666,53 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 4. INTERACTIVE SHOWCASE (WITH DEMO DATA BADGE & FICTIONAL COMPANIES) */}
+      {/* 4. BUILT AS A REAL-WORLD FULL-STACK PROJECT */}
+      <section
+        id="project-overview"
+        className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              Portfolio Context
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              Built as a Real-World Full-Stack Project
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+              GetHired was designed to solve the fragmented job-search workflow by bringing
+              job discovery, resume optimization, interview preparation, and application
+              tracking into one application.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {PROJECT_HIGHLIGHTS.map((card, idx) => {
+              const Icon = card.icon;
+              return (
+                <div
+                  key={idx}
+                  className={`p-6 sm:p-8 rounded-3xl border ${card.bg} shadow-xs space-y-4 flex flex-col justify-between bg-white dark:bg-slate-900`}
+                >
+                  <div className="space-y-3">
+                    <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 inline-block shadow-xs">
+                      <Icon size={24} className={card.color} />
+                    </div>
+                    <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. INTERACTIVE SHOWCASE (WITH DEMO DATA BADGE & FICTIONAL COMPANIES) */}
       <section
         id="showcase"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10"
@@ -667,7 +815,7 @@ export default function LandingPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-extrabold text-sm text-slate-100">
-                        Senior React Engineer
+                        Senior Full Stack Engineer
                       </h4>
                       <p className="text-xs text-slate-400">
                         TechNova Labs • Technical System Design Round
@@ -782,6 +930,30 @@ export default function LandingPage() {
                     </span>
                   </div>
                 </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-850 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-9 w-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
+                      PF
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        Backend Systems Engineer
+                      </h4>
+                      <p className="text-[11px] text-slate-500">
+                        PixelForge Labs • Bangalore / Remote
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 block">
+                      ₹24L - ₹34L LPA
+                    </span>
+                    <span className="text-[10px] font-bold text-indigo-500">
+                      89% Match
+                    </span>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -794,7 +966,7 @@ export default function LandingPage() {
                       ATS Scan Compatibility Report
                     </h4>
                     <p className="text-xs text-slate-500">
-                      Scanned against 50+ enterprise HR ATS parameters
+                      Target Role: Senior Full-Stack Engineer at NovaStack Technologies
                     </p>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-extrabold text-sm border border-emerald-500/30">
@@ -824,59 +996,61 @@ export default function LandingPage() {
         </AnimatePresence>
       </section>
 
-      {/* 5. FEATURES SECTION */}
+      {/* 6. FEATURES SECTION */}
       <section
         id="features"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
-      >
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            System Features
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Core Application Modules
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((feat, idx) => {
-            const Icon = feat.icon;
-            return (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -4 }}
-                className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-4 flex flex-col justify-between"
-              >
-                <div className="space-y-3">
-                  <div
-                    className={`p-3 rounded-2xl bg-gradient-to-tr ${feat.color} text-white inline-block shadow-md`}
-                  >
-                    <Icon size={22} />
-                  </div>
-                  <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
-                    {feat.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                    {feat.description}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                  <span>Explore Feature</span>
-                  <ArrowRight size={13} />
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 6. ENGINEERING HIGHLIGHTS SECTION */}
-      <section
-        id="engineering"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              System Features
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              Core Application Modules
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURES.map((feat, idx) => {
+              const Icon = feat.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  whileHover={{ y: -4 }}
+                  className="p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-4 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div
+                      className={`p-3 rounded-2xl bg-gradient-to-tr ${feat.color} text-white inline-block shadow-md`}
+                    >
+                      <Icon size={22} />
+                    </div>
+                    <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+                      {feat.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                      {feat.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">
+                    <span>Explore Feature</span>
+                    <ArrowRight size={13} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. ENGINEERING HIGHLIGHTS SECTION */}
+      <section
+        id="engineering"
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+      >
+        <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
               Technical Implementation
@@ -910,95 +1084,111 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 7. ARCHITECTURE SECTION */}
+      {/* 8. APPLICATION ARCHITECTURE SECTION */}
       <section
         id="architecture"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+        className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
       >
-        <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-            System Design
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-            Application Architecture
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-            Designed as a full-stack application with a React frontend, REST API
-            backend, MongoDB persistence, AI integrations and external job providers.
-          </p>
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              System Design
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              Application Architecture
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+              Designed as a full-stack application with a React frontend, REST API
+              backend, MongoDB persistence, AI integrations and external job providers.
+            </p>
+          </div>
 
-        <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {ARCHITECTURE_STEPS.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/70 dark:border-slate-800 space-y-2 relative"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
-                      <Icon size={16} />
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      0{idx + 1}
-                    </span>
+          <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {ARCHITECTURE_STEPS.map((step, idx) => {
+                const Icon = step.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/70 dark:border-slate-800 space-y-2 relative"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                        <Icon size={16} />
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-400">
+                        {step.step}
+                      </span>
+                    </div>
+                    <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
+                      {step.label}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 font-medium">
+                      {step.sub}
+                    </p>
                   </div>
-                  <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
-                    {step.label}
-                  </h4>
-                  <p className="text-[11px] text-slate-500 font-medium">
-                    {step.sub}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-center">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span className="px-2.5 py-1 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">React + TS</span>
+                <span>→</span>
+                <span className="px-2.5 py-1 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">Axios / TanStack</span>
+                <span>→</span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Express REST API</span>
+                <span>→</span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Auth + Logic</span>
+                <span>→</span>
+                <span className="px-2.5 py-1 rounded-lg bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">MongoDB</span>
+                <span>→</span>
+                <span className="px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Gemini AI + Job APIs</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 8. TECH STACK SECTION */}
+      {/* 9. TECH STACK SECTION */}
       <section
         id="tech-stack"
-        className="py-16 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
+        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-              Technology Stack
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
-              Built With
-            </h2>
-          </div>
+        <div className="text-center space-y-2">
+          <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+            Technology Stack
+          </span>
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            Built With
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {TECH_GROUPS.map((group, idx) => (
-              <div
-                key={idx}
-                className={`p-5 rounded-3xl border ${group.color} shadow-xs space-y-3`}
-              >
-                <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
-                  {group.category}
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.techs.map((t, i) => (
-                    <span
-                      key={i}
-                      className={`text-[11px] font-bold px-2.5 py-1 rounded-xl ${group.badgeColor}`}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {TECH_GROUPS.map((group, idx) => (
+            <div
+              key={idx}
+              className={`p-5 rounded-3xl border ${group.color} shadow-xs space-y-3`}
+            >
+              <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+                {group.category}
+              </h3>
+              <div className="flex flex-wrap gap-1.5">
+                {group.techs.map((t, i) => (
+                  <span
+                    key={i}
+                    className={`text-[11px] font-bold px-2.5 py-1 rounded-xl ${group.badgeColor}`}
+                  >
+                    {t}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* 9. FAQ SECTION */}
+      {/* 10. FAQ SECTION */}
       <section
         id="faq"
         className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
@@ -1044,7 +1234,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 10. FINAL CTA */}
+      {/* 11. FINAL CTA */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl text-center space-y-6 border border-indigo-900/50">
           <div className="inline-flex p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-indigo-300">
@@ -1078,7 +1268,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 11. FOOTER */}
+      {/* 12. FOOTER */}
       <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-semibold">
