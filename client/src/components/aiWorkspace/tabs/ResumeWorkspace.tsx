@@ -162,32 +162,31 @@ export default function ResumeWorkspace() {
   };
 
   return (
-    <div className="space-y-8 w-full">
-      {/* 1. HEADER & FORM CARD */}
-      <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-8 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 border-b border-slate-100 dark:border-slate-800 pb-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 shrink-0 shadow-2xs">
-              <FileText size={24} />
+    <div className="space-y-6 w-full">
+      <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 shrink-0 shadow-2xs">
+              <FileText size={20} />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
+              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Resume Intelligence Engine
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 ATS scoring, section reviews, STAR bullet transformations, and multi-format exports.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2.5 shrink-0">
             {activeResumeFileName && (
-              <div className="px-4 py-2 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800">
+              <div className="px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800">
                 ✓ Active: {activeResumeFileName}
               </div>
             )}
-            <label className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm cursor-pointer shadow-md shadow-indigo-600/20 transition-all">
-              <Upload size={16} />
+            <label className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs cursor-pointer shadow-sm shadow-indigo-600/20 transition-all">
+              <Upload size={14} />
               <span>{isParsing ? "Parsing..." : "Upload Resume (PDF/Doc)"}</span>
               <input
                 type="file"
@@ -199,11 +198,10 @@ export default function ResumeWorkspace() {
           </div>
         </div>
 
-        {/* METADATA BAR IF PARSED */}
         {docMeta && (
-          <div className="p-4 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm">
-            <div className="flex items-center gap-2.5">
-              <CheckCircle2 size={18} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+          <div className="p-3 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
               <div>
                 <span className="font-extrabold text-slate-900 dark:text-slate-100">{docMeta.fileName}</span>
                 <span className="text-slate-500 ml-2 font-medium">({docMeta.pageCount} pages, {docMeta.wordCount} words)</span>
@@ -216,15 +214,14 @@ export default function ResumeWorkspace() {
                 setResumeText("");
                 setActiveResume("");
               }}
-              className="text-xs font-bold text-rose-600 hover:underline cursor-pointer"
+              className="text-[11px] font-bold text-rose-600 hover:underline cursor-pointer"
             >
               Clear Upload
             </button>
           </div>
         )}
 
-        {/* FORM INPUTS WITH GENEROUS SPACING */}
-        <div className="space-y-6 w-full">
+        <div className="space-y-4 w-full">
           <Input
             label="Target Job Title / Role"
             value={targetRole}
@@ -235,7 +232,7 @@ export default function ResumeWorkspace() {
 
           <Textarea
             label="Resume Text / Profile Information"
-            rows={7}
+            rows={5}
             value={resumeText}
             onChange={(e) => {
               const val = e.target.value;
@@ -255,26 +252,25 @@ export default function ResumeWorkspace() {
           />
         </div>
 
-        {/* ACTION BUTTON TOOLBAR */}
-        <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
             <Button
               variant="primary"
-              size="lg"
+              size="md"
               onClick={handleRunFullAudit}
               isLoading={isProcessing && activeWorkflow === "audit"}
-              leftIcon={<TrendingUp size={18} />}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 w-full"
+              leftIcon={<TrendingUp size={15} />}
+              className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/20 w-full"
             >
               1. Full ATS Audit
             </Button>
 
             <Button
               variant="outline"
-              size="lg"
+              size="md"
               onClick={handleRewriteSTARBullet}
               isLoading={isProcessing && activeWorkflow === "star"}
-              leftIcon={<Zap size={18} />}
+              leftIcon={<Zap size={15} />}
               className="w-full"
             >
               2. STAR Bullet Rewriter
@@ -282,10 +278,10 @@ export default function ResumeWorkspace() {
 
             <Button
               variant="outline"
-              size="lg"
+              size="md"
               onClick={handleGenerateResume}
               isLoading={isProcessing && activeWorkflow === "generate"}
-              leftIcon={<Sparkles size={18} />}
+              leftIcon={<Sparkles size={15} />}
               className="w-full"
             >
               3. Generate AI Resume
@@ -294,87 +290,85 @@ export default function ResumeWorkspace() {
         </div>
       </div>
 
-      {/* 2. GUIDED HELPER EMPTY STATE */}
       {!auditData && !starData && !generatedResume && (
-        <div className="p-10 sm:p-12 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-4 shadow-xs w-full">
-          <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto border border-indigo-200 dark:border-indigo-800">
-            <Sparkles size={26} />
+        <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-3 shadow-2xs w-full">
+          <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto border border-indigo-200 dark:border-indigo-800">
+            <Sparkles size={20} />
           </div>
-          <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
+          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
             Resume Intelligence Ready
           </h3>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto leading-relaxed font-medium">
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed font-medium">
             Upload a resume or paste resume text above to audit your ATS score, transform STAR bullet points, and export tailored formats.
           </p>
         </div>
       )}
 
-      {/* 3. FULL RESUME AUDIT RESULTS */}
       {auditData && (
-        <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-8 w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
-            <h3 className="text-lg font-black text-slate-900 dark:text-slate-100 flex items-center gap-2.5">
-              <Sparkles size={20} className="text-indigo-500" />
+        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Sparkles size={17} className="text-indigo-500" />
               Full Resume Audit Report
             </h3>
-            <span className="text-xs font-black px-4 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 shrink-0">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 shrink-0">
               Grade: {auditData.overallGrade || "A"}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            <div className="lg:col-span-4 p-6 rounded-2xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-center flex flex-col justify-center items-center">
-              <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider block">ATS Readiness Score</span>
-              <span className="text-5xl font-black text-slate-900 dark:text-slate-100 my-2">{auditData.atsScore} / 100</span>
-              <span className="text-xs sm:text-sm font-bold text-indigo-600">Overall Grade: {auditData.overallGrade || "A"}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+            <div className="lg:col-span-4 p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-center flex flex-col justify-center items-center">
+              <span className="text-[11px] font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider block">ATS Readiness Score</span>
+              <span className="text-4xl font-black text-slate-900 dark:text-slate-100 my-1">{auditData.atsScore} / 100</span>
+              <span className="text-xs font-bold text-indigo-600">Overall Grade: {auditData.overallGrade || "A"}</span>
             </div>
 
-            <div className="lg:col-span-8 p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2.5 flex flex-col justify-center">
+            <div className="lg:col-span-8 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2 flex flex-col justify-center">
               <span className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider block">Executive Summary:</span>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{auditData.summary}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{auditData.summary}</p>
             </div>
           </div>
 
           {auditData.sectionBySection && (
-            <div className="space-y-4">
-              <h4 className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-500 flex items-center gap-2">
-                <Layers size={16} /> Section-by-Section Review
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <Layers size={14} /> Section-by-Section Review
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {Object.entries(auditData.sectionBySection).map(([section, info]: [string, any]) => (
-                  <div key={section} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+                  <div key={section} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-black capitalize text-slate-900 dark:text-slate-100">{section}</span>
-                      <span className={`text-xs font-black px-2.5 py-0.5 rounded-full ${
+                      <span className="text-xs font-bold capitalize text-slate-900 dark:text-slate-100">{section}</span>
+                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
                         (info.score || 80) >= 85 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300"
                       }`}>
                         {info.score || 80}/100
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{info.feedback || "Good alignment with standard formatting."}</p>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{info.feedback || "Good alignment with standard formatting."}</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-3">
-              <span className="text-xs font-black text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">Detected Keywords:</span>
-              <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-2">
+              <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">Detected Keywords:</span>
+              <div className="flex flex-wrap gap-1.5">
                 {(auditData.keywordAnalysis?.foundKeywords || auditData.strengths || ["React", "TypeScript"]).map((kw: string, i: number) => (
-                  <span key={i} className="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200 text-xs font-bold">
+                  <span key={i} className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200 text-[11px] font-bold">
                     ✓ {kw}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-3">
-              <span className="text-xs font-black text-amber-800 dark:text-amber-300 uppercase tracking-wider block">Missing Target Keywords:</span>
-              <div className="flex flex-wrap gap-2">
+            <div className="p-4 rounded-xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-2">
+              <span className="text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider block">Missing Target Keywords:</span>
+              <div className="flex flex-wrap gap-1.5">
                 {(auditData.missingKeywords || auditData.keywordAnalysis?.missingKeywords || ["AWS", "DOCKER", "CI/CD"]).map((kw: string, i: number) => (
-                  <span key={i} className="px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 text-xs font-bold">
+                  <span key={i} className="px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 text-[11px] font-bold">
                     + {kw}
                   </span>
                 ))}
@@ -383,14 +377,14 @@ export default function ResumeWorkspace() {
           </div>
 
           {auditData.actionPlan && (
-            <div className="p-6 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 space-y-3">
-              <span className="text-xs sm:text-sm font-black text-indigo-900 dark:text-indigo-200 block flex items-center gap-2">
-                <ListOrdered size={16} /> Recommended Action Plan:
+            <div className="p-4 sm:p-5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 space-y-2.5">
+              <span className="text-xs font-bold text-indigo-900 dark:text-indigo-200 block flex items-center gap-1.5 uppercase tracking-wider">
+                <ListOrdered size={14} /> Recommended Action Plan:
               </span>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
                 {auditData.actionPlan.map((step: string, i: number) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
+                  <li key={i} className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0 mt-0.5" />
                     <span>{step}</span>
                   </li>
                 ))}
@@ -400,63 +394,61 @@ export default function ResumeWorkspace() {
         </div>
       )}
 
-      {/* 4. STAR BULLET REWRITER RESULTS */}
       {starData && (
-        <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6 w-full">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
-            <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 flex items-center gap-2.5">
-              <Zap size={20} className="text-amber-500" />
+        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Zap size={17} className="text-amber-500" />
               STAR Bullet Transformation Result
             </h3>
-            <Button variant="ghost" size="sm" onClick={() => handleCopy(starData.rewritten)} leftIcon={<Copy size={14} />}>
+            <Button variant="ghost" size="sm" onClick={() => handleCopy(starData.rewritten)} leftIcon={<Copy size={13} />}>
               Copy Bullet
             </Button>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm space-y-1.5">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original Input Bullet:</span>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs space-y-1">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Original Input Bullet:</span>
             <p className="text-slate-700 dark:text-slate-300 italic font-medium">"{starData.original}"</p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm space-y-2">
-            <span className="text-xs font-black text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">✨ STAR Rewritten Bullet (Situation/Task, Action, Result):</span>
-            <p className="text-slate-900 dark:text-slate-100 font-extrabold text-sm sm:text-base leading-relaxed">{starData.rewritten}</p>
+          <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-xs space-y-1.5">
+            <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">✨ STAR Rewritten Bullet (Situation/Task, Action, Result):</span>
+            <p className="text-slate-900 dark:text-slate-100 font-extrabold text-sm leading-relaxed">{starData.rewritten}</p>
           </div>
 
           {starData.whyBetter && (
-            <div className="p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 text-xs sm:text-sm text-indigo-900 dark:text-indigo-200 font-medium leading-relaxed">
+            <div className="p-3 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 text-xs text-indigo-900 dark:text-indigo-200 font-medium leading-relaxed">
               <strong>Why it's better:</strong> {starData.whyBetter}
             </div>
           )}
         </div>
       )}
 
-      {/* 5. GENERATED RESUME & EXPORT OPTIONS */}
       {generatedResume && (
-        <div className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6 w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
+        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
             <div>
-              <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 flex items-center gap-2.5">
-                <FileSpreadsheet size={20} className="text-indigo-500" />
+              <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <FileSpreadsheet size={17} className="text-indigo-500" />
                 Generated Professional Resume
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">Ready for review and multi-format export.</p>
+              <p className="text-[11px] text-slate-500 mt-0.5">Ready for review and multi-format export.</p>
             </div>
 
-            <div className="flex flex-wrap gap-2.5">
-              <Button variant="outline" size="sm" onClick={exportMarkdown} leftIcon={<FileCode size={14} />}>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" size="sm" onClick={exportMarkdown} leftIcon={<FileCode size={13} />}>
                 Export Markdown (.md)
               </Button>
-              <Button variant="outline" size="sm" onClick={exportPDF} leftIcon={<Download size={14} />}>
+              <Button variant="outline" size="sm" onClick={exportPDF} leftIcon={<Download size={13} />}>
                 Export PDF
               </Button>
-              <Button variant="outline" size="sm" onClick={exportDOCX} leftIcon={<FileType size={14} />}>
+              <Button variant="outline" size="sm" onClick={exportDOCX} leftIcon={<FileType size={13} />}>
                 Export DOCX
               </Button>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 font-mono text-xs sm:text-sm text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed max-h-[500px] overflow-y-auto">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 font-mono text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed max-h-[420px] overflow-y-auto">
             {generatedResume.resumeMarkdown || JSON.stringify(generatedResume, null, 2)}
           </div>
         </div>

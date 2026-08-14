@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { useUIStore } from "../store/uiStore";
 
-// 1. PROJECT CAPABILITIES
+
 const PROJECT_CAPABILITIES = [
   {
     title: "Authentication & Protected Routes",
@@ -66,7 +66,6 @@ const PROJECT_CAPABILITIES = [
   },
 ];
 
-// 2. BUILT AS A REAL-WORLD FULL-STACK PROJECT
 const PROJECT_HIGHLIGHTS = [
   {
     title: "Full-Stack Architecture",
@@ -94,7 +93,7 @@ const PROJECT_HIGHLIGHTS = [
   },
 ];
 
-// 3. SYSTEM FEATURES
+
 const FEATURES = [
   {
     icon: FileText,
@@ -140,7 +139,7 @@ const FEATURES = [
   },
 ];
 
-// 4. ENGINEERING HIGHLIGHTS
+
 const ENGINEERING_HIGHLIGHTS = [
   {
     title: "Authentication",
@@ -180,7 +179,7 @@ const ENGINEERING_HIGHLIGHTS = [
   },
 ];
 
-// 5. TECH STACK GROUPS
+
 const TECH_GROUPS = [
   {
     category: "Frontend",
@@ -216,7 +215,7 @@ const TECH_GROUPS = [
   },
 ];
 
-// 6. ARCHITECTURE FLOW STEPS
+
 const ARCHITECTURE_STEPS = [
   {
     step: "01",
@@ -256,7 +255,7 @@ const ARCHITECTURE_STEPS = [
   },
 ];
 
-// 7. SHOWCASE TABS (FICTIONAL COMPANIES)
+
 const SHOWCASE_TABS = [
   {
     id: "dashboard",
@@ -284,7 +283,7 @@ const SHOWCASE_TABS = [
   },
 ];
 
-// 8. FAQS
+
 const FAQS = [
   {
     q: "Is GetHired a real product?",
@@ -315,7 +314,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
-      {/* HEADER NAVBAR */}
+
       <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/landing" className="flex items-center gap-2.5">
@@ -408,16 +407,16 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* 1. HERO SECTION */}
+
       <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-6 max-w-3xl mx-auto">
-          {/* Small Badge */}
+
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold border border-indigo-200/80 dark:border-indigo-800 shadow-2xs">
             <Code2 size={14} className="text-indigo-500" />
             <span>Full-Stack MERN + AI Project</span>
           </div>
 
-          {/* Hero Title */}
+
           <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
             Your Job Search,{" "}
             <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">
@@ -425,14 +424,14 @@ export default function LandingPage() {
             </span>
           </h1>
 
-          {/* Supporting Text */}
+
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
             GetHired is a full-stack job management platform combining job discovery,
             AI resume analysis, interview preparation, and application tracking in
             one workspace.
           </p>
 
-          {/* Action Buttons */}
+
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               to="/register"
@@ -465,7 +464,6 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* HERO MOCKUP PREVIEW WITH DEMO DATA NOTICE */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -532,7 +530,7 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* 2. PROBLEM -> SOLUTION SECTION */}
+
       <section
         id="problem-solution"
         className="py-16 bg-white dark:bg-slate-900/80 border-y border-slate-200/80 dark:border-slate-800"
@@ -548,7 +546,7 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
-            {/* Problem Box */}
+
             <div className="p-6 sm:p-8 rounded-3xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40 space-y-5 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 text-xs font-extrabold">
@@ -579,7 +577,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Solution Box */}
+
             <div className="p-6 sm:p-8 rounded-3xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40 space-y-5 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold">
@@ -624,7 +622,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. PROJECT CAPABILITIES */}
+
       <section
         id="capabilities"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
@@ -666,7 +664,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 4. BUILT AS A REAL-WORLD FULL-STACK PROJECT */}
       <section
         id="project-overview"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
@@ -711,8 +708,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 5. INTERACTIVE SHOWCASE (WITH DEMO DATA BADGE & FICTIONAL COMPANIES) */}
       <section
         id="showcase"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10"
@@ -732,11 +727,10 @@ export default function LandingPage() {
               key={tab.id}
               type="button"
               onClick={() => setActiveShowcase(tab.id)}
-              className={`px-5 py-2.5 rounded-2xl text-xs font-extrabold transition-all cursor-pointer ${
-                activeShowcase === tab.id
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
-                  : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-              }`}
+              className={`px-5 py-2.5 rounded-2xl text-xs font-extrabold transition-all cursor-pointer ${activeShowcase === tab.id
+                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
+                : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
             >
               {tab.label}
             </button>
@@ -765,7 +759,7 @@ export default function LandingPage() {
               </span>
             </div>
 
-            {/* TAB MOCKUP 1: DASHBOARD */}
+
             {activeTabObj.id === "dashboard" && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -829,7 +823,6 @@ export default function LandingPage() {
               </div>
             )}
 
-            {/* TAB MOCKUP 2: AI WORKSPACE */}
             {activeTabObj.id === "ai-workspace" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-3">
@@ -880,7 +873,6 @@ export default function LandingPage() {
               </div>
             )}
 
-            {/* TAB MOCKUP 3: DISCOVER JOBS */}
             {activeTabObj.id === "jobs" && (
               <div className="space-y-3">
                 <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -957,7 +949,6 @@ export default function LandingPage() {
               </div>
             )}
 
-            {/* TAB MOCKUP 4: RESUME ANALYSIS */}
             {activeTabObj.id === "resume" && (
               <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
@@ -996,7 +987,7 @@ export default function LandingPage() {
         </AnimatePresence>
       </section>
 
-      {/* 6. FEATURES SECTION */}
+
       <section
         id="features"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
@@ -1045,7 +1036,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 7. ENGINEERING HIGHLIGHTS SECTION */}
       <section
         id="engineering"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
@@ -1084,7 +1074,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 8. APPLICATION ARCHITECTURE SECTION */}
       <section
         id="architecture"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
@@ -1150,7 +1139,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 9. TECH STACK SECTION */}
       <section
         id="tech-stack"
         className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
@@ -1188,7 +1176,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 10. FAQ SECTION */}
+
       <section
         id="faq"
         className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
@@ -1218,9 +1206,8 @@ export default function LandingPage() {
                   <span>{faq.q}</span>
                   <ChevronDown
                     size={18}
-                    className={`transition-transform ${
-                      isOpen ? "rotate-180 text-indigo-600" : "text-slate-400"
-                    }`}
+                    className={`transition-transform ${isOpen ? "rotate-180 text-indigo-600" : "text-slate-400"
+                      }`}
                   />
                 </button>
                 {isOpen && (
@@ -1234,7 +1221,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 11. FINAL CTA */}
+
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl text-center space-y-6 border border-indigo-900/50">
           <div className="inline-flex p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-indigo-300">
@@ -1268,7 +1255,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 12. FOOTER */}
+
       <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-semibold">

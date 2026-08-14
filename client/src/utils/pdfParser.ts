@@ -28,11 +28,10 @@ export async function parseDocumentFile(file: File): Promise<ParsedDocument> {
     };
   }
 
-  // Handle PDF parsing
+
   try {
     const arrayBuffer = await file.arrayBuffer();
 
-    // Check if pdfjsLib (PDF.js) is available globally via script or window
     const windowPdfJs = (window as any).pdfjsLib;
     if (windowPdfJs) {
       const pdf = await windowPdfJs.getDocument({ data: arrayBuffer }).promise;
@@ -57,7 +56,6 @@ export async function parseDocumentFile(file: File): Promise<ParsedDocument> {
       };
     }
 
-    // Fallback: Pure JS PDF text stream extractor (removes PDF binary headers, stream objects, and returns extracted text tokens)
     const decoder = new TextDecoder("utf-8", { fatal: false });
     const rawString = decoder.decode(arrayBuffer);
 
