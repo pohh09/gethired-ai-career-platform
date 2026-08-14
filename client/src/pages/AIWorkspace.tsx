@@ -72,14 +72,14 @@ export default function AIWorkspace() {
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-[1750px] mx-auto space-y-6 pb-12 overflow-x-hidden">
-      <div className="p-5 sm:p-6 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
+    <div className="w-full max-w-[1750px] mx-auto space-y-4 sm:space-y-6 pb-16 sm:pb-12 px-1 sm:px-0 overflow-x-hidden">
+      <div className="p-4 sm:p-5 md:p-6 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="space-y-1.5 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
             <Sparkles size={12} className="text-indigo-400" />
             AI Career Operating System
           </div>
-          <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white">
             GetHired Career Intelligence
           </h1>
           <p className="text-xs text-slate-400 max-w-2xl leading-relaxed font-medium">
@@ -90,14 +90,14 @@ export default function AIWorkspace() {
         <button
           type="button"
           onClick={() => setIsMobileChatOpen(true)}
-          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all shrink-0 cursor-pointer w-full sm:w-auto"
+          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all shrink-0 cursor-pointer w-full md:w-auto"
         >
           <Bot size={15} />
           <span>Open AI Coach</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 w-full">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 w-full">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -107,28 +107,28 @@ export default function AIWorkspace() {
               key={item.id}
               type="button"
               onClick={() => setActiveTab(item.id)}
-              className={`w-full min-h-[64px] flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
+              className={`w-full min-h-[58px] sm:min-h-[64px] flex items-center justify-between p-2.5 sm:p-3.5 md:p-4 rounded-xl sm:rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
                 isActive
                   ? `${item.activeClass} shadow-sm`
                   : "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs"
               }`}
             >
-              <div className="flex items-center gap-3 min-w-0">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                 <div
-                  className={`p-2 rounded-xl shrink-0 transition-colors ${
+                  className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl shrink-0 transition-colors ${
                     isActive
                       ? item.iconBgActive
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
                   }`}
                 >
-                  <Icon size={18} />
+                  <Icon size={16} />
                 </div>
                 <div className="min-w-0">
                   <span className="text-xs sm:text-sm font-extrabold block truncate leading-tight">
                     {item.label}
                   </span>
                   <span
-                    className={`text-[11px] truncate block mt-0.5 font-medium ${
+                    className={`text-[10px] sm:text-[11px] truncate block mt-0.5 font-medium ${
                       isActive ? "text-white/80" : "text-slate-500 dark:text-slate-400"
                     }`}
                   >
@@ -137,7 +137,7 @@ export default function AIWorkspace() {
                 </div>
               </div>
               {isActive && (
-                <ChevronRight size={16} className="shrink-0 text-white hidden sm:block" />
+                <ChevronRight size={16} className="shrink-0 text-white hidden md:block" />
               )}
             </button>
           );
@@ -168,6 +168,19 @@ export default function AIWorkspace() {
         </div>
       </div>
 
+      <button
+        type="button"
+        onClick={() => setIsMobileChatOpen(true)}
+        className="xl:hidden fixed bottom-5 right-5 z-40 h-13 w-13 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-xl shadow-indigo-600/40 flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 transition-all border-2 border-white/20"
+        aria-label="Open AI Career Coach"
+      >
+        <Bot size={24} />
+        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border border-white" />
+        </span>
+      </button>
+
       <AnimatePresence>
         {isMobileChatOpen && (
           <div className="fixed inset-0 z-50 xl:hidden flex flex-col justify-end">
@@ -176,29 +189,29 @@ export default function AIWorkspace() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileChatOpen(false)}
-              className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
+              className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"
             />
             <motion.div
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="relative w-full max-h-[85vh] h-[640px] bg-white dark:bg-slate-900 rounded-t-3xl border-t border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col z-10"
+              className="relative w-full max-h-[92vh] h-[660px] bg-white dark:bg-slate-900 rounded-t-3xl border-t border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col z-10"
             >
-              <div className="p-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950">
+              <div className="p-3.5 px-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950 shrink-0">
                 <span className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                   <Bot size={16} className="text-indigo-500" /> AI Career Coach
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsMobileChatOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <X size={18} />
                 </button>
               </div>
-              <div className="flex-1 overflow-hidden p-2.5">
-                <AIChatAssistant activeTab={activeTab} />
+              <div className="flex-1 overflow-hidden p-2 sm:p-2.5">
+                <AIChatAssistant activeTab={activeTab} isMobileDrawer={true} />
               </div>
             </motion.div>
           </div>

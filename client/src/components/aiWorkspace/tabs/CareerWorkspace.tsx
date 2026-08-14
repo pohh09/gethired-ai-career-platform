@@ -84,31 +84,31 @@ export default function CareerWorkspace() {
   };
 
   return (
-    <div className="space-y-6 w-full">
-      <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+    <div className="space-y-4 sm:space-y-6 w-full">
+      <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sm:space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 shrink-0 shadow-2xs">
-              <TrendingUp size={20} />
+            <div className="p-2 sm:p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 shrink-0 shadow-2xs">
+              <TrendingUp size={18} className="sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Visual Career Planner & Progression
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">
                 Generate milestone execution roadmaps, skill gap matrices, certifications, and target company trajectory.
               </p>
             </div>
           </div>
 
           {activeResumeFileName && (
-            <div className="px-3 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 shrink-0">
+            <div className="px-3 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[11px] sm:text-xs font-bold border border-emerald-200 self-start sm:self-auto shrink-0 truncate max-w-[220px] sm:max-w-none">
               ✓ Active: {activeResumeFileName}
             </div>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-4 w-full">
           <Select
             label="Current Role"
             value={currentRole}
@@ -139,7 +139,7 @@ export default function CareerWorkspace() {
             label="Roadmap Duration"
             value={timelineMonths}
             onChange={(e) => setTimelineMonths(e.target.value)}
-            className="w-full"
+            className="w-full sm:col-span-2 md:col-span-1"
           >
             <option value="3">3 Months (Accelerated)</option>
             <option value="6">6 Months (Standard)</option>
@@ -149,7 +149,7 @@ export default function CareerWorkspace() {
           </Select>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           <Button
             variant="primary"
             size="md"
@@ -175,11 +175,11 @@ export default function CareerWorkspace() {
       </div>
 
       {!result && (
-        <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-3 shadow-2xs w-full">
-          <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto border border-emerald-200 dark:border-emerald-800">
-            <TrendingUp size={20} />
+        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-3 shadow-2xs w-full">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto border border-emerald-200 dark:border-emerald-800">
+            <TrendingUp size={18} className="sm:w-5 sm:h-5" />
           </div>
-          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100">
             Career Strategy Planner Ready
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed font-medium">
@@ -188,23 +188,23 @@ export default function CareerWorkspace() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
-        <div className="lg:col-span-7 p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 w-full">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <Calendar size={17} className="text-emerald-600" />
-              Milestone Execution Timeline ({timelineMonths} Months)
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start w-full">
+        <div className="lg:col-span-7 p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 sm:space-y-5 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h3 className="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Calendar size={17} className="text-emerald-600 shrink-0" />
+              <span>Milestone Execution Timeline ({timelineMonths} Months)</span>
             </h3>
-            <span className="text-xs font-bold text-slate-400">
+            <span className="text-[11px] sm:text-xs font-bold text-slate-400">
               {currentRole} → {targetGoal}
             </span>
           </div>
 
-          <div className="relative pl-7 space-y-5 before:absolute before:left-2.5 before:top-2.5 before:bottom-2.5 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+          <div className="relative pl-6 sm:pl-7 space-y-4 sm:space-y-5 before:absolute before:left-2.5 before:top-2.5 before:bottom-2.5 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
             {result?.roadmap ? (
               (result.roadmap || []).map((step: any, idx: number) => (
                 <div key={idx} className="relative space-y-1">
-                  <div className="absolute -left-7 top-0.5 h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shadow-xs ring-4 ring-white dark:ring-slate-900">
+                  <div className="absolute -left-6 sm:-left-7 top-0.5 h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shadow-xs ring-4 ring-white dark:ring-slate-900">
                     {idx + 1}
                   </div>
                   <div className="flex items-center justify-between">
@@ -233,7 +233,7 @@ export default function CareerWorkspace() {
                 { month: "Month 6", title: "Executive Interview Prep & Offer Negotiation", desc: "Mock Staff Engineer system design interviews, STAR leadership storytelling, and compensation negotiation." },
               ].map((step, idx) => (
                 <div key={idx} className="relative space-y-1">
-                  <div className="absolute -left-7 top-0.5 h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shadow-xs ring-4 ring-white dark:ring-slate-900">
+                  <div className="absolute -left-6 sm:-left-7 top-0.5 h-5 w-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-black shadow-xs ring-4 ring-white dark:ring-slate-900">
                     {idx + 1}
                   </div>
                   <div className="flex items-center justify-between">
@@ -256,19 +256,19 @@ export default function CareerWorkspace() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 space-y-6 w-full">
-          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-            <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <Award size={17} className="text-emerald-600" />
-              Skill Progress Matrix
+        <div className="lg:col-span-5 space-y-5 sm:space-y-6 w-full">
+          <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
+            <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <Award size={17} className="text-emerald-600 shrink-0" />
+              <span>Skill Progress Matrix</span>
             </h3>
 
             <div className="space-y-3">
               {DEFAULT_SKILL_PROGRESS.map((item) => (
                 <div key={item.skill} className="space-y-1">
                   <div className="flex items-center justify-between text-xs font-bold">
-                    <span className="text-slate-800 dark:text-slate-200">{item.skill}</span>
-                    <span className="text-emerald-600 font-black">{item.percent}%</span>
+                    <span className="text-slate-800 dark:text-slate-200 truncate pr-2">{item.skill}</span>
+                    <span className="text-emerald-600 font-black shrink-0">{item.percent}%</span>
                   </div>
                   <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
                     <div className={`${item.color} h-full rounded-full transition-all duration-500`} style={{ width: `${item.percent}%` }} />
@@ -278,20 +278,20 @@ export default function CareerWorkspace() {
             </div>
           </div>
 
-          <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-            <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <Building size={17} className="text-emerald-600" />
-              Target Companies Benchmark
+          <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
+            <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <Building size={17} className="text-emerald-600 shrink-0" />
+              <span>Target Companies Benchmark</span>
             </h3>
 
             <div className="space-y-2.5">
               {DEFAULT_TARGET_COMPANIES.map((comp) => (
-                <div key={comp.name} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex items-center justify-between gap-3">
+                <div key={comp.name} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">{comp.name}</h4>
                     <p className="text-[11px] text-slate-500 font-medium">{comp.role}</p>
                   </div>
-                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 shrink-0">
+                  <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 self-start sm:self-auto shrink-0">
                     {comp.comp}
                   </span>
                 </div>
@@ -301,13 +301,13 @@ export default function CareerWorkspace() {
         </div>
       </div>
 
-      <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-        <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
-          <BookOpen size={17} className="text-emerald-600" />
-          Recommended Learning Resources & Certifications
+      <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
+        <h3 className="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <BookOpen size={17} className="text-emerald-600 shrink-0" />
+          <span>Recommended Learning Resources & Certifications</span>
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
             <span className="text-[10px] font-black text-emerald-600 uppercase tracking-wider block">Certification</span>
             <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">AWS Certified Solutions Architect</h4>
@@ -320,7 +320,7 @@ export default function CareerWorkspace() {
             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Martin Kleppmann guide on replication, transactions, and consensus.</p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5 sm:col-span-2 lg:col-span-1">
             <span className="text-[10px] font-black text-purple-600 uppercase tracking-wider block">Hands-on Project</span>
             <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">Distributed Rate Limiter Service</h4>
             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Build a Redis sliding window rate limiter microservice with Docker.</p>

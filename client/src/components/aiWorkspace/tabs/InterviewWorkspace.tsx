@@ -250,33 +250,33 @@ export default function InterviewWorkspace() {
   };
 
   return (
-    <div className="space-y-6 w-full">
-      <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+    <div className="space-y-4 sm:space-y-6 w-full">
+      <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sm:space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shrink-0 shadow-2xs">
-              <Video size={20} />
+            <div className="p-2 sm:p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 shrink-0 shadow-2xs">
+              <Video size={18} className="sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Interactive Mock Interview Simulator
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">
                 12-question progressive rounds dynamically generated based on role, round type, and job description.
               </p>
             </div>
           </div>
 
           {activeResumeFileName && (
-            <div className="px-3 py-1 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 text-xs font-bold border border-amber-200 shrink-0">
+            <div className="px-3 py-1 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 text-[11px] sm:text-xs font-bold border border-amber-200 self-start sm:self-auto shrink-0 truncate max-w-[220px] sm:max-w-none">
               ✓ Active: {activeResumeFileName}
             </div>
           )}
         </div>
 
         {sessionStep === "setup" && (
-          <div className="space-y-6 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <div className="space-y-5 sm:space-y-6 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-4 w-full">
               <Select
                 label="Target Job Role"
                 value={jobTitle}
@@ -310,7 +310,7 @@ export default function InterviewWorkspace() {
                 label="Difficulty Level"
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value)}
-                className="w-full"
+                className="w-full sm:col-span-2 md:col-span-1"
               >
                 <option value="Beginner">Beginner (Foundational)</option>
                 <option value="Standard">Standard (Mid-Level)</option>
@@ -342,7 +342,7 @@ export default function InterviewWorkspace() {
                 Start 12-Question Mock Interview
               </Button>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-5 gap-3 text-center w-full">
+              <div className="p-3 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3 text-center w-full">
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Questions</span>
                   <span className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 block mt-0.5">12 Questions</span>
@@ -359,7 +359,7 @@ export default function InterviewWorkspace() {
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Role Focus</span>
                   <span className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 truncate block mt-0.5">{jobTitle}</span>
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Round Focus</span>
                   <span className="text-xs sm:text-sm font-extrabold text-amber-600 uppercase block mt-0.5">{roundType}</span>
                 </div>
@@ -369,11 +369,11 @@ export default function InterviewWorkspace() {
         )}
 
         {sessionStep === "active" && currentQuestionObj && (
-          <div className="space-y-6 w-full">
-            <div className="p-4 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-3">
+          <div className="space-y-4 sm:space-y-6 w-full">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 <div>
-                  <span className="text-xs font-bold text-amber-900 dark:text-amber-200 uppercase tracking-wide block">
+                  <span className="text-[11px] sm:text-xs font-bold text-amber-900 dark:text-amber-200 uppercase tracking-wide block">
                     {roundType.toUpperCase()} INTERVIEW • {jobTitle}
                   </span>
                   <span className="text-[11px] text-slate-500 font-medium">
@@ -381,17 +381,17 @@ export default function InterviewWorkspace() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2.5">
-                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 text-white text-[11px] font-bold font-mono">
+                <div className="flex items-center gap-2 sm:gap-2.5 self-start sm:self-auto">
+                  <span className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-slate-900 text-white text-[10px] sm:text-[11px] font-bold font-mono">
                     <Clock size={12} className="text-amber-400" /> {formatTimer(secondsRemaining)}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-amber-600 text-white text-[11px] font-black">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full bg-amber-600 text-white text-[10px] sm:text-[11px] font-black">
                     Q{currentIndex + 1}/{questionsList.length}
                   </span>
                   <button
                     type="button"
                     onClick={() => setSessionStep("setup")}
-                    className="text-xs text-slate-500 hover:underline font-bold"
+                    className="text-xs text-slate-500 hover:underline font-bold ml-1"
                   >
                     Exit
                   </button>
@@ -414,8 +414,8 @@ export default function InterviewWorkspace() {
               </div>
             </div>
 
-            <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-slate-900 text-white border border-slate-800 space-y-3 shadow-lg relative overflow-hidden w-full">
-              <div className="flex items-center justify-between text-xs font-bold text-amber-400">
+            <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-slate-900 text-white border border-slate-800 space-y-3 shadow-lg relative overflow-hidden w-full">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-amber-400">
                 <span className="flex items-center gap-1.5 uppercase tracking-wider">
                   <QuestionIcon size={14} /> Question {currentIndex + 1} of {questionsList.length}
                 </span>
@@ -423,7 +423,7 @@ export default function InterviewWorkspace() {
                   Difficulty: <strong className="text-white">{currentQuestionObj.difficulty || difficulty}</strong>
                 </span>
               </div>
-              <h3 className="text-base sm:text-xl font-bold text-white leading-relaxed">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold text-white leading-relaxed break-words">
                 {currentQuestionObj.question}
               </h3>
               {currentQuestionObj.expectedTopics && (
@@ -450,7 +450,7 @@ export default function InterviewWorkspace() {
               />
 
               {!evaluation ? (
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                   <Button
                     variant="primary"
                     size="md"
@@ -489,13 +489,13 @@ export default function InterviewWorkspace() {
             </div>
 
             {evaluation && (
-              <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                  <h4 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-slate-100 dark:border-slate-800 pb-3">
+                  <h4 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                     <Sparkles size={17} className="text-amber-500" />
                     Answer Rubric Evaluation
                   </h4>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2 self-start sm:self-auto">
                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase ${
                       evaluation.verdict === "Correct" ? "bg-emerald-100 text-emerald-800" :
                       evaluation.verdict === "Partially Correct" ? "bg-amber-100 text-amber-800" : "bg-rose-100 text-rose-800"
@@ -510,30 +510,30 @@ export default function InterviewWorkspace() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                  <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-center">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
                     <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider block">Overall Score</span>
-                    <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.score ?? evaluation.overallScore}/100</span>
+                    <span className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.score ?? evaluation.overallScore}/100</span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
                     <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider block">Tech Accuracy</span>
-                    <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.technicalAccuracyScore ?? evaluation.correctness}%</span>
+                    <span className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.technicalAccuracyScore ?? evaluation.correctness}%</span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
                     <span className="text-[10px] font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider block">Completeness</span>
-                    <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.completeness}%</span>
+                    <span className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.completeness}%</span>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
                     <span className="text-[10px] font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider block">Communication</span>
-                    <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.communicationScore}%</span>
+                    <span className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 my-0.5">{evaluation.communicationScore}%</span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-2">
                     <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 block flex items-center gap-1.5 uppercase tracking-wider">
                       <Check size={14} className="text-emerald-600" /> ✓ What You Did Well:
                     </span>
@@ -541,13 +541,13 @@ export default function InterviewWorkspace() {
                       {(evaluation.strengths || ["Answered the prompt"]).map((s: string, i: number) => (
                         <li key={i} className="flex items-start gap-1.5">
                           <span className="text-emerald-500 font-bold">•</span>
-                          <span>{s}</span>
+                          <span className="break-words">{s}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 space-y-2">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 space-y-2">
                     <span className="text-xs font-bold text-rose-900 dark:text-rose-200 block flex items-center gap-1.5 uppercase tracking-wider">
                       <AlertTriangle size={14} className="text-rose-600" /> ⚠ Missing Points / Errors:
                     </span>
@@ -555,7 +555,7 @@ export default function InterviewWorkspace() {
                       {(evaluation.missingPoints || evaluation.missingConcepts || ["No additional missing points"]).map((m: string, i: number) => (
                         <li key={i} className="flex items-start gap-1.5">
                           <span className="font-bold">•</span>
-                          <span>{m}</span>
+                          <span className="break-words">{m}</span>
                         </li>
                       ))}
                     </ul>
@@ -563,11 +563,11 @@ export default function InterviewWorkspace() {
                 </div>
 
                 {(evaluation.betterAnswer || evaluation.idealAnswer) && (
-                  <div className="p-4 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 space-y-1.5">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 space-y-1.5">
                     <span className="text-xs font-bold text-amber-900 dark:text-amber-200 block uppercase tracking-wider">
                       💡 Ideal Model Answer:
                     </span>
-                    <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
+                    <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-medium break-words">
                       "{evaluation.betterAnswer || evaluation.idealAnswer}"
                     </p>
                   </div>
@@ -578,7 +578,7 @@ export default function InterviewWorkspace() {
         )}
 
         {sessionStep === "report" && finalReport && (
-          <div className="space-y-6 pt-1 w-full">
+          <div className="space-y-5 sm:space-y-6 pt-1 w-full">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
               <div>
                 <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
@@ -588,30 +588,30 @@ export default function InterviewWorkspace() {
                 <p className="text-xs text-slate-500 mt-0.5">{jobTitle} • {roundType.toUpperCase()} Session Summary ({sessionHistory.length} Questions)</p>
               </div>
 
-              <span className="text-xs font-bold px-4 py-1.5 rounded-full bg-amber-600 text-white shadow-sm shrink-0">
+              <span className="text-xs font-bold px-4 py-1.5 rounded-full bg-amber-600 text-white shadow-sm self-start sm:self-auto shrink-0">
                 Overall Grade: {finalReport.grade}
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-center">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800">
                 <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider block">Overall Score</span>
-                <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.overallScore}/100</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.overallScore}/100</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
                 <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider block">Technical Score</span>
-                <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.technicalScore}%</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.technicalScore}%</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
                 <span className="text-[10px] font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider block">Communication</span>
-                <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.communicationScore}%</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.communicationScore}%</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
                 <span className="text-[10px] font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider block">Role Relevance</span>
-                <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.roleRelevanceScore || finalReport.accuracyScore}%</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-slate-100 my-1">{finalReport.roleRelevanceScore || finalReport.accuracyScore}%</span>
               </div>
             </div>
 

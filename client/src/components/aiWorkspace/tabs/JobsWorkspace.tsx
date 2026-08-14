@@ -170,31 +170,31 @@ export default function JobsWorkspace() {
   const hasAnyResults = jdData || explainData || matchData || coverLetterData || followUpData || salaryData || companyData;
 
   return (
-    <div className="space-y-6 w-full">
-      <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+    <div className="space-y-4 sm:space-y-6 w-full">
+      <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sm:space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800 shrink-0 shadow-2xs">
-              <Briefcase size={20} />
+            <div className="p-2 sm:p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800 shrink-0 shadow-2xs">
+              <Briefcase size={18} className="sm:w-5 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+              <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
                 Job Intelligence Engine
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">
                 AI-powered Job Description analysis, match score calculation, cover letters, and compensation benchmarks.
               </p>
             </div>
           </div>
 
           {activeResumeFileName && (
-            <div className="px-3 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-800 shrink-0">
+            <div className="px-3 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-[11px] sm:text-xs font-bold border border-purple-200 dark:border-purple-800 self-start sm:self-auto shrink-0 truncate max-w-[220px] sm:max-w-none">
               ✓ Active: {activeResumeFileName}
             </div>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 w-full">
           <Input
             label="Company"
             value={companyName}
@@ -214,7 +214,7 @@ export default function JobsWorkspace() {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="e.g. Bangalore, India"
-            className="w-full"
+            className="w-full sm:col-span-2 md:col-span-1"
           />
         </div>
 
@@ -229,8 +229,8 @@ export default function JobsWorkspace() {
           />
         </div>
 
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full">
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2.5 sm:space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 w-full">
             <Button
               variant="primary"
               size="md"
@@ -276,7 +276,7 @@ export default function JobsWorkspace() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full">
             <Button
               variant="outline"
               size="md"
@@ -314,11 +314,11 @@ export default function JobsWorkspace() {
       </div>
 
       {!hasAnyResults && (
-        <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-3 shadow-2xs w-full">
-          <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center mx-auto border border-purple-200 dark:border-purple-800">
-            <Sparkles size={20} />
+        <div className="p-6 sm:p-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-center space-y-3 shadow-2xs w-full">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center mx-auto border border-purple-200 dark:border-purple-800">
+            <Sparkles size={18} className="sm:w-5 sm:h-5" />
           </div>
-          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100">
             AI Job Analyzer Ready
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed font-medium">
@@ -328,20 +328,20 @@ export default function JobsWorkspace() {
       )}
 
       {jdData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 sm:space-y-5 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Sparkles size={17} className="text-purple-600" />
               Job Description Breakdown
             </h3>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 shrink-0">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 self-start sm:self-auto shrink-0">
               Seniority: {jdData.seniority || "Mid-Senior"}
             </span>
           </div>
 
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{jdData.summary}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
             <div className="p-4 rounded-xl bg-purple-50/60 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 space-y-2.5">
               <span className="text-xs font-bold text-purple-900 dark:text-purple-200 uppercase tracking-wider block">Required Technical Skills:</span>
               <div className="flex flex-wrap gap-1.5">
@@ -368,36 +368,36 @@ export default function JobsWorkspace() {
       )}
 
       {explainData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
             Simplified Role & Expectations Breakdown
           </h3>
-          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-line">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-line break-words">
             {explainData.explanation || explainData.summary}
           </p>
         </div>
       )}
 
       {matchData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 w-full">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 sm:space-y-5 w-full">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Target size={17} className="text-purple-600" />
               Profile Match Fit Evaluation
             </h3>
-            <span className="text-xs font-bold px-3.5 py-1 rounded-full bg-purple-600 text-white shadow-2xs">
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-purple-600 text-white shadow-2xs">
               {matchData.matchPercentage}% Match
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
             <div className="p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-2">
               <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider block">✓ Matched Resume Skills:</span>
               <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium">
                 {(matchData.matchingSkills || []).map((m: string, i: number) => (
                   <li key={i} className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
-                    <span>{m}</span>
+                    <span className="break-words">{m}</span>
                   </li>
                 ))}
               </ul>
@@ -409,7 +409,7 @@ export default function JobsWorkspace() {
                 {(matchData.missingSkills || ["No major missing skills"]).map((m: string, i: number) => (
                   <li key={i} className="flex items-center gap-2">
                     <span className="text-slate-400 font-bold">•</span>
-                    <span>{m}</span>
+                    <span className="break-words">{m}</span>
                   </li>
                 ))}
               </ul>
@@ -419,18 +419,18 @@ export default function JobsWorkspace() {
       )}
 
       {coverLetterData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <FileText size={17} className="text-purple-600" />
               Tailored Cover Letter
             </h3>
-            <Button variant="outline" size="sm" onClick={() => handleCopyText(coverLetterData.coverLetter)} leftIcon={<Copy size={13} />}>
+            <Button variant="outline" size="sm" onClick={() => handleCopyText(coverLetterData.coverLetter)} leftIcon={<Copy size={13} />} className="self-start sm:self-auto">
               Copy Cover Letter
             </Button>
           </div>
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-            <pre className="whitespace-pre-line text-xs text-slate-800 dark:text-slate-200 font-sans leading-relaxed">
+          <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+            <pre className="whitespace-pre-line text-xs text-slate-800 dark:text-slate-200 font-sans leading-relaxed break-words overflow-x-auto">
               {coverLetterData.coverLetter}
             </pre>
           </div>
@@ -438,20 +438,20 @@ export default function JobsWorkspace() {
       )}
 
       {followUpData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+            <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Mail size={17} className="text-purple-600" />
               Professional Follow-Up Email Draft
             </h3>
-            <Button variant="outline" size="sm" onClick={() => handleCopyText(`Subject: ${followUpData.subject}\n\n${followUpData.body}`)} leftIcon={<Copy size={13} />}>
+            <Button variant="outline" size="sm" onClick={() => handleCopyText(`Subject: ${followUpData.subject}\n\n${followUpData.body}`)} leftIcon={<Copy size={13} />} className="self-start sm:self-auto">
               Copy Email Body
             </Button>
           </div>
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
-            <p className="text-xs font-bold text-slate-900 dark:text-slate-100">Subject: {followUpData.subject}</p>
+          <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <p className="text-xs font-bold text-slate-900 dark:text-slate-100 break-words">Subject: {followUpData.subject}</p>
             <hr className="border-slate-200 dark:border-slate-700 my-1.5" />
-            <pre className="whitespace-pre-line text-xs text-slate-800 dark:text-slate-200 font-sans leading-relaxed">
+            <pre className="whitespace-pre-line text-xs text-slate-800 dark:text-slate-200 font-sans leading-relaxed break-words overflow-x-auto">
               {followUpData.body}
             </pre>
           </div>
@@ -459,35 +459,35 @@ export default function JobsWorkspace() {
       )}
 
       {salaryData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center gap-2">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center gap-2">
             <DollarSign size={17} className="text-emerald-600" />
             Market Salary Benchmark & Negotiation Range
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-            <div className="p-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
-              <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider block">Average Salary</span>
-              <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.averageSalary}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-center">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800">
+              <span className="text-[10px] sm:text-[11px] font-bold text-purple-700 uppercase tracking-wider block">Average Salary</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.averageSalary}</span>
             </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Min - Max Range</span>
-              <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.minSalary} - {salaryData.maxSalary}</span>
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Min - Max Range</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.minSalary} - {salaryData.maxSalary}</span>
             </div>
-            <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
-              <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Market Confidence</span>
-              <span className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.confidence || "High"}</span>
+            <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+              <span className="text-[10px] sm:text-[11px] font-bold text-emerald-800 uppercase tracking-wider block">Market Confidence</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 dark:text-slate-100 mt-1 block">{salaryData.confidence || "High"}</span>
             </div>
           </div>
         </div>
       )}
 
       {companyData && (
-        <div className="p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 w-full">
-          <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center gap-2">
+        <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-3.5 sm:space-y-4 w-full">
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center gap-2">
             <Building2 size={17} className="text-purple-600" />
             Company Intelligence: {companyData.company || companyName}
           </h3>
-          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium break-words">
             {companyData.summary || companyData.overview}
           </p>
         </div>
