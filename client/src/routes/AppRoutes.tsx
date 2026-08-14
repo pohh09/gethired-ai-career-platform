@@ -20,6 +20,14 @@ const Register = lazy(() => import("../pages/Register"));
 const LandingPage = lazy(() => import("../pages/LandingPage"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
+const DemoLayout = lazy(() => import("../layouts/DemoLayout"));
+const DemoDashboard = lazy(() => import("../pages/demo/DemoDashboard"));
+const DemoJobs = lazy(() => import("../pages/demo/DemoJobs"));
+const DemoApplications = lazy(() => import("../pages/demo/DemoApplications"));
+const DemoAIWorkspace = lazy(() => import("../pages/demo/DemoAIWorkspace"));
+const DemoAnalytics = lazy(() => import("../pages/demo/DemoAnalytics"));
+const DemoCalendar = lazy(() => import("../pages/demo/DemoCalendar"));
+
 const router = createBrowserRouter([
   {
     path: "/landing",
@@ -28,6 +36,64 @@ const router = createBrowserRouter([
         <LandingPage />
       </Suspense>
     ),
+  },
+  {
+    path: "/demo",
+    element: (
+      <Suspense fallback={<Loader fullScreen text="Launching Demo Mode..." />}>
+        <DemoLayout />
+      </Suspense>
+    ),
+    children: [
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo Dashboard..." />}>
+            <DemoDashboard />
+          </Suspense>
+        ),
+      },
+      {
+        path: "jobs",
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo Jobs..." />}>
+            <DemoJobs />
+          </Suspense>
+        ),
+      },
+      {
+        path: "applications",
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo Tracker..." />}>
+            <DemoApplications />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ai-workspace",
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo AI Workspace..." />}>
+            <DemoAIWorkspace />
+          </Suspense>
+        ),
+      },
+      {
+        path: "analytics",
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo Analytics..." />}>
+            <DemoAnalytics />
+          </Suspense>
+        ),
+      },
+      {
+        path: "calendar",
+        element: (
+          <Suspense fallback={<Loader text="Loading Demo Calendar..." />}>
+            <DemoCalendar />
+          </Suspense>
+        ),
+      },
+    ],
   },
   {
     path: "/login",

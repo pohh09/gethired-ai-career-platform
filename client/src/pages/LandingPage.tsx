@@ -373,7 +373,7 @@ export default function LandingPage() {
               Sign In
             </Link>
             <Link
-              to="/register"
+              to="/demo"
               className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/30 flex items-center gap-1.5 transition-all"
             >
               <span>Explore Demo</span>
@@ -414,7 +414,7 @@ export default function LandingPage() {
 
             <button
               type="button"
-              onClick={() => navigate("/ai-workspace")}
+              onClick={() => navigate("/demo")}
               className="px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-sm shadow-md hover:bg-slate-50 dark:hover:bg-slate-800/80 flex items-center gap-2 transition-all cursor-pointer"
             >
               <Play size={16} className="text-indigo-600 fill-indigo-600" />
@@ -1196,14 +1196,14 @@ export default function LandingPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <button
               type="button"
-              onClick={() => navigate("/ai-workspace")}
+              onClick={() => navigate("/demo")}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm shadow-xl shadow-indigo-600/40 hover:scale-105 transition-all cursor-pointer"
             >
               <span>Explore Demo</span>
               <ArrowRight size={18} />
             </button>
             <a
-              href="https://github.com"
+              href="https://github.com/pooj0901/gethired"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-sm border border-white/15 transition-all"
@@ -1213,7 +1213,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
 
       <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -1243,7 +1242,7 @@ export default function LandingPage() {
               </svg>
               <span>LinkedIn</span>
             </a>
-            <Link to="/ai-workspace" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            <Link to="/demo/ai-workspace" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
               AI Workspace
             </Link>
             <Link to="/login" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
