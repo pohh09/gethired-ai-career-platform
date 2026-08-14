@@ -18,7 +18,7 @@ export default function DashboardLayout() {
           <Navbar />
 
           <main className="flex-1 p-3 sm:p-6 lg:p-8 overflow-y-auto overflow-x-hidden no-scrollbar w-full">
-            <div className="max-w-7xl mx-auto space-y-6 w-full overflow-x-hidden">
+            <div className="max-w-[1750px] mx-auto space-y-6 w-full overflow-x-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={location.pathname}

@@ -38,7 +38,12 @@ const PERSONAS: Record<AIModuleId, CoachPersona> = {
     avatarIcon: Sparkles,
     badgeColor: "bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800",
     greeting: "Hi 👋 I'm your Resume Optimization Expert. Ask me to audit your ATS score, rewrite STAR bullets, or review your resume!",
-    chips: ["Analyze my resume", "How can I improve my ATS score?", "Why is my ATS score 70?", "Rewrite bullet"],
+    chips: [
+      "Analyze my resume",
+      "How can I improve my ATS score?",
+      "Why is my ATS score 70?",
+      "Rewrite bullet point in STAR format",
+    ],
   },
   jobs: {
     name: "Senior Recruiter",
@@ -46,15 +51,25 @@ const PERSONAS: Record<AIModuleId, CoachPersona> = {
     avatarIcon: Briefcase,
     badgeColor: "bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800",
     greeting: "Hi 👋 I'm your Senior Tech Recruiter. Ask me to analyze job descriptions, calculate profile match fit, or estimate salaries!",
-    chips: ["Explain this job", "Calculate match fit", "Write a cover letter for this job", "What salary should I target?"],
+    chips: [
+      "Explain this job in plain English",
+      "Calculate profile match fit",
+      "Write tailored cover letter",
+      "What salary should I target?",
+    ],
   },
   interview: {
     name: "Senior Interviewer",
     role: "Engineering Director & Mock Round Evaluator",
     avatarIcon: Video,
     badgeColor: "bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
-    greeting: "Hi 👋 I'm your Senior Engineering Interviewer. Ready for technical questions or answer evaluations?",
-    chips: ["Give me a React interview question", "Ask me a System Design question", "How should I prepare for React interviews?", "Evaluate my answer"],
+    greeting: "Hi 👋 I'm your Senior Engineering Interviewer. Ready for technical questions, behavioral rounds, or answer evaluations?",
+    chips: [
+      "Give me a React interview question",
+      "Ask me a System Design question",
+      "How should I prepare for React rounds?",
+      "Evaluate my previous answer",
+    ],
   },
   career: {
     name: "Career Mentor",
@@ -62,7 +77,12 @@ const PERSONAS: Record<AIModuleId, CoachPersona> = {
     avatarIcon: Target,
     badgeColor: "bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
     greeting: "Hi 👋 I'm your Executive Career Mentor. Ask me for personalized 30-60-90 day growth roadmaps, skill gap analysis, or promotion strategy!",
-    chips: ["Create a 30-60-90 day plan", "What skills am I missing?", "How can I get promoted to Staff Engineer?", "Salary growth strategy"],
+    chips: [
+      "Create a 30-60-90 day plan",
+      "What skills am I currently missing?",
+      "How to get promoted to Staff Engineer?",
+      "Executive salary growth strategy",
+    ],
   },
 };
 
@@ -163,19 +183,22 @@ export default function AIChatAssistant({ activeTab }: AIChatAssistantProps) {
   };
 
   return (
-    <div className="flex flex-col h-full rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-      {/* AI COACH HEADER */}
-      <div className="p-3.5 sm:p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/40 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 shrink-0">
-            <Bot size={18} />
+    <div className="flex flex-col h-[780px] max-h-[calc(100vh-100px)] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden w-full">
+      {/* 1. CHAT HEADER */}
+      <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/40 flex items-center justify-between">
+        <div className="flex items-center gap-3.5">
+          <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 shrink-0 shadow-2xs">
+            <Bot size={20} />
           </div>
           <div>
-            <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+            <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <span>AI Coach</span>
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
             </h3>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               {currentPersona.name} • {currentPersona.role}
             </p>
           </div>
@@ -189,56 +212,58 @@ export default function AIChatAssistant({ activeTab }: AIChatAssistantProps) {
               [activeTab]: [{ id: `init-${Date.now()}`, sender: "assistant", text: currentPersona.greeting, timestamp: "Just now" }],
             }))
           }
-          className="p-1.5 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+          className="p-2 rounded-xl hover:bg-slate-200/70 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer"
           title="Clear chat history"
         >
-          <RefreshCw size={14} />
+          <RefreshCw size={15} />
         </button>
       </div>
 
-      {/* ACTIVE RESUME INDICATOR */}
+      {/* 2. ACTIVE RESUME CONTEXT INDICATOR */}
       {activeResumeFileName && (
-        <div className="px-4 py-1.5 bg-indigo-50/60 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900 text-[11px] font-bold text-indigo-700 dark:text-indigo-300 flex items-center justify-between">
-          <span>✓ Active Resume: {activeResumeFileName}</span>
+        <div className="px-5 py-2 bg-indigo-50/60 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900/50 text-xs font-bold text-indigo-700 dark:text-indigo-300 flex items-center justify-between">
+          <span className="truncate">✓ Active Resume: {activeResumeFileName}</span>
         </div>
       )}
 
-      {/* MESSAGES BODY */}
-      <div className="flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3 min-h-[320px] max-h-[500px]">
+      {/* 3. MESSAGES STREAM */}
+      <div className="flex-1 p-5 overflow-y-auto space-y-4 min-h-[320px]">
         {activeMessages.map((msg) => {
           const isErr = msg.text === "I couldn't generate a response right now. Please try again.";
+          const isUser = msg.sender === "user";
+
           return (
             <motion.div
               key={msg.id}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+              className={`flex ${isUser ? "justify-end" : "justify-start"}`}
             >
-              <div className={`max-w-[85%] space-y-1 ${msg.sender === "user" ? "text-right" : "text-left"}`}>
+              <div className={`max-w-[90%] space-y-1.5 ${isUser ? "text-right" : "text-left"}`}>
                 <div
-                  className={`px-3.5 py-2.5 rounded-[16px] text-xs leading-relaxed font-medium group relative ${
-                    msg.sender === "user"
-                      ? "bg-slate-900 text-white shadow-xs"
+                  className={`px-4 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-[13px] leading-relaxed font-medium group relative shadow-2xs ${
+                    isUser
+                      ? "bg-slate-900 dark:bg-indigo-600 text-white rounded-tr-xs"
                       : isErr
-                      ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 border border-rose-200 dark:border-rose-800"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700/60"
+                      ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 border border-rose-200 dark:border-rose-800 rounded-tl-xs"
+                      : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 border border-slate-200/70 dark:border-slate-700/70 rounded-tl-xs"
                   }`}
                 >
-                  {isErr && <AlertTriangle size={14} className="inline mr-1 text-rose-500" />}
+                  {isErr && <AlertTriangle size={14} className="inline mr-1.5 text-rose-500" />}
                   <span className="whitespace-pre-line">{msg.text}</span>
 
-                  {msg.sender === "assistant" && !isErr && (
+                  {!isUser && !isErr && (
                     <button
                       type="button"
                       onClick={() => handleCopyText(msg.id, msg.text)}
-                      className="ml-2 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 cursor-pointer inline-flex items-center"
+                      className="ml-2 p-1 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer inline-flex items-center transition-colors"
                       title="Copy response"
                     >
-                      {copiedId === msg.id ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+                      {copiedId === msg.id ? <Check size={13} className="text-emerald-500" /> : <Copy size={13} />}
                     </button>
                   )}
                 </div>
-                <span className="text-[10px] text-slate-400 px-1 block">
+                <span className="text-[10px] text-slate-400 px-1 block font-medium">
                   {msg.timestamp}
                 </span>
               </div>
@@ -248,7 +273,7 @@ export default function AIChatAssistant({ activeTab }: AIChatAssistantProps) {
 
         {isTyping && (
           <div className="flex justify-start">
-            <div className="px-3.5 py-2.5 rounded-[16px] bg-slate-100 dark:bg-slate-800 text-slate-400 text-xs flex items-center gap-2">
+            <div className="px-4 py-3 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 text-xs sm:text-[13px] flex items-center gap-2 rounded-tl-xs">
               <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
               <span>AI Coach is analyzing...</span>
             </div>
@@ -257,18 +282,18 @@ export default function AIChatAssistant({ activeTab }: AIChatAssistantProps) {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* SUGGESTION PROMPT CHIPS FORMATTED AS SLEEK ROUNDED PILLS */}
-      <div className="p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/20 space-y-2">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block px-1">
+      {/* 4. SUGGESTION PROMPTS (2-PER-ROW ROUNDED BUTTONS) */}
+      <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-950/30 space-y-2.5">
+        <span className="text-[11px] font-black uppercase tracking-wider text-slate-400 block px-1">
           Suggested Prompts:
         </span>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="grid grid-cols-2 gap-2">
           {currentPersona.chips.map((chip, idx) => (
             <button
               key={idx}
               type="button"
               onClick={() => handleSendMessage(chip)}
-              className="text-xs font-semibold px-3 py-1 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-indigo-500 hover:text-indigo-600 transition-all cursor-pointer shadow-2xs"
+              className="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 text-left hover:border-indigo-500 hover:text-indigo-600 hover:shadow-xs hover:-translate-y-0.5 transition-all cursor-pointer leading-snug line-clamp-2"
             >
               {chip}
             </button>
@@ -276,23 +301,23 @@ export default function AIChatAssistant({ activeTab }: AIChatAssistantProps) {
         </div>
       </div>
 
-      {/* STICKY BOTTOM INPUT CONTROLS FOOTER */}
-      <div className="p-3 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-end gap-2 sticky bottom-0 z-10">
+      {/* 5. STICKY INPUT CONTROLS FOOTER */}
+      <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-end gap-2.5 sticky bottom-0 z-10">
         <textarea
           rows={2}
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={`Ask ${currentPersona.name}...`}
-          className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none font-medium"
+          className="flex-1 px-4 py-3 text-xs sm:text-[13px] rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none font-medium min-h-[48px] max-h-[120px] transition-all"
         />
         <button
           type="button"
           onClick={() => handleSendMessage()}
           disabled={!inputMessage.trim() || isTyping}
-          className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-40 transition-colors shrink-0 cursor-pointer shadow-sm shadow-indigo-600/20"
+          className="p-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-40 transition-all shrink-0 cursor-pointer shadow-md shadow-indigo-600/20"
         >
-          <Send size={15} />
+          <Send size={16} />
         </button>
       </div>
     </div>
