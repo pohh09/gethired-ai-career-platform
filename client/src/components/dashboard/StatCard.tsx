@@ -41,19 +41,19 @@ export default function StatCard({
   > = {
     indigo: {
       border:
-        "border-indigo-500/20 hover:border-indigo-500/40 dark:border-indigo-500/20 dark:hover:border-indigo-500/50",
-      bg: "bg-indigo-50/70 dark:bg-indigo-950/50",
-      iconText: "text-indigo-600 dark:text-indigo-400",
-      accentBar: "from-indigo-600 to-indigo-400",
-      pill: "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200/60 dark:border-indigo-800/50",
+        "border-blue-500/20 hover:border-blue-500/40 dark:border-blue-500/20 dark:hover:border-blue-500/50",
+      bg: "bg-blue-50/70 dark:bg-blue-950/50",
+      iconText: "text-blue-600 dark:text-cyan-400",
+      accentBar: "from-blue-600 to-cyan-400",
+      pill: "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 border-blue-200/60 dark:border-blue-800/50",
     },
     blue: {
       border:
-        "border-blue-500/20 hover:border-blue-500/40 dark:border-blue-500/20 dark:hover:border-blue-500/50",
-      bg: "bg-blue-50/70 dark:bg-blue-950/50",
-      iconText: "text-blue-600 dark:text-blue-400",
-      accentBar: "from-blue-600 to-blue-400",
-      pill: "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200/60 dark:border-blue-800/50",
+        "border-sky-500/20 hover:border-sky-500/40 dark:border-sky-500/20 dark:hover:border-sky-500/50",
+      bg: "bg-sky-50/70 dark:bg-sky-950/50",
+      iconText: "text-sky-600 dark:text-sky-400",
+      accentBar: "from-sky-500 to-blue-600",
+      pill: "bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border-sky-200/60 dark:border-sky-800/50",
     },
     amber: {
       border:
@@ -81,11 +81,11 @@ export default function StatCard({
     },
     purple: {
       border:
-        "border-purple-500/20 hover:border-purple-500/40 dark:border-purple-500/20 dark:hover:border-purple-500/50",
-      bg: "bg-purple-50/70 dark:bg-purple-950/50",
-      iconText: "text-purple-600 dark:text-purple-400",
-      accentBar: "from-purple-600 to-purple-400",
-      pill: "bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200/60 dark:border-purple-800/50",
+        "border-cyan-500/20 hover:border-cyan-500/40 dark:border-cyan-500/20 dark:hover:border-cyan-500/50",
+      bg: "bg-cyan-50/70 dark:bg-cyan-950/50",
+      iconText: "text-cyan-700 dark:text-cyan-300",
+      accentBar: "from-cyan-500 to-blue-500",
+      pill: "bg-cyan-50 dark:bg-cyan-950/60 text-cyan-800 dark:text-cyan-300 border-cyan-200/60 dark:border-cyan-800/50",
     },
   };
 

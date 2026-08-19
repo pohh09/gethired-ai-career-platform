@@ -14,7 +14,7 @@ export default function WorkspaceSwitcher({
         to="/"
         className="group flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100/80 dark:hover:bg-slate-800/60 transition-all duration-200"
       >
-        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 text-white flex items-center justify-center font-black shadow-md shadow-indigo-500/20 shrink-0 group-hover:scale-105 transition-transform">
+        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-black shadow-md shadow-blue-500/20 shrink-0 group-hover:scale-105 transition-transform">
           <Zap size={18} className="fill-current text-white" />
         </div>
 
@@ -25,7 +25,7 @@ export default function WorkspaceSwitcher({
                 <span className="font-bold text-sm text-slate-900 dark:text-slate-100 tracking-tight truncate">
                   GetHired AI
                 </span>
-                <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-400 border border-indigo-200/60 dark:border-indigo-800/40">
+                <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-950/80 dark:text-cyan-300 border border-blue-200/60 dark:border-cyan-800/40">
                   <Sparkles size={9} /> Pro
                 </span>
               </div>

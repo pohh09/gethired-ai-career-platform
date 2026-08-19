@@ -15,7 +15,6 @@ function cleanExtractedText(text) {
 }
 
 async function parsePdfBuffer(buffer) {
-  // Check v2 class export (PDFParse)
   if (pdfParseModule && typeof pdfParseModule.PDFParse === "function") {
     const parser = new pdfParseModule.PDFParse({ data: buffer });
     const res = await parser.getText();
@@ -24,7 +23,6 @@ async function parsePdfBuffer(buffer) {
     return { text: rawText, pageCount: Math.max(1, totalPages) };
   }
 
-  // Check v1 function export
   const pdfFn = typeof pdfParseModule === "function" ? pdfParseModule : pdfParseModule?.default;
   if (typeof pdfFn === "function") {
     const data = await pdfFn(buffer);
@@ -119,7 +117,6 @@ export async function parseUploadedDocument(file) {
     };
   }
 
-  // Plain text / markdown file
   rawExtractedText = file.buffer.toString("utf-8");
   pageCount = Math.max(1, Math.ceil(rawExtractedText.split(/\s+/).length / 400));
 

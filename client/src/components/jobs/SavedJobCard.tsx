@@ -44,7 +44,7 @@ export default function SavedJobCard({
                 }}
               />
             ) : (
-              <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 text-white flex items-center justify-center font-extrabold text-base shadow-xs shrink-0 ring-2 ring-indigo-500/10">
+              <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 text-white flex items-center justify-center font-extrabold text-base shadow-xs shrink-0 ring-2 ring-blue-500/10">
                 {job.company.charAt(0).toUpperCase()}
               </div>
             )}
@@ -60,14 +60,14 @@ export default function SavedJobCard({
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/60">
+            <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-cyan-50 dark:bg-cyan-950/60 text-cyan-800 dark:text-cyan-300 border border-cyan-200/60 dark:border-cyan-800/60">
               {provider}
             </span>
             <a
               href={job.jobLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors"
               title="Open original job posting"
             >
               <ExternalLink size={16} />
@@ -76,10 +76,10 @@ export default function SavedJobCard({
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
-          <span className="px-2.5 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60">
+          <span className="px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 border border-blue-200/60 dark:border-blue-800/60">
             {job.workplaceType}
           </span>
-          <span className="px-2.5 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/60">
+          <span className="px-2.5 py-0.5 rounded-md bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/60 dark:border-sky-800/60">
             {job.employmentType}
           </span>
         </div>

@@ -111,10 +111,10 @@ export default function RecentApplications({
                   <td className="py-3.5 px-4 text-slate-500 font-mono text-[11px]">
                     {job.appliedDate
                       ? new Date(job.appliedDate).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })
                       : "Recently"}
                   </td>
 

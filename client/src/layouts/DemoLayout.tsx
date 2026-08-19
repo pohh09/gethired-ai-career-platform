@@ -44,14 +44,14 @@ export default function DemoLayout() {
 
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      <div className="sticky top-0 z-50 bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 text-white px-3 sm:px-6 py-2.5 shadow-md flex items-center justify-between gap-3 text-xs shrink-0 select-none">
+      <div className="sticky top-0 z-50 bg-gradient-to-r from-blue-900 via-sky-900 to-cyan-900 text-white px-3 sm:px-6 py-2.5 shadow-md flex items-center justify-between gap-3 text-xs shrink-0 select-none">
         <div className="flex items-center gap-2 min-w-0">
           <span className="flex h-2 w-2 relative shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
           </span>
           <p className="font-semibold truncate">
-            <span className="font-extrabold text-amber-300 mr-1.5">🎉 Demo Mode:</span>
+            <span className="font-extrabold text-cyan-300 mr-1.5">🎉 Demo Mode:</span>
             <span className="hidden sm:inline">You're exploring GetHired using sample data. Sign up to unlock live AI tools and save progress!</span>
             <span className="sm:hidden">Exploring with sample data.</span>
           </p>
@@ -60,7 +60,7 @@ export default function DemoLayout() {
         <div className="flex items-center gap-2 shrink-0">
           <Link
             to="/register"
-            className="px-3.5 py-1.5 rounded-xl bg-white text-indigo-950 font-extrabold hover:bg-slate-100 transition-all shadow-sm flex items-center gap-1 cursor-pointer text-[11px] sm:text-xs"
+            className="px-3.5 py-1.5 rounded-xl bg-white text-blue-950 font-extrabold hover:bg-sky-50 transition-all shadow-sm flex items-center gap-1 cursor-pointer text-[11px] sm:text-xs"
           >
             <span>Create Account</span>
             <ArrowRight size={13} />
@@ -86,16 +86,16 @@ export default function DemoLayout() {
           </button>
 
           <Link to="/demo" className="flex items-center gap-2.5">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-indigo-500/20">
+            <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-blue-500/20">
               <Sparkles size={16} />
             </div>
             <span className="text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight hidden xs:inline-block">
-              Get<span className="text-indigo-600 dark:text-indigo-400">Hired</span>
+              Get<span className="text-blue-600 dark:text-cyan-400">Hired</span>
             </span>
           </Link>
 
-          <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-extrabold uppercase tracking-wider">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800 text-[10px] font-extrabold uppercase tracking-wider">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse" />
             Interactive Demo
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function DemoLayout() {
                 to={item.path}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
                   isActive
-                    ? "bg-indigo-600 text-white shadow-sm shadow-indigo-600/20"
+                    ? "bg-blue-600 text-white shadow-sm shadow-blue-600/20"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
               >
@@ -147,7 +147,7 @@ export default function DemoLayout() {
               aria-label="Notifications"
             >
               <Bell size={17} />
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-indigo-600 ring-2 ring-white dark:ring-slate-900" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-cyan-500 ring-2 ring-white dark:ring-slate-900" />
             </button>
 
             <AnimatePresence>
@@ -162,11 +162,11 @@ export default function DemoLayout() {
                     <span className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
                       Notifications (Demo)
                     </span>
-                    <span className="text-[10px] text-indigo-600 font-bold">2 New</span>
+                    <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold">2 New</span>
                   </div>
                   <div className="space-y-2 text-xs">
-                    <div className="p-2.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 space-y-0.5">
-                      <p className="font-extrabold text-indigo-900 dark:text-indigo-200">
+                    <div className="p-2.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/50 space-y-0.5">
+                      <p className="font-extrabold text-blue-900 dark:text-blue-200">
                         Interview Tomorrow @ 10:00 AM
                       </p>
                       <p className="text-[11px] text-slate-500">
@@ -232,7 +232,7 @@ export default function DemoLayout() {
                       <p className="text-[10px] text-slate-400 font-medium truncate max-w-[140px]">
                         {DEMO_USER.email}
                       </p>
-                      <span className="inline-block mt-0.5 text-[9px] font-extrabold px-2 py-0.2 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+                      <span className="inline-block mt-0.5 text-[9px] font-extrabold px-2 py-0.2 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400">
                         Demo Account
                       </span>
                     </div>
@@ -241,7 +241,7 @@ export default function DemoLayout() {
                   <div className="space-y-1">
                     <Link
                       to="/register"
-                      className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-bold text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors"
+                      className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-bold text-blue-600 dark:text-cyan-400 hover:bg-blue-50 dark:hover:bg-blue-950 transition-colors"
                     >
                       <UserPlus size={14} />
                       <span>Create Real Account</span>
@@ -278,7 +278,7 @@ export default function DemoLayout() {
                   to={item.path}
                   className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-all ${
                     isActive
-                      ? "bg-indigo-600 text-white"
+                      ? "bg-blue-600 text-white"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                   }`}
                 >

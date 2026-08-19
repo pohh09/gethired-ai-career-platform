@@ -220,7 +220,7 @@ export default function InterviewWorkspace() {
           updated[currentIndex + 1] = adaptiveRes.nextQuestion;
           setQuestionsList(updated);
         }
-      } catch (_e) {}
+      } catch (_e) { }
 
       setCurrentIndex(currentIndex + 1);
       setUserAnswer("");
@@ -402,13 +402,12 @@ export default function InterviewWorkspace() {
                 {questionsList.map((_, i) => (
                   <div
                     key={i}
-                    className={`h-full flex-1 border-r border-amber-500/20 transition-all ${
-                      i < currentIndex
+                    className={`h-full flex-1 border-r border-amber-500/20 transition-all ${i < currentIndex
                         ? "bg-emerald-600"
                         : i === currentIndex
-                        ? "bg-amber-600 animate-pulse"
-                        : "bg-transparent"
-                    }`}
+                          ? "bg-amber-600 animate-pulse"
+                          : "bg-transparent"
+                      }`}
                   />
                 ))}
               </div>
@@ -496,15 +495,13 @@ export default function InterviewWorkspace() {
                     Answer Rubric Evaluation
                   </h4>
                   <div className="flex items-center gap-2 self-start sm:self-auto">
-                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase ${
-                      evaluation.verdict === "Correct" ? "bg-emerald-100 text-emerald-800" :
-                      evaluation.verdict === "Partially Correct" ? "bg-amber-100 text-amber-800" : "bg-rose-100 text-rose-800"
-                    }`}>
+                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase ${evaluation.verdict === "Correct" ? "bg-emerald-100 text-emerald-800" :
+                        evaluation.verdict === "Partially Correct" ? "bg-amber-100 text-amber-800" : "bg-rose-100 text-rose-800"
+                      }`}>
                       Verdict: {evaluation.verdict || (evaluation.score >= 75 ? "Correct" : evaluation.score >= 40 ? "Partially Correct" : "Incorrect")}
                     </span>
-                    <div className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${
-                      evaluation.score >= 75 ? "bg-emerald-600" : evaluation.score >= 40 ? "bg-amber-600" : "bg-rose-600"
-                    }`}>
+                    <div className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${evaluation.score >= 75 ? "bg-emerald-600" : evaluation.score >= 40 ? "bg-amber-600" : "bg-rose-600"
+                      }`}>
                       Score: {evaluation.score ?? evaluation.overallScore}/100
                     </div>
                   </div>

@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       if (success) {
         return "border-emerald-500 focus:ring-emerald-500/30 focus:border-emerald-500";
       }
-      return "border-slate-200 dark:border-slate-800 focus:ring-indigo-500/30 focus:border-indigo-500";
+      return "border-slate-200 dark:border-slate-800 focus:ring-cyan-400/25 focus:border-blue-500";
     };
 
     return (

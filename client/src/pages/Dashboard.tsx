@@ -54,7 +54,7 @@ export default function Dashboard() {
           comparisonText="vs last month"
           percentageChange="+14%"
           trendDirection="up"
-          accentColor="indigo"
+          accentColor="blue"
           isLoading={isStatsLoading}
           miniGraphData={[4, 6, 5, 8, 7, 10, 12, 14]}
         />
@@ -87,9 +87,9 @@ export default function Dashboard() {
           comparisonText="archived"
           percentageChange="-5%"
           trendDirection="down"
-          accentColor="purple"
+          accentColor="rose"
           isLoading={isStatsLoading}
-          miniGraphData={[2, 3, 2, 1, 2, 2]}
+          miniGraphData={[2, 1, 2, 1, 0, 1, 1, 0]}
         />
       </div>
 

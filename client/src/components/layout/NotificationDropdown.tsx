@@ -71,7 +71,7 @@ export default function NotificationDropdown() {
       >
         <Bell size={18} />
         {unreadCount > 0 && (
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-indigo-600 ring-2 ring-white dark:ring-slate-900 animate-pulse" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-cyan-500 ring-2 ring-white dark:ring-slate-900 animate-pulse" />
         )}
       </button>
 
@@ -90,7 +90,7 @@ export default function NotificationDropdown() {
                   Notifications
                 </span>
                 {unreadCount > 0 && (
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-400">
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-950/80 dark:text-cyan-300">
                     {unreadCount} new
                   </span>
                 )}
@@ -100,7 +100,7 @@ export default function NotificationDropdown() {
                 <button
                   type="button"
                   onClick={markAllAsRead}
-                  className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-blue-600 hover:text-cyan-600 dark:text-cyan-400 flex items-center gap-1 cursor-pointer"
                 >
                   <Check size={13} />
                   <span>Mark all read</span>
@@ -125,13 +125,13 @@ export default function NotificationDropdown() {
                     key={item.id}
                     className={`p-3.5 flex items-start gap-3 transition-colors ${
                       !item.read
-                        ? "bg-indigo-50/40 dark:bg-indigo-950/20"
+                        ? "bg-blue-50/50 dark:bg-blue-950/30"
                         : "hover:bg-slate-50 dark:hover:bg-slate-800/40"
                     }`}
                   >
                     <div
                       className={`h-2 w-2 rounded-full mt-1.5 shrink-0 ${
-                        !item.read ? "bg-indigo-600" : "bg-transparent"
+                        !item.read ? "bg-cyan-500" : "bg-transparent"
                       }`}
                     />
                     <div className="flex-1 min-w-0">
@@ -155,7 +155,7 @@ export default function NotificationDropdown() {
               <a
                 href="/notifications"
                 onClick={() => setIsOpen(false)}
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 block py-1"
+                className="text-xs font-bold text-blue-600 hover:text-cyan-600 dark:text-cyan-400 dark:hover:text-cyan-300 block py-1"
               >
                 View all notifications →
               </a>

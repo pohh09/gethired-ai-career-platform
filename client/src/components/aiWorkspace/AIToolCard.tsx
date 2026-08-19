@@ -87,11 +87,10 @@ export default function AIToolCard({
             aria-label={
               tool.isFavorite ? "Unpin tool" : "Pin tool to favorites"
             }
-            className={`p-2 rounded-xl border transition-all duration-200 ${
-              tool.isFavorite
+            className={`p-2 rounded-xl border transition-all duration-200 ${tool.isFavorite
                 ? "bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-700 text-amber-500"
                 : "bg-slate-50 dark:bg-slate-800/60 border-slate-200/60 dark:border-slate-800 text-slate-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/40"
-            }`}
+              }`}
           >
             <Star
               size={16}

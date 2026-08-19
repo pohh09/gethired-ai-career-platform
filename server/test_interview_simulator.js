@@ -31,7 +31,7 @@ async function runInterviewSimulatorTests() {
     console.log(`   -> Q12 (Final Challenge): "${questions[11]?.question || questions[questions.length - 1]?.question}"\n`);
   }
 
-  // TEST 7: JD Customization Test
+
   console.log("Testing Config: 7. JD Customization (Node + PostgreSQL + Docker)");
   const jdQuestions = await generateInterviewQuestions({
     role: "Backend Developer",
@@ -41,7 +41,7 @@ async function runInterviewSimulatorTests() {
   });
   console.log(`   -> Q1 with JD: "${jdQuestions[0]?.question}"\n`);
 
-  // TEST 8: Wrong Answer Penalty Test
+
   console.log("Testing Rule: 8. Wrong Answer Evaluation Penalty");
   const wrongEval = await evaluateInterviewResponse({
     question: "Explain React's useMemo and when you would use it.",
@@ -55,7 +55,7 @@ async function runInterviewSimulatorTests() {
   console.log(`   -> Verdict: "${wrongEval.verdict}" (Expected "Incorrect")`);
   console.log(`   -> Missing Concepts: ${JSON.stringify(wrongEval.missingPoints || wrongEval.missingConcepts)}\n`);
 
-  // TEST 9: STAR / Correct Answer Test
+
   console.log("Testing Rule: 9. STAR / Correct Answer Evaluation");
   const starEval = await evaluateInterviewResponse({
     question: "How do you handle authentication in a React application?",
@@ -67,8 +67,7 @@ async function runInterviewSimulatorTests() {
   console.log(`   -> Score: ${starEval.score} (Expected >= 80)`);
   console.log(`   -> Verdict: "${starEval.verdict}" (Expected "Correct")\n`);
 
-  // TEST 10: 12-Question Session Report Generation
-  console.log("Testing Rule: 10. 12-Question Session Final Report");
+ console.log("Testing Rule: 10. 12-Question Session Final Report");
   const mockHistory = Array.from({ length: 12 }, (_, i) => ({
     question: `Question ${i + 1}`,
     userAnswer: `Answer ${i + 1}`,

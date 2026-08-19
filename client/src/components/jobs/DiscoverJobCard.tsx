@@ -72,11 +72,10 @@ export default function DiscoverJobCard({
 
           <div className="flex items-center gap-1.5 shrink-0">
             <span
-              className={`px-2 py-0.5 text-[10px] font-extrabold rounded-full border ${
-                provider === "Adzuna"
+              className={`px-2 py-0.5 text-[10px] font-extrabold rounded-full border ${provider === "Adzuna"
                   ? "bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200/60 dark:border-amber-800/60"
                   : "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200/60 dark:border-indigo-800/60"
-              }`}
+                }`}
             >
               {provider}
             </span>

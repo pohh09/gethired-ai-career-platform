@@ -66,11 +66,10 @@ export default function VersionHistory({
                 key={ver.id}
                 type="button"
                 onClick={() => onSelectVersion(ver)}
-                className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer shrink-0 text-left space-y-0.5 ${
-                  isActive
+                className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer shrink-0 text-left space-y-0.5 ${isActive
                     ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border-indigo-300/80 shadow-2xs font-extrabold"
                     : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-300"
-                }`}
+                  }`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1">

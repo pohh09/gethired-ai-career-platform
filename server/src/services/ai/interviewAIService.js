@@ -16,7 +16,6 @@ async function callGeminiPrompt(prompt, systemInstruction = "") {
   return null;
 }
 
-// Comprehensive Question Bank per Role and Round
 const ROLE_QUESTION_BANKS = {
   "Full Stack Developer": {
     technical: [
@@ -476,7 +475,6 @@ export async function generateInterviewQuestions({
   const normType = (type || "technical").toLowerCase();
   const sessionCount = count || 12;
 
-  // 1. Gemini dynamic generation with strict 12-question progressive curve
   const prompt = `You are a Senior Principal Technical Interviewer generating an interview session of EXACTLY ${sessionCount} questions.
 TARGET CONFIGURATION:
 - Target Role: ${role}
@@ -539,7 +537,6 @@ Return ONLY a valid JSON array of ${sessionCount} objects with keys:
     } catch (_e) {}
   }
 
-  // 2. Role-specific fallback bank selection
   const matchedRoleKey = Object.keys(ROLE_QUESTION_BANKS).find(
     (key) => role.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(role.toLowerCase())
   ) || "Full Stack Developer";
@@ -547,7 +544,6 @@ Return ONLY a valid JSON array of ${sessionCount} objects with keys:
   const roleBank = ROLE_QUESTION_BANKS[matchedRoleKey] || ROLE_QUESTION_BANKS["Full Stack Developer"];
   let roundQuestions = roleBank[normType] || roleBank["technical"] || ROLE_QUESTION_BANKS["Full Stack Developer"]["technical"];
 
-  // Duplicate or generate up to sessionCount if bank is smaller
   const result = [];
   for (let i = 0; i < sessionCount; i++) {
     const baseQ = roundQuestions[i % roundQuestions.length];
@@ -578,7 +574,6 @@ export async function evaluateInterviewResponse({
   const qText = (question || "Interview Question").trim();
   const uText = (userAnswer || "").trim();
 
-  // RULE 1: Empty Answer -> 0% Score & Incorrect Verdict
   if (!uText) {
     return {
       score: 0,
@@ -600,10 +595,8 @@ export async function evaluateInterviewResponse({
     };
   }
 
-  // RULE 2: Random text / Gibberish / Outright Incorrect Assertion Check
   const cleanWords = uText.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(Boolean);
 
-  // Check for outright wrong assertion (e.g. useMemo for HTTP requests)
   if (qText.toLowerCase().includes("usememo") && uText.toLowerCase().includes("http")) {
     return {
       score: 15,
@@ -625,7 +618,6 @@ export async function evaluateInterviewResponse({
     };
   }
 
-  // RULE 3: Gemini Evaluation against Question & Expected Topics
   const geminiPrompt = `You are a Senior Technical Evaluator assessing a candidate's answer to an interview question.
 QUESTION: "${qText}"
 CANDIDATE ANSWER: "${uText}"
@@ -692,7 +684,6 @@ Return ONLY valid JSON with keys:
     } catch (_e) {}
   }
 
-  // RULE 4: Fallback Algorithmic Scoring
   const topicsToCheck = expectedTopics.length > 0 ? expectedTopics : importantPoints;
   const matched = (topicsToCheck || []).filter((tp) => {
     const words = tp.toLowerCase().split(/\s+/).filter((w) => w.length > 3);

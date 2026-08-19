@@ -32,32 +32,32 @@ const NAV_ITEMS: {
     label: "Resume",
     desc: "ATS Analysis & STAR Rewriter",
     icon: FileText,
-    activeClass: "bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-600/20",
-    iconBgActive: "bg-indigo-500 text-white",
+    activeClass: "bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-600/20",
+    iconBgActive: "bg-blue-500 text-white",
   },
   {
     id: "jobs",
     label: "Jobs",
     desc: "JD Analysis & Fit Match",
     icon: Briefcase,
-    activeClass: "bg-purple-600 text-white border-purple-600 shadow-sm shadow-purple-600/20",
-    iconBgActive: "bg-purple-500 text-white",
+    activeClass: "bg-cyan-600 text-white border-cyan-600 shadow-sm shadow-cyan-600/20",
+    iconBgActive: "bg-cyan-500 text-white",
   },
   {
     id: "interview",
     label: "Interview",
     desc: "Mock Simulator & Evaluator",
     icon: Video,
-    activeClass: "bg-amber-600 text-white border-amber-600 shadow-sm shadow-amber-600/20",
-    iconBgActive: "bg-amber-500 text-white",
+    activeClass: "bg-sky-600 text-white border-sky-600 shadow-sm shadow-sky-600/20",
+    iconBgActive: "bg-sky-500 text-white",
   },
   {
     id: "career",
     label: "Career",
     desc: "Growth Planner & Skill Matrix",
     icon: TrendingUp,
-    activeClass: "bg-emerald-600 text-white border-emerald-600 shadow-sm shadow-emerald-600/20",
-    iconBgActive: "bg-emerald-500 text-white",
+    activeClass: "bg-teal-600 text-white border-teal-600 shadow-sm shadow-teal-600/20",
+    iconBgActive: "bg-teal-500 text-white",
   },
 ];
 
@@ -75,8 +75,8 @@ export default function AIWorkspace() {
     <div className="w-full max-w-[1750px] mx-auto space-y-4 sm:space-y-6 pb-16 sm:pb-12 px-1 sm:px-0 overflow-x-hidden">
       <div className="p-4 sm:p-5 md:p-6 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="space-y-1.5 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
-            <Sparkles size={12} className="text-indigo-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+            <Sparkles size={12} className="text-cyan-400" />
             AI Career Operating System
           </div>
           <h1 className="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white">
@@ -90,7 +90,7 @@ export default function AIWorkspace() {
         <button
           type="button"
           onClick={() => setIsMobileChatOpen(true)}
-          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all shrink-0 cursor-pointer w-full md:w-auto"
+          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md shadow-blue-600/30 transition-all shrink-0 cursor-pointer w-full md:w-auto"
         >
           <Bot size={15} />
           <span>Open AI Coach</span>
@@ -171,13 +171,13 @@ export default function AIWorkspace() {
       <button
         type="button"
         onClick={() => setIsMobileChatOpen(true)}
-        className="xl:hidden fixed bottom-5 right-5 z-40 h-13 w-13 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-xl shadow-indigo-600/40 flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 transition-all border-2 border-white/20"
+        className="xl:hidden fixed bottom-5 right-5 z-40 h-13 w-13 rounded-full bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-500 text-white shadow-xl shadow-blue-600/40 flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 transition-all border-2 border-white/20"
         aria-label="Open AI Career Coach"
       >
         <Bot size={24} />
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border border-white" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-cyan-500 border border-white" />
         </span>
       </button>
 
@@ -200,7 +200,7 @@ export default function AIWorkspace() {
             >
               <div className="p-3.5 px-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950 shrink-0">
                 <span className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                  <Bot size={16} className="text-indigo-500" /> AI Career Coach
+                  <Bot size={16} className="text-cyan-500" /> AI Career Coach
                 </span>
                 <button
                   type="button"

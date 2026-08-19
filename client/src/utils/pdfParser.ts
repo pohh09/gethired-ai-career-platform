@@ -59,15 +59,13 @@ export async function parseDocumentFile(file: File): Promise<ParsedDocument> {
     const decoder = new TextDecoder("utf-8", { fatal: false });
     const rawString = decoder.decode(arrayBuffer);
 
-    // Extract text in parentheses (PDF string literal syntax: (text) Tj or (text) TJ)
     const matches: string[] = [];
     const textLiteralRegex = /\(([^()]{2,})\)/g;
     let match: RegExpExecArray | null;
 
     while ((match = textLiteralRegex.exec(rawString)) !== null) {
       const token = match[1];
-      // Filter out PDF stream commands / binary noise
-      if (
+     if (
         !token.includes("/Filter") &&
         !token.includes("/Length") &&
         !token.includes("Font") &&
@@ -80,12 +78,10 @@ export async function parseDocumentFile(file: File): Promise<ParsedDocument> {
 
     let extractedText = matches.join(" ").replace(/\\([()])/g, "$1").replace(/\s+/g, " ").trim();
 
-    // Estimate page count from PDF object markers /Type /Page
     const pageMarkers = (rawString.match(/\/Type\s*\/Page\b/g) || []).length;
     const pageCount = Math.max(1, pageMarkers);
 
     if (!extractedText || extractedText.length < 20) {
-      // If stream extraction produced low quality text, fallback to sanitized printable ASCII
       const printableAscii = rawString
         .replace(/[\x00-\x1F\x7F-\x9F]/g, " ")
         .replace(/%PDF-[\s\S]*?obj/g, "")

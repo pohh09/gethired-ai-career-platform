@@ -8,7 +8,7 @@ export default function DemoCalendar() {
       <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <CalendarIcon size={22} className="text-indigo-600" />
+            <CalendarIcon size={22} className="text-blue-600 dark:text-cyan-400" />
             <span>Interview Schedule & Milestones</span>
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -40,14 +40,14 @@ export default function DemoCalendar() {
                   {interview.role}
                 </p>
                 <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
-                  <Video size={13} className="text-indigo-500" />
+                  <Video size={13} className="text-blue-500 dark:text-cyan-400" />
                   <span>{interview.type} • Interviewer: {interview.interviewer}</span>
                 </p>
               </div>
             </div>
 
             <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
-              <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1.5 rounded-xl border border-indigo-200 dark:border-indigo-800">
+              <span className="text-xs font-mono font-bold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1.5 rounded-xl border border-blue-200 dark:border-cyan-800">
                 {interview.date} @ {interview.time}
               </span>
               <Link

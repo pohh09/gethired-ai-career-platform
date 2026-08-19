@@ -84,7 +84,7 @@ export default function Settings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Sun size={18} className="text-indigo-600 dark:text-indigo-400" />
+            <Sun size={18} className="text-blue-600 dark:text-cyan-400" />
             Theme Appearance
           </CardTitle>
           <CardDescription>
@@ -103,12 +103,12 @@ export default function Settings() {
                   key={opt.id}
                   onClick={() => setTheme(opt.id)}
                   className={`group relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${isSelected
-                    ? "border-indigo-600 dark:border-indigo-500 bg-indigo-50/40 dark:bg-indigo-950/40 shadow-sm"
+                    ? "border-blue-600 dark:border-cyan-500 bg-blue-50/60 dark:bg-blue-950/40 shadow-sm"
                     : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700"
                     }`}
                 >
                   {isSelected && (
-                    <div className="absolute top-4 right-4 h-6 w-6 rounded-full bg-indigo-600 text-white flex items-center justify-center">
+                    <div className="absolute top-4 right-4 h-6 w-6 rounded-full bg-blue-600 dark:bg-cyan-500 text-white dark:text-slate-950 flex items-center justify-center">
                       <Check size={14} />
                     </div>
                   )}
@@ -116,7 +116,7 @@ export default function Settings() {
                   <div className="space-y-3">
                     <div
                       className={`h-11 w-11 rounded-xl flex items-center justify-center ${isSelected
-                        ? "bg-indigo-600 text-white shadow-xs"
+                        ? "bg-blue-600 dark:bg-cyan-500 text-white dark:text-slate-950 shadow-xs"
                         : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:scale-105 transition-transform"
                         }`}
                     >
@@ -143,7 +143,7 @@ export default function Settings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <FileText size={18} className="text-indigo-600 dark:text-indigo-400" />
+            <FileText size={18} className="text-blue-600 dark:text-cyan-400" />
             Default Master Resume
           </CardTitle>
           <CardDescription>
@@ -169,7 +169,7 @@ export default function Settings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Bell size={18} className="text-indigo-600 dark:text-indigo-400" />
+            <Bell size={18} className="text-blue-600 dark:text-cyan-400" />
             Notification Preferences
           </CardTitle>
           <CardDescription>
@@ -194,7 +194,7 @@ export default function Settings() {
                 setEmailAlerts(e.target.checked);
                 toast.success("Updated email preferences");
               }}
-              className="h-4 w-4 rounded text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
             />
           </label>
 
@@ -214,7 +214,7 @@ export default function Settings() {
                 setBrowserNotifs(e.target.checked);
                 toast.success("Updated browser notification preferences");
               }}
-              className="h-4 w-4 rounded text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
             />
           </label>
 
@@ -234,7 +234,7 @@ export default function Settings() {
                 setWeeklyDigest(e.target.checked);
                 toast.success("Updated weekly digest preferences");
               }}
-              className="h-4 w-4 rounded text-indigo-600 focus:ring-indigo-500"
+              className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
             />
           </label>
         </CardBody>
@@ -244,7 +244,7 @@ export default function Settings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Globe size={18} className="text-indigo-600 dark:text-indigo-400" />
+            <Globe size={18} className="text-blue-600 dark:text-cyan-400" />
             Language & Time Zone
           </CardTitle>
           <CardDescription>

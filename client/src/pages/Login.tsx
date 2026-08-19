@@ -58,11 +58,11 @@ export default function Login() {
         <div className="text-center space-y-2">
           <Link
             to="/landing"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline mb-2"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline mb-2"
           >
             ← Back to GetHired Home
           </Link>
-          <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-tr from-indigo-600 to-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-blue-500/30">
             <Zap size={26} className="fill-current text-white" />
           </div>
 
@@ -116,7 +116,7 @@ export default function Login() {
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+            className="font-bold text-blue-600 dark:text-cyan-400 hover:underline"
           >
             Create account
           </Link>

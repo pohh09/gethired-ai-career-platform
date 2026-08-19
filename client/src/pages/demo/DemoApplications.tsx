@@ -58,7 +58,7 @@ export default function DemoApplications() {
       <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <Layers size={22} className="text-indigo-600" />
+            <Layers size={22} className="text-blue-600 dark:text-cyan-400" />
             <span>Interactive Application Tracker (Kanban)</span>
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -72,7 +72,7 @@ export default function DemoApplications() {
             size="sm"
             onClick={() => setShowAddModal(true)}
             leftIcon={<Plus size={15} />}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm shadow-indigo-600/20"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-sm shadow-blue-600/20"
           >
             Add Application
           </Button>
@@ -120,7 +120,7 @@ export default function DemoApplications() {
                           {app.company}
                         </span>
                       </div>
-                      <span className="text-[10px] font-extrabold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 px-1.5 py-0.5 rounded-md">
+                      <span className="text-[10px] font-extrabold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-blue-950 px-1.5 py-0.5 rounded-md">
                         {app.matchScore}%
                       </span>
                     </div>
@@ -142,7 +142,7 @@ export default function DemoApplications() {
 
                     <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-700/60 text-[10px] text-slate-400">
                       <span>{app.appliedDate}</span>
-                      <span className="font-bold text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="font-bold text-blue-500 dark:text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
                         View Details →
                       </span>
                     </div>
@@ -174,17 +174,15 @@ export default function DemoApplications() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-5 z-10"
+              className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-7 space-y-4 z-10"
             >
-              <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
                 <div className="flex items-center gap-3">
-                  <div
-                    className={`h-11 w-11 rounded-2xl text-white flex items-center justify-center font-black text-sm shrink-0 ${selectedApp.color}`}
-                  >
+                  <div className={`h-11 w-11 rounded-xl text-white flex items-center justify-center font-black text-xs ${selectedApp.color}`}>
                     {selectedApp.logo}
                   </div>
                   <div>
-                    <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100">
+                    <h3 className="text-base font-black text-slate-900 dark:text-slate-100">
                       {selectedApp.role}
                     </h3>
                     <p className="text-xs text-slate-500 font-medium">
@@ -192,6 +190,7 @@ export default function DemoApplications() {
                     </p>
                   </div>
                 </div>
+
                 <button
                   type="button"
                   onClick={() => setSelectedApp(null)}
@@ -204,7 +203,7 @@ export default function DemoApplications() {
               <div className="grid grid-cols-3 gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-center text-xs">
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">Status</span>
-                  <span className="font-extrabold text-indigo-600 uppercase mt-0.5 block">{selectedApp.status}</span>
+                  <span className="font-extrabold text-blue-600 dark:text-cyan-400 uppercase mt-0.5 block">{selectedApp.status}</span>
                 </div>
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">Salary</span>
@@ -212,7 +211,7 @@ export default function DemoApplications() {
                 </div>
                 <div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">Profile Fit</span>
-                  <span className="font-extrabold text-purple-600 mt-0.5 block">{selectedApp.matchScore}% Match</span>
+                  <span className="font-extrabold text-cyan-600 dark:text-cyan-400 mt-0.5 block">{selectedApp.matchScore}% Match</span>
                 </div>
               </div>
 
@@ -238,7 +237,7 @@ export default function DemoApplications() {
                       }}
                       className={`p-1.5 rounded-lg text-[10px] font-bold uppercase transition-all ${
                         selectedApp.status === c.id
-                          ? "bg-indigo-600 text-white shadow-xs"
+                          ? "bg-blue-600 text-white shadow-xs"
                           : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                       }`}
                     >
@@ -274,7 +273,7 @@ export default function DemoApplications() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 text-center space-y-4 z-10"
             >
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 flex items-center justify-center mx-auto border border-indigo-200">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-cyan-800">
                 <Sparkles size={24} />
               </div>
               <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
@@ -286,7 +285,7 @@ export default function DemoApplications() {
               <div className="pt-2 flex flex-col gap-2">
                 <Link
                   to="/register"
-                  className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all block text-center"
+                  className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md shadow-blue-600/30 transition-all block text-center"
                 >
                   Create Free Account
                 </Link>

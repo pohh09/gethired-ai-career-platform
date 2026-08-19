@@ -39,13 +39,13 @@ export default function PerformanceChart({
       monthlyData && monthlyData.length > 0
         ? monthlyData
         : [
-            { month: "Mar", count: 5 },
-            { month: "Apr", count: 9 },
-            { month: "May", count: 12 },
-            { month: "Jun", count: 15 },
-            { month: "Jul", count: 18 },
-            { month: "Aug", count: 14 },
-          ];
+          { month: "Mar", count: 5 },
+          { month: "Apr", count: 9 },
+          { month: "May", count: 12 },
+          { month: "Jun", count: 15 },
+          { month: "Jul", count: 18 },
+          { month: "Aug", count: 14 },
+        ];
 
     switch (timeframe) {
       case "30d":
@@ -89,11 +89,10 @@ export default function PerformanceChart({
                   key={tf}
                   type="button"
                   onClick={() => setTimeframe(tf)}
-                  className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                    isSelected
+                  className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${isSelected
                       ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-extrabold"
                       : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
-                  }`}
+                    }`}
                   aria-pressed={isSelected}
                 >
                   {timeframeLabels[tf]}

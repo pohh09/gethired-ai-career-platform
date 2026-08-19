@@ -25,7 +25,7 @@ const KANBAN_COLUMNS = [
     id: "Saved",
     title: "Saved",
     color:
-      "border-purple-200 bg-purple-50/50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-300",
+      "border-cyan-200 bg-cyan-50/50 dark:bg-cyan-950/20 text-cyan-800 dark:text-cyan-300",
   },
   {
     id: "Applied",
@@ -43,7 +43,7 @@ const KANBAN_COLUMNS = [
     id: "Assessment",
     title: "Assessment",
     color:
-      "border-indigo-200 bg-indigo-50/50 dark:bg-indigo-950/20 text-indigo-700 dark:text-indigo-300",
+      "border-sky-200 bg-sky-50/50 dark:bg-sky-950/20 text-sky-700 dark:text-sky-300",
   },
   {
     id: "Offer",
@@ -126,7 +126,7 @@ export default function KanbanBoard({
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
+                        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-2xs">
                           {job.company.charAt(0).toUpperCase()}
                         </div>
                         <div className="min-w-0">

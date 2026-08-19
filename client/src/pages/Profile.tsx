@@ -103,14 +103,14 @@ export default function Profile() {
         subtitle="Manage your contact details, professional links, career objectives, and job preferences."
       />
 
-      <Card className="bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-transparent border-indigo-200/50 dark:border-indigo-900/40">
+      <Card className="bg-gradient-to-r from-blue-500/10 via-cyan-500/5 to-transparent border-blue-200/50 dark:border-blue-900/40">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-5">
             <div className="relative group">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-indigo-500/30 shrink-0">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-500 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/30 shrink-0">
                 {getInitials(profile.name)}
               </div>
-              <div className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 flex items-center justify-center ring-2 ring-indigo-500 shadow-md">
+              <div className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-200 flex items-center justify-center ring-2 ring-cyan-500 shadow-md">
                 <Camera size={14} />
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function Profile() {
                 {profile.name}
               </h2>
               <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center justify-center sm:justify-start gap-1.5">
-                <Briefcase size={14} className="text-indigo-500" />
+                <Briefcase size={14} className="text-blue-500 dark:text-cyan-400" />
                 {profile.preferredRole} • {profile.location}
               </p>
             </div>
@@ -144,7 +144,7 @@ export default function Profile() {
             <CardTitle className="flex items-center gap-2">
               <User
                 size={18}
-                className="text-indigo-600 dark:text-indigo-400"
+                className="text-blue-600 dark:text-cyan-400"
               />
               Personal & Contact Information
             </CardTitle>
@@ -196,7 +196,7 @@ export default function Profile() {
             <CardTitle className="flex items-center gap-2">
               <Globe
                 size={18}
-                className="text-indigo-600 dark:text-indigo-400"
+                className="text-blue-600 dark:text-cyan-400"
               />
               Online Profiles & Web Presence
             </CardTitle>
@@ -240,7 +240,7 @@ export default function Profile() {
             <CardTitle className="flex items-center gap-2">
               <Code
                 size={18}
-                className="text-indigo-600 dark:text-indigo-400"
+                className="text-blue-600 dark:text-cyan-400"
               />
               Technical Skills & Work Experience
             </CardTitle>
@@ -284,7 +284,7 @@ export default function Profile() {
             <CardTitle className="flex items-center gap-2">
               <Target
                 size={18}
-                className="text-indigo-600 dark:text-indigo-400"
+                className="text-blue-600 dark:text-cyan-400"
               />
               Career Preferences & Targets
             </CardTitle>

@@ -48,7 +48,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={`w-full appearance-none rounded-xl border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-4 py-2.5 text-sm pr-10 transition-all focus:outline-none focus:ring-2 ${
               error
                 ? "border-rose-500 focus:ring-rose-500/30 focus:border-rose-500"
-                : "border-slate-200 dark:border-slate-800 focus:ring-indigo-500/30 focus:border-indigo-500"
+                : "border-slate-200 dark:border-slate-800 focus:ring-cyan-400/25 focus:border-blue-500"
             } disabled:bg-slate-100 dark:disabled:bg-slate-800/80 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer ${className}`}
             {...props}
           >

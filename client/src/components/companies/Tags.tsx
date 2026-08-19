@@ -48,9 +48,8 @@ export default function Tags({
                 onTagClick(t);
               }
             }}
-            className={`font-extrabold rounded-md border tracking-wider shrink-0 transition-colors ${
-              isClickable ? "cursor-pointer" : ""
-            } ${sizeClasses} ${getTagStyle(t)}`}
+            className={`font-extrabold rounded-md border tracking-wider shrink-0 transition-colors ${isClickable ? "cursor-pointer" : ""
+              } ${sizeClasses} ${getTagStyle(t)}`}
             role={isClickable ? "button" : undefined}
             tabIndex={isClickable ? 0 : undefined}
             onKeyDown={(e) => {

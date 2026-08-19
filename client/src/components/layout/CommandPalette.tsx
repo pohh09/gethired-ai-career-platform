@@ -243,14 +243,14 @@ export default function CommandPalette({
                       }}
                       onMouseEnter={() => setSelectedIndex(index)}
                       className={`w-full flex items-center justify-between gap-3 p-3 rounded-xl text-left transition-all cursor-pointer ${isSelected
-                        ? "bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400"
+                        ? "bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-cyan-300"
                         : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                         }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
                           className={`h-8 w-8 rounded-lg flex items-center justify-center shrink-0 ${isSelected
-                            ? "bg-indigo-600 text-white"
+                            ? "bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-xs"
                             : "bg-slate-100 dark:bg-slate-800 text-slate-500"
                             }`}
                         >
@@ -273,7 +273,7 @@ export default function CommandPalette({
                         {isSelected && (
                           <ArrowRight
                             size={14}
-                            className="text-indigo-600 dark:text-indigo-400"
+                            className="text-blue-600 dark:text-cyan-400"
                           />
                         )}
                       </div>

@@ -24,7 +24,7 @@ export default function Loader({
       className={`flex flex-col items-center justify-center gap-3 ${className}`}
     >
       <Loader2
-        className="animate-spin text-indigo-600 dark:text-indigo-400"
+        className="animate-spin text-blue-600 dark:text-cyan-400"
         size={sizeMap[size]}
       />
       {text && (

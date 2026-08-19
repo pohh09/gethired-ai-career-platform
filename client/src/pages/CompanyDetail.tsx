@@ -183,7 +183,7 @@ export default function CompanyDetail() {
       <button
         type="button"
         onClick={() => navigate("/companies")}
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 transition-colors cursor-pointer"
         aria-label="Back to Companies Directory"
       >
         <ArrowLeft size={14} />
@@ -220,7 +220,7 @@ export default function CompanyDetail() {
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`px-4 py-3 text-xs font-bold transition-all border-b-2 flex items-center gap-2 cursor-pointer shrink-0 ${
                 isActive
-                  ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
+                  ? "border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400"
                   : "border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
@@ -317,7 +317,7 @@ export default function CompanyDetail() {
                           </p>
                           <p className="text-[11px] text-slate-400">{r.role}</p>
                         </div>
-                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-cyan-300 border border-blue-200/50">
                           {r.relationshipStatus}
                         </span>
                       </div>
@@ -547,7 +547,7 @@ export default function CompanyDetail() {
                       onClick={() =>
                         toast.success(`Downloading ${att.fileName}...`)
                       }
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                       title="Download file"
                       aria-label="Download file"
                     >

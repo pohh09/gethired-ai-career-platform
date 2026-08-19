@@ -90,7 +90,7 @@ export default function Resumes() {
         title="Resume Manager"
         subtitle="Upload, preview, organize, and manage your master resumes for AI job applications."
         action={
-          <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs transition-all shadow-md cursor-pointer">
+          <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs transition-all shadow-md cursor-pointer">
             <Upload size={16} />
             <span>Upload Resume (PDF/DOCX)</span>
             <input
@@ -105,13 +105,13 @@ export default function Resumes() {
       />
 
       {resumes.length > 0 && (
-        <div className="p-4 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/50 bg-gradient-to-r from-indigo-50/60 via-purple-50/40 to-white dark:from-indigo-950/40 dark:via-purple-950/20 dark:to-slate-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+        <div className="p-4 rounded-2xl border border-blue-200/80 dark:border-blue-900/50 bg-gradient-to-r from-blue-50/70 via-cyan-50/40 to-white dark:from-blue-950/40 dark:via-cyan-950/20 dark:to-slate-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
+            <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
               <Star size={20} />
             </div>
             <div>
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 block">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-blue-700 dark:text-cyan-300 block">
                 Active Default Resume
               </span>
               <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
@@ -133,7 +133,7 @@ export default function Resumes() {
               key={resume.id}
               className={`p-5 rounded-2xl border bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs flex flex-col justify-between space-y-4 transition-all ${
                 resume.isDefault
-                  ? "border-indigo-500/80 ring-2 ring-indigo-500/20 dark:border-indigo-600"
+                  ? "border-blue-500/80 ring-2 ring-cyan-500/20 dark:border-blue-500"
                   : "border-slate-200/80 dark:border-slate-800 hover:border-slate-300"
               }`}
             >
@@ -163,7 +163,7 @@ export default function Resumes() {
                   </div>
 
                   {resume.isDefault && (
-                    <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 shrink-0">
+                    <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 border border-blue-200/50 shrink-0">
                       Default
                     </span>
                   )}
@@ -175,7 +175,7 @@ export default function Resumes() {
                 </div>
 
                 <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-950/60 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                  <Briefcase size={14} className="text-indigo-500 shrink-0" />
+                  <Briefcase size={14} className="text-blue-500 dark:text-cyan-400 shrink-0" />
                   <span>
                     Used in{" "}
                     <strong>{resume.usedInApplicationsCount || 4}</strong>{" "}
@@ -214,7 +214,7 @@ export default function Resumes() {
                           `Set "${resume.name}" as default resume.`,
                         );
                       }}
-                      className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <Star size={13} />
                       <span>Make Default</span>

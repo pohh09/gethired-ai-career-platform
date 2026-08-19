@@ -130,7 +130,7 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
       onClose={onClose}
       title={
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold border border-purple-200/50">
+          <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 flex items-center justify-center font-bold border border-blue-200/50">
             <Sparkles size={20} />
           </div>
           <div>
@@ -148,8 +148,8 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
       <div className="space-y-6">
         {!result && !isLoading && (
           <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-purple-50/50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/40 text-xs text-purple-900 dark:text-purple-200 flex items-center gap-2">
-              <Sparkles size={16} className="text-purple-500 shrink-0" />
+            <div className="p-4 rounded-xl bg-sky-50/50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 text-xs text-sky-900 dark:text-sky-200 flex items-center gap-2">
+              <Sparkles size={16} className="text-cyan-500 shrink-0" />
               <span>
                 Paste your resume text below or upload your PDF/DOCX content to
                 analyze keyword match, ATS scores, and improvement
@@ -164,7 +164,7 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
                   <span>Candidate Resume Content</span>
                 </label>
 
-                <label className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer flex items-center gap-1">
+                <label className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline cursor-pointer flex items-center gap-1">
                   <Upload size={12} />
                   <span>Upload File</span>
                   <input
@@ -314,7 +314,7 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 space-y-2">
                 <h5 className="text-xs font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                  <TrendingUp size={14} className="text-indigo-500" />
+                  <TrendingUp size={14} className="text-blue-500" />
                   <span>Resume Strengths</span>
                 </h5>
                 <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
@@ -343,15 +343,15 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl border border-purple-200/60 dark:border-purple-900/40 bg-purple-50/40 dark:bg-purple-950/20 space-y-3">
-              <h5 className="text-xs font-extrabold text-purple-900 dark:text-purple-200 flex items-center gap-1.5">
-                <Lightbulb size={15} className="text-purple-500" />
+            <div className="p-4 rounded-xl border border-cyan-200/60 dark:border-cyan-900/40 bg-cyan-50/40 dark:bg-cyan-950/20 space-y-3">
+              <h5 className="text-xs font-extrabold text-cyan-950 dark:text-cyan-200 flex items-center gap-1.5">
+                <Lightbulb size={15} className="text-cyan-500" />
                 <span>ATS Optimization Tips & Recommendations</span>
               </h5>
               <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                 {result.suggestions.concat(result.atsTips).map((tip, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <span className="text-purple-500 font-bold">✓</span>
+                    <span className="text-cyan-600 dark:text-cyan-400 font-bold">✓</span>
                     <span>{tip}</span>
                   </div>
                 ))}

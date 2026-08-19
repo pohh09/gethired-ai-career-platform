@@ -45,7 +45,7 @@ export default function DemoJobs() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
           <div>
             <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
-              <Briefcase size={22} className="text-indigo-600" />
+              <Briefcase size={22} className="text-blue-600 dark:text-cyan-400" />
               <span>Job Discovery Engine</span>
               <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 border border-emerald-200">
                 10+ Curated Roles
@@ -71,7 +71,7 @@ export default function DemoJobs() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by role, company (e.g. Stripe, Razorpay), tech stack (e.g. React, Node)..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all font-medium"
             />
           </div>
 
@@ -79,7 +79,7 @@ export default function DemoJobs() {
             <select
               value={workplaceFilter}
               onChange={(e) => setWorkplaceFilter(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
             >
               <option value="all">All Workplace Types (Remote, Hybrid, On-site)</option>
               <option value="remote">Remote Only</option>
@@ -98,11 +98,10 @@ export default function DemoJobs() {
               <div
                 key={job.id}
                 onClick={() => setSelectedJob(job)}
-                className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer space-y-3 select-none ${
-                  isSelected
-                    ? "bg-white dark:bg-slate-900 border-indigo-500 shadow-md ring-1 ring-indigo-500/30"
+                className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer space-y-3 select-none ${isSelected
+                    ? "bg-white dark:bg-slate-900 border-blue-500 shadow-md ring-1 ring-cyan-500/30"
                     : "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xs"
-                }`}
+                  }`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
@@ -122,7 +121,7 @@ export default function DemoJobs() {
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="text-xs font-black text-indigo-600 dark:text-indigo-400 block">
+                    <span className="text-xs font-black text-blue-600 dark:text-cyan-400 block">
                       {job.matchScore}% Match
                     </span>
                     <span className="text-[10px] text-slate-400 font-medium">
@@ -159,11 +158,11 @@ export default function DemoJobs() {
         </div>
 
         {selectedJob && (
-          <div className="lg:col-span-6 sticky top-4 p-5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6">
+          <div className="lg:col-span-6 p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sticky top-4">
             <div className="flex items-start justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-3.5 min-w-0">
                 <div
-                  className={`h-12 w-12 rounded-2xl text-white flex items-center justify-center font-black text-base shrink-0 shadow-md ${selectedJob.color}`}
+                  className={`h-12 w-12 rounded-2xl text-white flex items-center justify-center font-black text-base shrink-0 shadow-sm ${selectedJob.color}`}
                 >
                   {selectedJob.logo}
                 </div>
@@ -178,7 +177,7 @@ export default function DemoJobs() {
               </div>
 
               <div className="text-right shrink-0">
-                <span className="text-xs font-black px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 block">
+                <span className="text-xs font-black px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400 border border-blue-200 dark:border-cyan-800 block">
                   {selectedJob.matchScore}% Match
                 </span>
               </div>
@@ -228,7 +227,7 @@ export default function DemoJobs() {
                 size="md"
                 onClick={handleApplyClick}
                 leftIcon={<ExternalLink size={15} />}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 w-full"
+                className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 w-full"
               >
                 Sign up to Apply
               </Button>
@@ -263,7 +262,7 @@ export default function DemoJobs() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-7 text-center space-y-4 z-10"
             >
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto border border-indigo-200 dark:border-indigo-800">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400 flex items-center justify-center mx-auto border border-blue-200 dark:border-cyan-800">
                 <ShieldCheck size={24} />
               </div>
               <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
@@ -275,7 +274,7 @@ export default function DemoJobs() {
               <div className="pt-2 flex flex-col gap-2">
                 <Link
                   to="/register"
-                  className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all block text-center"
+                  className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md shadow-blue-600/30 transition-all block text-center"
                 >
                   Create Free Account
                 </Link>

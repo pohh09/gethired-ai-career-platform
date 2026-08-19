@@ -93,7 +93,7 @@ export default function Documents() {
         title="AI Documents Repository"
         subtitle="Access, search, copy, download, and manage all your AI-generated career materials in one place."
         badge={
-          <span className="px-3 py-1 text-xs font-extrabold rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/60 shadow-xs">
+          <span className="px-3 py-1 text-xs font-extrabold rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 border border-blue-200/60 dark:border-blue-800/60 shadow-xs">
             {documents.length} Saved{" "}
             {documents.length === 1 ? "Document" : "Documents"}
           </span>
@@ -112,7 +112,7 @@ export default function Documents() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search document title, company, or content..."
-              className="w-full pl-10 pr-9 py-2 text-xs font-medium rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all"
+              className="w-full pl-10 pr-9 py-2 text-xs font-medium rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-blue-500 transition-all"
             />
             {search && (
               <button
@@ -153,16 +153,16 @@ export default function Documents() {
           {filteredDocuments.map((doc) => (
             <div
               key={doc.id}
-              className="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs flex flex-col justify-between space-y-4 hover:border-purple-300 dark:hover:border-purple-800/80 transition-all"
+              className="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs flex flex-col justify-between space-y-4 hover:border-sky-300 dark:hover:border-sky-800/80 transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="h-10 w-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold shrink-0 border border-purple-200/50">
+                    <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 flex items-center justify-center font-bold shrink-0 border border-blue-200/50">
                       <Sparkles size={18} />
                     </div>
                     <div className="min-w-0">
-                      <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-md bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/50 inline-block mb-1">
+                      <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-md bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 border border-blue-200/50 inline-block mb-1">
                         {doc.category}
                       </span>
                       <h3 className="text-xs font-extrabold text-slate-900 dark:text-slate-100 truncate">
@@ -239,7 +239,7 @@ export default function Documents() {
           onClose={() => setViewingDoc(null)}
           title={
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold border border-purple-200/50">
+              <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 flex items-center justify-center font-bold border border-blue-200/50">
                 <FileText size={20} />
               </div>
               <div>

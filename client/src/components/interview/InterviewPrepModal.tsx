@@ -113,11 +113,10 @@ ${result.questionsToAskInterviewer.map((q) => `- ${q}`).join("\n")}
             <button
               type="button"
               onClick={() => setActiveTab("guide")}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${
-                activeTab === "guide"
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${activeTab === "guide"
                   ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-extrabold"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
-              }`}
+                }`}
             >
               <BookOpen size={14} />
               <span>Full Prep Guide</span>
@@ -126,11 +125,10 @@ ${result.questionsToAskInterviewer.map((q) => `- ${q}`).join("\n")}
             <button
               type="button"
               onClick={() => setActiveTab("practice")}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${
-                activeTab === "practice"
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${activeTab === "practice"
                   ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-extrabold"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
-              }`}
+                }`}
             >
               <PlayCircle size={14} />
               <span>Practice Mode</span>
@@ -139,11 +137,10 @@ ${result.questionsToAskInterviewer.map((q) => `- ${q}`).join("\n")}
             <button
               type="button"
               onClick={() => setActiveTab("mock")}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${
-                activeTab === "mock"
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${activeTab === "mock"
                   ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-extrabold"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
-              }`}
+                }`}
             >
               <Trophy size={14} />
               <span>Mock Interview (10 Qs)</span>
@@ -152,11 +149,10 @@ ${result.questionsToAskInterviewer.map((q) => `- ${q}`).join("\n")}
             <button
               type="button"
               onClick={() => setActiveTab("readiness")}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${
-                activeTab === "readiness"
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer shrink-0 ${activeTab === "readiness"
                   ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-extrabold"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
-              }`}
+                }`}
             >
               <Sparkles size={14} />
               <span>Readiness Score</span>

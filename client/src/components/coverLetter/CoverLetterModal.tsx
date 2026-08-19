@@ -23,7 +23,7 @@ export default function CoverLetterModal({
       onClose={onClose}
       title={
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold shadow-xs">
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-xs">
             <FileText size={20} />
           </div>
           <div>

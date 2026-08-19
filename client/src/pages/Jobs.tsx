@@ -442,15 +442,14 @@ export default function Jobs() {
         <button
           type="button"
           onClick={() => setActiveTab("applications")}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-            activeTab === "applications"
-              ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${activeTab === "applications"
+              ? "bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
               : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/40"
-          }`}
+            }`}
         >
           <Briefcase size={15} />
           <span>My Applications</span>
-          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-200/50">
+          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 font-bold border border-blue-200/50">
             {activeApplications.length}
           </span>
         </button>
@@ -458,15 +457,14 @@ export default function Jobs() {
         <button
           type="button"
           onClick={() => setActiveTab("discover")}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-            activeTab === "discover"
-              ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${activeTab === "discover"
+              ? "bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
               : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/40"
-          }`}
+            }`}
         >
           <Compass size={15} />
           <span>Discover Jobs</span>
-          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-200/50 animate-pulse">
+          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 font-bold border border-cyan-200/50 animate-pulse">
             Multi-Provider
           </span>
         </button>
@@ -474,15 +472,14 @@ export default function Jobs() {
         <button
           type="button"
           onClick={() => setActiveTab("saved")}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-            activeTab === "saved"
-              ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${activeTab === "saved"
+              ? "bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
               : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/40"
-          }`}
+            }`}
         >
           <Bookmark size={15} />
           <span>Saved Jobs</span>
-          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 font-bold border border-purple-200/50">
+          <span className="ml-1 px-2 py-0.5 text-[10px] rounded-full bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 font-bold border border-sky-200/50">
             {savedJobs.length}
           </span>
         </button>
@@ -490,11 +487,10 @@ export default function Jobs() {
         <button
           type="button"
           onClick={() => setActiveTab("archived")}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-            activeTab === "archived"
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-extrabold rounded-xl transition-all whitespace-nowrap cursor-pointer ${activeTab === "archived"
               ? "bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 shadow-sm border border-slate-200/60 dark:border-slate-700"
               : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/40"
-          }`}
+            }`}
         >
           <Archive size={15} />
           <span>Archived</span>
@@ -591,11 +587,10 @@ export default function Jobs() {
                   <button
                     type="button"
                     onClick={() => setViewMode("kanban")}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === "kanban"
-                        ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs"
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${viewMode === "kanban"
+                        ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-cyan-400 shadow-2xs"
                         : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-                    }`}
+                      }`}
                   >
                     Kanban Board
                   </button>
@@ -603,11 +598,10 @@ export default function Jobs() {
                   <button
                     type="button"
                     onClick={() => setViewMode("table")}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                      viewMode === "table"
-                        ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs"
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${viewMode === "table"
+                        ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-cyan-400 shadow-2xs"
                         : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-                    }`}
+                      }`}
                   >
                     List Table
                   </button>
@@ -664,19 +658,19 @@ export default function Jobs() {
               description="Start tracking your job applications or import jobs directly from online sources."
               actionText={
                 search ||
-                status !== "All" ||
-                priority !== "All" ||
-                location !== "All" ||
-                dateRange !== "All"
+                  status !== "All" ||
+                  priority !== "All" ||
+                  location !== "All" ||
+                  dateRange !== "All"
                   ? "Reset Filters"
                   : "Add Your First Application"
               }
               onAction={
                 search ||
-                status !== "All" ||
-                priority !== "All" ||
-                location !== "All" ||
-                dateRange !== "All"
+                  status !== "All" ||
+                  priority !== "All" ||
+                  location !== "All" ||
+                  dateRange !== "All"
                   ? handleResetFilters
                   : handleOpenAdd
               }

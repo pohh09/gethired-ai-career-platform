@@ -38,7 +38,7 @@ export default function JobCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 text-white flex items-center justify-center font-extrabold text-base shadow-sm shrink-0">
+          <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 text-white flex items-center justify-center font-extrabold text-base shadow-sm shrink-0">
             {job.company.charAt(0).toUpperCase()}
           </div>
 
@@ -89,7 +89,7 @@ export default function JobCard({
           <Calendar size={12} />
           Applied on {formattedDate}
         </span>
-        <span className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+        <span className="font-semibold text-blue-600 dark:text-cyan-400 hover:underline">
           View Details →
         </span>
       </div>

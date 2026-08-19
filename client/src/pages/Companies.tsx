@@ -186,7 +186,7 @@ export default function Companies() {
                 onClick={() => setViewMode("grid")}
                 className={`p-2 rounded-lg transition-all cursor-pointer ${
                   viewMode === "grid"
-                    ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-bold"
+                    ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-cyan-400 shadow-2xs font-bold"
                     : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                 }`}
                 title="Grid Card View"
@@ -200,7 +200,7 @@ export default function Companies() {
                 onClick={() => setViewMode("table")}
                 className={`p-2 rounded-lg transition-all cursor-pointer ${
                   viewMode === "table"
-                    ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-bold"
+                    ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-cyan-400 shadow-2xs font-bold"
                     : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                 }`}
                 title="Table List View"
@@ -265,8 +265,8 @@ export default function Companies() {
                   onClick={() => setTagFilter(t)}
                   className={`text-[11px] font-extrabold px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-indigo-600 text-white border-indigo-600 shadow-2xs"
-                      : "bg-slate-50 text-slate-600 dark:bg-slate-800/80 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-indigo-300"
+                      ? "bg-blue-600 text-white border-blue-600 shadow-2xs"
+                      : "bg-slate-50 text-slate-600 dark:bg-slate-800/80 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-cyan-400"
                   }`}
                   aria-pressed={isSelected}
                 >

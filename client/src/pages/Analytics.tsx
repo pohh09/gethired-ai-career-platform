@@ -40,17 +40,17 @@ import { useJobs } from "../hooks/useJobs";
 import { useUIStore } from "../store/uiStore";
 
 const STATUS_COLORS: Record<string, string> = {
-  Applied: "#3b82f6",
-  Screening: "#a855f7",
+  Applied: "#008bdc",
+  Screening: "#0284c7",
   Assessment: "#06b6d4",
   Interview: "#f59e0b",
-  "HR Round": "#6366f1",
+  "HR Round": "#0369a1",
   Offer: "#10b981",
   Rejected: "#ef4444",
 };
 
 const LOCATION_COLORS: Record<string, string> = {
-  Remote: "#6366f1",
+  Remote: "#008bdc",
   Hybrid: "#06b6d4",
   Onsite: "#f59e0b",
 };
@@ -341,7 +341,7 @@ export default function Analytics() {
               isLoading={isStatsLoading}
               className="lg:col-span-2"
               action={
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-200/50 dark:border-indigo-800/40">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200/50 dark:border-cyan-800/40">
                   <TrendingUp size={13} />
                   <span>Velocity Trend</span>
                 </div>
@@ -386,11 +386,11 @@ export default function Analytics() {
                   <Line
                     type="monotone"
                     dataKey="count"
-                    stroke="#6366f1"
+                    stroke="#008bdc"
                     strokeWidth={3}
                     dot={{
                       r: 4,
-                      fill: "#6366f1",
+                      fill: "#008bdc",
                       strokeWidth: 2,
                       stroke: "#ffffff",
                     }}
@@ -405,7 +405,7 @@ export default function Analytics() {
               subtitle="Pipeline stage allocation"
               isLoading={isStatsLoading}
               action={
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/60 px-3 py-1 rounded-full border border-purple-200/50 dark:border-purple-800/40">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-200/50 dark:border-cyan-800/40">
                   <PieIcon size={13} />
                   <span>Stage Share</span>
                 </div>
@@ -604,7 +604,7 @@ export default function Analytics() {
                       className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
                     >
                       <td className="py-3 px-4 font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                        <Building2 size={16} className="text-indigo-500" />
+                        <Building2 size={16} className="text-blue-500 dark:text-cyan-400" />
                         {comp.company}
                       </td>
                       <td className="py-3 px-4 text-slate-600 dark:text-slate-300 font-semibold">

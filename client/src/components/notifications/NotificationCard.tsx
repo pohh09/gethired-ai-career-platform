@@ -32,7 +32,7 @@ export default function NotificationCard({
       case "Interview Scheduled":
         return <Calendar size={16} className="text-amber-500" />;
       case "Application Updated":
-        return <CheckCircle2 size={16} className="text-indigo-500" />;
+        return <CheckCircle2 size={16} className="text-sky-500" />;
       case "Offer Received":
         return <Award size={16} className="text-emerald-500" />;
       case "Application Rejected":
@@ -40,7 +40,7 @@ export default function NotificationCard({
       case "Reminder Due":
         return <Bell size={16} className="text-orange-500" />;
       default:
-        return <Bell size={16} className="text-purple-500" />;
+        return <Bell size={16} className="text-cyan-500" />;
     }
   };
 
@@ -51,14 +51,14 @@ export default function NotificationCard({
       exit={{ opacity: 0, x: -10 }}
       className={`group p-4 rounded-2xl border transition-all flex items-start justify-between gap-4 ${
         !notification.isRead
-          ? "border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/40 dark:bg-indigo-950/20 shadow-xs"
+          ? "border-sky-200 dark:border-sky-800/60 bg-sky-50/40 dark:bg-sky-950/20 shadow-xs"
           : "border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/50"
       } ${className}`}
     >
       <div className="flex items-start gap-3 min-w-0">
         <div className="flex items-center justify-center shrink-0 mt-1">
           {!notification.isRead ? (
-            <span className="h-2.5 w-2.5 rounded-full bg-indigo-600 shadow-xs ring-2 ring-indigo-500/30" />
+            <span className="h-2.5 w-2.5 rounded-full bg-blue-600 shadow-xs ring-2 ring-blue-500/30" />
           ) : (
             <span className="h-2.5 w-2.5 rounded-full bg-transparent" />
           )}
@@ -97,7 +97,7 @@ export default function NotificationCard({
           <button
             type="button"
             onClick={() => onMarkRead(notification.id)}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition cursor-pointer"
             title="Mark as read"
           >
             <Check size={14} />

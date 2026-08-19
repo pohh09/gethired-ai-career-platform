@@ -163,11 +163,10 @@ export default function ImportJobModal({
           <button
             type="button"
             onClick={() => setActiveTab("url")}
-            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "url"
+            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${activeTab === "url"
                 ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-            }`}
+              }`}
           >
             <LinkIcon size={14} />
             <span>Job URL</span>
@@ -176,11 +175,10 @@ export default function ImportJobModal({
           <button
             type="button"
             onClick={() => setActiveTab("text")}
-            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "text"
+            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${activeTab === "text"
                 ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-            }`}
+              }`}
           >
             <FileText size={14} />
             <span>Description</span>
@@ -189,11 +187,10 @@ export default function ImportJobModal({
           <button
             type="button"
             onClick={() => setActiveTab("manual")}
-            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              activeTab === "manual"
+            className={`flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${activeTab === "manual"
                 ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-            }`}
+              }`}
           >
             <Edit3 size={14} />
             <span>Manual</span>

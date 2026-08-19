@@ -43,19 +43,19 @@ export default function Button({
 
   const variantStyles = {
     primary:
-      "bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white shadow-sm shadow-indigo-500/20 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-offset-slate-900",
+      "bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white shadow-sm shadow-blue-500/25 focus:ring-cyan-400 dark:bg-blue-600 dark:hover:bg-blue-500 dark:focus:ring-offset-slate-900",
     secondary:
-      "bg-slate-100 hover:bg-slate-200 text-slate-800 focus:ring-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:focus:ring-offset-slate-900",
+      "bg-blue-50/80 hover:bg-blue-100/80 text-blue-900 focus:ring-blue-400 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:focus:ring-offset-slate-900 border border-blue-100 dark:border-slate-700",
     outline:
-      "border border-slate-300 dark:border-slate-700 bg-transparent hover:bg-slate-50 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-300 focus:ring-slate-400 dark:focus:ring-offset-slate-900",
+      "border border-blue-200 dark:border-blue-900/50 bg-transparent hover:bg-blue-50/50 dark:hover:bg-blue-950/40 text-blue-900 dark:text-blue-200 focus:ring-cyan-400 dark:focus:ring-offset-slate-900",
     ghost:
-      "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 focus:ring-slate-400 dark:focus:ring-offset-slate-900",
+      "bg-transparent hover:bg-blue-50/80 dark:hover:bg-blue-950/40 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-300 focus:ring-cyan-400 dark:focus:ring-offset-slate-900",
     danger:
       "bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white shadow-sm shadow-rose-500/20 focus:ring-rose-500 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-offset-slate-900",
     success:
       "bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white shadow-sm shadow-emerald-500/20 focus:ring-emerald-500 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-offset-slate-900",
     accent:
-      "bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white shadow-sm shadow-purple-500/20 focus:ring-purple-500 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-offset-slate-900",
+      "bg-cyan-500 hover:bg-cyan-400 active:bg-cyan-600 text-slate-950 font-bold shadow-sm shadow-cyan-500/30 focus:ring-cyan-400 dark:bg-cyan-500 dark:hover:bg-cyan-400 dark:focus:ring-offset-slate-900",
   };
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${

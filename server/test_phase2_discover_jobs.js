@@ -11,7 +11,7 @@ async function runTests() {
   console.log("Testing Phase 2 Discover Jobs Backend Engine");
   console.log("=================================================\n");
 
-  // Test 1: Jooble Provider Exports
+
   console.log("--- Test 1: Jooble Provider Exports ---");
   const joobleInstance = new JoobleProvider();
   console.log("JoobleProvider name:", joobleInstance.name);
@@ -30,7 +30,6 @@ async function runTests() {
   });
   console.log("Normalized Jooble Job role:", normalized?.role, "| provider:", normalized?.provider);
 
-  // Test 2: Smart Search Expansions & Query Fallback
   console.log("\n--- Test 2: Smart Search Expansions ---");
   const reactQueries = QueryBuilder.buildQueries({ query: "React" });
   console.log("Query 'React' expansions:", reactQueries);
@@ -44,15 +43,13 @@ async function runTests() {
   const softwareQueries = QueryBuilder.buildQueries({ query: "Software" });
   console.log("Query 'Software' expansions:", softwareQueries);
 
-  // Test 3: 4-Tier Logo Resolution & Caching
-  console.log("\n--- Test 3: Logo Resolution & Caching ---");
+ console.log("\n--- Test 3: Logo Resolution & Caching ---");
   const razorpayLogo = logoCache.getValidCompanyLogo("Razorpay", "");
   console.log("Razorpay logo derived:", razorpayLogo);
 
   logoCache.markLogoAsBroken("https://invalid-domain-1234567.com/logo.png");
   console.log("Is broken logo detected:", logoCache.isLogoBroken("https://invalid-domain-1234567.com/logo.png"));
 
-  // Test 4: Complete Orchestrator & Ranking Execution
   console.log("\n--- Test 4: Orchestrator fetchDiscoverJobs ---");
   const discoverJobs = await fetchDiscoverJobs({ query: "React" });
   console.log("Total Discover Jobs Returned:", discoverJobs.length);

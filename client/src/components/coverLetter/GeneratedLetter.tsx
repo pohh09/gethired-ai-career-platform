@@ -23,7 +23,7 @@ export default function GeneratedLetter({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="text-xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300 flex items-center gap-1.5">
-            <Sparkles size={14} className="text-indigo-500" />
+            <Sparkles size={14} className="text-blue-500" />
             <span>Cover Letter (Live Editable)</span>
           </label>
           <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400">
@@ -38,13 +38,13 @@ export default function GeneratedLetter({
           value={letterText}
           onChange={(e) => onChangeText(e.target.value)}
           placeholder="Your AI-generated cover letter text will appear here..."
-          className="font-sans leading-relaxed text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-2xs focus:ring-2 focus:ring-indigo-500/20"
+          className="font-sans leading-relaxed text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-2xs focus:ring-2 focus:ring-cyan-500/20"
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm space-y-2">
-          <div className="flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-xs font-extrabold text-blue-600 dark:text-cyan-400 uppercase tracking-wider">
             <CheckCircle2 size={14} />
             <span>Highlighted Core Skills ({highlightedSkills.length})</span>
           </div>
@@ -52,7 +52,7 @@ export default function GeneratedLetter({
             {highlightedSkills.map((sk) => (
               <span
                 key={sk}
-                className="px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200/50"
+                className="px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-cyan-300 border border-blue-200/50"
               >
                 {sk}
               </span>
@@ -61,7 +61,7 @@ export default function GeneratedLetter({
         </div>
 
         <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm space-y-2">
-          <div className="flex items-center gap-1.5 text-xs font-extrabold text-purple-600 dark:text-purple-400 uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 text-xs font-extrabold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
             <Tag size={14} />
             <span>ATS Keywords Included ({keywordsUsed.length})</span>
           </div>
@@ -69,7 +69,7 @@ export default function GeneratedLetter({
             {keywordsUsed.map((kw) => (
               <span
                 key={kw}
-                className="px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300 border border-purple-200/50"
+                className="px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-cyan-50 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-300 border border-cyan-200/50"
               >
                 {kw}
               </span>

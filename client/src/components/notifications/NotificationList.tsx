@@ -141,18 +141,17 @@ export default function NotificationList({
                 : cat === "All"
                   ? combinedNotifications.length
                   : combinedNotifications.filter((i) => i.category === cat)
-                      .length;
+                    .length;
 
             return (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 ${
-                  activeCategory === cat
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer shrink-0 flex items-center gap-1.5 ${activeCategory === cat
                     ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 font-bold shadow-2xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <span>{cat}</span>
                 {count > 0 && (

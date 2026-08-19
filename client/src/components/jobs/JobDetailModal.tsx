@@ -9,7 +9,6 @@ import {
   Sparkles,
   BookOpen,
   FileText,
-  UserCheck,
   CheckCircle2,
   Clock,
   Mail,
@@ -107,7 +106,7 @@ export default function JobDetailModal({
         onClose={onClose}
         title={
           <div className="flex items-center gap-3">
-            <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-md shrink-0">
+            <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold text-lg shadow-md shrink-0">
               {normalizedJob.company.charAt(0).toUpperCase()}
             </div>
             <div>
@@ -179,10 +178,10 @@ export default function JobDetailModal({
             )}
           </div>
 
-          <div className="p-4 rounded-2xl border border-indigo-200/70 dark:border-indigo-900/50 bg-gradient-to-r from-indigo-50/50 via-purple-50/30 to-white dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-slate-900 space-y-3">
+          <div className="p-4 rounded-2xl border border-sky-200/70 dark:border-sky-900/50 bg-gradient-to-r from-sky-50/50 via-cyan-50/30 to-white dark:from-sky-950/30 dark:via-cyan-950/20 dark:to-slate-900 space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
-                <Sparkles size={15} className="text-indigo-500 animate-pulse" />
+              <h4 className="text-xs font-extrabold uppercase tracking-wider text-sky-900 dark:text-cyan-300 flex items-center gap-1.5">
+                <Sparkles size={15} className="text-cyan-500 animate-pulse" />
                 <span>AI Productivity Actions</span>
               </h4>
               <span className="text-[11px] font-medium text-slate-400">
@@ -194,9 +193,9 @@ export default function JobDetailModal({
               <button
                 type="button"
                 onClick={() => setIsAIAnalysisOpen(true)}
-                className="flex items-center gap-2 p-2.5 rounded-xl border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-slate-900 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
+                className="flex items-center gap-2 p-2.5 rounded-xl border border-cyan-200 dark:border-cyan-800/60 bg-white dark:bg-slate-900 text-cyan-800 dark:text-cyan-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
               >
-                <Sparkles size={14} className="text-purple-500 shrink-0" />
+                <Sparkles size={14} className="text-cyan-500 shrink-0" />
                 <span className="truncate">AI Analyze Job</span>
               </button>
 
@@ -212,9 +211,9 @@ export default function JobDetailModal({
               <button
                 type="button"
                 onClick={() => setIsOptimizerModalOpen(true)}
-                className="flex items-center gap-2 p-2.5 rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-white dark:bg-slate-900 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
+                className="flex items-center gap-2 p-2.5 rounded-xl border border-sky-200 dark:border-sky-800/60 bg-white dark:bg-slate-900 text-sky-700 dark:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
               >
-                <FileText size={14} className="text-indigo-500 shrink-0" />
+                <FileText size={14} className="text-sky-500 shrink-0" />
                 <span className="truncate">Resume Optimizer</span>
               </button>
 
@@ -292,7 +291,7 @@ export default function JobDetailModal({
 
           <div className="p-4 rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
             <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-              <Clock size={14} className="text-indigo-500" />
+              <Clock size={14} className="text-blue-500" />
               <span>Application Timeline</span>
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
@@ -386,41 +385,6 @@ export default function JobDetailModal({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-2">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <UserCheck size={14} className="text-indigo-500" />
-                <span>Recruiter Information</span>
-              </h4>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 text-xs space-y-1">
-                <p className="font-semibold text-slate-800 dark:text-slate-200">
-                  {normalizedJob.company} Talent Acquisition Team
-                </p>
-                <p className="text-slate-500 dark:text-slate-400">
-                  Contact details available in follow-up email tools.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-2">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                <FileText size={14} className="text-indigo-500" />
-                <span>Associated Documents</span>
-              </h4>
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 text-xs flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <FileText size={16} className="text-indigo-500" />
-                  <span className="font-medium text-slate-700 dark:text-slate-300">
-                    Primary Resume & Cover Letter
-                  </span>
-                </div>
-                <Badge variant={normalizedJob.status} size="sm">
-                  Attached
-                </Badge>
-              </div>
-            </div>
-          </div>
-
           {normalizedJob.jobLink && (
             <div className="space-y-1.5">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
@@ -430,7 +394,7 @@ export default function JobDetailModal({
                 href={normalizedJob.jobLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline break-all p-3 rounded-xl bg-indigo-50/40 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 w-full"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline break-all p-3 rounded-xl bg-blue-50/40 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/40 w-full"
               >
                 <span className="truncate">{normalizedJob.jobLink}</span>
                 <ExternalLink size={14} className="shrink-0" />

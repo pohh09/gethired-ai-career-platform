@@ -23,7 +23,7 @@ export default function EmptyState({
     <div
       className={`flex flex-col items-center justify-center p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 ${className}`}
     >
-      <div className="h-16 w-16 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 shadow-xs">
+      <div className="h-16 w-16 rounded-2xl bg-blue-50/80 dark:bg-blue-950/50 text-blue-600 dark:text-cyan-400 flex items-center justify-center mb-4 shadow-xs border border-blue-100 dark:border-blue-900/40">
         {icon || <Briefcase size={32} />}
       </div>
 

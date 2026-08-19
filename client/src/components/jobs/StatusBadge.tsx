@@ -33,13 +33,13 @@ export default function StatusBadge({
         };
       case "screening":
         return {
-          bg: "bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border-purple-200/60 dark:border-purple-800/50",
-          dot: "bg-purple-500",
+          bg: "bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border-sky-200/60 dark:border-sky-800/50",
+          dot: "bg-sky-500",
         };
       case "assessment":
         return {
-          bg: "bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 border-violet-200/60 dark:border-violet-800/50",
-          dot: "bg-violet-500",
+          bg: "bg-cyan-50 dark:bg-cyan-950/60 text-cyan-800 dark:text-cyan-300 border-cyan-200/60 dark:border-cyan-800/50",
+          dot: "bg-cyan-500",
         };
       case "interview":
       case "hr round":
@@ -64,8 +64,8 @@ export default function StatusBadge({
         };
       case "wishlist":
         return {
-          bg: "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200/60 dark:border-indigo-800/50",
-          dot: "bg-indigo-500",
+          bg: "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200/60 dark:border-blue-800/50",
+          dot: "bg-blue-500",
         };
       default:
         return {

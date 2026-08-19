@@ -41,39 +41,39 @@ const NAV_ITEMS: {
   activeClass: string;
   iconBgActive: string;
 }[] = [
-  {
-    id: "resume",
-    label: "Resume",
-    desc: "ATS Analysis & STAR Rewriter",
-    icon: FileText,
-    activeClass: "bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-600/20",
-    iconBgActive: "bg-indigo-500 text-white",
-  },
-  {
-    id: "jobs",
-    label: "Jobs",
-    desc: "JD Analysis & Fit Match",
-    icon: Briefcase,
-    activeClass: "bg-purple-600 text-white border-purple-600 shadow-sm shadow-purple-600/20",
-    iconBgActive: "bg-purple-500 text-white",
-  },
-  {
-    id: "interview",
-    label: "Interview",
-    desc: "Mock Simulator & Evaluator",
-    icon: Video,
-    activeClass: "bg-amber-600 text-white border-amber-600 shadow-sm shadow-amber-600/20",
-    iconBgActive: "bg-amber-500 text-white",
-  },
-  {
-    id: "career",
-    label: "Career",
-    desc: "Growth Planner & Skill Matrix",
-    icon: TrendingUp,
-    activeClass: "bg-emerald-600 text-white border-emerald-600 shadow-sm shadow-emerald-600/20",
-    iconBgActive: "bg-emerald-500 text-white",
-  },
-];
+    {
+      id: "resume",
+      label: "Resume",
+      desc: "ATS Analysis & STAR Rewriter",
+      icon: FileText,
+      activeClass: "bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-600/20",
+      iconBgActive: "bg-indigo-500 text-white",
+    },
+    {
+      id: "jobs",
+      label: "Jobs",
+      desc: "JD Analysis & Fit Match",
+      icon: Briefcase,
+      activeClass: "bg-purple-600 text-white border-purple-600 shadow-sm shadow-purple-600/20",
+      iconBgActive: "bg-purple-500 text-white",
+    },
+    {
+      id: "interview",
+      label: "Interview",
+      desc: "Mock Simulator & Evaluator",
+      icon: Video,
+      activeClass: "bg-amber-600 text-white border-amber-600 shadow-sm shadow-amber-600/20",
+      iconBgActive: "bg-amber-500 text-white",
+    },
+    {
+      id: "career",
+      label: "Career",
+      desc: "Growth Planner & Skill Matrix",
+      icon: TrendingUp,
+      activeClass: "bg-emerald-600 text-white border-emerald-600 shadow-sm shadow-emerald-600/20",
+      iconBgActive: "bg-emerald-500 text-white",
+    },
+  ];
 
 export default function DemoAIWorkspace() {
   const [searchParams] = useSearchParams();
@@ -177,8 +177,8 @@ export default function DemoAIWorkspace() {
     <div className="w-full max-w-[1750px] mx-auto space-y-4 sm:space-y-6 pb-16 sm:pb-12 px-1 sm:px-0 overflow-x-hidden">
       <div className="p-4 sm:p-5 md:p-6 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="space-y-1.5 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
-            <Sparkles size={12} className="text-indigo-400" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+            <Sparkles size={12} className="text-cyan-400" />
             AI Career Operating System (Demo Mode)
           </div>
           <h1 className="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white">
@@ -192,7 +192,7 @@ export default function DemoAIWorkspace() {
         <button
           type="button"
           onClick={() => setIsMobileChatOpen(true)}
-          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all shrink-0 cursor-pointer w-full md:w-auto"
+          className="xl:hidden inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md shadow-blue-600/30 transition-all shrink-0 cursor-pointer w-full md:w-auto"
         >
           <Bot size={15} />
           <span>Open AI Coach</span>
@@ -209,19 +209,17 @@ export default function DemoAIWorkspace() {
               key={item.id}
               type="button"
               onClick={() => setActiveTab(item.id)}
-              className={`w-full min-h-[58px] sm:min-h-[64px] flex items-center justify-between p-2.5 sm:p-3.5 md:p-4 rounded-xl sm:rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
-                isActive
+              className={`w-full min-h-[58px] sm:min-h-[64px] flex items-center justify-between p-2.5 sm:p-3.5 md:p-4 rounded-xl sm:rounded-2xl border text-left transition-all duration-200 cursor-pointer ${isActive
                   ? `${item.activeClass} shadow-sm`
                   : "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs"
-              }`}
+                }`}
             >
               <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                 <div
-                  className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl shrink-0 transition-colors ${
-                    isActive
+                  className={`p-1.5 sm:p-2 rounded-lg sm:rounded-xl shrink-0 transition-colors ${isActive
                       ? item.iconBgActive
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                  }`}
+                    }`}
                 >
                   <Icon size={16} />
                 </div>
@@ -230,9 +228,8 @@ export default function DemoAIWorkspace() {
                     {item.label}
                   </span>
                   <span
-                    className={`text-[10px] sm:text-[11px] truncate block mt-0.5 font-medium ${
-                      isActive ? "text-white/80" : "text-slate-500 dark:text-slate-400"
-                    }`}
+                    className={`text-[10px] sm:text-[11px] truncate block mt-0.5 font-medium ${isActive ? "text-white/80" : "text-slate-500 dark:text-slate-400"
+                      }`}
                   >
                     {item.desc}
                   </span>
@@ -253,7 +250,7 @@ export default function DemoAIWorkspace() {
               <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-6 w-full">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 sm:p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 border border-indigo-200">
+                    <div className="p-2 sm:p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400 border border-blue-200 dark:border-cyan-800">
                       <FileText size={18} />
                     </div>
                     <div>
@@ -267,7 +264,7 @@ export default function DemoAIWorkspace() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200">
+                    <span className="px-3 py-1 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-cyan-300 text-xs font-bold border border-blue-200 dark:border-cyan-800">
                       ✓ Active: Alex_Johnson_Resume.pdf
                     </span>
                   </div>
@@ -657,11 +654,10 @@ export default function DemoAIWorkspace() {
                   <div key={msg.id} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[88%] space-y-1 ${isUser ? "text-right" : "text-left"}`}>
                       <div
-                        className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed font-medium shadow-2xs ${
-                          isUser
+                        className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed font-medium shadow-2xs ${isUser
                             ? "bg-slate-900 dark:bg-indigo-600 text-white rounded-tr-xs"
                             : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 border border-slate-200/70 dark:border-slate-700/70 rounded-tl-xs"
-                        }`}
+                          }`}
                       >
                         <span className="whitespace-pre-line">{msg.text}</span>
                       </div>
@@ -752,7 +748,7 @@ export default function DemoAIWorkspace() {
             >
               <div className="p-3.5 px-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950 shrink-0">
                 <span className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                  <Bot size={16} className="text-indigo-500" /> AI Career Coach (Demo)
+                  <Bot size={16} className="text-blue-500" /> AI Career Coach (Demo)
                 </span>
                 <button
                   type="button"
@@ -772,7 +768,7 @@ export default function DemoAIWorkspace() {
                         <div
                           className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed font-medium shadow-2xs ${
                             isUser
-                              ? "bg-slate-900 dark:bg-indigo-600 text-white rounded-tr-xs"
+                              ? "bg-slate-900 dark:bg-blue-600 text-white rounded-tr-xs"
                               : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 border border-slate-200/70 dark:border-slate-700/70 rounded-tl-xs"
                           }`}
                         >
@@ -799,7 +795,7 @@ export default function DemoAIWorkspace() {
                   type="button"
                   onClick={() => handleSendMessage()}
                   disabled={!inputMsg.trim() || isTyping}
-                  className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shrink-0"
+                  className="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shrink-0"
                 >
                   <Send size={14} />
                 </button>

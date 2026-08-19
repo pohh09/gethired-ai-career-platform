@@ -37,7 +37,6 @@ app.get("/profile", authMiddleware, (req, res) => {
 
 app.get("/api/debug/jobs", authMiddleware, getDebugJobs);
 
-// Standalone Production AI Routers
 app.use("/resume", resumeRoutes);
 app.use("/jobs", jobsRoutes);
 app.use("/interview", interviewRoutes);
@@ -46,7 +45,7 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/jobs", jobsRoutes);
 app.use("/api/interview", interviewRoutes);
 
-// General Workspace API Routers
+
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/jobs", jobSearchRoutes);

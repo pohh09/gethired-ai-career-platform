@@ -110,11 +110,10 @@ Candidate Name`;
                 key={t}
                 type="button"
                 onClick={() => setTone(t)}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
-                  tone === t
+                className={`px-3 py-1 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${tone === t
                     ? "bg-indigo-600 text-white shadow-xs"
                     : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
-                }`}
+                  }`}
               >
                 {t}
               </button>

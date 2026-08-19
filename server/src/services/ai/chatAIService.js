@@ -144,7 +144,7 @@ export async function processChatMessage({
   console.log(`[Chat Intent Router] Intent: "${intent}" | Workspace: "${contextTab}" | Resume Attached: ${Boolean(activeResumeText)}`);
 
   try {
-    // 1. RESUME ANALYSIS INTENT
+   
     if (intent === "resume_analysis" && activeResumeText) {
       const audit = await resumeService.auditResume(activeResumeText, targetRole);
       return {
@@ -155,7 +155,7 @@ export async function processChatMessage({
       };
     }
 
-    // 2. RESUME WEAKNESSES INTENT
+   
     if (intent === "resume_weaknesses" && activeResumeText) {
       const audit = await resumeService.auditResume(activeResumeText, targetRole);
       return {
@@ -166,7 +166,6 @@ export async function processChatMessage({
       };
     }
 
-    // 3. ATS SCORE INTENT
     if (intent === "ats_score" && activeResumeText) {
       const ats = await resumeService.calculateATSScore(activeResumeText, targetRole);
       return {
@@ -177,7 +176,7 @@ export async function processChatMessage({
       };
     }
 
-    // 4. JOB MATCH INTENT
+  
     if (intent === "job_match" && activeResumeText && activeJobDescription) {
       const match = await jobService.matchResumeWithJob(activeResumeText, activeJobDescription);
       return {
@@ -188,7 +187,7 @@ export async function processChatMessage({
       };
     }
 
-    // 5. COVER LETTER INTENT
+   
     if (intent === "cover_letter") {
       const cl = await jobService.generateCoverLetter(activeResumeText || "Full Stack Developer", activeJobDescription || "Senior Engineer", companyName, targetRole);
       return {
@@ -199,7 +198,7 @@ export async function processChatMessage({
       };
     }
 
-    // 6. SALARY INSIGHTS INTENT
+    
     if (intent === "salary_insights") {
       const salary = await jobService.estimateSalaryInsights(targetRole, "Bangalore, India");
       return {
@@ -210,7 +209,7 @@ export async function processChatMessage({
       };
     }
 
-    // 7. INTERVIEW QUESTION INTENT
+   
     if (intent === "interview_question") {
       const questions = await interviewService.generateInterviewQuestions({ type: interviewRound, role: targetRole, difficulty, count: 1 });
       const q = questions[0];
@@ -222,7 +221,7 @@ export async function processChatMessage({
       };
     }
 
-    // 8. CAREER ROADMAP INTENT
+   
     if (intent === "career_roadmap") {
       const roadmap = await careerService.generateCareerRoadmap(targetRole, "Staff Software Architect");
       return {
@@ -233,7 +232,7 @@ export async function processChatMessage({
       };
     }
 
-    // 9. SKILL GAP INTENT
+
     if (intent === "skill_gap") {
       const skillGap = await jobService.generateSkillGapRoadmap(["React", "TypeScript", "Node.js"], targetRole);
       return {
@@ -244,7 +243,7 @@ export async function processChatMessage({
       };
     }
 
-    // 10. GENERAL CONTEXTUAL CHAT INTENT
+   
     const personaNames = {
       resume: "Resume Expert (ATS & Executive Resume Coach)",
       jobs: "Senior Recruiter (Tech Talent Scout & JD Analyst)",

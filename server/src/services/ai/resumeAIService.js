@@ -20,7 +20,6 @@ async function callGeminiPrompt(prompt, systemInstruction = "") {
       const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (text) return text;
     } catch (_err) {
-      // Ignore API errors and fallback gracefully
     }
   }
   return null;

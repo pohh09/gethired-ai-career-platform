@@ -5,7 +5,7 @@ import type { JobStats } from "../../types/dashboard";
 
 export interface FunnelStageData {
   stage:
-    "Applied" | "Screening" | "Assessment" | "Interview" | "Offer" | "Accepted";
+  "Applied" | "Screening" | "Assessment" | "Interview" | "Offer" | "Accepted";
   count: number;
 }
 
@@ -22,52 +22,52 @@ const STAGE_CONFIG: {
   bgLight: string;
   darkBg: string;
 }[] = [
-  {
-    key: "Applied",
-    label: "Applied",
-    color: "#3b82f6",
-    bgLight: "bg-blue-50 text-blue-700 border-blue-200",
-    darkBg: "dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40",
-  },
-  {
-    key: "Screening",
-    label: "Screening",
-    color: "#a855f7",
-    bgLight: "bg-purple-50 text-purple-700 border-purple-200",
-    darkBg:
-      "dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40",
-  },
-  {
-    key: "Assessment",
-    label: "Assessment",
-    color: "#06b6d4",
-    bgLight: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    darkBg: "dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800/40",
-  },
-  {
-    key: "Interview",
-    label: "Interview",
-    color: "#f59e0b",
-    bgLight: "bg-amber-50 text-amber-700 border-amber-200",
-    darkBg: "dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40",
-  },
-  {
-    key: "Offer",
-    label: "Offer",
-    color: "#10b981",
-    bgLight: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    darkBg:
-      "dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40",
-  },
-  {
-    key: "Accepted",
-    label: "Accepted",
-    color: "#6366f1",
-    bgLight: "bg-indigo-50 text-indigo-700 border-indigo-200",
-    darkBg:
-      "dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/40",
-  },
-];
+    {
+      key: "Applied",
+      label: "Applied",
+      color: "#3b82f6",
+      bgLight: "bg-blue-50 text-blue-700 border-blue-200",
+      darkBg: "dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40",
+    },
+    {
+      key: "Screening",
+      label: "Screening",
+      color: "#a855f7",
+      bgLight: "bg-purple-50 text-purple-700 border-purple-200",
+      darkBg:
+        "dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40",
+    },
+    {
+      key: "Assessment",
+      label: "Assessment",
+      color: "#06b6d4",
+      bgLight: "bg-cyan-50 text-cyan-700 border-cyan-200",
+      darkBg: "dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800/40",
+    },
+    {
+      key: "Interview",
+      label: "Interview",
+      color: "#f59e0b",
+      bgLight: "bg-amber-50 text-amber-700 border-amber-200",
+      darkBg: "dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40",
+    },
+    {
+      key: "Offer",
+      label: "Offer",
+      color: "#10b981",
+      bgLight: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      darkBg:
+        "dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40",
+    },
+    {
+      key: "Accepted",
+      label: "Accepted",
+      color: "#6366f1",
+      bgLight: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      darkBg:
+        "dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800/40",
+    },
+  ];
 
 export default function ApplicationFunnel({
   stats = {},
@@ -142,11 +142,10 @@ export default function ApplicationFunnel({
           {funnelStages.map((stg) => (
             <div
               key={stg.key}
-              className={`p-4 rounded-2xl border transition-all space-y-2 ${
-                stg.count > 0
+              className={`p-4 rounded-2xl border transition-all space-y-2 ${stg.count > 0
                   ? `${stg.bgLight} ${stg.darkBg} shadow-2xs`
                   : "bg-slate-50/50 dark:bg-slate-950/40 border-slate-200/60 dark:border-slate-800/60 text-slate-400"
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-extrabold uppercase tracking-wider">

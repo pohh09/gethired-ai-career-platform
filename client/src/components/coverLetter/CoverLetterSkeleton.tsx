@@ -3,10 +3,10 @@ import { Sparkles } from "lucide-react";
 
 export default function CoverLetterSkeleton() {
   return (
-    <div className="space-y-6 animate-pulse p-4 sm:p-6 rounded-2xl border border-indigo-100 dark:border-indigo-950/60 bg-gradient-to-b from-indigo-50/30 to-purple-50/20 dark:from-indigo-950/20 dark:to-slate-900/40">
-      <div className="flex items-center justify-between border-b border-indigo-100/60 dark:border-indigo-900/40 pb-4">
+    <div className="space-y-6 animate-pulse p-4 sm:p-6 rounded-2xl border border-blue-100 dark:border-blue-950/60 bg-gradient-to-b from-blue-50/40 to-cyan-50/30 dark:from-blue-950/20 dark:to-slate-900/40">
+      <div className="flex items-center justify-between border-b border-blue-100/60 dark:border-blue-900/40 pb-4">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-indigo-200/60 dark:bg-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+          <div className="h-10 w-10 rounded-xl bg-blue-100 dark:bg-blue-900/60 flex items-center justify-center text-blue-600 dark:text-cyan-400">
             <Sparkles size={20} className="animate-spin" />
           </div>
           <div className="space-y-1.5">

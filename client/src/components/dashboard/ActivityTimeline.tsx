@@ -22,36 +22,36 @@ export default function ActivityTimeline({
     events.length > 0
       ? events
       : [
-          {
-            id: "act-ev-1",
-            type: "applied",
-            title: "Applied to Stripe",
-            subtitle: "Senior Frontend Engineer — Payments role",
-            timeAgo: "2 hours ago",
-          },
-          {
-            id: "act-ev-2",
-            type: "interview",
-            title: "Interview Scheduled with Vercel",
-            subtitle:
-              "Technical Architecture round scheduled with Marcus Vance",
-            timeAgo: "1 day ago",
-          },
-          {
-            id: "act-ev-3",
-            type: "resume",
-            title: "Updated Resume Attachment",
-            subtitle: "Uploaded Senior_Frontend_Tailored_Resume.pdf",
-            timeAgo: "2 days ago",
-          },
-          {
-            id: "act-ev-4",
-            type: "offer",
-            title: "Offer Package Received",
-            subtitle: "Stripe Connect team sent official compensation offer",
-            timeAgo: "3 days ago",
-          },
-        ];
+        {
+          id: "act-ev-1",
+          type: "applied",
+          title: "Applied to Stripe",
+          subtitle: "Senior Frontend Engineer — Payments role",
+          timeAgo: "2 hours ago",
+        },
+        {
+          id: "act-ev-2",
+          type: "interview",
+          title: "Interview Scheduled with Vercel",
+          subtitle:
+            "Technical Architecture round scheduled with Marcus Vance",
+          timeAgo: "1 day ago",
+        },
+        {
+          id: "act-ev-3",
+          type: "resume",
+          title: "Updated Resume Attachment",
+          subtitle: "Uploaded Senior_Frontend_Tailored_Resume.pdf",
+          timeAgo: "2 days ago",
+        },
+        {
+          id: "act-ev-4",
+          type: "offer",
+          title: "Offer Package Received",
+          subtitle: "Stripe Connect team sent official compensation offer",
+          timeAgo: "3 days ago",
+        },
+      ];
 
   const getEventIcon = (type: ActivityEvent["type"]) => {
     switch (type) {

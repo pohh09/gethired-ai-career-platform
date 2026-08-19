@@ -14,7 +14,7 @@ import SectionTitle from "./SectionTitle";
 export interface ActionItem {
   id: string;
   type:
-    "followup" | "interview" | "assessment" | "stale" | "offer" | "rejection";
+  "followup" | "interview" | "assessment" | "stale" | "offer" | "rejection";
   title: string;
   subtitle: string;
   companyName: string;

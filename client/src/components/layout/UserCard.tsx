@@ -21,7 +21,7 @@ export default function UserCard({ collapsed = false }: UserCardProps) {
     <div className="p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/60 transition-colors">
       <div className="flex items-center gap-3">
         <div className="relative shrink-0">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">
             {getInitials(user?.name)}
           </div>
           <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900 shadow-xs flex items-center justify-center">

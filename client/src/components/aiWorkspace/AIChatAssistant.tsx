@@ -204,9 +204,8 @@ export default function AIChatAssistant({ activeTab, isMobileDrawer = false }: A
 
   return (
     <div
-      className={`flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden w-full ${
-        isMobileDrawer ? "h-full max-h-full border-none shadow-none" : "h-[650px] max-h-[calc(100vh-140px)]"
-      }`}
+      className={`flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden w-full ${isMobileDrawer ? "h-full max-h-full border-none shadow-none" : "h-[650px] max-h-[calc(100vh-140px)]"
+        }`}
     >
       {!isMobileDrawer && (
         <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/40 flex items-center justify-between shrink-0">
@@ -267,13 +266,12 @@ export default function AIChatAssistant({ activeTab, isMobileDrawer = false }: A
             >
               <div className={`max-w-[88%] sm:max-w-[85%] space-y-1 ${isUser ? "text-right" : "text-left"}`}>
                 <div
-                  className={`px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl text-xs leading-relaxed font-medium group relative shadow-2xs ${
-                    isUser
+                  className={`px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-2xl text-xs leading-relaxed font-medium group relative shadow-2xs ${isUser
                       ? "bg-slate-900 dark:bg-indigo-600 text-white rounded-tr-xs"
                       : isErr
-                      ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 border border-rose-200 dark:border-rose-800 rounded-tl-xs"
-                      : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 border border-slate-200/70 dark:border-slate-700/70 rounded-tl-xs"
-                  }`}
+                        ? "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 border border-rose-200 dark:border-rose-800 rounded-tl-xs"
+                        : "bg-slate-100/90 dark:bg-slate-800/90 text-slate-800 dark:text-slate-100 border border-slate-200/70 dark:border-slate-700/70 rounded-tl-xs"
+                    }`}
                 >
                   {isErr && <AlertTriangle size={13} className="inline mr-1 text-rose-500" />}
                   <span className="whitespace-pre-line break-words">{msg.text}</span>

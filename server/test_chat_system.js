@@ -49,7 +49,7 @@ async function runChatSystemTests() {
     }
   }
 
-  // TEST 11: Multi-Turn Conversation Memory
+ 
   console.log("Testing Multi-Turn Memory (Follow-up Context Tracking):");
   try {
     const history = [
@@ -70,7 +70,7 @@ async function runChatSystemTests() {
     console.error(`   -> Multi-turn Error: ${err.message}\n`);
   }
 
-  // Verify uniqueness of all 10 responses
+
   const uniqueResponses = new Set(results);
   console.log(`=================================================`);
   console.log(`  UNIQUE RESPONSES VERIFICATION: ${uniqueResponses.size} / ${results.length}`);

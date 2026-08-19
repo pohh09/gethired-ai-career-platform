@@ -61,7 +61,7 @@ export default function ResumeWorkspace() {
           setActiveResume(text, file.name);
           toast.success(`Parsed text file ${file.name} (${words} words)`);
           return;
-        } catch (_textErr) {}
+        } catch (_textErr) { }
       }
       toast.error(err.response?.data?.error || err.message || "Failed to parse document text");
     } finally {
@@ -339,9 +339,8 @@ export default function ResumeWorkspace() {
                   <div key={section} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold capitalize text-slate-900 dark:text-slate-100">{section}</span>
-                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                        (info.score || 80) >= 85 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300"
-                      }`}>
+                      <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${(info.score || 80) >= 85 ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300" : "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300"
+                        }`}>
                         {info.score || 80}/100
                       </span>
                     </div>

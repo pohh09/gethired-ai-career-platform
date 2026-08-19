@@ -231,7 +231,7 @@ export default function AiCareerCoach() {
             onClick={handleDownloadPdf}
             disabled={!result || isLoading}
             leftIcon={<Download size={14} />}
-            className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-xs"
+            className="font-bold bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-xs"
           >
             Download PDF Report
           </Button>

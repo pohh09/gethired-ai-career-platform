@@ -29,17 +29,17 @@ export default function DemoDashboard() {
 
   return (
     <div className="space-y-6 w-full pb-10">
-      <div className="p-5 sm:p-7 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-5 relative overflow-hidden">
+      <div className="p-5 sm:p-7 rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-5 relative overflow-hidden">
         <div className="space-y-2 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold uppercase tracking-wider">
-            <Sparkles size={12} className="text-indigo-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 border border-cyan-500/30 text-cyan-300 text-[11px] font-bold uppercase tracking-wider">
+            <Sparkles size={12} className="text-cyan-400" />
             Executive Career Command Center
           </div>
           <h1 className="text-xl sm:text-3xl font-black tracking-tight text-white">
             Welcome back, {DEMO_USER.name} 👋
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed font-medium">
-            You have <strong className="text-amber-400">8 active interview processes</strong> and <strong className="text-emerald-400">2 formal job offers</strong>. Next interview with <strong className="text-indigo-300">Stripe</strong> is scheduled for tomorrow at 10:00 AM.
+            You have <strong className="text-amber-400">8 active interview processes</strong> and <strong className="text-emerald-400">2 formal job offers</strong>. Next interview with <strong className="text-cyan-300">Stripe</strong> is scheduled for tomorrow at 10:00 AM.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export default function DemoDashboard() {
             size="md"
             onClick={() => navigate("/demo/ai-workspace")}
             leftIcon={<Bot size={16} />}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 w-full sm:w-auto"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 w-full sm:w-auto"
           >
             Open AI Workspace
           </Button>
@@ -69,7 +69,7 @@ export default function DemoDashboard() {
         <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Tracked</span>
-            <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+            <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400">
               <Briefcase size={14} />
             </div>
           </div>
@@ -104,46 +104,46 @@ export default function DemoDashboard() {
           <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 block">
             {DEMO_METRICS.offersReceived}
           </span>
-          <span className="text-[10px] text-emerald-600 font-bold">Atlassian & Vercel</span>
+          <span className="text-[10px] text-emerald-600 font-bold">₹76L max pkg</span>
         </div>
 
         <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">ATS Score</span>
-            <div className="p-1.5 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-600">
-              <Zap size={14} />
-            </div>
-          </div>
-          <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 block">
-            {DEMO_METRICS.atsScore}%
-          </span>
-          <span className="text-[10px] text-purple-600 font-bold">Grade A+ (Optimal)</span>
-        </div>
-
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Response Rate</span>
-            <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600">
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Conversion</span>
+            <div className="p-1.5 rounded-lg bg-cyan-50 dark:bg-cyan-950 text-cyan-600">
               <Target size={14} />
             </div>
           </div>
           <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 block">
-            {DEMO_METRICS.responseRate}
+            {DEMO_METRICS.conversionRate}%
           </span>
-          <span className="text-[10px] text-blue-600 font-bold">2.4x Industry Avg</span>
+          <span className="text-[10px] text-cyan-600 font-bold">Top 5% candidate</span>
         </div>
 
         <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Avg Offer</span>
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Avg Response</span>
+            <div className="p-1.5 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-600">
+              <Zap size={14} />
+            </div>
+          </div>
+          <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 block">
+            {DEMO_METRICS.avgResponseDays}d
+          </span>
+          <span className="text-[10px] text-sky-600 font-bold">Fast response</span>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pipeline Val</span>
             <div className="p-1.5 rounded-lg bg-teal-50 dark:bg-teal-950 text-teal-600">
               <DollarSign size={14} />
             </div>
           </div>
-          <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-slate-100 block truncate">
-            ₹38L LPA
+          <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 block">
+            ₹68L
           </span>
-          <span className="text-[10px] text-teal-600 font-bold">Top 5% Band</span>
+          <span className="text-[10px] text-teal-600 font-bold">Median package</span>
         </div>
       </div>
 
@@ -166,7 +166,7 @@ export default function DemoDashboard() {
               </div>
               <Link
                 to="/demo/calendar"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
               >
                 <span>Full Schedule</span>
                 <ArrowRight size={13} />
@@ -177,7 +177,7 @@ export default function DemoDashboard() {
               {DEMO_UPCOMING_INTERVIEWS.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all"
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-blue-300 dark:hover:border-cyan-700 transition-all"
                 >
                   <div className="flex items-start gap-3 min-w-0">
                     <div
@@ -204,7 +204,7 @@ export default function DemoDashboard() {
                   </div>
 
                   <div className="flex sm:flex-col items-center sm:items-end justify-between gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200 dark:border-slate-700">
-                    <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-200 dark:border-indigo-800">
+                    <span className="text-xs font-mono font-bold text-blue-600 dark:text-cyan-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-200 dark:border-cyan-800">
                       {item.date} @ {item.time}
                     </span>
                     <button
@@ -224,7 +224,7 @@ export default function DemoDashboard() {
           <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3.5">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600">
+                <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400">
                   <Layers size={18} />
                 </div>
                 <div>
@@ -238,7 +238,7 @@ export default function DemoDashboard() {
               </div>
               <Link
                 to="/demo/applications"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
               >
                 <span>View Kanban Board</span>
                 <ArrowRight size={13} />
@@ -281,7 +281,7 @@ export default function DemoDashboard() {
                     >
                       {app.status}
                     </span>
-                    <span className="text-xs font-bold text-indigo-600 hidden sm:inline-block">
+                    <span className="text-xs font-bold text-blue-600 dark:text-cyan-400 hidden sm:inline-block">
                       {app.matchScore}% Match
                     </span>
                   </div>
@@ -294,7 +294,7 @@ export default function DemoDashboard() {
         <div className="lg:col-span-4 space-y-6">
           <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
             <div className="flex items-center gap-2.5 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <div className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600">
+              <div className="p-2 rounded-xl bg-cyan-50 dark:bg-cyan-950 text-cyan-600">
                 <Sparkles size={18} />
               </div>
               <div>
@@ -305,8 +305,8 @@ export default function DemoDashboard() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-center space-y-1">
-              <span className="text-[10px] font-bold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider block">
+            <div className="p-4 rounded-xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-center space-y-1">
+              <span className="text-[10px] font-bold text-blue-700 dark:text-cyan-300 uppercase tracking-wider block">
                 ATS Compatibility Score
               </span>
               <span className="text-4xl font-black text-slate-900 dark:text-slate-100 block">
@@ -368,7 +368,7 @@ export default function DemoDashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/demo/ai-workspace?tab=resume")}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-indigo-500 transition-all flex items-center justify-between cursor-pointer"
+                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-cyan-500 transition-all flex items-center justify-between cursor-pointer"
               >
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
@@ -382,7 +382,7 @@ export default function DemoDashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/demo/ai-workspace?tab=jobs")}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-indigo-500 transition-all flex items-center justify-between cursor-pointer"
+                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-cyan-500 transition-all flex items-center justify-between cursor-pointer"
               >
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
@@ -396,7 +396,7 @@ export default function DemoDashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/demo/ai-workspace?tab=interview")}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-indigo-500 transition-all flex items-center justify-between cursor-pointer"
+                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-cyan-500 transition-all flex items-center justify-between cursor-pointer"
               >
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
@@ -410,7 +410,7 @@ export default function DemoDashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/demo/ai-workspace?tab=career")}
-                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-indigo-500 transition-all flex items-center justify-between cursor-pointer"
+                className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-left hover:border-cyan-500 transition-all flex items-center justify-between cursor-pointer"
               >
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">

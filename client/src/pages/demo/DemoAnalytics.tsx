@@ -7,7 +7,7 @@ export default function DemoAnalytics() {
       <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <BarChart3 size={22} className="text-indigo-600" />
+            <BarChart3 size={22} className="text-blue-600 dark:text-cyan-400" />
             <span>Executive Career Analytics & Insights</span>
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
@@ -36,7 +36,7 @@ export default function DemoAnalytics() {
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-2">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Avg Time to First Response</span>
           <span className="text-3xl font-black text-slate-900 dark:text-slate-100 block">4.2 Days</span>
-          <p className="text-xs text-blue-600 font-bold flex items-center gap-1">
+          <p className="text-xs text-blue-600 dark:text-cyan-400 font-bold flex items-center gap-1">
             <Clock size={13} /> 62% faster than tech industry median
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function DemoAnalytics() {
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-2">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Target Role Benchmark</span>
           <span className="text-3xl font-black text-slate-900 dark:text-slate-100 block">₹42L LPA</span>
-          <p className="text-xs text-purple-600 font-bold flex items-center gap-1">
+          <p className="text-xs text-cyan-600 dark:text-cyan-400 font-bold flex items-center gap-1">
             <Target size={13} /> Top 5% Senior Full Stack Band
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function DemoAnalytics() {
           </p>
           <Link
             to="/register"
-            className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-600/30 transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md shadow-blue-600/30 transition-all flex items-center justify-center gap-1.5"
           >
             <span>Create Free Account</span>
             <ArrowRight size={14} />

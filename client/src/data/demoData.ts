@@ -52,6 +52,8 @@ export const DEMO_METRICS = {
   responseRate: "38%",
   avgSalaryRange: "₹32L - ₹45L",
   interviewPassRate: "75%",
+  conversionRate: 19,
+  avgResponseDays: 3,
 };
 
 export const DEMO_UPCOMING_INTERVIEWS = [

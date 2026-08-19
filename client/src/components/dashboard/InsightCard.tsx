@@ -25,43 +25,43 @@ export default function InsightCard({
     insights.length > 0
       ? insights
       : [
-          {
-            id: "ins-1",
-            type: "trend",
-            title: "Interview Rate Increased by +18%",
-            description:
-              "Your interview callback conversion rate jumped from 12% to 30% over the last 30 days.",
-            metricBadge: "+18% Conversion",
-            icon: <TrendingUp size={16} className="text-emerald-500" />,
-          },
-          {
-            id: "ins-2",
-            type: "strategy",
-            title: "2.4x Higher Callbacks from Remote Roles",
-            description:
-              "Remote product engineering applications are converting 2.4x faster than hybrid postings.",
-            metricBadge: "Remote Advantage",
-            icon: <Compass size={16} className="text-blue-500" />,
-          },
-          {
-            id: "ins-3",
-            type: "target",
-            title: "Apply to 3 More Target Companies",
-            description:
-              "Reaching 15 applications this week increases your probability of receiving an offer by 65%.",
-            metricBadge: "Weekly Goal",
-            icon: <Sparkles size={16} className="text-purple-500" />,
-          },
-          {
-            id: "ins-4",
-            type: "action",
-            title: "Follow Up with Microsoft Team",
-            description:
-              "8 days have elapsed since your technical screening. A polite follow-up increases recruiter response rate.",
-            metricBadge: "Follow Up Alert",
-            icon: <Clock size={16} className="text-amber-500" />,
-          },
-        ];
+        {
+          id: "ins-1",
+          type: "trend",
+          title: "Interview Rate Increased by +18%",
+          description:
+            "Your interview callback conversion rate jumped from 12% to 30% over the last 30 days.",
+          metricBadge: "+18% Conversion",
+          icon: <TrendingUp size={16} className="text-emerald-500" />,
+        },
+        {
+          id: "ins-2",
+          type: "strategy",
+          title: "2.4x Higher Callbacks from Remote Roles",
+          description:
+            "Remote product engineering applications are converting 2.4x faster than hybrid postings.",
+          metricBadge: "Remote Advantage",
+          icon: <Compass size={16} className="text-blue-500" />,
+        },
+        {
+          id: "ins-3",
+          type: "target",
+          title: "Apply to 3 More Target Companies",
+          description:
+            "Reaching 15 applications this week increases your probability of receiving an offer by 65%.",
+          metricBadge: "Weekly Goal",
+          icon: <Sparkles size={16} className="text-purple-500" />,
+        },
+        {
+          id: "ins-4",
+          type: "action",
+          title: "Follow Up with Microsoft Team",
+          description:
+            "8 days have elapsed since your technical screening. A polite follow-up increases recruiter response rate.",
+          metricBadge: "Follow Up Alert",
+          icon: <Clock size={16} className="text-amber-500" />,
+        },
+      ];
 
   return (
     <div className={`space-y-4 ${className}`}>

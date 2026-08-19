@@ -23,18 +23,18 @@ export default function StatCard({
 }: StatCardProps) {
   const accentStyles = {
     indigo: {
-      bg: "bg-indigo-50 dark:bg-indigo-950/60",
-      text: "text-indigo-600 dark:text-indigo-400",
-      border: "hover:border-indigo-300 dark:hover:border-indigo-800",
-      glow: "group-hover:shadow-indigo-500/10",
-      bar: "bg-indigo-600 dark:bg-indigo-500",
-    },
-    blue: {
       bg: "bg-blue-50 dark:bg-blue-950/60",
       text: "text-blue-600 dark:text-blue-400",
       border: "hover:border-blue-300 dark:hover:border-blue-800",
       glow: "group-hover:shadow-blue-500/10",
-      bar: "bg-blue-600 dark:bg-blue-500",
+      bar: "bg-gradient-to-r from-blue-600 to-cyan-500",
+    },
+    blue: {
+      bg: "bg-sky-50 dark:bg-sky-950/60",
+      text: "text-sky-600 dark:text-sky-400",
+      border: "hover:border-sky-300 dark:hover:border-sky-800",
+      glow: "group-hover:shadow-sky-500/10",
+      bar: "bg-sky-600 dark:bg-sky-500",
     },
     amber: {
       bg: "bg-amber-50 dark:bg-amber-950/60",
@@ -58,11 +58,11 @@ export default function StatCard({
       bar: "bg-rose-600 dark:bg-rose-500",
     },
     purple: {
-      bg: "bg-purple-50 dark:bg-purple-950/60",
-      text: "text-purple-600 dark:text-purple-400",
-      border: "hover:border-purple-300 dark:hover:border-purple-800",
-      glow: "group-hover:shadow-purple-500/10",
-      bar: "bg-purple-600 dark:bg-purple-500",
+      bg: "bg-cyan-50 dark:bg-cyan-950/60",
+      text: "text-cyan-600 dark:text-cyan-400",
+      border: "hover:border-cyan-300 dark:hover:border-cyan-800",
+      glow: "group-hover:shadow-cyan-500/10",
+      bar: "bg-cyan-500 dark:bg-cyan-400",
     },
   };
 

@@ -44,7 +44,7 @@ export default function ActionToolbar({
             variant="outline"
             size="sm"
             onClick={onSaveToJob}
-            leftIcon={<BookmarkPlus size={14} className="text-indigo-500" />}
+            leftIcon={<BookmarkPlus size={14} className="text-blue-500" />}
           >
             Save to Job
           </Button>
@@ -57,7 +57,7 @@ export default function ActionToolbar({
         onClick={onRegenerate}
         isLoading={isLoading}
         leftIcon={<RefreshCw size={14} />}
-        className="font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500"
+        className="font-bold bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400"
       >
         Regenerate
       </Button>

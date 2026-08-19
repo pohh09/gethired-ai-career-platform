@@ -10,7 +10,7 @@ export interface KpiCardProps {
   comparisonText?: string;
   percentageChange?: string;
   trendDirection?: "up" | "down" | "neutral";
-  accentColor?: "indigo" | "amber" | "emerald" | "purple" | "blue";
+  accentColor?: "indigo" | "amber" | "emerald" | "purple" | "blue" | "rose" | "cyan" | "sky";
   isLoading?: boolean;
   miniGraphData?: number[];
   className?: string;
@@ -23,18 +23,18 @@ export default function KpiCard({
   comparisonText = "vs last month",
   percentageChange = "+14%",
   trendDirection = "up",
-  accentColor = "indigo",
+  accentColor = "blue",
   isLoading = false,
   miniGraphData = [4, 6, 5, 8, 7, 10, 12],
   className = "",
 }: KpiCardProps) {
   const accentStyles = {
     indigo: {
-      bg: "bg-indigo-50 dark:bg-indigo-950/60",
-      text: "text-indigo-600 dark:text-indigo-400",
-      border: "hover:border-indigo-300 dark:hover:border-indigo-800",
-      glow: "hover:shadow-indigo-500/10",
-      bar: "bg-indigo-600 dark:bg-indigo-500",
+      bg: "bg-blue-50 dark:bg-blue-950/60",
+      text: "text-blue-600 dark:text-cyan-400",
+      border: "hover:border-blue-300 dark:hover:border-blue-800",
+      glow: "hover:shadow-blue-500/10",
+      bar: "bg-blue-600 dark:bg-blue-500",
     },
     amber: {
       bg: "bg-amber-50 dark:bg-amber-950/60",
@@ -51,11 +51,11 @@ export default function KpiCard({
       bar: "bg-emerald-600 dark:bg-emerald-500",
     },
     purple: {
-      bg: "bg-purple-50 dark:bg-purple-950/60",
-      text: "text-purple-600 dark:text-purple-400",
-      border: "hover:border-purple-300 dark:hover:border-purple-800",
-      glow: "hover:shadow-purple-500/10",
-      bar: "bg-purple-600 dark:bg-purple-500",
+      bg: "bg-cyan-50 dark:bg-cyan-950/60",
+      text: "text-cyan-800 dark:text-cyan-300",
+      border: "hover:border-cyan-300 dark:hover:border-cyan-800",
+      glow: "hover:shadow-cyan-500/10",
+      bar: "bg-cyan-600 dark:bg-cyan-500",
     },
     blue: {
       bg: "bg-blue-50 dark:bg-blue-950/60",
@@ -63,6 +63,27 @@ export default function KpiCard({
       border: "hover:border-blue-300 dark:hover:border-blue-800",
       glow: "hover:shadow-blue-500/10",
       bar: "bg-blue-600 dark:bg-blue-500",
+    },
+    cyan: {
+      bg: "bg-cyan-50 dark:bg-cyan-950/60",
+      text: "text-cyan-800 dark:text-cyan-300",
+      border: "hover:border-cyan-300 dark:hover:border-cyan-800",
+      glow: "hover:shadow-cyan-500/10",
+      bar: "bg-cyan-600 dark:bg-cyan-500",
+    },
+    sky: {
+      bg: "bg-sky-50 dark:bg-sky-950/60",
+      text: "text-sky-600 dark:text-sky-400",
+      border: "hover:border-sky-300 dark:hover:border-sky-800",
+      glow: "hover:shadow-sky-500/10",
+      bar: "bg-sky-600 dark:bg-sky-500",
+    },
+    rose: {
+      bg: "bg-rose-50 dark:bg-rose-950/60",
+      text: "text-rose-600 dark:text-rose-400",
+      border: "hover:border-rose-300 dark:hover:border-rose-800",
+      glow: "hover:shadow-rose-500/10",
+      bar: "bg-rose-600 dark:bg-rose-500",
     },
   };
 
@@ -113,11 +134,10 @@ export default function KpiCard({
               <div
                 key={idx}
                 style={{ height: `${heightPercent}%` }}
-                className={`w-1.5 rounded-full transition-all duration-300 ${
-                  idx === miniGraphData.length - 1
+                className={`w-1.5 rounded-full transition-all duration-300 ${idx === miniGraphData.length - 1
                     ? style.bar
                     : "bg-slate-200 dark:bg-slate-800"
-                }`}
+                  }`}
               />
             );
           })}
@@ -126,13 +146,12 @@ export default function KpiCard({
 
       <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
         <span
-          className={`inline-flex items-center gap-0.5 font-extrabold px-2 py-0.5 rounded-md text-[11px] ${
-            trendDirection === "up"
+          className={`inline-flex items-center gap-0.5 font-extrabold px-2 py-0.5 rounded-md text-[11px] ${trendDirection === "up"
               ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"
               : trendDirection === "down"
                 ? "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300"
                 : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
-          }`}
+            }`}
         >
           {trendDirection === "up" ? (
             <TrendingUp size={12} />

@@ -155,9 +155,9 @@ export default function AiInsights() {
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl border border-indigo-200/60 dark:border-indigo-800/40 bg-gradient-to-r from-indigo-50/70 via-purple-50/50 to-white dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl border border-blue-200/60 dark:border-blue-800/40 bg-gradient-to-r from-blue-50/70 via-cyan-50/50 to-white dark:from-blue-950/40 dark:via-cyan-950/30 dark:to-slate-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-indigo-600 text-white shrink-0 shadow-xs">
+              <div className="p-2.5 rounded-xl bg-blue-600 text-white shrink-0 shadow-xs">
                 <Compass size={20} />
               </div>
               <div>

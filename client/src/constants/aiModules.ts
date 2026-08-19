@@ -10,7 +10,7 @@ export const AI_MODULE_CATEGORIES: AIModuleCategory[] = [
     iconName: "FileText",
     badge: "Essential",
     color: "blue",
-    gradient: "from-blue-600 to-indigo-600",
+    gradient: "from-blue-600 to-cyan-500",
     suggestedActions: [
       { label: "Analyze my resume", toolId: "resume-analyzer" },
       { label: "Check ATS score", toolId: "ats-score" },
@@ -131,8 +131,8 @@ export const AI_MODULE_CATEGORIES: AIModuleCategory[] = [
       "Calculate job fit percentage, breakdown skill demands, pinpoint missing qualifications, and research prospective employers.",
     iconName: "Briefcase",
     badge: "Smart Match",
-    color: "purple",
-    gradient: "from-purple-600 to-pink-600",
+    color: "sky",
+    gradient: "from-sky-500 to-blue-600",
     suggestedActions: [
       { label: "Calculate job match score", toolId: "job-match" },
       { label: "Analyze job description", toolId: "job-analyzer" },
