@@ -316,7 +316,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
 
       <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 h-16 flex items-center justify-between">
           <Link to="/landing" className="flex items-center gap-2.5">
             <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-extrabold text-base shadow-md shadow-blue-500/20">
               <Sparkles size={18} />
@@ -383,8 +383,8 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-6 max-w-3xl mx-auto">
+      <section className="relative pt-12 pb-16 sm:pt-20 sm:pb-24 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4">
+        <div className="text-center space-y-6 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-cyan-400 text-xs font-extrabold border border-blue-200/80 dark:border-cyan-800 shadow-2xs">
             <Code2 size={14} className="text-cyan-500" />
             <span>Full-Stack MERN + AI Project</span>
@@ -427,7 +427,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-12 sm:mt-16 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 shadow-2xl p-4 sm:p-6 backdrop-blur-md space-y-4 max-w-5xl mx-auto"
+          className="mt-12 sm:mt-16 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 shadow-2xl p-4 sm:p-6 lg:p-8 backdrop-blur-md space-y-4 w-full max-w-6xl mx-auto"
         >
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
@@ -494,8 +494,8 @@ export default function LandingPage() {
         id="problem-solution"
         className="py-16 bg-white dark:bg-slate-900/80 border-y border-slate-200/80 dark:border-slate-800"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
               Workflow Optimization
             </span>
@@ -504,7 +504,7 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch w-full max-w-6xl mx-auto">
 
             <div className="p-6 sm:p-8 rounded-3xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40 space-y-5 flex flex-col justify-between">
               <div className="space-y-3">
@@ -584,9 +584,9 @@ export default function LandingPage() {
 
       <section
         id="capabilities"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+        className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12"
       >
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
             System Overview
           </span>
@@ -627,7 +627,7 @@ export default function LandingPage() {
         id="project-overview"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12">
           <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
               Portfolio Context
@@ -642,7 +642,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mx-auto">
             {PROJECT_HIGHLIGHTS.map((card, idx) => {
               const Icon = card.icon;
               return (
@@ -669,9 +669,9 @@ export default function LandingPage() {
       </section>
       <section
         id="showcase"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10"
+        className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-10"
       >
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
             Interactive Product Preview
           </span>
@@ -702,7 +702,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            className="p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl space-y-6 max-w-4xl mx-auto overflow-hidden"
+            className="p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl space-y-6 w-full max-w-5xl mx-auto overflow-hidden"
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
               <div>
@@ -951,8 +951,8 @@ export default function LandingPage() {
         id="features"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
               System Features
             </span>
@@ -997,10 +997,10 @@ export default function LandingPage() {
 
       <section
         id="engineering"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
+        className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12"
       >
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="w-full mx-auto space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
               Technical Implementation
             </span>
@@ -1037,7 +1037,7 @@ export default function LandingPage() {
         id="architecture"
         className="py-20 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-12">
           <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
               System Design
@@ -1051,7 +1051,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
+          <div className="w-full max-w-5xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {ARCHITECTURE_STEPS.map((step, idx) => {
                 const Icon = step.icon;
@@ -1100,7 +1100,7 @@ export default function LandingPage() {
 
       <section
         id="tech-stack"
-        className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
+        className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-8"
       >
         <div className="text-center space-y-2">
           <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
@@ -1111,7 +1111,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mx-auto">
           {TECH_GROUPS.map((group, idx) => (
             <div
               key={idx}
@@ -1138,9 +1138,9 @@ export default function LandingPage() {
 
       <section
         id="faq"
-        className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
+        className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 space-y-8"
       >
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
             Project Overview
           </span>
@@ -1149,7 +1149,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-4xl mx-auto">
           {FAQS.map((faq, idx) => {
             const isOpen = openFaqIndex === idx;
             return (
@@ -1181,15 +1181,15 @@ export default function LandingPage() {
       </section>
 
 
-      <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-2xl text-center space-y-6 border border-blue-900/50">
+      <section className="py-20 w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4">
+        <div className="p-8 sm:p-12 lg:p-16 rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-2xl text-center space-y-6 border border-blue-900/50">
           <div className="inline-flex p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-cyan-300">
             <Sparkles size={28} />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Explore the GetHired Project
           </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
             Explore the complete application and see how the frontend, backend,
             database, AI integrations and job APIs work together.
           </p>
@@ -1215,7 +1215,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="py-8 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="w-[90%] max-w-[1750px] mx-auto px-2 sm:px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-semibold">
             GetHired — Full-Stack MERN + AI Portfolio Project
           </p>
