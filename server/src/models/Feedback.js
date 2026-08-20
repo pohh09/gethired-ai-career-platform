@@ -12,6 +12,11 @@ const feedbackSchema = new mongoose.Schema(
       default: "Anonymous User",
       trim: true,
     },
+    email: {
+      type: String,
+      trim: true,
+      default: "",
+    },
     type: {
       type: String,
       enum: ["bug", "suggestion", "question", "other"],
@@ -25,6 +30,10 @@ const feedbackSchema = new mongoose.Schema(
     pageUrl: {
       type: String,
       trim: true,
+    },
+    emailSent: {
+      type: Boolean,
+      default: false,
     },
   },
   {

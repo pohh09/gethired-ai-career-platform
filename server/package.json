@@ -25,6 +25,7 @@
     "mongoose": "^9.8.0",
     "multer": "^2.2.0",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^9.0.5",
     "pdf-parse": "^2.4.5",
     "react-hook-form": "^7.82.0",
     "react-router-dom": "^7.18.1",

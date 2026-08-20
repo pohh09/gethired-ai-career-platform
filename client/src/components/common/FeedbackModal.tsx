@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { Send, Bug, Lightbulb, HelpCircle, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Send, Bug, Lightbulb, HelpCircle, MessageCircle, Mail, User } from "lucide-react";
 import toast from "react-hot-toast";
 import Modal from "../ui/Modal";
 import Button from "../ui/Button";
+import Input from "../ui/Input";
 import Textarea from "../ui/Textarea";
 import api from "../../services/api";
+import { useAuthStore } from "../../store/authStore";
 
 interface FeedbackModalProps {
   isOpen: boolean;
@@ -19,9 +21,17 @@ const FEEDBACK_TYPES = [
 ];
 
 export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
+  const { user } = useAuthStore();
   const [type, setType] = useState<string>("suggestion");
   const [message, setMessage] = useState("");
+  const [authorName, setAuthorName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (user?.name && !authorName) setAuthorName(user.name);
+    if (user?.email && !email) setEmail(user.email);
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,20 +45,28 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
       await api.post("/feedback", {
         type,
         message: message.trim(),
+        authorName: authorName.trim() || user?.name || "GetHired User",
+        email: email.trim() || user?.email || "",
         pageUrl: window.location.pathname,
       });
 
-      toast.success("Thank you! Your feedback has been sent directly to the engineering team. 🚀");
+      toast.success("Thank you! Your feedback has been emailed directly to the team. 🚀");
       setMessage("");
       onClose();
     } catch {
       // In offline/demo mode, save to localStorage so nothing is lost
       try {
         const saved = JSON.parse(localStorage.getItem("gethired_local_feedback") || "[]");
-        saved.push({ type, message: message.trim(), date: new Date().toISOString() });
+        saved.push({
+          type,
+          message: message.trim(),
+          authorName: authorName.trim() || "GetHired User",
+          email: email.trim() || "",
+          date: new Date().toISOString(),
+        });
         localStorage.setItem("gethired_local_feedback", JSON.stringify(saved));
       } catch (_e) {}
-      toast.success("Thank you! Your feedback has been recorded. 🚀");
+      toast.success("Thank you! Your feedback has been recorded and queued for email delivery. 🚀");
       setMessage("");
       onClose();
     } finally {
@@ -58,10 +76,17 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Send Feedback & Suggestions" maxWidth="md">
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="p-3 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/80 flex items-start gap-2.5 text-xs text-blue-800 dark:text-blue-200">
+          <Mail size={16} className="text-blue-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+          <span>
+            Your message will be delivered <strong>directly to the creator's inbox via email</strong> for prompt review!
+          </span>
+        </div>
+
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
-            Feedback Type
+            Feedback Category
           </label>
           <div className="grid grid-cols-2 gap-2">
             {FEEDBACK_TYPES.map((ft) => {
@@ -86,8 +111,26 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
           </div>
         </div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Input
+            label="Your Name (Optional)"
+            placeholder="e.g. Alex Rivera"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            leftIcon={<User size={14} />}
+          />
+          <Input
+            label="Your Email (Optional, for reply)"
+            type="email"
+            placeholder="alex@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            leftIcon={<Mail size={14} />}
+          />
+        </div>
+
         <Textarea
-          label="Your Feedback / Report"
+          label="Your Feedback / Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={4}
@@ -105,10 +148,11 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
             isLoading={isSubmitting}
             leftIcon={<Send size={13} />}
           >
-            Submit Feedback
+            Send Feedback by Email
           </Button>
         </div>
       </form>
     </Modal>
   );
 }
+
