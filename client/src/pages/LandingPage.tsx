@@ -30,6 +30,7 @@ import {
   X,
   Users,
   Flame,
+  HelpCircle,
 } from "lucide-react";
 import { useUIStore } from "../store/uiStore";
 
@@ -291,13 +292,13 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
       {/* Navigation Header */}
-      <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
-        <div className="w-[92%] sm:w-[90%] max-w-[1750px] mx-auto px-1 sm:px-4 h-16 flex items-center justify-between">
-          <Link to="/landing" className="flex items-center gap-2 sm:gap-2.5">
+      <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+        <div className="w-[94%] sm:w-[90%] max-w-[1750px] mx-auto px-1 sm:px-4 h-16 flex items-center justify-between">
+          <Link to="/landing" className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-extrabold text-base shadow-md shadow-blue-500/20 shrink-0">
               <Sparkles size={17} />
             </div>
-            <span className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
               Get
               <span className="text-blue-600 dark:text-cyan-400">Hired</span>
             </span>
@@ -341,7 +342,7 @@ export default function LandingPage() {
           </div>
 
           {/* Desktop CTA & Theme Controls */}
-          <div className="hidden sm:flex items-center gap-2.5 sm:gap-3">
+          <div className="hidden sm:flex items-center gap-2.5 sm:gap-3 shrink-0">
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -352,13 +353,13 @@ export default function LandingPage() {
             </button>
             <Link
               to="/login"
-              className="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               Sign In
             </Link>
             <Link
               to="/demo"
-              className="px-3.5 sm:px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-600/30 flex items-center gap-1.5 transition-all"
+              className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold shadow-md shadow-blue-600/30 flex items-center gap-1.5 transition-all"
             >
               <span>Explore Demo</span>
               <ArrowRight size={14} />
@@ -366,25 +367,26 @@ export default function LandingPage() {
           </div>
 
           {/* Mobile Actions & Hamburger */}
-          <div className="flex sm:hidden items-center gap-1.5">
+          <div className="flex sm:hidden items-center gap-2 shrink-0">
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
             <Link
               to="/demo"
-              className="px-2.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold shadow-xs"
+              className="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-extrabold shadow-xs flex items-center gap-1"
             >
-              Demo
+              <Play size={11} className="fill-white" />
+              <span>Demo</span>
             </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-95"
               aria-label="Open mobile navigation menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -399,58 +401,88 @@ export default function LandingPage() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="sm:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-4 space-y-3"
+              transition={{ duration: 0.2 }}
+              className="sm:hidden border-b border-slate-200/90 dark:border-slate-800/90 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl px-4 py-4 space-y-4 shadow-xl overflow-hidden"
             >
-              <nav className="flex flex-col space-y-2 text-sm font-bold text-slate-700 dark:text-slate-300">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/40 dark:to-cyan-950/40 border border-blue-100 dark:border-blue-900/50 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-7 w-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-black text-xs shrink-0">
+                    <Sparkles size={14} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
+                      Explore Interactive Demo
+                    </h4>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                      No sign-up needed • Full test drive
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  to="/demo"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold shrink-0 shadow-xs"
+                >
+                  Launch →
+                </Link>
+              </div>
+
+              <nav className="flex flex-col space-y-1 text-xs font-bold text-slate-700 dark:text-slate-300">
                 <a
                   href="#features"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  Features & Modules
+                  <Sparkles size={15} className="text-blue-500" />
+                  <span>Features & Modules</span>
                 </a>
                 <a
                   href="#capabilities"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  System Capabilities
+                  <Cpu size={15} className="text-cyan-500" />
+                  <span>System Capabilities</span>
                 </a>
                 <a
                   href="#architecture"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  Architecture & Design
+                  <Workflow size={15} className="text-indigo-500" />
+                  <span>Architecture & Design</span>
                 </a>
                 <a
                   href="#tech-stack"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  Tech Stack
+                  <FileCode size={15} className="text-emerald-500" />
+                  <span>Tech Stack</span>
                 </a>
                 <a
                   href="#faq"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors"
                 >
-                  FAQ
+                  <HelpCircle size={15} className="text-amber-500" />
+                  <span>Frequently Asked Questions</span>
                 </a>
               </nav>
 
-              <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
                 <Link
                   to="/register"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 rounded-xl bg-blue-600 text-white font-extrabold text-xs shadow-md"
+                  className="w-full text-center py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs shadow-md flex items-center justify-center gap-1.5"
                 >
-                  Get Started Free
+                  <span>Get Started Free</span>
+                  <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs"
+                  className="w-full text-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
                   Sign In to Account
                 </Link>
