@@ -102,6 +102,16 @@ export async function optimizeBullets(req, res) {
   }
 }
 
+export async function improveSection(req, res) {
+  try {
+    const { section, content, targetRole } = req.body;
+    const result = await resumeService.improveSection({ section, content, targetRole });
+    res.json({ success: true, data: result });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+}
+
 export async function analyzeJobDescription(req, res) {
   try {
     const jobTextOrUrl = req.body.jobDescription || req.body.jobTextOrUrl || req.body.text;

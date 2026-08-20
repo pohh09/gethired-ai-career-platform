@@ -6,6 +6,7 @@ export interface ResumeMatchResult {
   weaknesses: string[];
   suggestions: string[];
   atsTips: string[];
+  source?: "ai" | "fallback";
 }
 
 export interface ResumeMatchRequest {
@@ -34,6 +35,14 @@ export interface ResumeOptimizationResult {
   improvedSummary: string;
   improvedProjects: string[];
   aiRecommendations: string[];
+  source?: "ai" | "fallback";
+}
+
+export interface SectionImprovementResult {
+  improvedContent: string;
+  keyChanges: string[];
+  score: number;
+  source?: "ai" | "fallback";
 }
 
 export interface ResumeOptimizationRequest {

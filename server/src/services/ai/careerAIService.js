@@ -29,7 +29,11 @@ ${input.slice(0, 3000)}`;
   if (rawGemini) {
     try {
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
-      return JSON.parse(cleaned);
+      const parsed = JSON.parse(cleaned);
+      return {
+        ...parsed,
+        source: "ai",
+      };
     } catch (_e) {}
   }
 
@@ -51,6 +55,7 @@ ${input.slice(0, 3000)}`;
       "Add 1-minute video demo previews for major full-stack projects.",
       "Include quantitative results (e.g. 'Handled 50k requests/day with 99.9% uptime').",
     ],
+    source: "fallback",
   };
 }
 
@@ -68,6 +73,7 @@ export async function reviewGitHub(githubInput = "") {
       "Pin top 3 flagship projects with live deployment badges.",
       "Add unit test coverage badges (e.g. Jest / Playwright coverage > 85%).",
     ],
+    source: "fallback",
   };
 }
 
@@ -89,6 +95,7 @@ export async function reviewLinkedIn(linkedInInput = "") {
       "Request 2 recommendations from engineering managers or tech leads.",
       "Feature top GitHub repository link in the profile Featured section.",
     ],
+    source: "fallback",
   };
 }
 
@@ -116,6 +123,7 @@ Prompt: Output JSON only.`;
           targetGoal: tGoal,
           timelineMonths: 6,
           roadmap: parsed.roadmap,
+          source: "ai",
         };
       }
     } catch (_e) {}
@@ -163,5 +171,6 @@ Prompt: Output JSON only.`;
         bullets: ["Practice technical & behavioral mock rounds", "Negotiate competitive compensation packages"],
       },
     ],
+    source: "fallback",
   };
 }

@@ -46,7 +46,10 @@ Job Text:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.requiredSkills && parsed.summary) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -74,7 +77,8 @@ Job Text:
       "Proven ability to optimize web performance metrics."
     ],
     atsKeywords: foundSkills.length > 0 ? foundSkills.map(s => s.toUpperCase()) : ["REACT", "TYPESCRIPT", "NODE.JS", "REST APIS"],
-    summary: `Target role requires strong engineering proficiency in ${foundSkills.slice(0, 3).join(", ") || "core web technology stacks"}.`
+    summary: `Target role requires strong engineering proficiency in ${foundSkills.slice(0, 3).join(", ") || "core web technology stacks"}.`,
+    source: "fallback",
   };
 }
 
@@ -101,7 +105,12 @@ Job Text:
     try {
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
-      if (parsed.whatYouWillDo) return parsed;
+      if (parsed.whatYouWillDo) {
+        return {
+          ...parsed,
+          source: "ai",
+        };
+      }
     } catch (_e) {}
   }
 
@@ -115,7 +124,8 @@ Job Text:
       "1. High focus on React & TypeScript frontend execution.",
       "2. Collaborates closely with backend microservices teams.",
       "3. Demands performance optimization and clean component design."
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -151,7 +161,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (typeof parsed.matchScore === "number") {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -191,7 +204,8 @@ Return ONLY valid JSON with keys:
     resumeImprovements: [
       "Align work experience action verbs with key responsibilities mentioned in the JD.",
       "Highlight microservices or API design experience in project highlights."
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -228,7 +242,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.coverLetter) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -255,7 +272,8 @@ Candidate`;
     highlights: [
       "Highlighted web performance latency optimization experience.",
       "Demonstrated direct alignment with target company engineering vision."
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -287,7 +305,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.emailText) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -320,7 +341,8 @@ Return ONLY valid JSON with keys:
     company,
     role,
     type: selectedType,
-    tips
+    tips,
+    source: "fallback",
   };
 }
 
@@ -346,7 +368,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.averageSalary) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -368,7 +393,8 @@ Return ONLY valid JSON with keys:
     negotiationAdvice: [
       "Highlight specialized skill tags like system design or performance optimization to justify target upper quantile compensation.",
       "Request a signing bonus or equity acceleration if base salary budget is fixed."
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -399,7 +425,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.about) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -420,7 +449,8 @@ Return ONLY valid JSON with keys:
       `Review ${company}'s product architecture and recent feature releases.`,
       "Prepare STAR behavioral stories showcasing technical leadership.",
       "Practice frontend system design and REST/GraphQL API optimization."
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -439,5 +469,6 @@ export async function generateSkillGapRoadmap(missingSkills = [], targetRole = "
       { name: "Full-Stack System Design & Cloud Architecture", duration: "12 Hours" },
       { name: "Production React 19 & Next.js App Router Mastery", duration: "8 Hours" },
     ],
+    source: "fallback",
   };
 }

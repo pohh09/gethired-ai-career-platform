@@ -20,6 +20,7 @@ async function callGeminiPrompt(prompt, systemInstruction = "") {
       const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (text) return text;
     } catch (_err) {
+      // Graceful fallback to regex heuristic parser
     }
   }
   return null;
@@ -41,7 +42,11 @@ ${text.slice(0, 4000)}`;
   if (rawGemini) {
     try {
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
-      return JSON.parse(cleaned);
+      const parsed = JSON.parse(cleaned);
+      return {
+        ...parsed,
+        source: "ai",
+      };
     } catch (_e) {}
   }
 
@@ -80,7 +85,8 @@ ${text.slice(0, 4000)}`;
     ],
     projects: [
       { title: "Technical Project", description: text.slice(0, 100), techStack: extractedSkills.slice(0, 3) }
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -88,6 +94,32 @@ export async function calculateATSScore(resumeText, targetRole = "Software Engin
   const text = (resumeText || "").trim();
   if (!text) {
     throw new Error("Resume text is empty.");
+  }
+
+  const geminiPrompt = `Calculate ATS compatibility for target role "${targetRole}".
+Return JSON with:
+- "atsScore": number (0-100)
+- "grade": string ("A+", "A", "B", "C")
+- "readabilityScore": string
+- "formatCompliance": string
+- "breakdown": object with keywordMatch (string), formattingScore (string), bulletImpactScore (string), structureScore (string)
+- "missingKeywords": array of strings
+
+Resume Text:
+${text.slice(0, 4000)}`;
+
+  const rawGemini = await callGeminiPrompt(geminiPrompt, "Output valid JSON only.");
+  if (rawGemini) {
+    try {
+      const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
+      const parsed = JSON.parse(cleaned);
+      if (typeof parsed.atsScore === "number") {
+        return {
+          ...parsed,
+          source: "ai",
+        };
+      }
+    } catch (_e) {}
   }
 
   const coreKeywords = ["react", "typescript", "node", "javascript", "api", "git", "database", "testing", "agile", "architecture"];
@@ -109,7 +141,8 @@ export async function calculateATSScore(resumeText, targetRole = "Software Engin
       bulletImpactScore: hasMetrics ? "90/100" : "65/100",
       structureScore: "92/100"
     },
-    missingKeywords: coreKeywords.filter((k) => !matchedKeywords.includes(k)).map((k) => k.toUpperCase())
+    missingKeywords: coreKeywords.filter((k) => !matchedKeywords.includes(k)).map((k) => k.toUpperCase()),
+    source: "fallback",
   };
 }
 
@@ -134,13 +167,42 @@ export async function analyzeResume(resumeText) {
     ],
     grammarScore: "95%",
     formattingGrade: "Grade A (Clean standard structure)",
-    missingKeywords: ats.missingKeywords
+    missingKeywords: ats.missingKeywords,
+    source: ats.source === "ai" || parsed.source === "ai" ? "ai" : "fallback",
   };
 }
 
 export async function tailorResume(resumeText, jobDescription) {
   const resumeLower = (resumeText || "").toLowerCase();
   const jdLower = (jobDescription || "").toLowerCase();
+
+  const geminiPrompt = `Tailor this resume to match the job description.
+Return JSON with:
+- "matchScore": number (0-100)
+- "originalScore": number (0-100)
+- "tailoredScore": number (0-100)
+- "addedKeywords": array of strings
+- "tailoredSummary": string
+
+Resume:
+${resumeText.slice(0, 3000)}
+
+Job Description:
+${jobDescription.slice(0, 3000)}`;
+
+  const rawGemini = await callGeminiPrompt(geminiPrompt, "Output valid JSON only.");
+  if (rawGemini) {
+    try {
+      const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
+      const parsed = JSON.parse(cleaned);
+      if (typeof parsed.matchScore === "number") {
+        return {
+          ...parsed,
+          source: "ai",
+        };
+      }
+    } catch (_e) {}
+  }
 
   const jdKeywords = ["react", "typescript", "node.js", "aws", "docker", "graphql", "system design", "ci/cd", "microservices"];
   const matched = jdKeywords.filter((k) => resumeLower.includes(k));
@@ -154,7 +216,8 @@ export async function tailorResume(resumeText, jobDescription) {
     originalScore: ats.atsScore,
     tailoredScore: Math.min(ats.atsScore + 12, 98),
     addedKeywords: missing.length > 0 ? missing.map(m => m.toUpperCase()) : ["Performance Optimization", "State Management"],
-    tailoredSummary: "Tailored summary: Experienced Engineer with specific expertise aligned with target position requirements."
+    tailoredSummary: "Tailored summary: Experienced Engineer with specific expertise aligned with target position requirements.",
+    source: "fallback",
   };
 }
 
@@ -203,7 +266,10 @@ Return ONLY valid JSON with exact structure:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (typeof parsed.atsScore === "number" && parsed.sectionBySection) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -257,7 +323,8 @@ Return ONLY valid JSON with exact structure:
       "Step 1: Reframe work experience bullets using the STAR methodology",
       "Step 2: Add missing high-priority technical keywords",
       "Step 3: Export optimized resume version"
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -287,7 +354,8 @@ Return ONLY valid JSON with keys:
         return {
           original: parsed.original || text,
           rewritten: parsed.rewritten,
-          whyBetter: parsed.whyBetter || "Enhanced with active verbs, quantifiable performance metrics, and clear engineering impact."
+          whyBetter: parsed.whyBetter || "Enhanced with active verbs, quantifiable performance metrics, and clear engineering impact.",
+          source: "ai",
         };
       }
     } catch (_e) {}
@@ -305,7 +373,72 @@ Return ONLY valid JSON with keys:
   return {
     original: text,
     rewritten,
-    whyBetter: "Replaced passive language with high-impact action verbs, quantitative metrics (% latency reduction / scale), and explicit technical context."
+    whyBetter: "Replaced passive language with high-impact action verbs, quantitative metrics (% latency reduction / scale), and explicit technical context.",
+    source: "fallback",
+  };
+}
+
+export async function improveSection({ section, content, targetRole = "Software Engineer" }) {
+  const sec = (section || "summary").toLowerCase();
+  const text = (content || "").trim();
+  if (!text) {
+    throw new Error("Content to improve is empty.");
+  }
+
+  const geminiPrompt = `You are a Principal Technical Recruiter and Resume Writer.
+Improve the following "${sec}" section of a candidate's resume for the target role "${targetRole}".
+Make it punchy, quantifiable, highly professional, and ATS-friendly.
+
+Original Content:
+"${text}"
+
+Return ONLY valid JSON with keys:
+- "improvedContent": string (the enhanced version of this section)
+- "keyChanges": array of strings (bulleted explanations of improvements made)
+- "score": number (estimated quality score 0-100)`;
+
+  const rawGemini = await callGeminiPrompt(geminiPrompt, "Output valid JSON only.");
+  if (rawGemini) {
+    try {
+      const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
+      const parsed = JSON.parse(cleaned);
+      if (parsed.improvedContent) {
+        return {
+          ...parsed,
+          source: "ai",
+        };
+      }
+    } catch (_e) {}
+  }
+
+  // Heuristic Fallback
+  let improvedContent = text;
+  if (sec === "summary") {
+    improvedContent = `${text} Demonstrated success collaborating across cross-functional engineering teams, optimizing application performance by 35%+, and delivering scalable solutions for ${targetRole} initiatives.`;
+  } else if (sec === "experience" || sec === "projects") {
+    improvedContent = text.split("\n").map(line => {
+      const trimmed = line.trim();
+      if (!trimmed) return "";
+      if (!/\d+%/i.test(trimmed)) {
+        return `${trimmed.replace(/\.$/, "")}, enhancing operational efficiency and throughput by 30%+.`;
+      }
+      return trimmed;
+    }).join("\n");
+  } else if (sec === "skills") {
+    improvedContent = `${text}, CI/CD Pipelines, System Design, Cloud Architecture`;
+  } else {
+    improvedContent = text;
+  }
+
+  return {
+    improvedContent,
+    keyChanges: [
+      "Injected quantifiable impact and performance metrics",
+      "Aligned technical vocabulary with target role expectations",
+      "Streamlined phrasing for ATS scanner readability"
+    ],
+    score: 92,
+    source: "fallback",
   };
 }
 
@@ -335,7 +468,10 @@ Return ONLY valid JSON with keys:
       const cleaned = rawGemini.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsed = JSON.parse(cleaned);
       if (parsed.resumeMarkdown) {
-        return parsed;
+        return {
+          ...parsed,
+          source: "ai",
+        };
       }
     } catch (_e) {}
   }
@@ -425,6 +561,7 @@ Results-driven Software Engineer with 4+ years of experience engineering high-sc
       { title: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2023" }
     ],
     resumeMarkdown: markdownContent,
-    fileName: `${name.replace(/\s+/g, "_")}_Resume.md`
+    fileName: `${name.replace(/\s+/g, "_")}_Resume.md`,
+    source: "fallback",
   };
 }

@@ -325,3 +325,12 @@ export async function sendChatMessage(payload: {
     payload.companyName || "Razorpay"
   );
 }
+
+export async function improveSection(payload: {
+  section: string;
+  content: string;
+  targetRole?: string;
+}) {
+  const res = await api.post("/ai/workspace/resume/improve-section", payload);
+  return res.data.data;
+}

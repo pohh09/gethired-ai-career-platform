@@ -276,6 +276,7 @@ RESPONSE RULES:
       text: replyText,
       sender: "assistant",
       intent,
+      source: geminiReply ? "ai" : "fallback",
       timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
 

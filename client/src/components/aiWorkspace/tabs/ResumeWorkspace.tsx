@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import Input from "../../ui/Input";
+import ATSMethodologyBreakdown from "../../ai/ATSMethodologyBreakdown";
 import { useResumeStore } from "../../../store/resumeStore";
 import * as aiService from "../../../services/aiWorkspaceService";
 
@@ -328,6 +329,9 @@ export default function ResumeWorkspace() {
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{auditData.summary}</p>
             </div>
           </div>
+
+          {/* Transparent Scoring Methodology Breakdown */}
+          <ATSMethodologyBreakdown source={auditData.source} />
 
           {auditData.sectionBySection && (
             <div className="space-y-3">

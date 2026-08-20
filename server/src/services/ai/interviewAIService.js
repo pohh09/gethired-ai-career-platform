@@ -678,7 +678,8 @@ Return ONLY valid JSON with keys:
           missingConcepts: parsed.missingConcepts || parsed.missingPoints || [],
           idealAnswer: parsed.idealAnswer || parsed.betterAnswer || strongAnswerContains,
           betterAnswer: parsed.betterAnswer || parsed.idealAnswer || strongAnswerContains,
-          improvementTips: parsed.improvementTips || ["Use the STAR method to structure answers."]
+          improvementTips: parsed.improvementTips || ["Use the STAR method to structure answers."],
+          source: "ai",
         };
       }
     } catch (_e) {}
@@ -715,7 +716,8 @@ Return ONLY valid JSON with keys:
     missingConcepts: (topicsToCheck || []).filter((t) => !matched.includes(t)).map((m) => `Missing coverage of: ${m}`),
     idealAnswer: strongAnswerContains || "A complete response covers architectural principles, implementation details, and security safeguards.",
     betterAnswer: strongAnswerContains || "A complete response covers architectural principles, implementation details, and security safeguards.",
-    improvementTips: ["Address technical mechanisms and provide concrete code or architectural examples."]
+    improvementTips: ["Address technical mechanisms and provide concrete code or architectural examples."],
+    source: "fallback",
   };
 }
 

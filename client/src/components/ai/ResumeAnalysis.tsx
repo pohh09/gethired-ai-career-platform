@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import KeywordCard from "./KeywordCard";
 import SuggestionCard from "./SuggestionCard";
+import ATSMethodologyBreakdown from "./ATSMethodologyBreakdown";
 import type { ResumeOptimizationResult } from "../../types/ai";
 
 export interface ResumeAnalysisProps {
@@ -250,6 +251,9 @@ ${result.aiRecommendations.map((r) => `• ${r}`).join("\n")}
           </div>
         </div>
       </div>
+
+      {/* Transparent ATS Methodology & Fallback Notification */}
+      <ATSMethodologyBreakdown source={result.source} />
 
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

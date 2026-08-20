@@ -13,6 +13,7 @@ import {
   X,
   Users,
   FileText,
+  Sparkles,
 } from "lucide-react";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
 import SidebarSection from "./SidebarSection";
@@ -103,6 +104,14 @@ export default function Sidebar() {
               name="Resumes"
               path="/resumes"
               icon={FileText}
+              collapsed={isCollapsed}
+              onClick={() => handleLinkClick(isMobile)}
+            />
+            <SidebarItem
+              name="Resume Builder"
+              path="/resumes/builder"
+              icon={Sparkles}
+              badge="AI"
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />

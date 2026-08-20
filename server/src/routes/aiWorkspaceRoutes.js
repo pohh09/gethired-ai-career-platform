@@ -17,6 +17,7 @@ router.post("/resume/build", controller.generateResume);
 router.post("/resume/generate", controller.generateResume);
 router.post("/resume/optimize-bullets", controller.optimizeBullets);
 router.post("/resume/star", controller.optimizeBullets);
+router.post("/resume/improve-section", controller.improveSection);
 
 router.post("/job/analyze", controller.analyzeJobDescription);
 router.post("/jobs/analyze", controller.analyzeJobDescription);

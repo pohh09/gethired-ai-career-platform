@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Upload,
@@ -11,6 +12,7 @@ import {
   Briefcase,
   FileCheck,
   Share2,
+  Sparkles,
 } from "lucide-react";
 import PageHeader from "../components/common/PageHeader";
 import Button from "../components/ui/Button";
@@ -93,17 +95,27 @@ export default function Resumes() {
         title="Resume Manager"
         subtitle="Upload, preview, organize, and manage your master resumes for AI job applications."
         action={
-          <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs transition-all shadow-md cursor-pointer">
-            <Upload size={16} />
-            <span>Upload Resume (PDF/DOCX)</span>
-            <input
-              type="file"
-              multiple
-              accept=".pdf,.doc,.docx,.txt"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
-          </label>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <Link
+              to="/resumes/builder"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs transition-all shadow-md shadow-blue-600/20"
+            >
+              <Sparkles size={15} />
+              <span>Build with AI Wizard ✨</span>
+            </Link>
+
+            <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs transition-all shadow-xs cursor-pointer">
+              <Upload size={15} className="text-blue-600" />
+              <span>Upload File</span>
+              <input
+                type="file"
+                multiple
+                accept=".pdf,.doc,.docx,.txt"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+            </label>
+          </div>
         }
       />
 
