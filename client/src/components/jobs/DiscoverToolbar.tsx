@@ -40,14 +40,6 @@ const SORT_OPTIONS: FilterOption[] = [
   { label: "Relevant", value: "Relevant" },
 ];
 
-const QUICK_FILTERS = [
-  { label: "🌐 Remote Only", filter: { workplaceType: "Remote" } },
-  { label: "⚡ Frontend", filter: { role: "Frontend" } },
-  { label: "🚀 Backend", filter: { role: "Backend" } },
-  { label: "💼 Full Stack", filter: { role: "Full Stack" } },
-  { label: "🤖 AI / ML", filter: { skill: "Python" } },
-  { label: "🛠️ DevOps", filter: { role: "DevOps" } },
-];
 
 export default function DiscoverToolbar({
   filters,
@@ -236,49 +228,6 @@ export default function DiscoverToolbar({
         </div>
       </div>
 
-      {/* Quick Filter Pills */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
-        <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 shrink-0 mr-1">
-          Quick Filters:
-        </span>
-        {QUICK_FILTERS.map((qf) => {
-          const isSelected =
-            (qf.filter.workplaceType && filters.workplaceType === qf.filter.workplaceType) ||
-            (qf.filter.role && role === qf.filter.role) ||
-            (qf.filter.skill && skill === qf.filter.skill);
-
-          return (
-            <button
-              key={qf.label}
-              type="button"
-              onClick={() => {
-                if (isSelected) {
-                  onReset();
-                } else {
-                  if (qf.filter.workplaceType) {
-                    onChange({ ...filters, workplaceType: qf.filter.workplaceType });
-                  }
-                  if (qf.filter.role) {
-                    setRole(qf.filter.role);
-                    onChange({ ...filters, role: qf.filter.role });
-                  }
-                  if (qf.filter.skill) {
-                    setSkill(qf.filter.skill);
-                    onChange({ ...filters, skill: qf.filter.skill });
-                  }
-                }
-              }}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition-all cursor-pointer border ${
-                isSelected
-                  ? "bg-indigo-600 text-white border-indigo-600 shadow-xs"
-                  : "bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border-slate-200/80 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700"
-              }`}
-            >
-              {qf.label}
-            </button>
-          );
-        })}
-      </div>
 
       <div className="hidden sm:flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80">
         <div className="flex items-center gap-2">
