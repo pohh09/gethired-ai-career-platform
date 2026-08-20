@@ -136,7 +136,7 @@ export default function Dashboard() {
             onAddApplication={() => navigate("/jobs")}
             onScheduleInterview={() => navigate("/calendar")}
             onOpenAnalytics={() => navigate("/analytics")}
-            onManageResumes={() => navigate("/resumes")}
+            onManageResumes={() => navigate("/ai-workspace?tab=resume")}
             onUpdateProfile={() => navigate("/profile")}
           />
         </div>

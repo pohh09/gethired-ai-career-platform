@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   FileText,
   Upload,
@@ -13,6 +14,7 @@ import {
   Layers,
   FileCode,
   FileType,
+  FolderOpen,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -22,15 +24,25 @@ import Input from "../../ui/Input";
 import ATSMethodologyBreakdown from "../../ai/ATSMethodologyBreakdown";
 import { useResumeStore } from "../../../store/resumeStore";
 import * as aiService from "../../../services/aiWorkspaceService";
+import ResumeBuilder from "../../../pages/ResumeBuilder";
 
 export default function ResumeWorkspace() {
-  const { activeResumeText, activeResumeFileName, setActiveResume } = useResumeStore();
+  const [searchParams] = useSearchParams();
+  const { resumes, activeResumeText, activeResumeFileName, setActiveResume } = useResumeStore();
+  const [showBuilder, setShowBuilder] = useState(searchParams.get("mode") === "builder");
+
   const [resumeText, setResumeText] = useState(activeResumeText || "");
   const [targetRole, setTargetRole] = useState("Senior Full Stack Engineer");
   const [bulletInput, setBulletInput] = useState("");
   const [docMeta, setDocMeta] = useState<{ fileName: string; wordCount: number; pageCount: number } | null>(
     activeResumeFileName ? { fileName: activeResumeFileName, wordCount: (activeResumeText || "").split(/\s+/).length, pageCount: 1 } : null
   );
+
+  useEffect(() => {
+    if (searchParams.get("mode") === "builder") {
+      setShowBuilder(true);
+    }
+  }, [searchParams]);
 
   const [isParsing, setIsParsing] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -162,6 +174,10 @@ export default function ResumeWorkspace() {
     toast.success("Exported DOCX document");
   };
 
+  if (showBuilder) {
+    return <ResumeBuilder onBackToWorkspace={() => setShowBuilder(false)} />;
+  }
+
   return (
     <div className="space-y-4 sm:space-y-6 w-full">
       <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sm:space-y-6 w-full">
@@ -175,20 +191,26 @@ export default function ResumeWorkspace() {
                 Resume Intelligence Engine
               </h2>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">
-                ATS scoring, section reviews, STAR bullet transformations, and multi-format exports.
+                ATS scoring, section reviews, STAR bullet transformations, and guided builder.
               </p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 shrink-0 pt-1 sm:pt-0">
-            {activeResumeFileName && (
-              <div className="px-2.5 sm:px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-[11px] sm:text-xs font-bold border border-indigo-200 dark:border-indigo-800 truncate max-w-[200px] sm:max-w-none">
-                ✓ Active: {activeResumeFileName}
-              </div>
-            )}
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setShowBuilder(true)}
+              className="border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 font-bold text-xs"
+              leftIcon={<Sparkles size={13} className="text-indigo-500" />}
+            >
+              Build New Resume
+            </Button>
+
             <label className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs cursor-pointer shadow-sm shadow-indigo-600/20 transition-all w-full sm:w-auto">
               <Upload size={14} />
-              <span>{isParsing ? "Parsing..." : "Upload Resume (PDF/Doc)"}</span>
+              <span>{isParsing ? "Parsing..." : "Upload Resume"}</span>
               <input
                 type="file"
                 accept=".pdf,.txt,.doc,.docx"
@@ -198,6 +220,41 @@ export default function ResumeWorkspace() {
             </label>
           </div>
         </div>
+
+        {/* Master Resumes Quick Switcher */}
+        {resumes.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 text-xs">
+            <span className="font-bold text-slate-500 flex items-center gap-1 shrink-0">
+              <FolderOpen size={13} className="text-indigo-500" />
+              Saved Resumes:
+            </span>
+            <div className="flex flex-wrap items-center gap-1.5 flex-1 min-w-0">
+              {resumes.map((r) => {
+                const isSelected = activeResumeFileName === r.fileName || resumeText === r.content;
+                return (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => {
+                      setResumeText(r.content);
+                      setActiveResume(r.content, r.fileName);
+                      setDocMeta({ fileName: r.fileName, wordCount: r.content.split(/\s+/).length, pageCount: 1 });
+                      toast.success(`Loaded "${r.name}" into workspace`);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all cursor-pointer truncate max-w-[180px] sm:max-w-[240px] ${
+                      isSelected
+                        ? "bg-indigo-600 text-white shadow-xs"
+                        : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700"
+                    }`}
+                  >
+                    {r.isDefault && "★ "}
+                    {r.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {docMeta && (
           <div className="p-3 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex flex-wrap items-center justify-between gap-2.5 text-xs">

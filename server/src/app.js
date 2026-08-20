@@ -15,6 +15,7 @@ import resumeRoutes from "./routes/resumeRoutes.js";
 import jobsRoutes from "./routes/jobsRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
 import communityRoutes from "./routes/communityRoutes.js";
+import feedbackRoutes from "./routes/feedbackRoutes.js";
 
 const app = express();
 
@@ -43,11 +44,13 @@ app.use("/jobs", jobsRoutes);
 app.use("/interview", interviewRoutes);
 app.use("/community", communityRoutes);
 app.use("/auth", authRoutes);
+app.use("/feedback", feedbackRoutes);
 
 app.use("/api/resume", resumeRoutes);
 app.use("/api/jobs", jobsRoutes);
 app.use("/api/interview", interviewRoutes);
 app.use("/api/community", communityRoutes);
+app.use("/api/feedback", feedbackRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);

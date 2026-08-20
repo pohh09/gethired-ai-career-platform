@@ -1030,7 +1030,7 @@ export default function LandingPage() {
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
-                  className="p-5 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-3.5 flex flex-col justify-between"
+                  className="group p-5 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all space-y-3.5 flex flex-col justify-between"
                 >
                   <div className="space-y-2.5">
                     <div
@@ -1046,10 +1046,13 @@ export default function LandingPage() {
                     </p>
                   </div>
 
-                  <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-cyan-400">
-                    <span>Explore Module</span>
-                    <ArrowRight size={13} />
-                  </div>
+                  <Link
+                    to="/login"
+                    className="pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-blue-600 dark:text-cyan-400 group-hover:text-blue-500 transition-colors"
+                  >
+                    <span>Sign in to try this</span>
+                    <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
                 </motion.div>
               );
             })}

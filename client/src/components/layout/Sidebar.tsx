@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -6,17 +7,17 @@ import {
   HelpCircle,
   MessageSquare,
   LogOut,
-  Bot,
   ChevronLeft,
   ChevronRight,
   X,
-  Users,
-  FileText,
+  Sparkles,
 } from "lucide-react";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
 import SidebarSection from "./SidebarSection";
 import SidebarItem from "./SidebarItem";
 import UserCard from "./UserCard";
+import HelpModal from "../common/HelpModal";
+import FeedbackModal from "../common/FeedbackModal";
 import { useUIStore } from "../../store/uiStore";
 import { useAuthStore } from "../../store/authStore";
 
@@ -28,6 +29,9 @@ export default function Sidebar() {
     setMobileDrawerOpen,
   } = useUIStore();
   const { logout } = useAuthStore();
+
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleLinkClick = (isMobile: boolean) => {
     if (isMobile) setMobileDrawerOpen(false);
@@ -83,25 +87,10 @@ export default function Sidebar() {
               onClick={() => handleLinkClick(isMobile)}
             />
             <SidebarItem
-              name="Resumes & Docs"
-              path="/resumes"
-              icon={FileText}
-              collapsed={isCollapsed}
-              onClick={() => handleLinkClick(isMobile)}
-            />
-            <SidebarItem
-              name="Interview Prep"
-              path="/interview-prep"
-              icon={Bot}
+              name="AI Workspace"
+              path="/ai-workspace"
+              icon={Sparkles}
               badge="AI"
-              collapsed={isCollapsed}
-              onClick={() => handleLinkClick(isMobile)}
-            />
-            <SidebarItem
-              name="Community"
-              path="/community"
-              icon={Users}
-              badge="New"
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />
@@ -119,8 +108,11 @@ export default function Sidebar() {
           <div className="space-y-0.5">
             <button
               type="button"
-              onClick={() => handleLinkClick(isMobile)}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              onClick={() => {
+                handleLinkClick(isMobile);
+                setIsHelpOpen(true);
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer"
             >
               <HelpCircle size={18} className="text-slate-400 shrink-0" />
               {!isCollapsed && <span>Help & Support</span>}
@@ -128,8 +120,11 @@ export default function Sidebar() {
 
             <button
               type="button"
-              onClick={() => handleLinkClick(isMobile)}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              onClick={() => {
+                handleLinkClick(isMobile);
+                setIsFeedbackOpen(true);
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 transition-colors cursor-pointer"
             >
               <MessageSquare size={18} className="text-slate-400 shrink-0" />
               {!isCollapsed && <span>Send Feedback</span>}
@@ -141,7 +136,7 @@ export default function Sidebar() {
                 handleLinkClick(isMobile);
                 logout();
               }}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
             >
               <LogOut size={18} className="shrink-0" />
               {!isCollapsed && <span>Logout</span>}
@@ -187,6 +182,9 @@ export default function Sidebar() {
           </div>
         )}
       </AnimatePresence>
+
+      <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
     </>
   );
 }

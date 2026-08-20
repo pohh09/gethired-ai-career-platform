@@ -8,7 +8,6 @@ const Jobs = lazy(() => import("../pages/Jobs"));
 const Analytics = lazy(() => import("../pages/Analytics"));
 const Calendar = lazy(() => import("../pages/Calendar"));
 const AIWorkspace = lazy(() => import("../pages/AIWorkspace"));
-const Resumes = lazy(() => import("../pages/Resumes"));
 const ResumeBuilder = lazy(() => import("../pages/ResumeBuilder"));
 const Community = lazy(() => import("../pages/Community"));
 const Profile = lazy(() => import("../pages/Profile"));
@@ -132,7 +131,7 @@ const router = createBrowserRouter([
       {
         path: "interview-prep",
         element: (
-          <Suspense fallback={<Loader text="Loading Interview Prep..." />}>
+          <Suspense fallback={<Loader text="Loading AI Workspace..." />}>
             <AIWorkspace />
           </Suspense>
         ),
@@ -140,7 +139,7 @@ const router = createBrowserRouter([
       {
         path: "interview",
         element: (
-          <Suspense fallback={<Loader text="Loading Interview Prep..." />}>
+          <Suspense fallback={<Loader text="Loading AI Workspace..." />}>
             <AIWorkspace />
           </Suspense>
         ),
@@ -212,13 +211,21 @@ const router = createBrowserRouter([
       {
         path: "resumes",
         element: (
-          <Suspense fallback={<Loader text="Loading Resume Manager..." />}>
-            <Resumes />
+          <Suspense fallback={<Loader text="Redirecting to AI Workspace..." />}>
+            <AIWorkspace />
           </Suspense>
         ),
       },
       {
         path: "resumes/builder",
+        element: (
+          <Suspense fallback={<Loader text="Launching Resume Builder..." />}>
+            <ResumeBuilder />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ai-workspace/builder",
         element: (
           <Suspense fallback={<Loader text="Launching Resume Builder..." />}>
             <ResumeBuilder />
@@ -244,8 +251,8 @@ const router = createBrowserRouter([
       {
         path: "documents",
         element: (
-          <Suspense fallback={<Loader text="Loading Resumes & Documents..." />}>
-            <Resumes />
+          <Suspense fallback={<Loader text="Redirecting to AI Workspace..." />}>
+            <AIWorkspace />
           </Suspense>
         ),
       },

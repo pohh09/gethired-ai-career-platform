@@ -64,9 +64,21 @@ const STEPS = [
   { id: "review", label: "Preview & Export", icon: Sparkles },
 ];
 
-export default function ResumeBuilder() {
+interface ResumeBuilderProps {
+  onBackToWorkspace?: () => void;
+}
+
+export default function ResumeBuilder({ onBackToWorkspace }: ResumeBuilderProps = {}) {
   const navigate = useNavigate();
   const { addResume, setActiveResume } = useResumeStore();
+
+  const handleBack = () => {
+    if (onBackToWorkspace) {
+      onBackToWorkspace();
+    } else {
+      navigate("/ai-workspace?tab=resume");
+    }
+  };
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
@@ -492,6 +504,14 @@ export default function ResumeBuilder() {
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleBack}
+            className="border-slate-700 text-slate-300 hover:bg-white/10 font-bold"
+          >
+            ← Back to AI Workspace
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -1198,10 +1218,10 @@ export default function ResumeBuilder() {
                   type="button"
                   variant="primary"
                   size="sm"
-                  onClick={() => navigate("/resumes")}
+                  onClick={handleBack}
                   className="font-bold text-xs"
                 >
-                  Go to Resumes Hub
+                  Return to AI Workspace
                 </Button>
               )}
             </div>

@@ -36,8 +36,8 @@ export default function QuickActions({
       onClick: onScheduleInterview,
     },
     {
-      title: "Resumes & Docs",
-      subtitle: "Manage master files & drafts",
+      title: "AI Resume Studio",
+      subtitle: "ATS scoring, builder & STAR rewriter",
       icon: FileText,
       color:
         "bg-purple-50 text-purple-600 dark:bg-purple-950/60 dark:text-purple-400 border-purple-200/50",

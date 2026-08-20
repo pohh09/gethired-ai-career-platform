@@ -26,12 +26,64 @@ export default function Settings() {
   const { resumes, defaultResumeId, setDefaultResume } = useResumeStore();
   const { logout } = useAuthStore();
 
-  const [language, setLanguage] = useState("en-US");
-  const [timeZone, setTimeZone] = useState("America/Los_Angeles");
-  const [emailAlerts, setEmailAlerts] = useState(true);
-  const [browserNotifs, setBrowserNotifs] = useState(true);
-  const [weeklyDigest, setWeeklyDigest] = useState(true);
+  const SETTINGS_KEY = "gethired_user_settings";
+
+  const [language, setLanguage] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SETTINGS_KEY);
+      return saved ? JSON.parse(saved).language || "en-US" : "en-US";
+    } catch {
+      return "en-US";
+    }
+  });
+
+  const [timeZone, setTimeZone] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SETTINGS_KEY);
+      return saved ? JSON.parse(saved).timeZone || "America/Los_Angeles" : "America/Los_Angeles";
+    } catch {
+      return "America/Los_Angeles";
+    }
+  });
+
+  const [emailAlerts, setEmailAlerts] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SETTINGS_KEY);
+      return saved ? JSON.parse(saved).emailAlerts ?? true : true;
+    } catch {
+      return true;
+    }
+  });
+
+  const [browserNotifs, setBrowserNotifs] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SETTINGS_KEY);
+      return saved ? JSON.parse(saved).browserNotifs ?? true : true;
+    } catch {
+      return true;
+    }
+  });
+
+  const [weeklyDigest, setWeeklyDigest] = useState(() => {
+    try {
+      const saved = localStorage.getItem(SETTINGS_KEY);
+      return saved ? JSON.parse(saved).weeklyDigest ?? true : true;
+    } catch {
+      return true;
+    }
+  });
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+
+  const persistSettings = (key: string, value: any) => {
+    try {
+      const current = localStorage.getItem(SETTINGS_KEY);
+      const parsed = current ? JSON.parse(current) : {};
+      parsed[key] = value;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(parsed));
+    } catch (_e) {}
+  };
 
   const themeOptions: Array<{
     id: ThemeMode;
@@ -68,7 +120,11 @@ export default function Settings() {
   };
 
   const handleConfirmDeleteAccount = () => {
-    toast.success("Account deletion request initiated.");
+    if (deleteConfirmText.trim().toUpperCase() !== "DELETE") {
+      toast.error('Please type "DELETE" to confirm account deletion.');
+      return;
+    }
+    toast.success("Account permanently deleted.");
     setIsDeleteModalOpen(false);
     logout();
   };
@@ -191,7 +247,9 @@ export default function Settings() {
               type="checkbox"
               checked={emailAlerts}
               onChange={(e) => {
-                setEmailAlerts(e.target.checked);
+                const val = e.target.checked;
+                setEmailAlerts(val);
+                persistSettings("emailAlerts", val);
                 toast.success("Updated email preferences");
               }}
               className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
@@ -211,7 +269,9 @@ export default function Settings() {
               type="checkbox"
               checked={browserNotifs}
               onChange={(e) => {
-                setBrowserNotifs(e.target.checked);
+                const val = e.target.checked;
+                setBrowserNotifs(val);
+                persistSettings("browserNotifs", val);
                 toast.success("Updated browser notification preferences");
               }}
               className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
@@ -231,7 +291,9 @@ export default function Settings() {
               type="checkbox"
               checked={weeklyDigest}
               onChange={(e) => {
-                setWeeklyDigest(e.target.checked);
+                const val = e.target.checked;
+                setWeeklyDigest(val);
+                persistSettings("weeklyDigest", val);
                 toast.success("Updated weekly digest preferences");
               }}
               className="h-4 w-4 rounded text-blue-600 focus:ring-cyan-400"
@@ -257,7 +319,9 @@ export default function Settings() {
             label="Display Language"
             value={language}
             onChange={(e) => {
-              setLanguage(e.target.value);
+              const val = e.target.value;
+              setLanguage(val);
+              persistSettings("language", val);
               toast.success("Language preference updated");
             }}
           >
@@ -272,7 +336,9 @@ export default function Settings() {
             label="Time Zone"
             value={timeZone}
             onChange={(e) => {
-              setTimeZone(e.target.value);
+              const val = e.target.value;
+              setTimeZone(val);
+              persistSettings("timeZone", val);
               toast.success("Time zone preference updated");
             }}
           >
@@ -307,7 +373,10 @@ export default function Settings() {
 
           <Button
             variant="ghost"
-            onClick={() => setIsDeleteModalOpen(true)}
+            onClick={() => {
+              setDeleteConfirmText("");
+              setIsDeleteModalOpen(true);
+            }}
             leftIcon={<Trash2 size={16} />}
             className="text-rose-600 hover:text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40"
           >
@@ -326,6 +395,18 @@ export default function Settings() {
           <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
             Are you sure you want to permanently delete your GetHired account? All tracked job applications, resumes, and saved AI documents will be removed.
           </p>
+          <div className="space-y-1.5 pt-1">
+            <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block">
+              Type <span className="font-mono text-rose-600 font-black">DELETE</span> to confirm:
+            </label>
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              placeholder="DELETE"
+              className="w-full px-3 py-2 text-xs font-mono rounded-xl border border-rose-300 dark:border-rose-800 bg-rose-50/50 dark:bg-rose-950/30 text-rose-900 dark:text-rose-200 focus:outline-none focus:ring-2 focus:ring-rose-500/20"
+            />
+          </div>
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)}>
               Cancel
@@ -333,9 +414,10 @@ export default function Settings() {
             <Button
               variant="primary"
               onClick={handleConfirmDeleteAccount}
-              className="bg-rose-600 hover:bg-rose-700 text-white"
+              disabled={deleteConfirmText.trim().toUpperCase() !== "DELETE"}
+              className="bg-rose-600 hover:bg-rose-700 text-white disabled:opacity-50"
             >
-              Confirm Account Deletion
+              Permanently Delete
             </Button>
           </div>
         </div>
