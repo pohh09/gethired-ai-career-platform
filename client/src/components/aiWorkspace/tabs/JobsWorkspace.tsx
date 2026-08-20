@@ -20,6 +20,27 @@ import Input from "../../ui/Input";
 import { useResumeStore } from "../../../store/resumeStore";
 import * as aiService from "../../../services/aiWorkspaceService";
 
+const SAMPLE_PRESETS = [
+  {
+    company: "Razorpay",
+    role: "Senior Full Stack Developer",
+    location: "Bangalore, India",
+    jd: "We are looking for a Senior Full Stack Developer proficient in React, TypeScript, Node.js, and distributed systems. Responsibilities include building high-throughput payment checkout flows, collaborating with cross-functional teams, optimizing database queries with MongoDB and Redis, and mentoring junior engineers.",
+  },
+  {
+    company: "Stripe",
+    role: "Frontend Engineer (Core UI)",
+    location: "Remote / San Francisco",
+    jd: "Join Stripe to craft developer-first dashboard experiences. Requirements: 4+ years of modern JavaScript/TypeScript, React 19, Tailwind CSS, high attention to design fidelity, web accessibility (WCAG), and client-side performance optimization.",
+  },
+  {
+    company: "Datadog",
+    role: "Backend Platform Engineer",
+    location: "New York / Remote",
+    jd: "Looking for an engineer experienced in building scalable microservices, Go or Node.js, REST & GraphQL APIs, Kafka event streams, and cloud infrastructure on AWS/Kubernetes.",
+  },
+];
+
 export default function JobsWorkspace() {
   const [searchParams] = useSearchParams();
   const { activeResumeText, activeResumeFileName } = useResumeStore();
@@ -28,6 +49,14 @@ export default function JobsWorkspace() {
   const [targetRole, setTargetRole] = useState("Senior Full Stack Developer");
   const [location, setLocation] = useState("Bangalore, India");
   const [jobDescription, setJobDescription] = useState("");
+
+  const handleApplyPreset = (preset: (typeof SAMPLE_PRESETS)[0]) => {
+    setCompanyName(preset.company);
+    setTargetRole(preset.role);
+    setLocation(preset.location);
+    setJobDescription(preset.jd);
+    toast.success(`Loaded ${preset.company} template!`);
+  };
 
   useEffect(() => {
     const roleParam = searchParams.get("role");
@@ -229,7 +258,25 @@ export default function JobsWorkspace() {
           />
         </div>
 
-        <div className="w-full">
+        <div className="space-y-2 w-full">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+              Quick Load Sample Role:
+            </span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              {SAMPLE_PRESETS.map((p) => (
+                <button
+                  key={p.company}
+                  type="button"
+                  onClick={() => handleApplyPreset(p)}
+                  className="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-slate-100 dark:bg-slate-800 hover:bg-purple-50 dark:hover:bg-purple-950/60 text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer shrink-0"
+                >
+                  {p.company}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <Textarea
             label="Job Description (JD)"
             rows={4}
