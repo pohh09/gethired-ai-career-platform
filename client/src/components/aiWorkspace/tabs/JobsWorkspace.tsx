@@ -182,9 +182,9 @@ export default function JobsWorkspace() {
 
   return (
     <div className="space-y-4 sm:space-y-6 w-full">
-      <div className="p-4 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5 sm:space-y-6 w-full">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
+      <div className="p-3.5 sm:p-6 lg:p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4 sm:space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 border-b border-slate-100 dark:border-slate-800 pb-3.5 sm:pb-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <div className="p-2 sm:p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800 shrink-0 shadow-2xs">
               <Briefcase size={18} className="sm:w-5 sm:h-5" />
             </div>
@@ -199,13 +199,13 @@ export default function JobsWorkspace() {
           </div>
 
           {activeResumeFileName && (
-            <div className="px-3 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-[11px] sm:text-xs font-bold border border-purple-200 dark:border-purple-800 self-start sm:self-auto shrink-0 truncate max-w-[220px] sm:max-w-none">
+            <div className="px-2.5 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-[10px] sm:text-xs font-bold border border-purple-200 dark:border-purple-800 self-start sm:self-auto shrink-0 truncate max-w-[240px] sm:max-w-none">
               ✓ Active: {activeResumeFileName}
             </div>
           )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4 w-full">
           <Input
             label="Company"
             value={companyName}
@@ -232,36 +232,26 @@ export default function JobsWorkspace() {
         <div className="w-full">
           <Textarea
             label="Job Description (JD)"
-            rows={5}
+            rows={4}
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Paste full job description text here to analyze requirements, calculate profile fit, and generate tailored application assets..."
-            className="w-full"
+            className="w-full text-xs"
           />
         </div>
 
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2.5 sm:space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 w-full">
+        <div className="pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2.5 sm:space-y-3">
+          {/* Primary AI Workflows */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
             <Button
               variant="primary"
               size="md"
               onClick={handleAnalyzeJD}
               isLoading={isProcessing && activeWorkflow === "jd"}
               leftIcon={<Sparkles size={15} />}
-              className="bg-purple-600 hover:bg-purple-500 text-white shadow-sm shadow-purple-600/20 w-full"
+              className="bg-purple-600 hover:bg-purple-500 text-white shadow-sm shadow-purple-600/20 w-full text-xs font-extrabold col-span-2 sm:col-span-1"
             >
               Analyze JD
-            </Button>
-
-            <Button
-              variant="outline"
-              size="md"
-              onClick={handleExplainJob}
-              isLoading={isProcessing && activeWorkflow === "explain"}
-              leftIcon={<HelpCircle size={15} />}
-              className="w-full"
-            >
-              Explain Role
             </Button>
 
             <Button
@@ -270,9 +260,20 @@ export default function JobsWorkspace() {
               onClick={handleMatchProfile}
               isLoading={isProcessing && activeWorkflow === "match"}
               leftIcon={<Target size={15} />}
-              className="w-full"
+              className="w-full text-xs font-bold"
             >
               Match Score
+            </Button>
+
+            <Button
+              variant="outline"
+              size="md"
+              onClick={handleExplainJob}
+              isLoading={isProcessing && activeWorkflow === "explain"}
+              leftIcon={<HelpCircle size={15} />}
+              className="w-full text-xs font-bold"
+            >
+              Explain Role
             </Button>
 
             <Button
@@ -281,20 +282,21 @@ export default function JobsWorkspace() {
               onClick={handleGenerateCoverLetter}
               isLoading={isProcessing && activeWorkflow === "cover-letter"}
               leftIcon={<FileText size={15} />}
-              className="w-full"
+              className="w-full text-xs font-bold"
             >
               Cover Letter
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full">
+          {/* Secondary AI Tools */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full">
             <Button
               variant="outline"
               size="md"
               onClick={() => handleGenerateFollowUp("after-application")}
               isLoading={isProcessing && activeWorkflow === "followup"}
               leftIcon={<Mail size={15} />}
-              className="w-full"
+              className="w-full text-xs font-bold"
             >
               Follow-up Email
             </Button>
@@ -305,7 +307,7 @@ export default function JobsWorkspace() {
               onClick={handleSalaryInsights}
               isLoading={isProcessing && activeWorkflow === "salary"}
               leftIcon={<DollarSign size={15} />}
-              className="w-full"
+              className="w-full text-xs font-bold"
             >
               Salary Insights
             </Button>
@@ -316,7 +318,7 @@ export default function JobsWorkspace() {
               onClick={handleCompanyResearch}
               isLoading={isProcessing && activeWorkflow === "company"}
               leftIcon={<Building2 size={15} />}
-              className="w-full"
+              className="w-full text-xs font-bold"
             >
               Company Research
             </Button>
