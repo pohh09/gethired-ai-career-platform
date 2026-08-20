@@ -75,7 +75,7 @@ export default function ProfileDropdown() {
 
         <ChevronDown
           size={15}
-          className={`text-slate-400 dark:text-slate-500 transition-transform duration-200 ${
+          className={`hidden lg:block text-slate-400 dark:text-slate-500 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
