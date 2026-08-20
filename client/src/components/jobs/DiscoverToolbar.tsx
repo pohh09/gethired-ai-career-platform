@@ -91,8 +91,88 @@ export default function DiscoverToolbar({
   };
 
   return (
-    <div className="space-y-3 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs transition-all select-none">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+    <div className="space-y-3 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs transition-all select-none">
+      {/* Mobile Streamlined Dual-Row Search Card (< sm screens) */}
+      <div className="sm:hidden space-y-2.5">
+        {/* Row 1: Primary Search Input & Search Action */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
+            <Search
+              size={15}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+            />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Job title, skills, keywords..."
+              className="w-full pl-9 pr-7 py-2.5 text-xs font-medium rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                <X size={13} />
+              </button>
+            )}
+          </div>
+
+          <Button
+            type="button"
+            variant="primary"
+            size="md"
+            onClick={handleSearchTrigger}
+            isLoading={isSearching}
+            leftIcon={<Search size={14} />}
+            className="shrink-0 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs px-3.5"
+          >
+            Search
+          </Button>
+        </div>
+
+        {/* Row 2: Location & Refine Filters Trigger */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
+            <MapPin
+              size={14}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+            />
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Location (e.g. Remote, SF)..."
+              className="w-full pl-8.5 pr-7 py-2 text-xs font-medium rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            />
+            {location && (
+              <button
+                type="button"
+                onClick={() => setLocation("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                <X size={12} />
+              </button>
+            )}
+          </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsMobileDrawerOpen(true)}
+            leftIcon={<SlidersHorizontal size={13} />}
+            className="shrink-0 text-xs font-bold px-3"
+          >
+            Filters {activeCount > 0 ? `(${activeCount})` : ""}
+          </Button>
+        </div>
+      </div>
+
+      {/* Desktop 5-Column Grid Form (>= sm screens) */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
         <div className="relative">
           <Search
             size={14}
@@ -228,7 +308,6 @@ export default function DiscoverToolbar({
         </div>
       </div>
 
-
       <div className="hidden sm:flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80">
         <div className="flex items-center gap-2">
           <FilterDropdown
@@ -265,26 +344,53 @@ export default function DiscoverToolbar({
         )}
       </div>
 
-      <div className="sm:hidden flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setIsMobileDrawerOpen(true)}
-          leftIcon={<SlidersHorizontal size={14} />}
-          className="w-full"
-        >
-          Filters & Sort {activeCount > 0 ? `(${activeCount})` : ""}
-        </Button>
-      </div>
-
       {isMobileDrawerOpen && (
         <Modal
           isOpen={isMobileDrawerOpen}
           onClose={() => setIsMobileDrawerOpen(false)}
-          title="Filter & Sort Live Jobs"
+          title="Filter & Refine Jobs"
           maxWidth="sm"
         >
           <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                Target Role
+              </label>
+              <input
+                type="text"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                placeholder="e.g. Frontend Engineer"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                Skill / Tech Stack
+              </label>
+              <input
+                type="text"
+                value={skill}
+                onChange={(e) => setSkill(e.target.value)}
+                placeholder="e.g. React, TypeScript, Python"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                Company
+              </label>
+              <input
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="e.g. Stripe, Razorpay"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+              />
+            </div>
+
             <div className="space-y-2">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
                 Workplace Type
@@ -294,7 +400,7 @@ export default function DiscoverToolbar({
                 onChange={(e) =>
                   onChange({ ...filters, workplaceType: e.target.value })
                 }
-                className="w-full p-2 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
               >
                 {WORKPLACE_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -313,7 +419,7 @@ export default function DiscoverToolbar({
                 onChange={(e) =>
                   onChange({ ...filters, employmentType: e.target.value })
                 }
-                className="w-full p-2 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
               >
                 {EMPLOYMENT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -332,7 +438,7 @@ export default function DiscoverToolbar({
                 onChange={(e) =>
                   onChange({ ...filters, sortBy: e.target.value })
                 }
-                className="w-full p-2 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
+                className="w-full p-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -356,7 +462,10 @@ export default function DiscoverToolbar({
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => setIsMobileDrawerOpen(false)}
+                onClick={() => {
+                  handleSearchTrigger();
+                  setIsMobileDrawerOpen(false);
+                }}
               >
                 Apply Filters
               </Button>
