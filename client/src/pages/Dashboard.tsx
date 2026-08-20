@@ -11,7 +11,6 @@ import WeeklyGoal from "../components/dashboard/WeeklyGoal";
 import QuickActions from "../components/dashboard/QuickActions";
 import EmptyDashboard from "../components/dashboard/EmptyDashboard";
 import DashboardSkeleton from "../components/dashboard/DashboardSkeleton";
-import CommunityActivityWidget from "../components/dashboard/CommunityActivityWidget";
 import { useDashboard } from "../hooks/useDashboard";
 import { useJobs } from "../hooks/useJobs";
 
@@ -97,9 +96,6 @@ export default function Dashboard() {
           onClick={() => navigate("/jobs?status=Rejected")}
         />
       </div>
-
-      {/* Community Accountability, Streaks & Wins Differentiator */}
-      <CommunityActivityWidget />
 
       <ActionCenter
         onNavigateToJobs={() => navigate("/jobs")}
