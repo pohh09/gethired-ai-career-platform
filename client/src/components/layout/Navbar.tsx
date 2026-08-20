@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Menu, Plus } from "lucide-react";
+import {
+  Menu,
+  Plus,
+  Search,
+  LayoutDashboard,
+  Briefcase,
+  Bot,
+  FileText,
+  Users,
+  TrendingUp,
+  Calendar,
+  Settings as SettingsIcon,
+  User as UserIcon,
+} from "lucide-react";
 import Breadcrumbs from "../common/Breadcrumbs";
 import SearchBar from "./SearchBar";
 import CommandPalette from "./CommandPalette";
@@ -9,16 +22,19 @@ import ProfileDropdown from "./ProfileDropdown";
 import Button from "../ui/Button";
 import { useUIStore } from "../../store/uiStore";
 
-const ROUTE_LABELS: Record<string, string> = {
-  "/": "Dashboard",
-  "/jobs": "Jobs Tracker",
-  "/ai-workspace": "AI Workspace",
-  "/resumes/builder": "Resume Builder",
-  "/community": "Community",
-  "/analytics": "Analytics",
-  "/calendar": "Calendar",
-  "/profile": "Profile",
-  "/settings": "Settings",
+const ROUTE_CONFIG: Record<
+  string,
+  { label: string; icon: React.ComponentType<{ size?: number; className?: string }> }
+> = {
+  "/": { label: "Dashboard", icon: LayoutDashboard },
+  "/jobs": { label: "Jobs Tracker", icon: Briefcase },
+  "/ai-workspace": { label: "AI Workspace", icon: Bot },
+  "/resumes/builder": { label: "Resume Builder", icon: FileText },
+  "/community": { label: "Community", icon: Users },
+  "/analytics": { label: "Analytics", icon: TrendingUp },
+  "/calendar": { label: "Calendar", icon: Calendar },
+  "/profile": { label: "Profile", icon: UserIcon },
+  "/settings": { label: "Settings", icon: SettingsIcon },
 };
 
 export default function Navbar() {
@@ -27,10 +43,15 @@ export default function Navbar() {
   const { toggleMobileDrawer } = useUIStore();
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
-  const currentPageTitle =
-    ROUTE_LABELS[location.pathname] ||
-    location.pathname.split("/").filter(Boolean).pop()?.replace(/-/g, " ") ||
-    "Dashboard";
+  const currentRoute =
+    ROUTE_CONFIG[location.pathname] || {
+      label:
+        location.pathname.split("/").filter(Boolean).pop()?.replace(/-/g, " ") ||
+        "Dashboard",
+      icon: LayoutDashboard,
+    };
+
+  const PageIcon = currentRoute.icon;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,15 +66,16 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-20 h-16 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 transition-colors select-none">
+      <header className="sticky top-0 z-30 h-14 sm:h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 transition-colors select-none">
+        {/* Left Side: Mobile Drawer Toggle & Page Context / Desktop Breadcrumbs */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             type="button"
             onClick={toggleMobileDrawer}
-            className="md:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer active:scale-95"
+            className="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 cursor-pointer active:scale-95 shadow-2xs"
             aria-label="Open navigation drawer"
           >
-            <Menu size={20} />
+            <Menu size={18} />
           </button>
 
           {/* Desktop Breadcrumbs */}
@@ -61,28 +83,41 @@ export default function Navbar() {
             <Breadcrumbs />
           </div>
 
-          {/* Mobile Current Page Context Badge */}
+          {/* Mobile Current Page Context Badge with Icon */}
           <div className="flex md:hidden items-center gap-1.5 min-w-0">
-            <span className="text-xs font-extrabold text-slate-900 dark:text-slate-100 capitalize truncate max-w-[110px] xs:max-w-[140px]">
-              {currentPageTitle}
-            </span>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800/70 border border-slate-200/60 dark:border-slate-700/60 min-w-0">
+              <PageIcon size={14} className="text-blue-600 dark:text-cyan-400 shrink-0" />
+              <span className="text-xs font-black text-slate-800 dark:text-slate-200 capitalize truncate max-w-[130px] xs:max-w-[160px]">
+                {currentRoute.label}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Search Bar - Responsive */}
-        <div className="flex-1 max-w-[140px] xs:max-w-xs sm:max-w-sm mx-2 sm:mx-3">
+        {/* Desktop Search Bar */}
+        <div className="hidden sm:block flex-1 max-w-xs sm:max-w-sm mx-3">
           <SearchBar onClick={() => setCommandPaletteOpen(true)} />
         </div>
 
-        {/* Actions & Profile */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          {/* Desktop Quick Add */}
+        {/* Right Side Action Cluster */}
+        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
+          {/* Mobile Search Icon Trigger Button */}
+          <button
+            type="button"
+            onClick={() => setCommandPaletteOpen(true)}
+            className="sm:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-transform active:scale-95 cursor-pointer"
+            aria-label="Search or jump to (Ctrl+K)"
+          >
+            <Search size={18} />
+          </button>
+
+          {/* Desktop Quick Add Button */}
           <Button
             variant="primary"
             size="sm"
             onClick={() => navigate("/jobs")}
             leftIcon={<Plus size={15} />}
-            className="hidden sm:inline-flex shadow-xs"
+            className="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 text-white shadow-xs"
           >
             Quick Add
           </Button>
@@ -102,4 +137,5 @@ export default function Navbar() {
     </>
   );
 }
+
 
