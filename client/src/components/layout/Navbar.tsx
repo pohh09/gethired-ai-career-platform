@@ -87,16 +87,6 @@ export default function Navbar() {
             Quick Add
           </Button>
 
-          {/* Mobile Quick Add Icon Button */}
-          <button
-            type="button"
-            onClick={() => navigate("/jobs")}
-            aria-label="Quick Add Job"
-            className="sm:hidden p-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white shadow-xs transition-transform active:scale-95 cursor-pointer"
-          >
-            <Plus size={16} />
-          </button>
-
           <NotificationDropdown />
 
           <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
