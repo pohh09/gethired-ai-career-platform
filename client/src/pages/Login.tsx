@@ -39,9 +39,29 @@ export default function Login() {
       toast.success(`Welcome back, ${response.user.name}!`);
       navigate("/");
     } catch (err: unknown) {
-      const errorObj = err as { response?: { data?: { message?: string } } };
-      const msg =
-        errorObj.response?.data?.message || "Invalid email or password";
+      const errorObj = err as {
+        response?: {
+          status?: number;
+          data?: { message?: string; error?: string };
+        };
+        message?: string;
+      };
+
+      let msg =
+        errorObj.response?.data?.message || errorObj.response?.data?.error;
+
+      if (!msg) {
+        if (errorObj.response?.status === 404) {
+          msg = "Login service endpoint not found (404). Please verify backend server is running.";
+        } else if (errorObj.response?.status && errorObj.response.status >= 500) {
+          msg = "Server error occurred during login. Please try again.";
+        } else if (errorObj.message) {
+          msg = errorObj.message;
+        } else {
+          msg = "Login failed. Please check your credentials and try again.";
+        }
+      }
+
       setServerError(msg);
       toast.error(msg);
     }

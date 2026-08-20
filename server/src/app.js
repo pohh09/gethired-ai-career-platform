@@ -42,6 +42,7 @@ app.use("/resume", resumeRoutes);
 app.use("/jobs", jobsRoutes);
 app.use("/interview", interviewRoutes);
 app.use("/community", communityRoutes);
+app.use("/auth", authRoutes);
 
 app.use("/api/resume", resumeRoutes);
 app.use("/api/jobs", jobsRoutes);
