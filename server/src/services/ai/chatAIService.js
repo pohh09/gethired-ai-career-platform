@@ -11,39 +11,46 @@ async function callGeminiChat(message, systemInstruction, history = []) {
     return null;
   }
 
-  try {
-    const contents = [];
+  const models = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"];
 
-    for (const m of history) {
-      const senderRole = m.sender === "user" || m.role === "user" ? "user" : "model";
-      const textVal = m.text || m.content || "";
-      if (textVal) {
-        contents.push({
-          role: senderRole,
-          parts: [{ text: textVal }],
-        });
-      }
+  const contents = [];
+  for (const m of history) {
+    const senderRole = m.sender === "user" || m.role === "user" ? "user" : "model";
+    const textVal = m.text || m.content || m.reply || "";
+    if (textVal) {
+      contents.push({
+        role: senderRole,
+        parts: [{ text: textVal }],
+      });
     }
-
-    contents.push({
-      role: "user",
-      parts: [{ text: message }],
-    });
-
-    const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        contents,
-        systemInstruction: { parts: [{ text: systemInstruction }] },
-      },
-      { headers: { "Content-Type": "application/json" } }
-    );
-
-    const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (text) return text;
-  } catch (err) {
-    console.error("[Gemini API Error]:", err.response?.data || err.message);
   }
+
+  contents.push({
+    role: "user",
+    parts: [{ text: message }],
+  });
+
+  for (const model of models) {
+    try {
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          contents,
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          timeout: 10000,
+        }
+      );
+
+      const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (text) return text;
+    } catch (err) {
+      console.warn(`[Gemini API Warning (${model})]:`, err.response?.data?.error?.message || err.message);
+    }
+  }
+
   return null;
 }
 
@@ -143,107 +150,118 @@ export async function processChatMessage({
   const intent = detectIntent(msgText, contextTab);
   console.log(`[Chat Intent Router] Intent: "${intent}" | Workspace: "${contextTab}" | Resume Attached: ${Boolean(activeResumeText)}`);
 
+  const timestamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
   try {
-   
     if (intent === "resume_analysis" && activeResumeText) {
       const audit = await resumeService.auditResume(activeResumeText, targetRole);
+      const text = `### 📄 Resume Audit Report (${targetRole})\n\n**ATS Readiness Score:** ${audit.atsScore}/100 (Grade: ${audit.overallGrade || "A"})\n\n**Executive Summary:**\n${audit.summary}\n\n**Strengths:**\n${(audit.strengths || []).map(s => `• ${s}`).join("\n")}\n\n**Action Plan:**\n${(audit.actionPlan || []).map(a => `1. ${a}`).join("\n")}`;
       return {
-        text: `### 📄 Resume Audit Report (${targetRole})\n\n**ATS Readiness Score:** ${audit.atsScore}/100 (Grade: ${audit.overallGrade || "A"})\n\n**Executive Summary:**\n${audit.summary}\n\n**Strengths:**\n${(audit.strengths || []).map(s => `• ${s}`).join("\n")}\n\n**Action Plan:**\n${(audit.actionPlan || []).map(a => `1. ${a}`).join("\n")}`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-   
     if (intent === "resume_weaknesses" && activeResumeText) {
       const audit = await resumeService.auditResume(activeResumeText, targetRole);
+      const text = `### ⚠️ Resume Weaknesses & Risks (${targetRole})\n\n**Identified Weaknesses:**\n${(audit.weakBullets || [{ original: "Built React dashboard", issue: "Lacks quantifiable metrics" }]).map(w => `• **Weak Bullet:** "${w.original || w}"\n  *Issue:* ${w.issue || "Lacks metrics and action verbs"}`).join("\n\n")}\n\n**Missing Keywords:** ${(audit.missingKeywords || ["AWS", "Docker", "CI/CD"]).join(", ")}\n\n**Recommended Fix:** Rewrite weak bullets using the STAR framework with percentage metrics.`;
       return {
-        text: `### ⚠️ Resume Weaknesses & Risks (${targetRole})\n\n**Identified Weaknesses:**\n${(audit.weakBullets || [{ original: "Built React dashboard", issue: "Lacks quantifiable metrics" }]).map(w => `• **Weak Bullet:** "${w.original || w}"\n  *Issue:* ${w.issue || "Lacks metrics and action verbs"}`).join("\n\n")}\n\n**Missing Keywords:** ${(audit.missingKeywords || ["AWS", "Docker", "CI/CD"]).join(", ")}\n\n**Recommended Fix:** Rewrite weak bullets using the STAR framework with percentage metrics.`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
     if (intent === "ats_score" && activeResumeText) {
       const ats = await resumeService.calculateATSScore(activeResumeText, targetRole);
+      const text = `### 🎯 ATS Readiness Analysis\n\n**Overall ATS Score:** ${ats.atsScore}% (${ats.grade || "A"})\n\n**Breakdown:**\n• **Keyword Match:** ${ats.breakdown?.keywordMatch || 75}%\n• **Formatting & Structure:** ${ats.breakdown?.formatting || 85}%\n• **Impact & STAR Metrics:** ${ats.breakdown?.impactMetrics || 70}%\n\n**Detected Keywords:** ${(ats.detectedKeywords || []).join(", ")}\n\n**Missing Target Keywords:** ${(ats.missingKeywords || []).join(", ")}\n\n**Improvement Tip:** ${ats.topRecommendation || "Add quantitative metrics and target role keywords."}`;
       return {
-        text: `### 🎯 ATS Readiness Analysis\n\n**Overall ATS Score:** ${ats.atsScore}% (${ats.grade || "A"})\n\n**Breakdown:**\n• **Keyword Match:** ${ats.breakdown?.keywordMatch || 75}%\n• **Formatting & Structure:** ${ats.breakdown?.formatting || 85}%\n• **Impact & STAR Metrics:** ${ats.breakdown?.impactMetrics || 70}%\n\n**Detected Keywords:** ${(ats.detectedKeywords || []).join(", ")}\n\n**Missing Target Keywords:** ${(ats.missingKeywords || []).join(", ")}\n\n**Improvement Tip:** ${ats.topRecommendation || "Add quantitative metrics and target role keywords."}`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-  
     if (intent === "job_match" && activeResumeText && activeJobDescription) {
       const match = await jobService.matchResumeWithJob(activeResumeText, activeJobDescription);
+      const text = `### 📊 Profile ↔ Job Match Analysis\n\n**Calculated Match Score:** ${match.matchScore}%\n**Interview Callback Probability:** ${match.interviewProbability || "High"}\n\n**Matching Skills:** ${(match.matchingSkills || []).map(m => `✓ ${m}`).join("\n")}\n\n**Missing Skills:** ${(match.missingSkills || match.missingTechnologies || []).map(m => `! ${m}`).join("\n")}`;
       return {
-        text: `### 📊 Profile ↔ Job Match Analysis\n\n**Calculated Match Score:** ${match.matchScore}%\n**Interview Callback Probability:** ${match.interviewProbability || "High"}\n\n**Matching Skills:** ${(match.matchingSkills || []).map(m => `✓ ${m}`).join("\n")}\n\n**Missing Skills:** ${(match.missingSkills || match.missingTechnologies || []).map(m => `! ${m}`).join("\n")}`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-   
     if (intent === "cover_letter") {
       const cl = await jobService.generateCoverLetter(activeResumeText || "Full Stack Developer", activeJobDescription || "Senior Engineer", companyName, targetRole);
+      const text = `### ✉️ Tailored Cover Letter\n\n**Subject:** ${cl.subjectLine}\n\n${cl.coverLetter}`;
       return {
-        text: `### ✉️ Tailored Cover Letter\n\n**Subject:** ${cl.subjectLine}\n\n${cl.coverLetter}`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-    
     if (intent === "salary_insights") {
       const salary = await jobService.estimateSalaryInsights(targetRole, "Bangalore, India");
+      const text = `### 💰 Salary & Compensation Insights (${targetRole})\n\n**Average Median Salary:** ${salary.averageSalary}\n**Target Market Range:** ${salary.minSalary} - ${salary.maxSalary}\n**Market Demand:** ${salary.marketDemand || "High Demand"}\n\n**Negotiation Tips:**\n• Highlight quantifiable impact metrics (e.g. 35% performance speedup).\n• Reference target benchmark data when evaluating CTC offers.`;
       return {
-        text: `### 💰 Salary & Compensation Insights (${targetRole})\n\n**Average Median Salary:** ${salary.averageSalary}\n**Target Market Range:** ${salary.minSalary} - ${salary.maxSalary}\n**Market Demand:** ${salary.marketDemand || "High Demand"}\n\n**Negotiation Tips:**\n• Highlight quantifiable impact metrics (e.g. 35% performance speedup).\n• Reference target benchmark data when evaluating CTC offers.`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-   
     if (intent === "interview_question") {
       const questions = await interviewService.generateInterviewQuestions({ type: interviewRound, role: targetRole, difficulty, count: 1 });
       const q = questions[0];
+      const text = `### 🎙️ Practice Interview Question (${targetRole} • ${difficulty})\n\n**Question:** ${q.question}\n\n**Category:** ${q.category || interviewRound}\n\n**What a strong answer should contain:**\n${q.strongAnswerContains || "Clear technical explanation, architecture choice, and quantitative outcomes."}\n\n*Type your response in the chat or launch the Interactive Interview Simulator to practice!*`;
       return {
-        text: `### 🎙️ Practice Interview Question (${targetRole} • ${difficulty})\n\n**Question:** ${q.question}\n\n**Category:** ${q.category || interviewRound}\n\n**What a strong answer should contain:**\n${q.strongAnswerContains || "Clear technical explanation, architecture choice, and quantitative outcomes."}\n\n*Type your response in the chat or launch the Interactive Interview Simulator to practice!*`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-   
     if (intent === "career_roadmap") {
       const roadmap = await careerService.generateCareerRoadmap(targetRole, "Staff Software Architect");
+      const text = `### 🚀 6-Month Career Growth Roadmap (${targetRole} → Staff Architect)\n\n${(roadmap.roadmap || []).map((step, i) => `**Month ${step.month || i + 1}: ${step.topic}**\n${step.description}`).join("\n\n")}\n\n**Recommended Certifications:**\n${(roadmap.recommendedCourses || []).map(c => `• ${c.name || c}`).join("\n")}`;
       return {
-        text: `### 🚀 6-Month Career Growth Roadmap (${targetRole} → Staff Architect)\n\n${(roadmap.roadmap || []).map((step, i) => `**Month ${step.month || i + 1}: ${step.topic}**\n${step.description}`).join("\n\n")}\n\n**Recommended Certifications:**\n${(roadmap.recommendedCourses || []).map(c => `• ${c.name || c}`).join("\n")}`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
-
 
     if (intent === "skill_gap") {
       const skillGap = await jobService.generateSkillGapRoadmap(["React", "TypeScript", "Node.js"], targetRole);
+      const text = `### 🎯 Skill Gap Analysis for ${targetRole}\n\n**Priority Missing Skills:**\n${(skillGap.missingSkills || ["System Architecture", "GraphQL", "AWS Cloud", "Docker"]).map(s => `• ${s}`).join("\n")}\n\n**Recommended Action:** Focus on building a hands-on project demonstrating cloud microservices and distributed caching.`;
       return {
-        text: `### 🎯 Skill Gap Analysis for ${targetRole}\n\n**Priority Missing Skills:**\n${(skillGap.missingSkills || ["System Architecture", "GraphQL", "AWS Cloud", "Docker"]).map(s => `• ${s}`).join("\n")}\n\n**Recommended Action:** Focus on building a hands-on project demonstrating cloud microservices and distributed caching.`,
+        text,
+        reply: text,
         sender: "assistant",
         intent,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        timestamp,
       };
     }
 
-   
     const personaNames = {
       resume: "Resume Expert (ATS & Executive Resume Coach)",
       jobs: "Senior Recruiter (Tech Talent Scout & JD Analyst)",
@@ -274,19 +292,21 @@ RESPONSE RULES:
 
     return {
       text: replyText,
+      reply: replyText,
       sender: "assistant",
       intent,
       source: geminiReply ? "ai" : "fallback",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp,
     };
 
   } catch (err) {
     console.error("[Chat AI Processing Failure]:", err.message);
+    const fallbackText = generateDynamicContextualFallback(msgText, contextTab, activeResumeText, activeJobDescription, targetRole, history);
     return {
-      text: "I couldn't generate a response right now. Please try again.",
+      text: fallbackText,
+      reply: fallbackText,
       sender: "assistant",
-      error: true,
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp,
     };
   }
 }

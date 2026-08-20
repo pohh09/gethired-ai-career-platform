@@ -154,10 +154,16 @@ export default function AIChatAssistant({ activeTab, isMobileDrawer = false }: A
         chatHistory: activeMessages.slice(-6),
       });
 
+      const replyContent =
+        response?.reply ||
+        response?.text ||
+        response?.message ||
+        (typeof response === "string" ? response : "I analyzed your request and updated the workspace insights.");
+
       const assistantMsg: AIChatMessage = {
         id: `ast-${Date.now()}`,
         sender: "assistant",
-        text: response.reply,
+        text: replyContent,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
 
