@@ -72,9 +72,11 @@ api.interceptors.response.use(
     }
 
     if (status && status >= 500) {
-      toast.error("Server error. Please try again later.");
-    } else if (error.code === "ERR_NETWORK") {
-      toast.error("Network connection error. Check your internet.");
+      toast.error("Server error. Please try again later.", { id: "server-error" });
+    } else if (error.code === "ERR_NETWORK" || error.code === "ECONNABORTED") {
+      toast.error("Cannot connect to server. Please ensure the backend server is running on http://localhost:5000.", {
+        id: "network-error",
+      });
     }
 
     return Promise.reject(error);
