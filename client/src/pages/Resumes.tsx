@@ -10,11 +10,13 @@ import {
   Check,
   Briefcase,
   FileCheck,
+  Share2,
 } from "lucide-react";
 import PageHeader from "../components/common/PageHeader";
 import Button from "../components/ui/Button";
 import EmptyState from "../components/dashboard/EmptyState";
 import ResumePreviewModal from "../components/resumes/ResumePreviewModal";
+import ShareDocumentModal from "../components/community/ShareDocumentModal";
 import Modal from "../components/ui/Modal";
 import Input from "../components/ui/Input";
 import { useResumeStore, type ResumeItem } from "../store/resumeStore";
@@ -26,6 +28,7 @@ export default function Resumes() {
   const [previewResume, setPreviewResume] = useState<ResumeItem | null>(null);
   const [renamingResume, setRenamingResume] = useState<ResumeItem | null>(null);
   const [newName, setNewName] = useState("");
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -204,6 +207,16 @@ export default function Resumes() {
                   </Button>
                 </div>
 
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsShareModalOpen(true)}
+                  leftIcon={<Share2 size={13} className="text-blue-500" />}
+                  className="w-full text-xs font-bold border-blue-200 dark:border-blue-900/50 hover:bg-blue-50 dark:hover:bg-blue-950/40 text-blue-700 dark:text-blue-300"
+                >
+                  Share for Peer Review
+                </Button>
+
                 <div className="flex items-center justify-between pt-1">
                   {!resume.isDefault ? (
                     <button
@@ -276,6 +289,12 @@ export default function Resumes() {
         onClose={() => setPreviewResume(null)}
         resume={previewResume}
         onMakeDefault={setDefaultResume}
+      />
+
+      <ShareDocumentModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        defaultType="resume"
       />
 
       {renamingResume && (

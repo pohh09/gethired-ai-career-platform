@@ -11,6 +11,7 @@ const Analytics = lazy(() => import("../pages/Analytics"));
 const Calendar = lazy(() => import("../pages/Calendar"));
 const AIWorkspace = lazy(() => import("../pages/AIWorkspace"));
 const Resumes = lazy(() => import("../pages/Resumes"));
+const Community = lazy(() => import("../pages/Community"));
 const Notifications = lazy(() => import("../pages/Notifications"));
 const Activity = lazy(() => import("../pages/Activity"));
 const Profile = lazy(() => import("../pages/Profile"));
@@ -216,6 +217,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader text="Loading Resume Manager..." />}>
             <Resumes />
+          </Suspense>
+        ),
+      },
+      {
+        path: "community",
+        element: (
+          <Suspense fallback={<Loader text="Loading Community Hub..." />}>
+            <Community />
           </Suspense>
         ),
       },

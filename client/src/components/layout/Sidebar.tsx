@@ -11,6 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Users,
+  FileText,
 } from "lucide-react";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
 import SidebarSection from "./SidebarSection";
@@ -86,6 +88,21 @@ export default function Sidebar() {
               path="/ai-workspace"
               icon={Bot}
               badge="AI Hub"
+              collapsed={isCollapsed}
+              onClick={() => handleLinkClick(isMobile)}
+            />
+            <SidebarItem
+              name="Community"
+              path="/community"
+              icon={Users}
+              badge="New"
+              collapsed={isCollapsed}
+              onClick={() => handleLinkClick(isMobile)}
+            />
+            <SidebarItem
+              name="Resumes"
+              path="/resumes"
+              icon={FileText}
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />

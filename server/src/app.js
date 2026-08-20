@@ -14,6 +14,7 @@ import aiWorkspaceRoutes from "./routes/aiWorkspaceRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import jobsRoutes from "./routes/jobsRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
+import communityRoutes from "./routes/communityRoutes.js";
 
 const app = express();
 
@@ -40,11 +41,12 @@ app.get("/api/debug/jobs", authMiddleware, getDebugJobs);
 app.use("/resume", resumeRoutes);
 app.use("/jobs", jobsRoutes);
 app.use("/interview", interviewRoutes);
+app.use("/community", communityRoutes);
 
 app.use("/api/resume", resumeRoutes);
 app.use("/api/jobs", jobsRoutes);
 app.use("/api/interview", interviewRoutes);
-
+app.use("/api/community", communityRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);

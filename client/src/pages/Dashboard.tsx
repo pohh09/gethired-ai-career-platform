@@ -11,6 +11,8 @@ import WeeklyGoal from "../components/dashboard/WeeklyGoal";
 import QuickActions from "../components/dashboard/QuickActions";
 import EmptyDashboard from "../components/dashboard/EmptyDashboard";
 import DashboardSkeleton from "../components/dashboard/DashboardSkeleton";
+import StreakCard from "../components/dashboard/StreakCard";
+import SuccessFeedSnippet from "../components/dashboard/SuccessFeedSnippet";
 import { useDashboard } from "../hooks/useDashboard";
 import { useJobs } from "../hooks/useJobs";
 
@@ -91,6 +93,12 @@ export default function Dashboard() {
           isLoading={isStatsLoading}
           miniGraphData={[2, 1, 2, 1, 0, 1, 1, 0]}
         />
+      </div>
+
+      {/* Community Accountability & Win Ticker */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <StreakCard />
+        <SuccessFeedSnippet />
       </div>
 
       <ActionCenter
