@@ -85,9 +85,9 @@ export default function Navbar() {
 
           {/* Mobile Current Page Context Badge with Icon */}
           <div className="flex md:hidden items-center gap-1.5 min-w-0">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800/70 border border-slate-200/60 dark:border-slate-700/60 min-w-0">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-100/90 dark:bg-slate-800/80 border border-slate-200/70 dark:border-slate-700/70 shrink-0">
               <PageIcon size={14} className="text-blue-600 dark:text-cyan-400 shrink-0" />
-              <span className="text-xs font-black text-slate-800 dark:text-slate-200 capitalize truncate max-w-[130px] xs:max-w-[160px]">
+              <span className="text-xs font-black text-slate-900 dark:text-slate-100 capitalize whitespace-nowrap">
                 {currentRoute.label}
               </span>
             </div>
@@ -95,17 +95,17 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Search Bar */}
-        <div className="hidden sm:block flex-1 max-w-xs sm:max-w-sm mx-3">
+        <div className="hidden md:block flex-1 max-w-xs lg:max-w-sm mx-3">
           <SearchBar onClick={() => setCommandPaletteOpen(true)} />
         </div>
 
         {/* Right Side Action Cluster */}
-        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           {/* Mobile Search Icon Trigger Button */}
           <button
             type="button"
             onClick={() => setCommandPaletteOpen(true)}
-            className="sm:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-transform active:scale-95 cursor-pointer"
+            className="md:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-transform active:scale-95 cursor-pointer"
             aria-label="Search or jump to (Ctrl+K)"
           >
             <Search size={18} />
@@ -117,14 +117,14 @@ export default function Navbar() {
             size="sm"
             onClick={() => navigate("/jobs")}
             leftIcon={<Plus size={15} />}
-            className="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 text-white shadow-xs"
+            className="hidden md:inline-flex bg-blue-600 hover:bg-blue-500 text-white shadow-xs"
           >
             Quick Add
           </Button>
 
           <NotificationDropdown />
 
-          <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
+          <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden md:block" />
 
           <ProfileDropdown />
         </div>
