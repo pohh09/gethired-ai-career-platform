@@ -38,7 +38,7 @@ export default function ShareDocumentModal({
   const [targetCompany, setTargetCompany] = useState("");
   const [tagsInput, setTagsInput] = useState("");
   const [content, setContent] = useState("");
-  const [visibility, setVisibility] = useState<"shared" | "private">("shared");
+  const [visibility, setVisibility] = useState<"shared" | "private">("private");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Sync content when choosing from existing store
@@ -95,7 +95,7 @@ export default function ShareDocumentModal({
       );
       onClose();
     } catch {
-      toast.error("Failed to share document.");
+      toast.error("Failed to save document.");
     } finally {
       setIsSubmitting(false);
     }
@@ -105,7 +105,7 @@ export default function ShareDocumentModal({
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="lg" title="Share Draft for Peer Review">
       <form onSubmit={handleSubmit} className="space-y-4 pt-1">
         <p className="text-xs text-slate-500 dark:text-slate-400">
-          Get actionable feedback, section-by-section critiques, and ATS tips from fellow candidates and hiring mentors.
+          Save your resume or cover letter draft. By default, drafts stay private to you unless you opt in to open them for community feedback.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -233,19 +233,19 @@ export default function ShareDocumentModal({
               {visibility === "shared" ? (
                 <>
                   <Globe size={14} className="text-emerald-500" />
-                  <span>Open for Community Feedback</span>
+                  <span>Open for Community Feedback (Public)</span>
                 </>
               ) : (
                 <>
                   <Lock size={14} className="text-slate-400" />
-                  <span>Private Only</span>
+                  <span>Private Only (Default)</span>
                 </>
               )}
             </h4>
             <p className="text-[11px] text-slate-400">
               {visibility === "shared"
                 ? "Other GetHired members can read and leave helpful section comments."
-                : "Only you can see this draft in your private workspace."}
+                : "Kept private to your account only. Toggle to opt into peer reviews."}
             </p>
           </div>
 
@@ -260,7 +260,7 @@ export default function ShareDocumentModal({
                 : "bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600"
             }`}
           >
-            {visibility === "shared" ? "Public / Shared" : "Keep Private"}
+            {visibility === "shared" ? "Public / Shared" : "Make Public"}
           </button>
         </div>
 
@@ -276,7 +276,7 @@ export default function ShareDocumentModal({
             className="font-bold flex items-center gap-1.5"
           >
             <Share2 size={14} />
-            <span>Publish Draft</span>
+            <span>{visibility === "shared" ? "Publish Draft" : "Save Draft"}</span>
           </Button>
         </div>
       </form>

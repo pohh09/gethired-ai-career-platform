@@ -84,7 +84,7 @@ const sharedDocumentSchema = new mongoose.Schema(
     visibility: {
       type: String,
       enum: ["private", "shared"],
-      default: "shared",
+      default: "private",
     },
     tags: [
       {

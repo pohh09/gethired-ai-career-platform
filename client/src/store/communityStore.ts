@@ -440,7 +440,7 @@ export const useCommunityStore = create<CommunityState>()(
           targetRole: data.targetRole,
           targetCompany: data.targetCompany || "",
           content: data.content,
-          visibility: data.visibility || "shared",
+          visibility: data.visibility || "private",
           tags: data.tags || ["Peer Review"],
           feedbackList: [],
           feedbackCount: 0,

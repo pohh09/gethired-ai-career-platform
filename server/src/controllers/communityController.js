@@ -92,7 +92,7 @@ export const createSharedDocument = async (req, res) => {
       targetRole: targetRole || "Candidate",
       targetCompany: targetCompany || "",
       content,
-      visibility: visibility || "shared",
+      visibility: visibility || "private",
       tags: tags || [],
       feedbackList: [],
       feedbackCount: 0,
