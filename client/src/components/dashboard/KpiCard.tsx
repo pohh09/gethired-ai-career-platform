@@ -13,6 +13,7 @@ export interface KpiCardProps {
   accentColor?: "indigo" | "amber" | "emerald" | "purple" | "blue" | "rose" | "cyan" | "sky";
   isLoading?: boolean;
   miniGraphData?: number[];
+  onClick?: () => void;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export default function KpiCard({
   accentColor = "blue",
   isLoading = false,
   miniGraphData = [4, 6, 5, 8, 7, 10, 12],
+  onClick,
   className = "",
 }: KpiCardProps) {
   const accentStyles = {
@@ -106,8 +108,9 @@ export default function KpiCard({
 
   return (
     <motion.div
+      onClick={onClick}
       whileHover={{ y: -3, transition: { duration: 0.18 } }}
-      className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-all duration-200 ${style.border} ${style.glow} ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-all duration-200 ${style.border} ${style.glow} ${onClick ? "cursor-pointer" : ""} ${className}`}
     >
       <div className={`absolute top-0 left-0 right-0 h-1 ${style.bar}`} />
 

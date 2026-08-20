@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileText,
@@ -63,11 +63,20 @@ const NAV_ITEMS: {
 
 export default function AIWorkspace() {
   const [searchParams] = useSearchParams();
-  const initialTab = (searchParams.get("tab") as AIModuleId) || "resume";
+  const location = useLocation();
 
-  const [activeTab, setActiveTab] = useState<AIModuleId>(
-    ["resume", "jobs", "interview", "career"].includes(initialTab) ? initialTab : "resume"
-  );
+  const getInitialTab = (): AIModuleId => {
+    if (location.pathname.includes("interview")) return "interview";
+    const tab = searchParams.get("tab") as AIModuleId;
+    if (["resume", "jobs", "interview", "career"].includes(tab)) return tab;
+    return "resume";
+  };
+
+  const [activeTab, setActiveTab] = useState<AIModuleId>(getInitialTab());
+
+  useEffect(() => {
+    setActiveTab(getInitialTab());
+  }, [location.pathname, searchParams]);
 
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 

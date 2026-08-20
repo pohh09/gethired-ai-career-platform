@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Sparkles,
   CheckCircle2,
@@ -12,9 +13,6 @@ import Button from "../ui/Button";
 import ResumeMatchModal from "./ResumeMatchModal";
 import ResumeOptimizerModal from "./ResumeOptimizerModal";
 import FollowUpEmailModal from "./FollowUpEmailModal";
-import InterviewPrepModal from "../interview/InterviewPrepModal";
-import CoverLetterModal from "../coverLetter/CoverLetterModal";
-import JobAnalyzerModal from "../jobAnalyzer/JobAnalyzerModal";
 import type { Job, DiscoverJob } from "../../types/job";
 
 export interface JobAiActionsMenuProps {
@@ -28,14 +26,12 @@ export default function JobAiActionsMenu({
   variant = "dropdown",
   className = "",
 }: JobAiActionsMenuProps) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [isMatchOpen, setIsMatchOpen] = useState(false);
   const [isOptimizerOpen, setIsOptimizerOpen] = useState(false);
-  const [isAnalyzerOpen, setIsAnalyzerOpen] = useState(false);
-  const [isCoverLetterOpen, setIsCoverLetterOpen] = useState(false);
-  const [isInterviewPrepOpen, setIsInterviewPrepOpen] = useState(false);
   const [isFollowUpOpen, setIsFollowUpOpen] = useState(false);
 
   useEffect(() => {
@@ -114,12 +110,18 @@ export default function JobAiActionsMenu({
             type="button"
             onClick={() => {
               setIsOpen(false);
-              setIsAnalyzerOpen(true);
+              const params = new URLSearchParams({
+                tab: "jobs",
+                role: normalizedJob.role,
+                company: normalizedJob.company,
+              });
+              if (normalizedJob.notes) params.append("jd", normalizedJob.notes);
+              navigate(`/ai-workspace?${params.toString()}`);
             }}
             className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-200 hover:bg-purple-50 dark:hover:bg-purple-950/50 hover:text-purple-700 dark:hover:text-purple-300 transition-colors text-left cursor-pointer"
           >
             <Sparkles size={14} className="text-purple-500 shrink-0" />
-            <span>AI Job Analyzer</span>
+            <span>AI Job Analyzer & Match</span>
           </button>
 
           <button
@@ -150,24 +152,34 @@ export default function JobAiActionsMenu({
             type="button"
             onClick={() => {
               setIsOpen(false);
-              setIsCoverLetterOpen(true);
+              const params = new URLSearchParams({
+                tab: "jobs",
+                role: normalizedJob.role,
+                company: normalizedJob.company,
+              });
+              if (normalizedJob.notes) params.append("jd", normalizedJob.notes);
+              navigate(`/ai-workspace?${params.toString()}`);
             }}
             className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors text-left cursor-pointer"
           >
             <FileSpreadsheet size={14} className="text-emerald-500 shrink-0" />
-            <span>AI Cover Letter</span>
+            <span>AI Cover Letter Generator</span>
           </button>
 
           <button
             type="button"
             onClick={() => {
               setIsOpen(false);
-              setIsInterviewPrepOpen(true);
+              const params = new URLSearchParams({
+                role: normalizedJob.role,
+              });
+              if (normalizedJob.notes) params.append("jd", normalizedJob.notes);
+              navigate(`/interview-prep?${params.toString()}`);
             }}
             className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-xl text-slate-700 dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-amber-950/50 hover:text-amber-700 dark:hover:text-amber-300 transition-colors text-left cursor-pointer"
           >
             <BookOpen size={14} className="text-amber-500 shrink-0" />
-            <span>AI Interview Questions</span>
+            <span>AI Interview Practice</span>
           </button>
 
           <button
@@ -193,24 +205,6 @@ export default function JobAiActionsMenu({
       <ResumeOptimizerModal
         isOpen={isOptimizerOpen}
         onClose={() => setIsOptimizerOpen(false)}
-        job={normalizedJob}
-      />
-
-      <JobAnalyzerModal
-        isOpen={isAnalyzerOpen}
-        onClose={() => setIsAnalyzerOpen(false)}
-        job={normalizedJob}
-      />
-
-      <CoverLetterModal
-        isOpen={isCoverLetterOpen}
-        onClose={() => setIsCoverLetterOpen(false)}
-        job={normalizedJob}
-      />
-
-      <InterviewPrepModal
-        isOpen={isInterviewPrepOpen}
-        onClose={() => setIsInterviewPrepOpen(false)}
         job={normalizedJob}
       />
 

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Briefcase,
   Sparkles,
@@ -20,12 +21,22 @@ import { useResumeStore } from "../../../store/resumeStore";
 import * as aiService from "../../../services/aiWorkspaceService";
 
 export default function JobsWorkspace() {
+  const [searchParams] = useSearchParams();
   const { activeResumeText, activeResumeFileName } = useResumeStore();
 
   const [companyName, setCompanyName] = useState("Razorpay");
   const [targetRole, setTargetRole] = useState("Senior Full Stack Developer");
   const [location, setLocation] = useState("Bangalore, India");
   const [jobDescription, setJobDescription] = useState("");
+
+  useEffect(() => {
+    const roleParam = searchParams.get("role");
+    const companyParam = searchParams.get("company");
+    const jdParam = searchParams.get("jd");
+    if (roleParam) setTargetRole(roleParam);
+    if (companyParam) setCompanyName(companyParam);
+    if (jdParam) setJobDescription(jdParam);
+  }, [searchParams]);
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeWorkflow, setActiveWorkflow] = useState<

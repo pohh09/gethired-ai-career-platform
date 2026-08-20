@@ -58,6 +58,7 @@ export default function Dashboard() {
           accentColor="blue"
           isLoading={isStatsLoading}
           miniGraphData={[4, 6, 5, 8, 7, 10, 12, 14]}
+          onClick={() => navigate("/jobs")}
         />
         <KpiCard
           title="Active Interviews"
@@ -69,6 +70,7 @@ export default function Dashboard() {
           accentColor="amber"
           isLoading={isStatsLoading}
           miniGraphData={[1, 2, 1, 3, 2, 4, 3, 5]}
+          onClick={() => navigate("/jobs?status=Interview")}
         />
         <KpiCard
           title="Offers"
@@ -80,6 +82,7 @@ export default function Dashboard() {
           accentColor="emerald"
           isLoading={isStatsLoading}
           miniGraphData={[0, 0, 1, 0, 1, 1, 2, 2]}
+          onClick={() => navigate("/jobs?status=Offer")}
         />
         <KpiCard
           title="Rejected"
@@ -91,6 +94,7 @@ export default function Dashboard() {
           accentColor="rose"
           isLoading={isStatsLoading}
           miniGraphData={[2, 1, 2, 1, 0, 1, 1, 0]}
+          onClick={() => navigate("/jobs?status=Rejected")}
         />
       </div>
 
@@ -132,7 +136,7 @@ export default function Dashboard() {
             onAddApplication={() => navigate("/jobs")}
             onScheduleInterview={() => navigate("/calendar")}
             onOpenAnalytics={() => navigate("/analytics")}
-            onManageCompanies={() => navigate("/companies")}
+            onManageResumes={() => navigate("/resumes")}
             onUpdateProfile={() => navigate("/profile")}
           />
         </div>

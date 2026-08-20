@@ -13,6 +13,8 @@ import {
   FileCheck,
   Share2,
   Sparkles,
+  FileText,
+  MessageSquareShare,
 } from "lucide-react";
 import PageHeader from "../components/common/PageHeader";
 import Button from "../components/ui/Button";
@@ -22,15 +24,20 @@ import ShareDocumentModal from "../components/community/ShareDocumentModal";
 import Modal from "../components/ui/Modal";
 import Input from "../components/ui/Input";
 import { useResumeStore, type ResumeItem } from "../store/resumeStore";
+import { useCommunityStore } from "../store/communityStore";
 
 export default function Resumes() {
   const { resumes, addResume, deleteResume, renameResume, setDefaultResume } =
     useResumeStore();
+  const { sharedDocuments } = useCommunityStore();
 
+  const [activeTab, setActiveTab] = useState<"resumes" | "shared">("resumes");
   const [previewResume, setPreviewResume] = useState<ResumeItem | null>(null);
   const [renamingResume, setRenamingResume] = useState<ResumeItem | null>(null);
   const [newName, setNewName] = useState("");
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  const mySharedDocs = sharedDocuments.filter((d) => d.userId === "user-current");
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -92,8 +99,8 @@ export default function Resumes() {
   return (
     <div className="space-y-6 pb-12">
       <PageHeader
-        title="Resume Manager"
-        subtitle="Upload, preview, organize, and manage your master resumes for AI job applications."
+        title="Resumes & Documents Hub"
+        subtitle="Manage master resumes, launch guided AI builder, and monitor peer review drafts."
         action={
           <div className="flex items-center gap-2.5 flex-wrap">
             <Link
@@ -101,7 +108,7 @@ export default function Resumes() {
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs transition-all shadow-md shadow-blue-600/20"
             >
               <Sparkles size={15} />
-              <span>Build with AI Wizard ✨</span>
+              <span>Create New (AI Builder) ✨</span>
             </Link>
 
             <label className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-extrabold text-xs transition-all shadow-xs cursor-pointer">
@@ -119,27 +126,138 @@ export default function Resumes() {
         }
       />
 
-      {resumes.length > 0 && (
-        <div className="p-4 rounded-2xl border border-blue-200/80 dark:border-blue-900/50 bg-gradient-to-r from-blue-50/70 via-cyan-50/40 to-white dark:from-blue-950/40 dark:via-cyan-950/20 dark:to-slate-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
-              <Star size={20} />
-            </div>
-            <div>
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-blue-700 dark:text-cyan-300 block">
-                Active Default Resume
-              </span>
-              <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
-                {resumes.find((r) => r.isDefault)?.name || resumes[0]?.name}
-              </h4>
-            </div>
-          </div>
-          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-            AI actions automatically analyze against your default resume unless
-            overridden.
+      {/* Sub-Tabs */}
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 overflow-x-auto no-scrollbar">
+        <button
+          type="button"
+          onClick={() => setActiveTab("resumes")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shrink-0 ${
+            activeTab === "resumes"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+          }`}
+        >
+          <FileText size={15} />
+          <span>Master Resumes</span>
+          <span className="px-1.5 py-0.2 rounded-md text-[10px] bg-white/20">
+            {resumes.length}
           </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("shared")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shrink-0 ${
+            activeTab === "shared"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+          }`}
+        >
+          <MessageSquareShare size={15} />
+          <span>Shared for Peer Review</span>
+          <span className="px-1.5 py-0.2 rounded-md text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+            {mySharedDocs.length}
+          </span>
+        </button>
+      </div>
+
+      {activeTab === "shared" && (
+        <div className="space-y-4">
+          <div className="p-4 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/50 bg-indigo-50/40 dark:bg-indigo-950/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <MessageSquareShare size={18} className="text-indigo-600" />
+              <div>
+                <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
+                  Peer Review & Community Drafts
+                </h4>
+                <p className="text-[11px] text-slate-500">
+                  Documents you have opened for peer feedback in the Community Hub.
+                </p>
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsShareModalOpen(true)}
+              className="text-xs font-bold shrink-0"
+              leftIcon={<Share2 size={13} />}
+            >
+              Share Another Draft
+            </Button>
+          </div>
+
+          {mySharedDocs.length === 0 ? (
+            <EmptyState
+              title="No shared drafts yet"
+              description="Share a resume or cover letter draft to the Community to get actionable suggestions and feedback from peers."
+              actionText="Share Draft for Review"
+              onAction={() => setIsShareModalOpen(true)}
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {mySharedDocs.map((doc) => (
+                <div
+                  key={doc._id}
+                  className="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3 shadow-xs flex flex-col justify-between"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-cyan-300">
+                        {doc.documentType.toUpperCase()}
+                      </span>
+                      <span className="text-xs text-slate-400 font-medium">
+                        {doc.feedbackCount || doc.feedbackList.length} feedback comments
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100 line-clamp-1">
+                      {doc.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 line-clamp-1">
+                      Target: {doc.targetRole} {doc.targetCompany ? `@ ${doc.targetCompany}` : ""}
+                    </p>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300 font-mono bg-slate-50 dark:bg-slate-800 p-2.5 rounded-xl line-clamp-2">
+                      {doc.content}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+                    <Link
+                      to="/community"
+                      className="text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline"
+                    >
+                      View in Community →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
+
+      {activeTab === "resumes" && (
+        <>
+          {resumes.length > 0 && (
+            <div className="p-4 rounded-2xl border border-blue-200/80 dark:border-blue-900/50 bg-gradient-to-r from-blue-50/70 via-cyan-50/40 to-white dark:from-blue-950/40 dark:via-cyan-950/20 dark:to-slate-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
+                  <Star size={20} />
+                </div>
+                <div>
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-blue-700 dark:text-cyan-300 block">
+                    Active Default Resume
+                  </span>
+                  <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+                    {resumes.find((r) => r.isDefault)?.name || resumes[0]?.name}
+                  </h4>
+                </div>
+              </div>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                AI actions automatically analyze against your default resume unless
+                overridden.
+              </span>
+            </div>
+          )}
 
       {resumes.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -295,6 +413,8 @@ export default function Resumes() {
           }}
         />
       )}
+      </>
+    )}
 
       <ResumePreviewModal
         isOpen={!!previewResume}

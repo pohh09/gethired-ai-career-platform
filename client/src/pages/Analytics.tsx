@@ -6,7 +6,11 @@ import {
   BarChart2,
   Filter,
   Building2,
+  History,
+  Bell,
 } from "lucide-react";
+import ActivityTimeline from "../components/activity/ActivityTimeline";
+import NotificationList from "../components/notifications/NotificationList";
 import {
   ResponsiveContainer,
   LineChart,
@@ -58,6 +62,7 @@ const LOCATION_COLORS: Record<string, string> = {
 export default function Analytics() {
   const navigate = useNavigate();
   const [dateRange, setDateRange] = useState("30days");
+  const [activeTab, setActiveTab] = useState<"overview" | "activity" | "notifications">("overview");
   const { theme } = useUIStore();
 
   const isDark =
@@ -296,45 +301,102 @@ export default function Analytics() {
   return (
     <div className="space-y-8 pb-12">
       <PageHeader
-        title="Analytics Center"
-        subtitle="Understand your job search performance and pipeline conversion velocity."
+        title="Analytics & Activity Center"
+        subtitle="Understand your pipeline performance, review timeline activity, and manage alerts."
         action={
-          <DateRangePicker
-            value={dateRange}
-            onChange={(val) => setDateRange(val)}
-          />
+          activeTab === "overview" ? (
+            <DateRangePicker
+              value={dateRange}
+              onChange={(val) => setDateRange(val)}
+            />
+          ) : undefined
         }
-        secondaryAction={<ExportMenu />}
+        secondaryAction={activeTab === "overview" ? <ExportMenu /> : undefined}
       />
 
-      {isLoading ? (
-        <div className="space-y-8 animate-pulse">
-          <KPIGrid metrics={kpiMetrics} isLoading />
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
-              <Skeleton width="180px" height={24} className="mb-4" />
-              <Skeleton width="100%" height={260} className="rounded-xl" />
-            </div>
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
-              <Skeleton width="160px" height={24} className="mb-4" />
-              <Skeleton width="100%" height={260} className="rounded-xl" />
+      {/* Analytics Sub-Tabs */}
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 overflow-x-auto no-scrollbar">
+        <button
+          type="button"
+          onClick={() => setActiveTab("overview")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shrink-0 ${
+            activeTab === "overview"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+          }`}
+        >
+          <BarChart2 size={15} />
+          <span>Pipeline & Conversion Charts</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("activity")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shrink-0 ${
+            activeTab === "activity"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+          }`}
+        >
+          <History size={15} />
+          <span>Activity Audit Trail</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("notifications")}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer shrink-0 ${
+            activeTab === "notifications"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
+              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+          }`}
+        >
+          <Bell size={15} />
+          <span>Notification Center</span>
+        </button>
+      </div>
+
+      {activeTab === "activity" && (
+        <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm">
+          <ActivityTimeline />
+        </div>
+      )}
+
+      {activeTab === "notifications" && (
+        <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm">
+          <NotificationList />
+        </div>
+      )}
+
+      {activeTab === "overview" && (
+        isLoading ? (
+          <div className="space-y-8 animate-pulse">
+            <KPIGrid metrics={kpiMetrics} isLoading />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
+                <Skeleton width="180px" height={24} className="mb-4" />
+                <Skeleton width="100%" height={260} className="rounded-xl" />
+              </div>
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
+                <Skeleton width="160px" height={24} className="mb-4" />
+                <Skeleton width="100%" height={260} className="rounded-xl" />
+              </div>
             </div>
           </div>
-        </div>
-      ) : totalJobs === 0 && !isStatsLoading ? (
-        <EmptyState
-          title="No Analytics Data Available Yet"
-          description="Submit and track your first job applications to unlock live funnel analytics, response velocity graphs, and compensation trends."
-          actionText="Add Job Application"
-          onAction={() => navigate("/jobs")}
-        />
-      ) : (
-        <>
-          <KPIGrid metrics={kpiMetrics} isLoading={isStatsLoading} />
+        ) : totalJobs === 0 && !isStatsLoading ? (
+          <EmptyState
+            title="No Analytics Data Available Yet"
+            description="Submit and track your first job applications to unlock live funnel analytics, response velocity graphs, and compensation trends."
+            actionText="Add Job Application"
+            onAction={() => navigate("/jobs")}
+          />
+        ) : (
+          <div className="space-y-8">
+            <KPIGrid metrics={kpiMetrics} isLoading={isStatsLoading} />
 
-          <InsightCard />
+            <InsightCard />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <ChartCard
               title="Applications Per Month"
               subtitle="Month-over-month submission trajectory"
@@ -624,7 +686,8 @@ export default function Analytics() {
               </table>
             </div>
           </div>
-        </>
+        </div>
+        )
       )}
     </div>
   );

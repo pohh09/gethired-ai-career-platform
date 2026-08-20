@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Video,
   Play,
@@ -39,8 +40,8 @@ interface SessionHistoryItem {
 
 const FEATURED_ROLES = [
   "Full Stack Developer",
-  "Frontend Developer",
-  "Backend Developer",
+  "Senior Frontend Engineer",
+  "Backend Engineer",
   "React Developer",
   "Angular Developer",
   "Node.js Developer",
@@ -54,12 +55,20 @@ const FEATURED_ROLES = [
 ];
 
 export default function InterviewWorkspace() {
+  const [searchParams] = useSearchParams();
   const { activeResumeText, activeResumeFileName } = useResumeStore();
 
   const [jobTitle, setJobTitle] = useState("Full Stack Developer");
   const [roundType, setRoundType] = useState("technical");
   const [difficulty, setDifficulty] = useState("Standard");
   const [jobDescription, setJobDescription] = useState("");
+
+  useEffect(() => {
+    const roleParam = searchParams.get("role");
+    const jdParam = searchParams.get("jd");
+    if (roleParam) setJobTitle(roleParam);
+    if (jdParam) setJobDescription(jdParam);
+  }, [searchParams]);
 
   const [sessionStep, setSessionStep] = useState<"setup" | "active" | "report">("setup");
   const [questionsList, setQuestionsList] = useState<any[]>([]);

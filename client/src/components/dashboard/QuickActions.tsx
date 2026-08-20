@@ -1,11 +1,11 @@
-import { Plus, Calendar, BarChart3, Building2, UserCog } from "lucide-react";
+import { Plus, Calendar, BarChart3, FileText, UserCog } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
 export interface QuickActionsProps {
   onAddApplication?: () => void;
   onScheduleInterview?: () => void;
   onOpenAnalytics?: () => void;
-  onManageCompanies?: () => void;
+  onManageResumes?: () => void;
   onUpdateProfile?: () => void;
   className?: string;
 }
@@ -14,17 +14,17 @@ export default function QuickActions({
   onAddApplication,
   onScheduleInterview,
   onOpenAnalytics,
-  onManageCompanies,
+  onManageResumes,
   onUpdateProfile,
   className = "",
 }: QuickActionsProps) {
   const actions = [
     {
-      title: "Add New Application",
-      subtitle: "Track a new job posting",
+      title: "Add Application",
+      subtitle: "Track a new job opening",
       icon: Plus,
       color:
-        "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400 border-indigo-200/50",
+        "bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400 border-blue-200/50",
       onClick: onAddApplication,
     },
     {
@@ -36,27 +36,27 @@ export default function QuickActions({
       onClick: onScheduleInterview,
     },
     {
-      title: "View Analytics",
-      subtitle: "Review pipeline conversion",
+      title: "Resumes & Docs",
+      subtitle: "Manage master files & drafts",
+      icon: FileText,
+      color:
+        "bg-purple-50 text-purple-600 dark:bg-purple-950/60 dark:text-purple-400 border-purple-200/50",
+      onClick: onManageResumes,
+    },
+    {
+      title: "Pipeline Analytics",
+      subtitle: "Review conversion rates",
       icon: BarChart3,
       color:
         "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 border-emerald-200/50",
       onClick: onOpenAnalytics,
     },
     {
-      title: "Manage Companies",
-      subtitle: "CRM recruiter relationships",
-      icon: Building2,
-      color:
-        "bg-purple-50 text-purple-600 dark:bg-purple-950/60 dark:text-purple-400 border-purple-200/50",
-      onClick: onManageCompanies,
-    },
-    {
-      title: "Update Profile",
+      title: "Settings & Profile",
       subtitle: "Edit account preferences",
       icon: UserCog,
       color:
-        "bg-blue-50 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400 border-blue-200/50",
+        "bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200/50",
       onClick: onUpdateProfile,
     },
   ];

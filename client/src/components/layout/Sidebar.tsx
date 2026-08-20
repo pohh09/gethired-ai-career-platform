@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Briefcase,
-  BarChart3,
   Settings,
   HelpCircle,
   MessageSquare,
@@ -13,7 +12,6 @@ import {
   X,
   Users,
   FileText,
-  Sparkles,
 } from "lucide-react";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
 import SidebarSection from "./SidebarSection";
@@ -80,15 +78,22 @@ export default function Sidebar() {
               name="Jobs"
               path="/jobs"
               icon={Briefcase}
-              badge="Live"
+              badge="Tracker"
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />
             <SidebarItem
-              name="AI Workspace"
-              path="/ai-workspace"
+              name="Resumes & Docs"
+              path="/resumes"
+              icon={FileText}
+              collapsed={isCollapsed}
+              onClick={() => handleLinkClick(isMobile)}
+            />
+            <SidebarItem
+              name="Interview Prep"
+              path="/interview-prep"
               icon={Bot}
-              badge="AI Hub"
+              badge="AI"
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />
@@ -97,29 +102,6 @@ export default function Sidebar() {
               path="/community"
               icon={Users}
               badge="New"
-              collapsed={isCollapsed}
-              onClick={() => handleLinkClick(isMobile)}
-            />
-            <SidebarItem
-              name="Resumes"
-              path="/resumes"
-              icon={FileText}
-              collapsed={isCollapsed}
-              onClick={() => handleLinkClick(isMobile)}
-            />
-            <SidebarItem
-              name="Resume Builder"
-              path="/resumes/builder"
-              icon={Sparkles}
-              badge="AI"
-              collapsed={isCollapsed}
-              onClick={() => handleLinkClick(isMobile)}
-            />
-            <SidebarItem
-              name="Analytics"
-              path="/analytics"
-              icon={BarChart3}
-              badge="Pro"
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />

@@ -1158,7 +1158,7 @@ export default function ResumeBuilder() {
           )}
 
           {/* Wizard Navigation Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800 gap-2 flex-wrap">
             <Button
               type="button"
               variant="outline"
@@ -1171,28 +1171,40 @@ export default function ResumeBuilder() {
               Previous
             </Button>
 
-            {currentStepIndex < STEPS.length - 1 ? (
-              <Button
-                type="button"
-                variant="primary"
-                size="sm"
-                onClick={() => setCurrentStepIndex((prev) => Math.min(STEPS.length - 1, prev + 1))}
-                className="font-bold text-xs flex items-center gap-1.5"
-              >
-                <span>Next: {STEPS[currentStepIndex + 1]?.label}</span>
-                <ArrowRight size={13} />
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                variant="primary"
-                size="sm"
-                onClick={() => navigate("/resumes")}
-                className="font-bold text-xs"
-              >
-                Go to Resumes Hub
-              </Button>
-            )}
+            <div className="flex items-center gap-2">
+              {currentStepIndex < STEPS.length - 1 && (
+                <button
+                  type="button"
+                  onClick={() => setCurrentStepIndex(STEPS.length - 1)}
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-500 hover:text-blue-600 dark:hover:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  ⚡ Skip to Preview
+                </button>
+              )}
+
+              {currentStepIndex < STEPS.length - 1 ? (
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setCurrentStepIndex((prev) => Math.min(STEPS.length - 1, prev + 1))}
+                  className="font-bold text-xs flex items-center gap-1.5"
+                >
+                  <span>Next: {STEPS[currentStepIndex + 1]?.label}</span>
+                  <ArrowRight size={13} />
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => navigate("/resumes")}
+                  className="font-bold text-xs"
+                >
+                  Go to Resumes Hub
+                </Button>
+              )}
+            </div>
           </div>
         </div>
 

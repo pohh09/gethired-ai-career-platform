@@ -243,6 +243,12 @@ ${result.suggestions.map((s) => `- ${s}`).join("\n")}
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   Target Role: {job.role} at {job.company}
                 </p>
+                {result.source === "fallback" && (
+                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 mt-1.5 rounded-md bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-[11px] font-semibold">
+                    <AlertTriangle size={12} className="text-amber-600 shrink-0" />
+                    <span>Estimated (AI temporarily unavailable — showing keyword-based analysis)</span>
+                  </div>
+                )}
               </div>
 
               <div className="relative h-24 w-24 shrink-0 flex items-center justify-center">

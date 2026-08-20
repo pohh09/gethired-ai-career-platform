@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   ExternalLink,
@@ -22,9 +23,6 @@ import Button from "../ui/Button";
 import ResumeMatchModal from "./ResumeMatchModal";
 import ResumeOptimizerModal from "./ResumeOptimizerModal";
 import FollowUpEmailModal from "./FollowUpEmailModal";
-import InterviewPrepModal from "../interview/InterviewPrepModal";
-import CoverLetterModal from "../coverLetter/CoverLetterModal";
-import JobAnalyzerModal from "../jobAnalyzer/JobAnalyzerModal";
 import AIJobAnalysisModal from "./AIJobAnalysisModal";
 import { useReminderStore } from "../../store/reminderStore";
 import type { Job, DiscoverJob } from "../../types/job";
@@ -44,15 +42,12 @@ export default function JobDetailModal({
   onEdit,
   onDelete,
 }: JobDetailModalProps) {
+  const navigate = useNavigate();
   const [isMatchModalOpen, setIsMatchModalOpen] = useState<boolean>(false);
   const [isOptimizerModalOpen, setIsOptimizerModalOpen] =
     useState<boolean>(false);
   const [isFollowUpModalOpen, setIsFollowUpModalOpen] =
     useState<boolean>(false);
-  const [isInterviewPrepOpen, setIsInterviewPrepOpen] =
-    useState<boolean>(false);
-  const [isCoverLetterOpen, setIsCoverLetterOpen] = useState<boolean>(false);
-  const [isAnalyzerOpen, setIsAnalyzerOpen] = useState<boolean>(false);
   const [isAIAnalysisOpen, setIsAIAnalysisOpen] = useState<boolean>(false);
 
   if (!job) return null;
@@ -219,7 +214,14 @@ export default function JobDetailModal({
 
               <button
                 type="button"
-                onClick={() => setIsInterviewPrepOpen(true)}
+                onClick={() => {
+                  onClose();
+                  const params = new URLSearchParams({
+                    role: normalizedJob.role,
+                  });
+                  if (normalizedJob.notes) params.append("jd", normalizedJob.notes);
+                  navigate(`/interview-prep?${params.toString()}`);
+                }}
                 className="flex items-center gap-2 p-2.5 rounded-xl border border-amber-200 dark:border-amber-800/60 bg-white dark:bg-slate-900 text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-amber-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
               >
                 <BookOpen size={14} className="text-amber-500 shrink-0" />
@@ -228,7 +230,16 @@ export default function JobDetailModal({
 
               <button
                 type="button"
-                onClick={() => setIsCoverLetterOpen(true)}
+                onClick={() => {
+                  onClose();
+                  const params = new URLSearchParams({
+                    tab: "jobs",
+                    role: normalizedJob.role,
+                    company: normalizedJob.company,
+                  });
+                  if (normalizedJob.notes) params.append("jd", normalizedJob.notes);
+                  navigate(`/ai-workspace?${params.toString()}`);
+                }}
                 className="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800/60 bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 transition-all text-xs font-bold text-left cursor-pointer shadow-xs"
               >
                 <FileSpreadsheet
@@ -436,24 +447,6 @@ export default function JobDetailModal({
       <FollowUpEmailModal
         isOpen={isFollowUpModalOpen}
         onClose={() => setIsFollowUpModalOpen(false)}
-        job={normalizedJob}
-      />
-
-      <InterviewPrepModal
-        isOpen={isInterviewPrepOpen}
-        onClose={() => setIsInterviewPrepOpen(false)}
-        job={normalizedJob}
-      />
-
-      <CoverLetterModal
-        isOpen={isCoverLetterOpen}
-        onClose={() => setIsCoverLetterOpen(false)}
-        job={normalizedJob}
-      />
-
-      <JobAnalyzerModal
-        isOpen={isAnalyzerOpen}
-        onClose={() => setIsAnalyzerOpen(false)}
         job={normalizedJob}
       />
 

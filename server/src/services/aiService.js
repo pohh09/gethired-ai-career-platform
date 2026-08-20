@@ -53,6 +53,7 @@ Respond strictly with a valid JSON object matching:
           weaknesses: Array.isArray(parsed.weaknesses) ? parsed.weaknesses : [],
           suggestions: Array.isArray(parsed.suggestions) ? parsed.suggestions : [],
           atsTips: Array.isArray(parsed.atsTips) ? parsed.atsTips : [],
+          source: "ai",
         };
       }
     } catch (_err) {
@@ -128,6 +129,7 @@ Respond strictly with a valid JSON object matching:
           improvedSummary: typeof parsed.improvedSummary === "string" ? parsed.improvedSummary : "",
           improvedProjects: Array.isArray(parsed.improvedProjects) ? parsed.improvedProjects : [],
           aiRecommendations: Array.isArray(parsed.aiRecommendations) ? parsed.aiRecommendations : [],
+          source: "ai",
         };
       }
     } catch (_err) {
@@ -174,7 +176,8 @@ function fallbackMatchAnalyzer(resumeText, jobDescription) {
     atsTips: [
       "Use standard section headers like 'Work Experience' and 'Technical Skills'",
       "Avoid complex multi-column graphic tables that trip up ATS scanners"
-    ]
+    ],
+    source: "fallback",
   };
 }
 
@@ -225,6 +228,7 @@ function fallbackOptimizer(resumeText, jobDescription) {
       "Position your technical summary prominently at the top of your resume above work history.",
       "Incorporate strong action verbs at the start of every experience bullet point.",
       "Ensure ATS scanners can extract your email, phone, and LinkedIn URL without graphic icons."
-    ]
+    ],
+    source: "fallback",
   };
 }

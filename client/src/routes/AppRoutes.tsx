@@ -5,16 +5,12 @@ import Loader from "../components/ui/Loader";
 
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Jobs = lazy(() => import("../pages/Jobs"));
-const Companies = lazy(() => import("../pages/Companies"));
-const CompanyDetail = lazy(() => import("../pages/CompanyDetail"));
 const Analytics = lazy(() => import("../pages/Analytics"));
 const Calendar = lazy(() => import("../pages/Calendar"));
 const AIWorkspace = lazy(() => import("../pages/AIWorkspace"));
 const Resumes = lazy(() => import("../pages/Resumes"));
 const ResumeBuilder = lazy(() => import("../pages/ResumeBuilder"));
 const Community = lazy(() => import("../pages/Community"));
-const Notifications = lazy(() => import("../pages/Notifications"));
-const Activity = lazy(() => import("../pages/Activity"));
 const Profile = lazy(() => import("../pages/Profile"));
 const Settings = lazy(() => import("../pages/Settings"));
 const Login = lazy(() => import("../pages/Login"));
@@ -134,18 +130,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "companies",
+        path: "interview-prep",
         element: (
-          <Suspense fallback={<Loader text="Loading Companies CRM..." />}>
-            <Companies />
+          <Suspense fallback={<Loader text="Loading Interview Prep..." />}>
+            <AIWorkspace />
           </Suspense>
         ),
       },
       {
-        path: "companies/:id",
+        path: "interview",
         element: (
-          <Suspense fallback={<Loader text="Loading Company Profile..." />}>
-            <CompanyDetail />
+          <Suspense fallback={<Loader text="Loading Interview Prep..." />}>
+            <AIWorkspace />
           </Suspense>
         ),
       },
@@ -248,8 +244,8 @@ const router = createBrowserRouter([
       {
         path: "documents",
         element: (
-          <Suspense fallback={<Loader text="Redirecting to AI Workspace..." />}>
-            <AIWorkspace />
+          <Suspense fallback={<Loader text="Loading Resumes & Documents..." />}>
+            <Resumes />
           </Suspense>
         ),
       },
@@ -257,7 +253,7 @@ const router = createBrowserRouter([
         path: "notifications",
         element: (
           <Suspense fallback={<Loader text="Loading Notifications..." />}>
-            <Notifications />
+            <Analytics />
           </Suspense>
         ),
       },
@@ -265,7 +261,7 @@ const router = createBrowserRouter([
         path: "activity",
         element: (
           <Suspense fallback={<Loader text="Loading Activity Timeline..." />}>
-            <Activity />
+            <Analytics />
           </Suspense>
         ),
       },

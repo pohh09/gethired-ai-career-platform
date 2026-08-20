@@ -124,11 +124,21 @@ ${result.aiRecommendations.map((r) => `• ${r}`).join("\n")}
             <Sparkles size={18} />
           </div>
           <div>
-            <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
-              Optimization Analysis Ready
-            </h4>
+            <div className="flex items-center gap-2">
+              <h4 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">
+                Optimization Analysis Ready
+              </h4>
+              {result.source === "fallback" && (
+                <span className="px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center gap-1">
+                  <AlertTriangle size={11} className="text-amber-600" />
+                  Estimated (AI Unavailable)
+                </span>
+              )}
+            </div>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Review ATS compliance, missing keywords, and rewritten sections below.
+              {result.source === "fallback"
+                ? "Basic analysis — AI temporarily unavailable, showing heuristic-based ATS estimate."
+                : "Review ATS compliance, missing keywords, and rewritten sections below."}
             </p>
           </div>
         </div>

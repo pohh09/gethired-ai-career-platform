@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Plus,
@@ -52,6 +53,7 @@ type WorkspaceTab = "applications" | "discover" | "saved" | "archived";
 const SAVED_JOBS_KEY = "jobflow_saved_jobs_v1";
 
 export default function Jobs() {
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("applications");
   const [viewMode, setViewMode] = useState<"kanban" | "table">("kanban");
 
@@ -62,6 +64,17 @@ export default function Jobs() {
   const [dateRange, setDateRange] = useState("All");
   const [sortBy, setSortBy] = useState<string>("newest");
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const statusParam = searchParams.get("status");
+    if (statusParam) {
+      setStatus(statusParam);
+    }
+    const actionParam = searchParams.get("action");
+    if (actionParam === "new") {
+      setIsModalOpen(true);
+    }
+  }, [searchParams]);
 
   const [discoverFilters, setDiscoverFilters] = useState<DiscoverJobFilters>(
     {},

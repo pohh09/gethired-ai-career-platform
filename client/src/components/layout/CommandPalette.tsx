@@ -10,13 +10,9 @@ import {
   BarChart3,
   Calendar,
   ArrowRight,
-  Building2,
   FileCheck,
-  FolderOpen,
   Sparkles,
-  Bookmark,
 } from "lucide-react";
-import { useDocumentStore } from "../../store/documentStore";
 
 export interface CommandPaletteProps {
   isOpen: boolean;
@@ -31,7 +27,6 @@ export default function CommandPalette({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
-  const documents = useDocumentStore((state) => state.documents);
 
   const staticCommands = [
     {
@@ -39,70 +34,49 @@ export default function CommandPalette({
       path: "/",
       icon: LayoutDashboard,
       category: "Navigation",
-      description: "Real-time analytics and tracking overview",
+      description: "Real-time pipeline overview, streak & wins",
     },
     {
-      name: "Jobs Applications",
+      name: "Jobs Pipeline & Search",
       path: "/jobs",
       icon: Briefcase,
       category: "Navigation",
-      description: "Manage ATS pipeline and track opportunities",
+      description: "Manage applications, discovery, and status",
     },
     {
-      name: "Discover Jobs",
-      path: "/jobs",
-      icon: Search,
-      category: "Jobs",
-      description: "Search live tech job postings & remote roles",
-    },
-    {
-      name: "Saved Jobs",
-      path: "/jobs",
-      icon: Bookmark,
-      category: "Jobs",
-      description: "View saved target opportunities",
-    },
-    {
-      name: "Companies CRM",
-      path: "/companies",
-      icon: Building2,
-      category: "Navigation",
-      description: "Target companies and recruitment CRM",
-    },
-    {
-      name: "Resume Manager",
+      name: "Resumes & Documents",
       path: "/resumes",
       icon: FileCheck,
-      category: "Tools",
-      description: "Upload, set default, and manage master resume files",
+      category: "Documents",
+      description: "Master resumes, cover letters, and shared drafts",
     },
     {
-      name: "AI Documents",
-      path: "/documents",
-      icon: FolderOpen,
-      category: "Tools",
-      description: "View saved Cover Letters and AI reports",
-    },
-    {
-      name: "AI Resume Optimizer",
-      path: "/resume-optimizer",
+      name: "Guided AI Resume Builder",
+      path: "/resumes/builder",
       icon: Sparkles,
       category: "AI Tools",
-      description: "Optimize bullet points and ATS score",
+      description: "Step-by-step ATS resume builder with AI",
     },
     {
-      name: "AI Cover Letter",
-      path: "/cover-letter",
+      name: "Interview Prep Simulator",
+      path: "/interview-prep",
       icon: Sparkles,
-      category: "AI Tools",
-      description: "Generate customized cover letters",
+      category: "Interview",
+      description: "Practice mock interview rounds with real-time feedback",
     },
     {
-      name: "Analytics & Trends",
+      name: "Community Hub & Streaks",
+      path: "/community",
+      icon: User,
+      category: "Community",
+      description: "Peer resume feedback, accountability streak, and success wall",
+    },
+    {
+      name: "Analytics & Activity",
       path: "/analytics",
       icon: BarChart3,
       category: "Analytics",
-      description: "View conversion charts and weekly activity",
+      description: "Conversion charts, action audit trail & notifications",
     },
     {
       name: "Calendar & Deadlines",
@@ -119,23 +93,15 @@ export default function CommandPalette({
       description: "Personal details, experience & job targets",
     },
     {
-      name: "Preferences & Settings",
+      name: "Settings & Preferences",
       path: "/settings",
       icon: Settings,
       category: "Account",
-      description: "Theme preferences, default resume & options",
+      description: "Theme preferences, privacy & account options",
     },
   ];
 
-  const documentItems = documents.map((doc) => ({
-    name: doc.title,
-    path: "/documents",
-    icon: FolderOpen,
-    category: "AI Documents",
-    description: `Saved ${doc.category} document (${doc.createdAt})`,
-  }));
-
-  const allItems = [...staticCommands, ...documentItems];
+  const allItems = [...staticCommands];
 
   const filteredItems = allItems.filter(
     (item) =>
