@@ -123,16 +123,6 @@ export default function Navbar() {
             <Search size={18} />
           </button>
 
-          {/* Mobile Quick Add Icon Button */}
-          <button
-            type="button"
-            onClick={() => navigate("/jobs")}
-            className="md:hidden h-8.5 w-8.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition-transform active:scale-95 cursor-pointer shadow-xs"
-            aria-label="Quick add job"
-          >
-            <Plus size={18} />
-          </button>
-
           {/* Desktop Quick Add Button */}
           <Button
             variant="primary"
