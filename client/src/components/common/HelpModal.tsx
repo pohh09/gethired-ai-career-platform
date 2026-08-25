@@ -100,7 +100,7 @@ export default function HelpModal({ isOpen, onClose }: HelpModalProps) {
           <div className="space-y-1">
             <h3 className="text-sm sm:text-base font-extrabold flex items-center gap-2 text-white">
               <BookOpen size={16} className="text-cyan-400" />
-              Career OS Knowledge Base & FAQs
+              GetHired Knowledge Base & FAQs
             </h3>
             <p className="text-xs text-slate-300">
               Learn how to get the most out of your job tracker, AI tools, and search engine.
