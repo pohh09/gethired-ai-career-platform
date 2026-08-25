@@ -847,7 +847,7 @@ export default function LandingPage() {
             {/* Community Showcase */}
             {activeTabObj.id === "community" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
                       <Users size={15} className="text-indigo-500" /> Peer Review & Suggestions
@@ -895,7 +895,7 @@ export default function LandingPage() {
             {/* AI Workspace Showcase */}
             {activeTabObj.id === "ai-workspace" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
                       <Bot size={15} className="text-blue-500" /> AI Resume Optimizer
@@ -946,7 +946,7 @@ export default function LandingPage() {
             {/* Jobs Showcase */}
             {activeTabObj.id === "jobs" && (
               <div className="space-y-2.5 sm:space-y-3">
-                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                     <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
                       TN
@@ -970,7 +970,7 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                     <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-cyan-600 text-white flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
                       CP
@@ -998,7 +998,7 @@ export default function LandingPage() {
 
             {/* Resume Showcase */}
             {activeTabObj.id === "resume" && (
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-3 sm:space-y-4">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-3 sm:space-y-4">
                 <div className="flex items-center justify-between gap-2">
                   <div>
                     <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100">
@@ -1137,7 +1137,7 @@ export default function LandingPage() {
               Application Architecture
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-              Designed as a full-stack platform with a React frontend, REST API backend, MongoDB persistence, AI integrations and external job providers.
+              Designed as a modern full-stack platform with a React frontend, REST API backend, MongoDB persistence, AI integrations and external job providers.
             </p>
           </div>
 
@@ -1148,20 +1148,20 @@ export default function LandingPage() {
                 return (
                   <div
                     key={idx}
-                    className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/70 dark:border-slate-800 space-y-1.5 relative"
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80 space-y-2 relative hover:border-blue-500/40 dark:hover:border-cyan-500/40 transition-all duration-200 shadow-2xs"
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400">
-                        <Icon size={15} />
+                    <div className="flex items-center justify-between">
+                      <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-cyan-400 border border-blue-100 dark:border-blue-900/60 shadow-2xs">
+                        <Icon size={16} />
                       </span>
-                      <span className="text-[10px] font-mono text-slate-400">
-                        {step.step}
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-800">
+                        STEP {step.step}
                       </span>
                     </div>
-                    <h4 className="text-xs font-extrabold text-slate-900 dark:text-slate-100">
+                    <h4 className="text-xs font-black text-slate-900 dark:text-slate-100">
                       {step.label}
                     </h4>
-                    <p className="text-[11px] text-slate-500 font-medium">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
                       {step.sub}
                     </p>
                   </div>
@@ -1169,19 +1169,32 @@ export default function LandingPage() {
               })}
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-center overflow-x-auto">
-              <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-bold text-slate-700 dark:text-slate-300">
-                <span className="px-2 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-cyan-300">React + TS</span>
-                <span>→</span>
-                <span className="px-2 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-cyan-300">TanStack / Axios</span>
-                <span>→</span>
-                <span className="px-2 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Express REST</span>
-                <span>→</span>
-                <span className="px-2 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">JWT Guards</span>
-                <span>→</span>
-                <span className="px-2 py-0.5 rounded-lg bg-cyan-100 dark:bg-cyan-950 text-cyan-800 dark:text-cyan-300">MongoDB</span>
-                <span>→</span>
-                <span className="px-2 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">Gemini AI</span>
+            {/* Architecture Pipeline Flow Banner */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200/90 dark:border-slate-800 text-center overflow-x-auto no-scrollbar">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs font-bold text-slate-700 dark:text-slate-300 min-w-max">
+                <span className="px-2.5 py-1 rounded-xl bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-cyan-300 border border-blue-200/80 dark:border-blue-800/60 shadow-2xs">
+                  React 19 + TS
+                </span>
+                <span className="text-slate-400 dark:text-slate-600 font-black">→</span>
+                <span className="px-2.5 py-1 rounded-xl bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800/60 shadow-2xs">
+                  TanStack / Axios
+                </span>
+                <span className="text-slate-400 dark:text-slate-600 font-black">→</span>
+                <span className="px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 shadow-2xs">
+                  Express REST
+                </span>
+                <span className="text-slate-400 dark:text-slate-600 font-black">→</span>
+                <span className="px-2.5 py-1 rounded-xl bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200/80 dark:border-purple-800/60 shadow-2xs">
+                  JWT Guards
+                </span>
+                <span className="text-slate-400 dark:text-slate-600 font-black">→</span>
+                <span className="px-2.5 py-1 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/60 shadow-2xs">
+                  MongoDB Atlas
+                </span>
+                <span className="text-slate-400 dark:text-slate-600 font-black">→</span>
+                <span className="px-2.5 py-1 rounded-xl bg-amber-50 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/60 shadow-2xs">
+                  Gemini 1.5 Flash
+                </span>
               </div>
             </div>
           </div>

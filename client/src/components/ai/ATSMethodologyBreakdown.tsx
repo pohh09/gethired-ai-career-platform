@@ -69,7 +69,7 @@ export default function ATSMethodologyBreakdown({
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 size={13} className="text-blue-500" />
@@ -82,7 +82,7 @@ export default function ATSMethodologyBreakdown({
               </p>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 size={13} className="text-emerald-500" />
@@ -95,7 +95,7 @@ export default function ATSMethodologyBreakdown({
               </p>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 size={13} className="text-purple-500" />
@@ -108,7 +108,7 @@ export default function ATSMethodologyBreakdown({
               </p>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 size={13} className="text-amber-500" />
