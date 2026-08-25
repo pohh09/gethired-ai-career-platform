@@ -292,9 +292,9 @@ export default function AdminAnalytics() {
   return (
     <div className="space-y-6 pb-16">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 sm:p-6 bg-gradient-to-r from-slate-900 via-slate-900 to-blue-950 text-white rounded-3xl shadow-xl border border-slate-800">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 sm:p-6 bg-gradient-to-r from-slate-900 via-slate-900 to-blue-950 text-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-800">
         <div className="space-y-1.5">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-500/20 text-cyan-300 border border-cyan-500/30">
               <ShieldCheck size={12} /> System Admin
             </span>
@@ -312,8 +312,8 @@ export default function AdminAnalytics() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-[11px] text-slate-300">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+          <div className="col-span-2 sm:col-span-1 flex items-center justify-center sm:justify-start gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-[11px] text-slate-300">
             <Clock size={13} className="text-slate-400" />
             <span>Updated {formatTime(lastUpdated)}</span>
           </div>
@@ -321,7 +321,7 @@ export default function AdminAnalytics() {
           <button
             type="button"
             onClick={() => setAutoRefresh(!autoRefresh)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border text-center ${
               autoRefresh
                 ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40 shadow-xs"
                 : "bg-slate-800 text-slate-400 border-slate-700 hover:text-white"
@@ -334,7 +334,7 @@ export default function AdminAnalytics() {
             type="button"
             onClick={() => fetchAllAnalytics(true)}
             disabled={refreshing}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold shadow-lg shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold shadow-lg shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
           >
             <RefreshCw size={13} className={refreshing ? "animate-spin" : ""} />
             <span>Refresh</span>
@@ -404,8 +404,8 @@ export default function AdminAnalytics() {
       )}
 
       {/* Tab Navigation */}
-      <div className="border-b border-slate-200 dark:border-slate-800 overflow-x-auto scrollbar-none">
-        <div className="flex gap-1 min-w-max">
+      <div className="border-b border-slate-200 dark:border-slate-800 overflow-x-auto no-scrollbar scroll-smooth -mx-3 sm:mx-0 px-3 sm:px-0">
+        <div className="flex gap-1 min-w-max pb-1">
           {TABS.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -414,7 +414,7 @@ export default function AdminAnalytics() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-extrabold border-b-2 transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 sm:px-4 py-2.5 text-xs font-extrabold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
                   isActive
                     ? "border-blue-600 text-blue-600 dark:border-cyan-400 dark:text-cyan-400"
                     : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
@@ -730,8 +730,8 @@ export default function AdminAnalytics() {
         {activeTab === "users" && (
           <div className="space-y-6">
             {/* User Search, Filters, & Table */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
                 <div>
                   <h3 className="font-extrabold text-base text-slate-900 dark:text-white">
                     Registered Users Directory
@@ -741,9 +741,9 @@ export default function AdminAnalytics() {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 md:flex md:flex-wrap items-center gap-2 sm:gap-2.5 w-full md:w-auto">
                   {/* Search Bar */}
-                  <div className="relative">
+                  <div className="relative sm:col-span-3 md:col-span-1">
                     <Search
                       size={14}
                       className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
@@ -756,7 +756,7 @@ export default function AdminAnalytics() {
                         setUserSearch(e.target.value);
                         setUserPage(1);
                       }}
-                      className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs text-slate-900 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-blue-500 w-48 sm:w-60"
+                      className="pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs text-slate-900 dark:text-slate-100 focus:outline-hidden focus:ring-2 focus:ring-blue-500 w-full md:w-56"
                     />
                   </div>
 
@@ -767,7 +767,7 @@ export default function AdminAnalytics() {
                       setUserRoleFilter(e.target.value);
                       setUserPage(1);
                     }}
-                    className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-700 dark:text-slate-300"
+                    className="w-full md:w-auto px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-700 dark:text-slate-300"
                   >
                     <option value="all">All Roles</option>
                     <option value="user">Normal Users</option>
@@ -783,7 +783,7 @@ export default function AdminAnalytics() {
                       setUserSortOrder(order);
                       setUserPage(1);
                     }}
-                    className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-700 dark:text-slate-300"
+                    className="w-full md:w-auto px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs font-bold text-slate-700 dark:text-slate-300 sm:col-span-2 md:col-span-1"
                   >
                     <option value="createdAt-desc">Newest Registered</option>
                     <option value="createdAt-asc">Oldest Registered</option>
@@ -1314,12 +1314,12 @@ export default function AdminAnalytics() {
       {/* User Detail Drawer / Modal */}
       <AnimatePresence>
         {selectedUserId && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/60 backdrop-blur-xs">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto"
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-lg w-[95vw] sm:w-full shadow-2xl space-y-4 sm:space-y-5 max-h-[92vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2">
