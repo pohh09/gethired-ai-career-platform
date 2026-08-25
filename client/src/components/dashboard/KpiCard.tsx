@@ -110,27 +110,27 @@ export default function KpiCard({
     <motion.div
       onClick={onClick}
       whileHover={{ y: -3, transition: { duration: 0.18 } }}
-      className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-all duration-200 ${style.border} ${style.glow} ${onClick ? "cursor-pointer" : ""} ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3.5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 ${style.border} ${style.glow} ${onClick ? "cursor-pointer" : ""} ${className}`}
     >
       <div className={`absolute top-0 left-0 right-0 h-1 ${style.bar}`} />
 
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+      <div className="flex items-center justify-between gap-1.5 mb-2 sm:mb-3">
+        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
           {title}
         </span>
         <div
-          className={`h-10 w-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 border border-slate-200/50 dark:border-slate-800/50 ${style.bg} ${style.text}`}
+          className={`h-8 w-8 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 border border-slate-200/50 dark:border-slate-800/50 shrink-0 ${style.bg} ${style.text}`}
         >
           {icon}
         </div>
       </div>
 
-      <div className="flex items-end justify-between gap-2 mb-3">
-        <h3 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+      <div className="flex items-end justify-between gap-1.5 mb-2 sm:mb-3">
+        <h3 className="text-xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
           {typeof value === "number" ? value.toLocaleString() : value}
         </h3>
 
-        <div className="flex items-end gap-1 h-8 shrink-0">
+        <div className="hidden sm:flex items-end gap-1 h-8 shrink-0">
           {miniGraphData.map((val, idx) => {
             const heightPercent = Math.max(15, (val / maxVal) * 100);
             return (
@@ -147,9 +147,9 @@ export default function KpiCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-[10px] sm:text-xs font-medium text-slate-500 dark:text-slate-400">
         <span
-          className={`inline-flex items-center gap-0.5 font-extrabold px-2 py-0.5 rounded-md text-[11px] ${trendDirection === "up"
+          className={`inline-flex items-center gap-0.5 font-extrabold px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[11px] ${trendDirection === "up"
               ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"
               : trendDirection === "down"
                 ? "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300"
@@ -157,9 +157,9 @@ export default function KpiCard({
             }`}
         >
           {trendDirection === "up" ? (
-            <TrendingUp size={12} />
+            <TrendingUp size={11} />
           ) : trendDirection === "down" ? (
-            <TrendingDown size={12} />
+            <TrendingDown size={11} />
           ) : null}
           <span>{percentageChange}</span>
         </span>

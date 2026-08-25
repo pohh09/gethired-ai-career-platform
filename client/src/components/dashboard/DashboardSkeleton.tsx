@@ -1,5 +1,4 @@
 import Skeleton from "../ui/Skeleton";
-import DashboardGrid from "./DashboardGrid";
 
 export default function DashboardSkeleton() {
   return (
@@ -9,33 +8,28 @@ export default function DashboardSkeleton() {
         <Skeleton width="340px" height={16} />
       </div>
 
-      <DashboardGrid columns={5}>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 sm:p-5 space-y-3">
           <Skeleton width="50%" height={14} />
           <Skeleton width="40%" height={32} />
           <Skeleton width="70%" height={12} />
         </div>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 sm:p-5 space-y-3">
           <Skeleton width="50%" height={14} />
           <Skeleton width="40%" height={32} />
           <Skeleton width="70%" height={12} />
         </div>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 sm:p-5 space-y-3">
           <Skeleton width="50%" height={14} />
           <Skeleton width="40%" height={32} />
           <Skeleton width="70%" height={12} />
         </div>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 sm:p-5 space-y-3">
           <Skeleton width="50%" height={14} />
           <Skeleton width="40%" height={32} />
           <Skeleton width="70%" height={12} />
         </div>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
-          <Skeleton width="50%" height={14} />
-          <Skeleton width="40%" height={32} />
-          <Skeleton width="70%" height={12} />
-        </div>
-      </DashboardGrid>
+      </div>
 
       <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
         <div className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-4">
