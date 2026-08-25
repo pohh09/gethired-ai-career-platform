@@ -14,7 +14,7 @@ interface UIState {
   toggleMobileDrawer: () => void;
 }
 
-const applyThemeToDOM = (theme: ThemeMode) => {
+const applyThemeToDOM = (theme: ThemeMode = "dark") => {
   if (typeof window === "undefined") return;
   const root = document.documentElement;
   const isDark =
@@ -32,7 +32,7 @@ const applyThemeToDOM = (theme: ThemeMode) => {
 export const useUIStore = create<UIState>()(
   persist(
     (set) => ({
-      theme: "system",
+      theme: "dark",
       sidebarCollapsed: false,
       mobileDrawerOpen: false,
 
@@ -59,9 +59,7 @@ export const useUIStore = create<UIState>()(
         sidebarCollapsed: state.sidebarCollapsed,
       }),
       onRehydrateStorage: () => (state) => {
-        if (state) {
-          applyThemeToDOM(state.theme);
-        }
+        applyThemeToDOM(state?.theme || "dark");
       },
     },
   ),
