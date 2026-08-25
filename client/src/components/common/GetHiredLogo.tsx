@@ -262,9 +262,9 @@ export default function GetHiredLogo({
   variant = "default",
   showText = true,
   showTagline = false,
-  taglineText = "JOBS • SKILLS • YOUR FUTURE",
+  taglineText = "AI Career Platform",
   showBadge = false,
-  badgeText = "AI OS",
+  badgeText = "AI",
   className = "",
   textClassName = "",
   iconOnly = false,
@@ -323,15 +323,11 @@ export default function GetHiredLogo({
           )}
         </div>
 
-        {showTagline ? (
-          <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 tracking-[0.16em] uppercase mt-1">
+        {showTagline && (
+          <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 tracking-[0.14em] uppercase mt-1">
             {taglineText}
           </span>
-        ) : pixelSize >= 36 ? (
-          <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 tracking-wider uppercase mt-0.5">
-            Career OS
-          </span>
-        ) : null}
+        )}
       </div>
     </div>
   );
