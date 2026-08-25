@@ -6,6 +6,8 @@ import { useResumeStore } from "./resumeStore";
 import { useReminderStore } from "./reminderStore";
 import { useDocumentStore } from "./documentStore";
 
+import api from "../services/api";
+
 interface AuthState {
   user: User | null;
   token: string | null;
@@ -23,11 +25,10 @@ export const useAuthStore = create<AuthState>()(
 
       login: (user, token) => {
         try {
-          queryClient.clear();
+          useResumeStore.getState().initUser(user.id);
+          useReminderStore.getState().initUser(user.id);
+          useDocumentStore.getState().initUser(user.id);
         } catch {}
-        useResumeStore.getState().initUser(user.id);
-        useReminderStore.getState().initUser(user.id);
-        useDocumentStore.getState().initUser(user.id);
         set({
           user,
           token,
@@ -38,14 +39,7 @@ export const useAuthStore = create<AuthState>()(
         try {
           const currentToken = useAuthStore.getState().token;
           if (currentToken) {
-            const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-            fetch(`${apiBase}/auth/logout`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${currentToken}`,
-              },
-            }).catch(() => {});
+            api.post("/auth/logout").catch(() => {});
           }
         } catch {}
 

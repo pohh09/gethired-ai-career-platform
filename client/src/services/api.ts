@@ -2,8 +2,37 @@ import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useAuthStore } from "../store/authStore";
 
+/**
+ * Resolves the backend API base URL:
+ * 1. Checks VITE_API_URL environment variable (from Vercel / .env)
+ * 2. In local dev (Vite), falls back to "http://localhost:5000/api"
+ * 3. In production, sanitizes and formats the Render / deployed backend URL
+ */
+export const getApiBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+
+  if (envUrl && typeof envUrl === "string" && envUrl.trim().length > 0) {
+    let cleanUrl = envUrl.trim();
+    if (cleanUrl.endsWith("/")) {
+      cleanUrl = cleanUrl.slice(0, -1);
+    }
+    if (!cleanUrl.endsWith("/api")) {
+      cleanUrl = `${cleanUrl}/api`;
+    }
+    return cleanUrl;
+  }
+
+  // Local development fallback
+  if (import.meta.env.DEV) {
+    return "http://localhost:5000/api";
+  }
+
+  // Production fallback
+  return "/api";
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: getApiBaseUrl(),
   headers: {
     "Content-Type": "application/json",
   },
@@ -74,7 +103,7 @@ api.interceptors.response.use(
     if (status && status >= 500) {
       toast.error("Server error. Please try again later.", { id: "server-error" });
     } else if (error.code === "ERR_NETWORK" || error.code === "ECONNABORTED") {
-      toast.error("Cannot connect to server. Please ensure the backend server is running on http://localhost:5000.", {
+      toast.error("Cannot connect to server. Please check your network connection or verify the backend is running.", {
         id: "network-error",
       });
     }
