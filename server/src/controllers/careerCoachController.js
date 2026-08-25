@@ -1,5 +1,6 @@
 import JobApplication from "../models/JobApplication.js";
 import { generateCareerCoachAnalysisWithAI } from "../services/careerCoachService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export async function getCareerCoachAnalysis(req, res) {
   try {
@@ -8,6 +9,10 @@ export async function getCareerCoachAnalysis(req, res) {
     const userJobs = await JobApplication.find({ createdBy: userId }).sort({ createdAt: -1 });
 
     const result = await generateCareerCoachAnalysisWithAI(userJobs, req.user);
+
+    trackEvent(userId, "career_guidance", {
+      jobsTrackedCount: userJobs.length,
+    });
 
     return res.status(200).json({
       success: true,

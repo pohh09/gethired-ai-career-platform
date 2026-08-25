@@ -19,10 +19,36 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
       minlength: 6,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+      index: true,
+    },
+    lastLoginAt: {
+      type: Date,
+      default: null,
+    },
+    loginCount: {
+      type: Number,
+      default: 0,
+    },
+    lastActiveAt: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.index({ email: 1, isAdmin: 1 });
+userSchema.index({ createdAt: -1 });
 
 export default mongoose.model("User", userSchema);

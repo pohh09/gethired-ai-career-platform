@@ -8,6 +8,7 @@ import {
   Moon,
   LogOut,
   ChevronDown,
+  ShieldCheck,
 } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import { useUIStore } from "../../store/uiStore";
@@ -117,6 +118,17 @@ export default function ProfileDropdown() {
                 <Settings size={16} className="text-slate-400" />
                 <span>Settings</span>
               </Link>
+
+              {(user?.isAdmin || user?.role === "admin") && (
+                <Link
+                  to="/admin/analytics"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-blue-600 dark:text-cyan-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition"
+                >
+                  <ShieldCheck size={16} />
+                  <span>Admin Analytics</span>
+                </Link>
+              )}
 
               <button
                 type="button"

@@ -2,7 +2,12 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  isAdmin?: boolean;
+  role?: "user" | "admin";
   createdAt?: string;
+  lastLoginAt?: string;
+  loginCount?: number;
+  lastActiveAt?: string;
 }
 
 export interface LoginRequest {

@@ -1,6 +1,20 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { trackEvent } from "../services/analyticsService.js";
+
+// Helper to check if email is designated as admin
+const isDesignatedAdmin = (email = "") => {
+  const adminEmails = (
+    process.env.ADMIN_EMAIL ||
+    process.env.ADMIN_EMAILS ||
+    "poojadaki09@gmail.com"
+  )
+    .toLowerCase()
+    .split(",")
+    .map((e) => e.trim());
+  return !!email && adminEmails.includes(email.toLowerCase());
+};
 
 export const register = async (req, res) => {
   try {
@@ -13,7 +27,8 @@ export const register = async (req, res) => {
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const existingUser = await User.findOne({ email: normalizedEmail });
 
     if (existingUser) {
       return res.status(409).json({
@@ -23,18 +38,33 @@ export const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const isAdminUser = isDesignatedAdmin(normalizedEmail);
 
     const user = await User.create({
-      name,
-      email,
+      name: name.trim(),
+      email: normalizedEmail,
       password: hashedPassword,
+      isAdmin: isAdminUser,
+      role: isAdminUser ? "admin" : "user",
+      lastLoginAt: new Date(),
+      loginCount: 1,
+      lastActiveAt: new Date(),
     });
 
     const token = jwt.sign(
-      { userId: user._id },
+      {
+        userId: user._id,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        role: user.role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+
+    // Track analytics events
+    trackEvent(user._id, "register", { email: user.email });
+    trackEvent(user._id, "login", { email: user.email, method: "register_auto_login" });
 
     res.status(201).json({
       success: true,
@@ -44,6 +74,8 @@ export const register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin: user.isAdmin,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -67,7 +99,8 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
       return res.status(401).json({
@@ -85,11 +118,35 @@ export const login = async (req, res) => {
       });
     }
 
+    // Auto-elevate admin if designated email
+    const isAdminUser = user.isAdmin || user.role === "admin" || isDesignatedAdmin(normalizedEmail);
+    if (isAdminUser && (!user.isAdmin || user.role !== "admin")) {
+      user.isAdmin = true;
+      user.role = "admin";
+    }
+
+    // Update login metrics
+    user.lastLoginAt = new Date();
+    user.loginCount = (user.loginCount || 0) + 1;
+    user.lastActiveAt = new Date();
+    await user.save();
+
     const token = jwt.sign(
-      { userId: user._id },
+      {
+        userId: user._id,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        role: user.role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+
+    // Track login event
+    trackEvent(user._id, "login", {
+      email: user.email,
+      loginCount: user.loginCount,
+    });
 
     res.status(200).json({
       success: true,
@@ -99,6 +156,8 @@ export const login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin: user.isAdmin,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -121,13 +180,27 @@ export const getMe = async (req, res) => {
       });
     }
 
+    // Check designated admin on getMe as well
+    const isAdminUser =
+      user.isAdmin || user.role === "admin" || isDesignatedAdmin(user.email);
+
+    if (isAdminUser && (!user.isAdmin || user.role !== "admin")) {
+      user.isAdmin = true;
+      user.role = "admin";
+      await user.save().catch(() => {});
+    }
+
     res.status(200).json({
       success: true,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin: user.isAdmin,
+        role: user.role,
         createdAt: user.createdAt,
+        lastLoginAt: user.lastLoginAt,
+        loginCount: user.loginCount,
       },
     });
   } catch (error) {

@@ -1,11 +1,13 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootRoute from "./RootRoute";
+import AdminRoute from "./AdminRoute";
 import Loader from "../components/ui/Loader";
 
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const Jobs = lazy(() => import("../pages/Jobs"));
 const Analytics = lazy(() => import("../pages/Analytics"));
+const AdminAnalytics = lazy(() => import("../pages/AdminAnalytics"));
 const Calendar = lazy(() => import("../pages/Calendar"));
 const AIWorkspace = lazy(() => import("../pages/AIWorkspace"));
 const ResumeBuilder = lazy(() => import("../pages/ResumeBuilder"));
@@ -286,6 +288,26 @@ const router = createBrowserRouter([
           <Suspense fallback={<Loader text="Loading Settings..." />}>
             <Settings />
           </Suspense>
+        ),
+      },
+      {
+        path: "admin/analytics",
+        element: (
+          <AdminRoute>
+            <Suspense fallback={<Loader text="Loading Admin Analytics..." />}>
+              <AdminAnalytics />
+            </Suspense>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin",
+        element: (
+          <AdminRoute>
+            <Suspense fallback={<Loader text="Loading Admin Analytics..." />}>
+              <AdminAnalytics />
+            </Suspense>
+          </AdminRoute>
         ),
       },
     ],

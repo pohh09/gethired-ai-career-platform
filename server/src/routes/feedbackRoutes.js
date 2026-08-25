@@ -2,6 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import Feedback from "../models/Feedback.js";
 import { sendFeedbackEmail } from "../services/emailService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 const router = express.Router();
 
@@ -82,6 +83,12 @@ router.post("/", optionalAuth, rateLimiter, async (req, res) => {
     });
 
     await feedbackDoc.save();
+
+    // Telemetry tracking
+    trackEvent(authenticatedUserId, "feedback_submit", {
+      type: sanitizedType,
+      feedbackId: feedbackDoc._id,
+    });
 
     // Trigger email notification to recipient (poojadaki09@gmail.com)
     let emailResult = { success: false };

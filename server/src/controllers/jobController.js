@@ -1,11 +1,18 @@
 import mongoose from "mongoose";
 import JobApplication from "../models/JobApplication.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export const createJob = async (req, res) => {
   try {
     const job = await JobApplication.create({
       ...req.body,
       createdBy: req.user.userId,
+    });
+
+    trackEvent(req.user.userId, "application_create", {
+      company: job.company,
+      role: job.role,
+      status: job.status,
     });
 
     res.status(201).json({
@@ -121,6 +128,15 @@ export const updateJob = async (req, res) => {
         runValidators: true,
       }
     );
+
+    if (req.body.status && req.body.status !== job.status) {
+      trackEvent(req.user.userId, "application_status_change", {
+        company: updatedJob.company,
+        role: updatedJob.role,
+        oldStatus: job.status,
+        newStatus: req.body.status,
+      });
+    }
 
     res.status(200).json({
       success: true,

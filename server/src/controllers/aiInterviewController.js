@@ -1,4 +1,5 @@
 import { generateInterviewPrepWithAI } from "../services/aiInterviewService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export async function generateInterviewPrep(req, res) {
   try {
@@ -23,6 +24,12 @@ export async function generateInterviewPrep(req, res) {
       role,
       jobDescription: jobDescription || "",
       resumeText: resumeText || "",
+    });
+
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "interview_practice", {
+      company,
+      role,
     });
 
     return res.status(200).json({

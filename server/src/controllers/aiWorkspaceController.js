@@ -6,6 +6,7 @@ import * as chatService from "../services/ai/chatAIService.js";
 import * as companyService from "../services/ai/companyService.js";
 import * as adminService from "../services/ai/adminService.js";
 import { parseUploadedDocument } from "../services/ai/documentParserService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export async function parseDocument(req, res) {
   try {
@@ -21,6 +22,12 @@ export async function parseDocument(req, res) {
       return res.status(400).json({ success: false, error: "No file uploaded" });
     }
     const result = await parseUploadedDocument(req.file);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_upload", {
+      fileType: req.file.mimetype,
+      fileSize: req.file.size,
+      wordCount: result?.wordCount || 0,
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     console.error("[Upload Debug Error]:", err.message);
@@ -32,10 +39,17 @@ export async function parseResume(req, res) {
   try {
     if (req.file) {
       const result = await parseUploadedDocument(req.file);
+      const userId = req.user?.userId || null;
+      trackEvent(userId, "resume_upload", {
+        fileType: req.file.mimetype,
+        fileSize: req.file.size,
+      });
       return res.json({ success: true, data: result });
     }
     const { resumeText } = req.body || {};
     const result = await resumeService.parseResume(resumeText);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", { feature: "parse_resume" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -46,6 +60,12 @@ export async function calculateATSScore(req, res) {
   try {
     const { resumeText, targetRole } = req.body;
     const result = await resumeService.calculateATSScore(resumeText, targetRole);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", {
+      feature: "ats_score",
+      targetRole: targetRole || "General",
+      atsScore: result?.atsScore || result?.overallScore || null,
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -56,6 +76,12 @@ export async function auditResume(req, res) {
   try {
     const { resumeText, targetRole } = req.body;
     const result = await resumeService.auditResume(resumeText, targetRole);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", {
+      feature: "audit_resume",
+      targetRole: targetRole || "General",
+      score: result?.score || result?.overallScore || null,
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -66,6 +92,8 @@ export async function analyzeResume(req, res) {
   try {
     const { resumeText } = req.body;
     const result = await resumeService.analyzeResume(resumeText);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", { feature: "deep_analysis" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -76,6 +104,8 @@ export async function tailorResume(req, res) {
   try {
     const { resumeText, jobDescription } = req.body;
     const result = await resumeService.tailorResume(resumeText, jobDescription);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_generate", { feature: "tailor_resume" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -86,6 +116,11 @@ export async function generateResume(req, res) {
   try {
     const profileData = req.body.profileData || req.body;
     const result = await resumeService.generateResume(profileData);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_generate", {
+      feature: "resume_builder_ai",
+      role: profileData?.targetRole || profileData?.role || "Software Engineer",
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -96,6 +131,8 @@ export async function optimizeBullets(req, res) {
   try {
     const bulletsText = req.body.bullet || req.body.bulletsText || req.body.text;
     const result = await resumeService.optimizeBullets(bulletsText);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", { feature: "star_bullet_optimizer" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -106,6 +143,8 @@ export async function improveSection(req, res) {
   try {
     const { section, content, targetRole } = req.body;
     const result = await resumeService.improveSection({ section, content, targetRole });
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "resume_analyze", { feature: "section_improver", section });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -116,6 +155,8 @@ export async function analyzeJobDescription(req, res) {
   try {
     const jobTextOrUrl = req.body.jobDescription || req.body.jobTextOrUrl || req.body.text;
     const result = await jobService.analyzeJobDescription(jobTextOrUrl);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "job_view", { feature: "job_description_analysis" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -126,6 +167,8 @@ export async function explainJob(req, res) {
   try {
     const jobText = req.body.jobDescription || req.body.text;
     const result = await jobService.explainJob(jobText);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "job_view", { feature: "explain_job" });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -136,6 +179,10 @@ export async function matchResumeWithJob(req, res) {
   try {
     const { resumeText, jobDescription } = req.body;
     const result = await jobService.matchResumeWithJob(resumeText, jobDescription);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "job_match", {
+      matchScore: result?.matchScore || result?.score || null,
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -146,6 +193,11 @@ export async function generateCoverLetter(req, res) {
   try {
     const { resumeText, jobDescription, companyName, roleTitle } = req.body;
     const result = await jobService.generateCoverLetter(resumeText, jobDescription, companyName, roleTitle);
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "cover_letter_generate", {
+      companyName: companyName || "",
+      roleTitle: roleTitle || "",
+    });
     res.json({ success: true, data: result });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

@@ -1,5 +1,6 @@
 import { fetchDiscoverJobs, getJobSearchDebugStats } from "../services/jobSearchService.js";
 import { extractJobData } from "../services/jobImportService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export const searchDiscoverJobs = async (req, res) => {
   try {
@@ -30,6 +31,14 @@ export const searchDiscoverJobs = async (req, res) => {
     };
 
     const jobs = await fetchDiscoverJobs(filters);
+
+    // Telemetry tracking
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "job_search", {
+      query: query || role || skill || keywords || "",
+      location: location || "",
+      resultsCount: jobs.length,
+    });
 
     res.set("Cache-Control", "no-store");
     res.status(200).json({

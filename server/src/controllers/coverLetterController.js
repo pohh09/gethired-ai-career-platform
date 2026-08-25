@@ -1,4 +1,5 @@
 import { generateCoverLetterWithAI } from "../services/coverLetterService.js";
+import { trackEvent } from "../services/analyticsService.js";
 
 export async function generateCoverLetter(req, res) {
   try {
@@ -28,6 +29,14 @@ export async function generateCoverLetter(req, res) {
       length: length || "Medium",
       userName: userName || req.user?.name || "",
       userEmail: userEmail || req.user?.email || "",
+    });
+
+    const userId = req.user?.userId || null;
+    trackEvent(userId, "cover_letter_generate", {
+      company,
+      role,
+      style,
+      wordCount: result?.wordCount || 0,
     });
 
     return res.status(200).json({

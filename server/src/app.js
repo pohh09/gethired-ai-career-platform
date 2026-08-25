@@ -16,6 +16,7 @@ import jobsRoutes from "./routes/jobsRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
 import communityRoutes from "./routes/communityRoutes.js";
 import feedbackRoutes from "./routes/feedbackRoutes.js";
+import adminAnalyticsRoutes from "./routes/adminAnalyticsRoutes.js";
 
 const app = express();
 
@@ -61,5 +62,6 @@ app.use("/api/ai", coverLetterRoutes);
 app.use("/api/ai", careerCoachRoutes);
 app.use("/api/ai", jobAnalyzerRoutes);
 app.use("/api/ai/workspace", aiWorkspaceRoutes);
+app.use("/api/admin/analytics", adminAnalyticsRoutes);
 
 export default app;

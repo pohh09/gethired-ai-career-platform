@@ -11,6 +11,7 @@ import {
   ChevronRight,
   X,
   Sparkles,
+  ShieldCheck,
 } from "lucide-react";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";
 import SidebarSection from "./SidebarSection";
@@ -28,7 +29,8 @@ export default function Sidebar() {
     mobileDrawerOpen,
     setMobileDrawerOpen,
   } = useUIStore();
-  const { logout } = useAuthStore();
+  const { user, logout } = useAuthStore();
+  const isAdmin = !!user?.isAdmin || user?.role === "admin";
 
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -101,6 +103,16 @@ export default function Sidebar() {
               collapsed={isCollapsed}
               onClick={() => handleLinkClick(isMobile)}
             />
+            {isAdmin && (
+              <SidebarItem
+                name="Admin Analytics"
+                path="/admin/analytics"
+                icon={ShieldCheck}
+                badge="Ops"
+                collapsed={isCollapsed}
+                onClick={() => handleLinkClick(isMobile)}
+              />
+            )}
           </SidebarSection>
         </nav>
 
