@@ -29,7 +29,6 @@ export const GetHiredLogoIcon: React.FC<{
   className?: string;
 }> = ({ size = 40, variant = "default", className = "" }) => {
   const pixelSize = typeof size === "number" ? size : SIZE_MAP[size] || 40;
-  const uniqueId = React.useId().replace(/:/g, "");
 
   return (
     <svg
@@ -38,18 +37,14 @@ export const GetHiredLogoIcon: React.FC<{
       viewBox="0 0 128 128"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`shrink-0 transition-transform duration-200 group-hover:scale-105 ${className}`}
+      className={`shrink-0 transition-transform duration-200 group-hover:scale-105 ${
+        variant === "default" ? "drop-shadow-xs" : ""
+      } ${className}`}
       aria-label="GetHired Logo"
     >
       <defs>
         {/* Main Ribbon Gradient: Rich purple to electric blue to vibrant cyan */}
-        <linearGradient
-          id={`gh-ribbon-${uniqueId}`}
-          x1="18%"
-          y1="88%"
-          x2="85%"
-          y2="15%"
-        >
+        <linearGradient id="gh-v2-ribbon" x1="18%" y1="88%" x2="85%" y2="15%">
           <stop offset="0%" stopColor="#8B5CF6" />
           <stop offset="25%" stopColor="#6366F1" />
           <stop offset="55%" stopColor="#2563EB" />
@@ -58,13 +53,7 @@ export const GetHiredLogoIcon: React.FC<{
         </linearGradient>
 
         {/* Top Cyan Arch Highlight */}
-        <linearGradient
-          id={`gh-top-cyan-${uniqueId}`}
-          x1="10%"
-          y1="80%"
-          x2="95%"
-          y2="20%"
-        >
+        <linearGradient id="gh-v2-top-cyan" x1="10%" y1="80%" x2="95%" y2="20%">
           <stop offset="0%" stopColor="#2563EB" />
           <stop offset="40%" stopColor="#0284C7" />
           <stop offset="75%" stopColor="#00C4FA" />
@@ -72,26 +61,14 @@ export const GetHiredLogoIcon: React.FC<{
         </linearGradient>
 
         {/* Upward Career Arrow Gradient */}
-        <linearGradient
-          id={`gh-arrow-${uniqueId}`}
-          x1="0%"
-          y1="100%"
-          x2="100%"
-          y2="0%"
-        >
+        <linearGradient id="gh-v2-arrow" x1="0%" y1="100%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#0284C7" />
           <stop offset="50%" stopColor="#00C4FA" />
           <stop offset="100%" stopColor="#38BDF8" />
         </linearGradient>
 
         {/* Bottom Arc Gradient */}
-        <linearGradient
-          id={`gh-bottom-${uniqueId}`}
-          x1="0%"
-          y1="20%"
-          x2="100%"
-          y2="80%"
-        >
+        <linearGradient id="gh-v2-bottom" x1="0%" y1="20%" x2="100%" y2="80%">
           <stop offset="0%" stopColor="#7C3AED" />
           <stop offset="35%" stopColor="#6366F1" />
           <stop offset="70%" stopColor="#2563EB" />
@@ -99,83 +76,36 @@ export const GetHiredLogoIcon: React.FC<{
         </linearGradient>
 
         {/* 3D Fold Inner Shadow */}
-        <linearGradient
-          id={`gh-fold-shadow-${uniqueId}`}
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-        >
+        <linearGradient id="gh-v2-fold-shadow" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#0F172A" stopOpacity="0.45" />
           <stop offset="100%" stopColor="#0F172A" stopOpacity="0" />
         </linearGradient>
 
         {/* Dark Navy Professional Tie Gradient */}
-        <linearGradient
-          id={`gh-tie-grad-${uniqueId}`}
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-        >
+        <linearGradient id="gh-v2-tie-grad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#1E293B" />
           <stop offset="50%" stopColor="#0F172A" />
           <stop offset="100%" stopColor="#020617" />
         </linearGradient>
 
         {/* Tie Royal Blue Sheen */}
-        <linearGradient
-          id={`gh-tie-sheen-${uniqueId}`}
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="0%"
-        >
-          <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.75" />
-          <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.15" />
+        <linearGradient id="gh-v2-tie-sheen" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.2" />
         </linearGradient>
 
         {/* Dark Squircle Background */}
-        <linearGradient
-          id={`gh-dark-tile-bg-${uniqueId}`}
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-        >
+        <linearGradient id="gh-v2-dark-tile-bg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#0F172A" />
           <stop offset="50%" stopColor="#090D16" />
           <stop offset="100%" stopColor="#020617" />
         </linearGradient>
 
         {/* Light Squircle Background */}
-        <linearGradient
-          id={`gh-light-tile-bg-${uniqueId}`}
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-        >
+        <linearGradient id="gh-v2-light-tile-bg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#FFFFFF" />
           <stop offset="100%" stopColor="#F1F5F9" />
         </linearGradient>
-
-        {/* Drop Shadow for Glyphs */}
-        <filter
-          id={`gh-glyph-shadow-${uniqueId}`}
-          x="-15%"
-          y="-15%"
-          width="130%"
-          height="130%"
-        >
-          <feDropShadow
-            dx="0"
-            dy="3"
-            stdDeviation="3"
-            floodColor="#0284C7"
-            floodOpacity="0.3"
-          />
-        </filter>
       </defs>
 
       {/* Optional Dark Squircle Background */}
@@ -186,16 +116,16 @@ export const GetHiredLogoIcon: React.FC<{
             y="4"
             width="120"
             height="120"
-            rx="32"
-            fill={`url(#gh-dark-tile-bg-${uniqueId})`}
+            rx="30"
+            fill="url(#gh-v2-dark-tile-bg)"
           />
           <rect
             x="4"
             y="4"
             width="120"
             height="120"
-            rx="32"
-            stroke="rgba(255, 255, 255, 0.14)"
+            rx="30"
+            stroke="rgba(255, 255, 255, 0.16)"
             strokeWidth="1.5"
             fill="none"
           />
@@ -210,15 +140,15 @@ export const GetHiredLogoIcon: React.FC<{
             y="4"
             width="120"
             height="120"
-            rx="32"
-            fill={`url(#gh-light-tile-bg-${uniqueId})`}
+            rx="30"
+            fill="url(#gh-v2-light-tile-bg)"
           />
           <rect
             x="4"
             y="4"
             width="120"
             height="120"
-            rx="32"
+            rx="30"
             stroke="rgba(15, 23, 42, 0.08)"
             strokeWidth="1.5"
             fill="none"
@@ -227,7 +157,7 @@ export const GetHiredLogoIcon: React.FC<{
       )}
 
       {/* Main Logo Glyph Group */}
-      <g filter={variant === "default" ? `url(#gh-glyph-shadow-${uniqueId})` : undefined}>
+      <g>
         {/* 1. Bottom & Right Body of 'G' */}
         <path
           d="M 58 102
@@ -242,7 +172,7 @@ export const GetHiredLogoIcon: React.FC<{
              L 94 57
              C 95 61 95 66 94 71
              C 90 89 75 102 58 102 Z"
-          fill={`url(#gh-bottom-${uniqueId})`}
+          fill="url(#gh-v2-bottom)"
         />
 
         {/* 2. Left & Top Sweeping 3D Ribbon */}
@@ -256,7 +186,7 @@ export const GetHiredLogoIcon: React.FC<{
              C 37 71 39 77 42 82
              L 28 92
              C 23 84 21 76 21 66 Z"
-          fill={`url(#gh-ribbon-${uniqueId})`}
+          fill="url(#gh-v2-ribbon)"
         />
 
         {/* 3. Top Cyan Arch & Highlighting */}
@@ -269,7 +199,7 @@ export const GetHiredLogoIcon: React.FC<{
              C 52 38 46 42 40 47
              L 30 38
              C 33 36 36 34 40 33 Z"
-          fill={`url(#gh-top-cyan-${uniqueId})`}
+          fill="url(#gh-v2-top-cyan)"
         />
 
         {/* 4. 3D Overlapping Fold Shadow */}
@@ -279,7 +209,7 @@ export const GetHiredLogoIcon: React.FC<{
              L 49 88
              C 46 86 43 83 40 80
              L 28 92 Z"
-          fill={`url(#gh-fold-shadow-${uniqueId})`}
+          fill="url(#gh-v2-fold-shadow)"
         />
 
         {/* 5. Upward Career Ascent Arrow */}
@@ -291,7 +221,7 @@ export const GetHiredLogoIcon: React.FC<{
              L 106 39
              L 99 33
              L 84 48 Z"
-          fill={`url(#gh-arrow-${uniqueId})`}
+          fill="url(#gh-v2-arrow)"
         />
 
         {/* 6. Arrow Specular Highlight */}
@@ -300,27 +230,27 @@ export const GetHiredLogoIcon: React.FC<{
              L 108 17
              L 99 33 Z"
           fill="white"
-          fillOpacity="0.32"
+          fillOpacity="0.4"
         />
 
         {/* 7. Center Necktie - Knot */}
         <polygon
           points="58,56 68,56 69,63 57,63"
-          fill={`url(#gh-tie-grad-${uniqueId})`}
+          fill="url(#gh-v2-tie-grad)"
         />
         <polygon
           points="58,56 68,56 69,63 57,63"
-          fill={`url(#gh-tie-sheen-${uniqueId})`}
+          fill="url(#gh-v2-tie-sheen)"
         />
 
         {/* 8. Center Necktie - Body with sharp point */}
         <polygon
           points="57,64 69,64 71,79 63,90 55,79"
-          fill={`url(#gh-tie-grad-${uniqueId})`}
+          fill="url(#gh-v2-tie-grad)"
         />
         <polygon
           points="57,64 63,64 63,90 55,79"
-          fill={`url(#gh-tie-sheen-${uniqueId})`}
+          fill="url(#gh-v2-tie-sheen)"
         />
       </g>
     </svg>
