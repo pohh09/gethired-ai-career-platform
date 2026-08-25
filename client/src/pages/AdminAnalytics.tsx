@@ -373,7 +373,7 @@ export default function AdminAnalytics() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: idx * 0.03 }}
-                className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 sm:p-4.5 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group"
+                className="bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 sm:p-4.5 shadow-xs dark-card-glow hover:shadow-md transition-shadow relative overflow-hidden group"
               >
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">

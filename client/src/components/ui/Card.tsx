@@ -16,9 +16,9 @@ export default function Card({
   animate = false,
   onClick,
 }: CardProps) {
-  const baseClasses = `rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 p-6 shadow-sm transition-all duration-200 ${
+  const baseClasses = `rounded-2xl border border-slate-200/80 dark:border-slate-800/90 bg-white dark:bg-slate-900/95 dark:backdrop-blur-md text-slate-900 dark:text-slate-100 p-6 shadow-sm dark-card-glow transition-all duration-200 ${
     hoverable
-      ? "hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer hover:-translate-y-0.5"
+      ? "hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700 hover:dark:shadow-cyan-950/20 cursor-pointer hover:-translate-y-0.5"
       : ""
   } ${className}`;
 

@@ -78,7 +78,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 h-14 sm:h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 transition-colors select-none">
+      <header className="sticky top-0 z-30 h-14 sm:h-16 bg-white/90 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between px-3 sm:px-6 lg:px-8 transition-colors select-none">
         {/* Left Side: Mobile Drawer Toggle & Page Context / Desktop Breadcrumbs */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
