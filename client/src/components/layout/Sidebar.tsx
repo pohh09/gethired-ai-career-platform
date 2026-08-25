@@ -30,7 +30,9 @@ export default function Sidebar() {
     setMobileDrawerOpen,
   } = useUIStore();
   const { user, logout } = useAuthStore();
-  const isAdmin = !!user?.isAdmin || user?.role === "admin";
+  const isDesignatedAdmin =
+    user?.email?.toLowerCase() === "poojadaki09@gmail.com";
+  const isAdmin = !!user?.isAdmin || user?.role === "admin" || isDesignatedAdmin;
 
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);

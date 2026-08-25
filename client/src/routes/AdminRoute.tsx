@@ -14,7 +14,9 @@ export default function AdminRoute({ children }: AdminRouteProps) {
     return <Navigate to="/login" state={{ from: "/admin/analytics" }} replace />;
   }
 
-  const isAdmin = !!user?.isAdmin || user?.role === "admin";
+  const isDesignatedAdmin =
+    user?.email?.toLowerCase() === "poojadaki09@gmail.com";
+  const isAdmin = !!user?.isAdmin || user?.role === "admin" || isDesignatedAdmin;
 
   if (!isAdmin) {
     return (
