@@ -1,7 +1,8 @@
-import express from "express";
 import {
   register,
   login,
+  logout,
+  heartbeat,
   getMe,
   updateProfile,
   changePassword,
@@ -14,6 +15,8 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
+router.post("/logout", authMiddleware, logout);
+router.post("/heartbeat", authMiddleware, heartbeat);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
 router.get("/me", authMiddleware, getMe);

@@ -79,6 +79,21 @@ const DATE_RANGES = [
   { id: "12m", label: "12 Months" },
 ];
 
+const formatExactDateTime = (dateStr?: string | null) => {
+  if (!dateStr) return "—";
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+};
+
 export default function AdminAnalytics() {
   const [activeTab, setActiveTab] = useState("overview");
   const [dateRange, setDateRange] = useState("30d");
@@ -781,16 +796,18 @@ export default function AdminAnalytics() {
 
               {/* Table */}
               <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
-                <table className="w-full text-left text-xs">
+                <table className="w-full text-left text-xs min-w-[850px]">
                   <thead className="bg-slate-50 dark:bg-slate-950/60 text-slate-500 dark:text-slate-400 font-extrabold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-800">
                     <tr>
                       <th className="px-4 py-3">User</th>
+                      <th className="px-4 py-3">Session Status</th>
                       <th className="px-4 py-3">Role</th>
                       <th className="px-4 py-3">Registered</th>
-                      <th className="px-4 py-3">Last Login</th>
-                      <th className="px-4 py-3">Logins</th>
-                      <th className="px-4 py-3">Apps Tracked</th>
-                      <th className="px-4 py-3">AI Uses</th>
+                      <th className="px-4 py-3">Exact Last Login</th>
+                      <th className="px-4 py-3">Exact Last Logout</th>
+                      <th className="px-4 py-3 text-center">Logins</th>
+                      <th className="px-4 py-3 text-center">Apps</th>
+                      <th className="px-4 py-3 text-center">AI Uses</th>
                       <th className="px-4 py-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -812,6 +829,24 @@ export default function AdminAnalytics() {
                             </div>
                           </td>
                           <td className="px-4 py-3">
+                            {u.sessionStatus === "online" ? (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 shadow-2xs">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                                Active Now
+                              </span>
+                            ) : u.sessionStatus === "logged_in" ? (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60">
+                                <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                                Still Logged In
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700/60">
+                                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
+                                Logged Out
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
                             {u.isAdmin || u.role === "admin" ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-50 dark:bg-purple-950/80 text-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
                                 <ShieldCheck size={10} /> Admin
@@ -822,26 +857,37 @@ export default function AdminAnalytics() {
                               </span>
                             )}
                           </td>
-                          <td className="px-4 py-3 text-slate-500 dark:text-slate-400">
-                            {new Date(u.createdAt).toLocaleDateString()}
+                          <td className="px-4 py-3 text-slate-500 dark:text-slate-400 whitespace-nowrap text-[11px]">
+                            {formatExactDateTime(u.createdAt)}
                           </td>
-                          <td className="px-4 py-3 text-slate-500 dark:text-slate-400">
-                            {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : "—"}
+                          <td className="px-4 py-3 text-slate-800 dark:text-slate-200 whitespace-nowrap font-medium text-[11px]">
+                            {formatExactDateTime(u.lastLoginAt)}
                           </td>
-                          <td className="px-4 py-3 font-bold text-slate-800 dark:text-slate-200">
+                          <td className="px-4 py-3 whitespace-nowrap text-[11px]">
+                            {u.lastLogoutAt ? (
+                              <span className="text-slate-600 dark:text-slate-400">
+                                {formatExactDateTime(u.lastLogoutAt)}
+                              </span>
+                            ) : (
+                              <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+                                Still Logged In
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3 font-bold text-center text-slate-800 dark:text-slate-200">
                             {u.loginCount}
                           </td>
-                          <td className="px-4 py-3 font-bold text-slate-800 dark:text-slate-200">
+                          <td className="px-4 py-3 font-bold text-center text-slate-800 dark:text-slate-200">
                             {u.applicationCount}
                           </td>
-                          <td className="px-4 py-3 font-bold text-slate-800 dark:text-slate-200">
+                          <td className="px-4 py-3 font-bold text-center text-slate-800 dark:text-slate-200">
                             {u.aiUsageCount}
                           </td>
                           <td className="px-4 py-3 text-right">
                             <button
                               type="button"
                               onClick={() => handleOpenUserDetail(u.id)}
-                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 font-extrabold text-[11px] hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-colors"
+                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-cyan-400 font-extrabold text-[11px] hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-colors cursor-pointer"
                             >
                               <Eye size={12} />
                               <span>Details</span>
@@ -851,7 +897,7 @@ export default function AdminAnalytics() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={8} className="px-4 py-8 text-center text-slate-400 font-medium">
+                        <td colSpan={10} className="px-4 py-8 text-center text-slate-400 font-medium">
                           No users found matching query.
                         </td>
                       </tr>
@@ -1292,62 +1338,163 @@ export default function AdminAnalytics() {
                 </div>
               ) : userDetail ? (
                 <div className="space-y-4 text-xs">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase">
-                        Registration Date
+                  {/* Session Status Banner */}
+                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        Current Session State
                       </span>
-                      <div className="font-extrabold text-slate-800 dark:text-slate-200 mt-0.5">
-                        {new Date(userDetail.user.createdAt).toLocaleString()}
+                      <div className="flex items-center gap-2 mt-1">
+                        {userDetail.user.sessionStatus === "online" ? (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            Active Now
+                          </span>
+                        ) : userDetail.user.sessionStatus === "logged_in" ? (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+                            <span className="w-2 h-2 rounded-full bg-amber-400" />
+                            Still Logged In (Idle)
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                            Logged Out
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                    <div className="text-right">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                         Total Logins
                       </span>
-                      <div className="font-extrabold text-slate-800 dark:text-slate-200 mt-0.5">
+                      <div className="text-base font-black text-slate-900 dark:text-white mt-0.5">
                         {userDetail.user.loginCount} sessions
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Exact Date & Time Timestamps */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        Exact Last Login
+                      </span>
+                      <div className="font-extrabold text-slate-900 dark:text-slate-100 text-[11px]">
+                        {formatExactDateTime(userDetail.user.lastLoginAt)}
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        Exact Last Logout
+                      </span>
+                      <div className="font-extrabold text-slate-900 dark:text-slate-100 text-[11px]">
+                        {userDetail.user.lastLogoutAt ? (
+                          formatExactDateTime(userDetail.user.lastLogoutAt)
+                        ) : (
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+                            Still Logged In
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        Registered On
+                      </span>
+                      <div className="font-extrabold text-slate-800 dark:text-slate-200 text-[11px]">
+                        {formatExactDateTime(userDetail.user.createdAt)}
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        Last Active At
+                      </span>
+                      <div className="font-extrabold text-slate-800 dark:text-slate-200 text-[11px]">
+                        {formatExactDateTime(userDetail.user.lastActiveAt)}
                       </div>
                     </div>
                   </div>
 
                   {/* Metrics Row */}
                   <div className="grid grid-cols-3 gap-2">
-                    <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-center">
+                    <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-center">
                       <span className="text-[10px] font-bold text-blue-600 dark:text-cyan-400">
                         Applications
                       </span>
-                      <div className="text-lg font-black text-slate-900 dark:text-white">
+                      <div className="text-base font-black text-slate-900 dark:text-white">
                         {userDetail.metrics.totalApplications}
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/60 text-center">
+                    <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/60 text-center">
                       <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400">
                         AI Actions
                       </span>
-                      <div className="text-lg font-black text-slate-900 dark:text-white">
+                      <div className="text-base font-black text-slate-900 dark:text-white">
                         {userDetail.metrics.totalAIEvents}
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-center">
+                    <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-center">
                       <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
                         Feedback
                       </span>
-                      <div className="text-lg font-black text-slate-900 dark:text-white">
+                      <div className="text-base font-black text-slate-900 dark:text-white">
                         {userDetail.metrics.totalFeedbackSubmitted}
                       </div>
                     </div>
                   </div>
+
+                  {/* Session History (Login & Logout Timeline) */}
+                  {userDetail.sessionHistory && userDetail.sessionHistory.length > 0 && (
+                    <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                      <span className="font-extrabold text-xs text-slate-900 dark:text-white flex items-center justify-between">
+                        <span>Login & Logout History</span>
+                        <span className="text-[10px] text-slate-400 font-normal">Exact Dates & Times</span>
+                      </span>
+                      <div className="space-y-1.5 max-h-36 overflow-y-auto">
+                        {userDetail.sessionHistory.map((sess, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 text-[11px]"
+                          >
+                            <div className="flex items-center gap-1.5">
+                              {sess.eventType === "login" ? (
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-cyan-300 font-bold text-[9px]">
+                                  LOGIN
+                                </span>
+                              ) : sess.eventType === "logout" ? (
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 font-bold text-[9px]">
+                                  LOGOUT
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-bold text-[9px]">
+                                  REGISTER
+                                </span>
+                              )}
+                              <span className="font-medium text-slate-700 dark:text-slate-300">
+                                {sess.summary}
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono text-slate-400 shrink-0 ml-2">
+                              {formatExactDateTime(sess.timestamp)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Recent Activity Timeline */}
                   <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <span className="font-extrabold text-xs text-slate-900 dark:text-white">
                       Recent Activity Events
                     </span>
-                    <div className="space-y-1.5 max-h-48 overflow-y-auto">
+                    <div className="space-y-1.5 max-h-36 overflow-y-auto">
                       {userDetail.recentActivity && userDetail.recentActivity.length > 0 ? (
                         userDetail.recentActivity.map((evt, idx) => (
                           <div
@@ -1357,11 +1504,8 @@ export default function AdminAnalytics() {
                             <span className="font-bold text-slate-800 dark:text-slate-200 truncate mr-2">
                               {evt.summary}
                             </span>
-                            <span className="text-[10px] text-slate-400 shrink-0">
-                              {new Date(evt.timestamp).toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
+                            <span className="text-[10px] text-slate-400 shrink-0 font-mono">
+                              {formatExactDateTime(evt.timestamp)}
                             </span>
                           </div>
                         ))

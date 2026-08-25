@@ -36,6 +36,20 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => {
         try {
+          const currentToken = useAuthStore.getState().token;
+          if (currentToken) {
+            const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+            fetch(`${apiBase}/auth/logout`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${currentToken}`,
+              },
+            }).catch(() => {});
+          }
+        } catch {}
+
+        try {
           queryClient.clear();
         } catch {}
         useResumeStore.getState().reset();

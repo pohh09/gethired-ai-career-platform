@@ -47,8 +47,10 @@ export const register = async (req, res) => {
       isAdmin: isAdminUser,
       role: isAdminUser ? "admin" : "user",
       lastLoginAt: new Date(),
+      lastLogoutAt: null,
       loginCount: 1,
       lastActiveAt: new Date(),
+      isOnline: true,
     });
 
     const token = jwt.sign(
@@ -129,6 +131,7 @@ export const login = async (req, res) => {
     user.lastLoginAt = new Date();
     user.loginCount = (user.loginCount || 0) + 1;
     user.lastActiveAt = new Date();
+    user.isOnline = true;
     await user.save();
 
     const token = jwt.sign(
@@ -366,4 +369,52 @@ export const resetPassword = async (req, res) => {
     console.error(error);
     res.status(400).json({ success: false, message: "Invalid or expired token" });
   }
-};
+};
+
+export const logout = async (req, res) => {
+  try {
+    if (req.user && req.user.userId) {
+      const user = await User.findById(req.user.userId);
+      if (user) {
+        user.isOnline = false;
+        user.lastLogoutAt = new Date();
+        user.lastActiveAt = new Date();
+        await user.save().catch(() => {});
+
+        trackEvent(user._id, "logout", {
+          email: user.email,
+          logoutAt: user.lastLogoutAt,
+          durationSinceLogin: user.lastLoginAt
+            ? Math.round((new Date() - new Date(user.lastLoginAt)) / 1000)
+            : null,
+        });
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    console.error("[Logout Controller Error]:", error);
+    res.status(200).json({
+      success: true,
+      message: "Logged out",
+    });
+  }
+};
+
+export const heartbeat = async (req, res) => {
+  try {
+    if (req.user && req.user.userId) {
+      await User.findByIdAndUpdate(req.user.userId, {
+        lastActiveAt: new Date(),
+        isOnline: true,
+      }).catch(() => {});
+    }
+    res.status(200).json({ success: true });
+  } catch {
+    res.status(200).json({ success: true });
+  }
+};
+

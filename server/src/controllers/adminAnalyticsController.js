@@ -343,22 +343,64 @@ export const getUserAnalytics = async (req, res) => {
       ]),
     ]);
 
-    const appMap = new Map(appCounts.map((a) => [String(a._id), a.count]));
-    const aiMap = new Map(aiCounts.map((a) => [String(a._id), a.count]));
+    const computeSessionStatus = (u) => {
+      const lastLogin = u.lastLoginAt ? new Date(u.lastLoginAt).getTime() : (u.createdAt ? new Date(u.createdAt).getTime() : 0);
+      const lastLogout = u.lastLogoutAt ? new Date(u.lastLogoutAt).getTime() : 0;
+      const lastActive = u.lastActiveAt ? new Date(u.lastActiveAt).getTime() : lastLogin;
+      const now = Date.now();
+      const fifteenMinutes = 15 * 60 * 1000;
 
-    const users = rawUsers.map((u) => ({
-      id: u._id,
-      name: u.name,
-      email: u.email,
-      isAdmin: !!u.isAdmin || u.role === "admin",
-      role: u.role || (u.isAdmin ? "admin" : "user"),
-      createdAt: u.createdAt,
-      lastLoginAt: u.lastLoginAt || u.createdAt,
-      loginCount: u.loginCount || 1,
-      lastActiveAt: u.lastActiveAt || u.lastLoginAt || u.createdAt,
-      applicationCount: appMap.get(String(u._id)) || 0,
-      aiUsageCount: aiMap.get(String(u._id)) || 0,
-    }));
+      if (lastLogout >= lastLogin && lastLogout > 0) {
+        return {
+          status: "logged_out",
+          label: "Logged Out",
+          isOnline: false,
+        };
+      }
+
+      if (lastLogin > 0) {
+        if (now - lastActive <= fifteenMinutes) {
+          return {
+            status: "online",
+            label: "Active Now",
+            isOnline: true,
+          };
+        } else {
+          return {
+            status: "logged_in",
+            label: "Still Logged In",
+            isOnline: true,
+          };
+        }
+      }
+
+      return {
+        status: "offline",
+        label: "Offline",
+        isOnline: false,
+      };
+    };
+
+    const users = rawUsers.map((u) => {
+      const session = computeSessionStatus(u);
+      return {
+        id: u._id,
+        name: u.name,
+        email: u.email,
+        isAdmin: !!u.isAdmin || u.role === "admin",
+        role: u.role || (u.isAdmin ? "admin" : "user"),
+        createdAt: u.createdAt,
+        lastLoginAt: u.lastLoginAt || u.createdAt,
+        lastLogoutAt: u.lastLogoutAt || null,
+        lastActiveAt: u.lastActiveAt || u.lastLoginAt || u.createdAt,
+        isOnline: session.isOnline,
+        sessionStatus: session.status,
+        sessionLabel: session.label,
+        loginCount: u.loginCount || 1,
+        applicationCount: appMap.get(String(u._id)) || 0,
+        aiUsageCount: aiMap.get(String(u._id)) || 0,
+      };
+    });
 
     res.status(200).json({
       success: true,
@@ -903,6 +945,7 @@ export const getUserDetail = async (req, res) => {
       aiEventsCount,
       feedbackCount,
       recentEvents,
+      sessionEvents,
     ] = await Promise.all([
       JobApplication.countDocuments({ createdBy: id }),
       JobApplication.aggregate([
@@ -927,10 +970,44 @@ export const getUserDetail = async (req, res) => {
       Feedback.countDocuments({ userId: id }),
       AnalyticsEvent.find({ userId: id })
         .sort({ timestamp: -1 })
+        .limit(25)
+        .select("eventType timestamp metadata")
+        .lean(),
+      AnalyticsEvent.find({
+        userId: id,
+        eventType: { $in: ["login", "logout", "register"] },
+      })
+        .sort({ timestamp: -1 })
         .limit(20)
         .select("eventType timestamp metadata")
         .lean(),
     ]);
+
+    const lastLogin = user.lastLoginAt ? new Date(user.lastLoginAt).getTime() : (user.createdAt ? new Date(user.createdAt).getTime() : 0);
+    const lastLogout = user.lastLogoutAt ? new Date(user.lastLogoutAt).getTime() : 0;
+    const lastActive = user.lastActiveAt ? new Date(user.lastActiveAt).getTime() : lastLogin;
+    const now = Date.now();
+    const fifteenMinutes = 15 * 60 * 1000;
+
+    let sessionStatus = "offline";
+    let sessionLabel = "Offline";
+    let isOnline = false;
+
+    if (lastLogout >= lastLogin && lastLogout > 0) {
+      sessionStatus = "logged_out";
+      sessionLabel = "Logged Out";
+      isOnline = false;
+    } else if (lastLogin > 0) {
+      if (now - lastActive <= fifteenMinutes) {
+        sessionStatus = "online";
+        sessionLabel = "Active Now";
+        isOnline = true;
+      } else {
+        sessionStatus = "logged_in";
+        sessionLabel = "Still Logged In";
+        isOnline = true;
+      }
+    }
 
     res.status(200).json({
       success: true,
@@ -943,8 +1020,12 @@ export const getUserDetail = async (req, res) => {
           role: user.role || (user.isAdmin ? "admin" : "user"),
           createdAt: user.createdAt,
           lastLoginAt: user.lastLoginAt || user.createdAt,
-          loginCount: user.loginCount || 1,
+          lastLogoutAt: user.lastLogoutAt || null,
           lastActiveAt: user.lastActiveAt || user.lastLoginAt || user.createdAt,
+          isOnline,
+          sessionStatus,
+          sessionLabel,
+          loginCount: user.loginCount || 1,
         },
         metrics: {
           totalApplications,
@@ -952,6 +1033,16 @@ export const getUserDetail = async (req, res) => {
           totalAIEvents: aiEventsCount,
           totalFeedbackSubmitted: feedbackCount,
         },
+        sessionHistory: sessionEvents.map((s) => ({
+          eventType: s.eventType,
+          timestamp: s.timestamp,
+          summary:
+            s.eventType === "login"
+              ? "User logged into account"
+              : s.eventType === "logout"
+              ? "User logged out"
+              : "Account created & initial login",
+        })),
         recentActivity: recentEvents.map((e) => ({
           eventType: e.eventType,
           timestamp: e.timestamp,

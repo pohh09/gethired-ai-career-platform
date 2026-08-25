@@ -6,8 +6,10 @@ export interface User {
   role?: "user" | "admin";
   createdAt?: string;
   lastLoginAt?: string;
+  lastLogoutAt?: string | null;
   loginCount?: number;
   lastActiveAt?: string;
+  isOnline?: boolean;
 }
 
 export interface LoginRequest {

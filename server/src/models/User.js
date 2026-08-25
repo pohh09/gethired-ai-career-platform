@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    lastLogoutAt: {
+      type: Date,
+      default: null,
+    },
     loginCount: {
       type: Number,
       default: 0,
@@ -41,6 +45,10 @@ const userSchema = new mongoose.Schema(
     lastActiveAt: {
       type: Date,
       default: null,
+    },
+    isOnline: {
+      type: Boolean,
+      default: false,
     },
   },
   {

@@ -47,8 +47,12 @@ export interface AdminUserListItem {
   role: "user" | "admin" | string;
   createdAt: string;
   lastLoginAt: string;
+  lastLogoutAt?: string | null;
   loginCount: number;
   lastActiveAt: string;
+  isOnline?: boolean;
+  sessionStatus?: "online" | "logged_in" | "logged_out" | "offline" | string;
+  sessionLabel?: string;
   applicationCount: number;
   aiUsageCount: number;
 }
@@ -168,8 +172,12 @@ export interface UserDetailResponse {
     role: string;
     createdAt: string;
     lastLoginAt: string;
+    lastLogoutAt?: string | null;
     loginCount: number;
     lastActiveAt: string;
+    isOnline?: boolean;
+    sessionStatus?: string;
+    sessionLabel?: string;
   };
   metrics: {
     totalApplications: number;
@@ -180,6 +188,11 @@ export interface UserDetailResponse {
     totalAIEvents: number;
     totalFeedbackSubmitted: number;
   };
+  sessionHistory?: Array<{
+    eventType: string;
+    timestamp: string;
+    summary: string;
+  }>;
   recentActivity: Array<{
     eventType: string;
     timestamp: string;
