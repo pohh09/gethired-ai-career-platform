@@ -42,33 +42,28 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
 
     setIsSubmitting(true);
     try {
-      await api.post("/feedback", {
+      const response = await api.post("/feedback", {
         type,
         message: message.trim(),
-        authorName: authorName.trim() || user?.name || "GetHired User",
+        authorName: authorName.trim() || user?.name || "Anonymous",
         email: email.trim() || user?.email || "",
         pageUrl: window.location.pathname,
       });
 
-      toast.success("Thank you! Your feedback has been emailed directly to the team. 🚀");
-      setMessage("");
-      onClose();
-    } catch {
-      // In offline/demo mode, save to localStorage so nothing is lost
-      try {
-        const saved = JSON.parse(localStorage.getItem("gethired_local_feedback") || "[]");
-        saved.push({
-          type,
-          message: message.trim(),
-          authorName: authorName.trim() || "GetHired User",
-          email: email.trim() || "",
-          date: new Date().toISOString(),
-        });
-        localStorage.setItem("gethired_local_feedback", JSON.stringify(saved));
-      } catch (_e) {}
-      toast.success("Thank you! Your feedback has been recorded and queued for email delivery. 🚀");
-      setMessage("");
-      onClose();
+      if (response.data?.success) {
+        toast.success(
+          response.data.message || "Thanks! Your feedback has been sent successfully.",
+        );
+        setMessage("");
+        setType("suggestion");
+        onClose();
+      } else {
+        toast.error("Unable to send feedback. Please try again.");
+      }
+    } catch (err: any) {
+      const errorMsg =
+        err.response?.data?.message || "Unable to send feedback. Please try again.";
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
