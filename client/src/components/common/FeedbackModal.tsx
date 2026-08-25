@@ -93,11 +93,10 @@ export default function FeedbackModal({ isOpen, onClose }: FeedbackModalProps) {
                   key={cat.id}
                   type="button"
                   onClick={() => setType(cat.id)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all cursor-pointer ${
-                    isSelected
+                  className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all cursor-pointer ${isSelected
                       ? "bg-blue-50 dark:bg-blue-950/60 border-blue-500 text-blue-600 dark:text-cyan-300 shadow-xs ring-1 ring-blue-500/30"
                       : "bg-white dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200"
-                  }`}
+                    }`}
                 >
                   <Icon size={14} className={cat.color} />
                   <span>{cat.label}</span>
