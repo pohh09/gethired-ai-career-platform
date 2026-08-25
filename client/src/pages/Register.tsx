@@ -5,11 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { Zap, User, Mail, Lock, UserPlus } from "lucide-react";
+import { User, Mail, Lock, UserPlus } from "lucide-react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { registerUser } from "../services/authServices";
 import { useAuthStore } from "../store/authStore";
+import { GetHiredLogoIcon } from "../components/common/GetHiredLogo";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Full name must be at least 2 characters long"),
@@ -68,8 +69,8 @@ export default function Register() {
           >
             ← Back to GetHired Home
           </Link>
-          <div className="h-12 w-12 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center shadow-lg shadow-blue-500/30">
-            <Zap size={26} className="fill-current text-white" />
+          <div className="flex justify-center my-2">
+            <GetHiredLogoIcon size={52} />
           </div>
 
           <h1 className="text-2xl font-extrabold tracking-tight">

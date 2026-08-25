@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { Zap, Sparkles, ChevronDown } from "lucide-react";
+import { Sparkles, ChevronDown } from "lucide-react";
+import { GetHiredLogoIcon } from "../common/GetHiredLogo";
 
 export interface WorkspaceSwitcherProps {
   collapsed?: boolean;
@@ -14,9 +15,7 @@ export default function WorkspaceSwitcher({
         to="/"
         className="group flex items-center gap-3 p-2 rounded-xl hover:bg-slate-100/80 dark:hover:bg-slate-800/60 transition-all duration-200"
       >
-        <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-black shadow-md shadow-blue-500/20 shrink-0 group-hover:scale-105 transition-transform">
-          <Zap size={18} className="fill-current text-white" />
-        </div>
+        <GetHiredLogoIcon size={36} />
 
         {!collapsed && (
           <div className="flex-1 min-w-0 flex items-center justify-between">

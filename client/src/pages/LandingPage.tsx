@@ -33,6 +33,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { useUIStore } from "../store/uiStore";
+import GetHiredLogo from "../components/common/GetHiredLogo";
 
 const PROJECT_CAPABILITIES = [
   {
@@ -294,17 +295,8 @@ export default function LandingPage() {
       {/* Navigation Header */}
       <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
         <div className="w-[94%] sm:w-[90%] max-w-[1750px] mx-auto px-1 sm:px-4 h-16 flex items-center justify-between">
-          <Link to="/landing" className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-extrabold text-base shadow-md shadow-blue-500/20 shrink-0">
-              <Sparkles size={17} />
-            </div>
-            <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
-              Get
-              <span className="text-blue-600 dark:text-cyan-400">Hired</span>
-            </span>
-            <span className="hidden md:inline-block text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-cyan-400 border border-blue-200/80 dark:border-blue-800 ml-1">
-              Full-Stack Platform
-            </span>
+          <Link to="/landing" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
+            <GetHiredLogo size={36} showBadge badgeText="Full-Stack" />
           </Link>
 
           {/* Desktop Nav Links */}

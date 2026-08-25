@@ -8,7 +8,6 @@ import {
   Bot,
   BarChart3,
   Calendar as CalendarIcon,
-  Sparkles,
   ArrowRight,
   X,
   Menu,
@@ -21,6 +20,7 @@ import {
 
 import { useUIStore } from "../store/uiStore";
 import { DEMO_USER } from "../data/demoData";
+import GetHiredLogo from "../components/common/GetHiredLogo";
 
 const DEMO_NAV_LINKS = [
   { name: "Dashboard", path: "/demo", icon: LayoutDashboard },
@@ -86,12 +86,7 @@ export default function DemoLayout() {
           </button>
 
           <Link to="/demo" className="flex items-center gap-2.5">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-blue-500/20">
-              <Sparkles size={16} />
-            </div>
-            <span className="text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight hidden xs:inline-block">
-              Get<span className="text-blue-600 dark:text-cyan-400">Hired</span>
-            </span>
+            <GetHiredLogo size={32} showText />
           </Link>
 
           <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800 text-[10px] font-extrabold uppercase tracking-wider">
