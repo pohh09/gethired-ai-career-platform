@@ -155,6 +155,10 @@ export interface FeedbackAnalyticsResponse {
     message: string;
     pageUrl: string;
     emailSent: boolean;
+    deliveryStatus?: "delivered" | "failed" | "logged";
+    emailError?: string | null;
+    emailProvider?: string | null;
+    deliveredAt?: string | null;
     createdAt: string;
   }>;
   trend: Array<{

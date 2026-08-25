@@ -892,6 +892,10 @@ export const getFeedbackAnalytics = async (req, res) => {
       message: f.message || "",
       pageUrl: f.pageUrl || "",
       emailSent: !!f.emailSent,
+      deliveryStatus: f.deliveryStatus || (f.emailSent ? "delivered" : "logged"),
+      emailError: f.emailError || null,
+      emailProvider: f.emailProvider || (f.emailSent ? "resend" : null),
+      deliveredAt: f.deliveredAt || null,
       createdAt: f.createdAt,
     }));
 

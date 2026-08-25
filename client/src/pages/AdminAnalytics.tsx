@@ -1273,12 +1273,25 @@ export default function AdminAnalytics() {
                             {item.message}
                           </td>
                           <td className="px-4 py-3">
-                            {item.emailSent ? (
-                              <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold">
-                                <CheckCircle2 size={12} /> Delivered
+                            {item.deliveryStatus === "delivered" || item.emailSent ? (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                                <CheckCircle2 size={11} /> Delivered
                               </span>
+                            ) : item.deliveryStatus === "failed" ? (
+                              <div className="flex flex-col gap-0.5">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800">
+                                  Failed
+                                </span>
+                                {item.emailError && (
+                                  <span className="text-[9px] text-rose-400 max-w-[140px] truncate" title={item.emailError}>
+                                    {item.emailError}
+                                  </span>
+                                )}
+                              </div>
                             ) : (
-                              <span className="text-slate-400 text-[11px]">Logged</span>
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                Logged
+                              </span>
                             )}
                           </td>
                         </tr>

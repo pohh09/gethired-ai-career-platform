@@ -45,6 +45,26 @@ const optionalAuth = (req, res, next) => {
   next();
 };
 
+// GET /api/feedback/diagnostic - Safe diagnostic check for email delivery service configuration
+router.get("/diagnostic", (req, res) => {
+  const hasResend = !!process.env.RESEND_API_KEY && process.env.RESEND_API_KEY.trim().length > 0;
+  const keyPrefix = hasResend ? process.env.RESEND_API_KEY.trim().slice(0, 5) + "..." : "missing";
+  const recipient = (process.env.FEEDBACK_RECEIVER_EMAIL || process.env.ADMIN_EMAIL || "poojadaki09@gmail.com").trim();
+  const fromEmail = (process.env.RESEND_FROM || process.env.SMTP_FROM || "GetHired Feedback <onboarding@resend.dev>").trim();
+
+  return res.status(200).json({
+    success: true,
+    emailService: {
+      provider: hasResend ? "resend" : "none (database logging only)",
+      resendConfigured: hasResend,
+      resendKeyPrefix: keyPrefix,
+      receiverEmail: recipient,
+      fromAddress: fromEmail,
+      timestamp: new Date().toISOString(),
+    },
+  });
+});
+
 // POST /api/feedback - Submit feedback (authenticated or guest) and deliver by email to poojadaki09@gmail.com
 router.post("/", optionalAuth, rateLimiter, async (req, res) => {
   try {
@@ -80,6 +100,7 @@ router.post("/", optionalAuth, rateLimiter, async (req, res) => {
       message: trimmedMessage,
       pageUrl: sanitizedPageUrl,
       emailSent: false,
+      deliveryStatus: "logged",
     });
 
     await feedbackDoc.save();
@@ -91,9 +112,8 @@ router.post("/", optionalAuth, rateLimiter, async (req, res) => {
     });
 
     // Trigger email notification to recipient (poojadaki09@gmail.com)
-    let emailResult = { success: false };
     try {
-      emailResult = await sendFeedbackEmail({
+      const emailResult = await sendFeedbackEmail({
         type: sanitizedType,
         message: trimmedMessage,
         authorName: sanitizedAuthor,
@@ -102,21 +122,38 @@ router.post("/", optionalAuth, rateLimiter, async (req, res) => {
         userId: authenticatedUserId,
       });
 
-      if (emailResult?.success && !emailResult.simulated) {
+      if (emailResult?.delivered) {
         feedbackDoc.emailSent = true;
-        await feedbackDoc.save();
+        feedbackDoc.deliveryStatus = "delivered";
+        feedbackDoc.emailProvider = emailResult.provider || "resend";
+        feedbackDoc.emailMessageId = emailResult.messageId || null;
+        feedbackDoc.emailError = null;
+        feedbackDoc.deliveredAt = new Date();
+      } else {
+        feedbackDoc.emailSent = false;
+        feedbackDoc.deliveryStatus = emailResult?.simulated ? "logged" : "failed";
+        feedbackDoc.emailProvider = emailResult?.provider || "none";
+        feedbackDoc.emailError = emailResult?.error || "Email delivery was not completed";
       }
+
+      await feedbackDoc.save();
     } catch (emailErr) {
-      console.warn("[Feedback Route] Email delivery error:", emailErr.message);
+      console.error("[Feedback Route] Email delivery exception:", emailErr.message);
+      feedbackDoc.deliveryStatus = "failed";
+      feedbackDoc.emailError = emailErr.message;
+      await feedbackDoc.save().catch(() => {});
     }
 
     return res.status(201).json({
       success: true,
-      message: "Thanks! Your feedback has been sent successfully.",
+      message: feedbackDoc.emailSent
+        ? "Thanks! Your feedback has been sent successfully."
+        : "Feedback received and logged into system.",
       data: {
         id: feedbackDoc._id,
         type: feedbackDoc.type,
         emailSent: feedbackDoc.emailSent,
+        deliveryStatus: feedbackDoc.deliveryStatus,
       },
     });
   } catch (err) {

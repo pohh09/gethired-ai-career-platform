@@ -56,10 +56,22 @@ export async function sendFeedbackEmail({
   pageUrl = "",
   userId = null,
 }) {
-  const recipientEmail =
+  const recipientEmail = (
     process.env.FEEDBACK_RECEIVER_EMAIL ||
     process.env.ADMIN_EMAIL ||
-    DEFAULT_RECEIVER_EMAIL;
+    DEFAULT_RECEIVER_EMAIL
+  ).trim();
+
+  const resendKeyPresent = !!process.env.RESEND_API_KEY && process.env.RESEND_API_KEY.trim().length > 0;
+  const smtpConfigPresent = !!(process.env.SMTP_USER || process.env.EMAIL_USER);
+
+  console.log(`[Email Service Diagnostic] Initiating feedback email dispatch:`, {
+    resendConfigured: resendKeyPresent,
+    smtpConfigured: smtpConfigPresent,
+    recipient: recipientEmail,
+    feedbackType: type,
+    hasUserEmail: !!email,
+  });
 
   const formattedType = formatFeedbackType(type);
   const submissionTime = new Date().toLocaleString("en-US", {
@@ -67,7 +79,7 @@ export async function sendFeedbackEmail({
     timeStyle: "long",
   });
 
-  // Subject as requested: GetHired Feedback — [Feedback Type]
+  // Subject: GetHired Feedback — [Feedback Type]
   const subject = `GetHired Feedback — ${formattedType}`;
 
   const htmlContent = `
@@ -145,67 +157,116 @@ ${message}
 ==================================================
   `.trim();
 
+  const isValidReplyEmail =
+    typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
   // 1. Try Resend if RESEND_API_KEY is configured
-  if (process.env.RESEND_API_KEY) {
+  if (resendKeyPresent) {
+    const fromEmail = (
+      process.env.RESEND_FROM ||
+      process.env.SMTP_FROM ||
+      "GetHired Feedback <onboarding@resend.dev>"
+    ).trim();
+
+    console.log(`[Email Service - Resend] Dispatching via Resend API:`, {
+      from: fromEmail,
+      to: recipientEmail,
+      replyTo: isValidReplyEmail ? email.trim() : "none",
+    });
+
     try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      const fromEmail =
-        process.env.RESEND_FROM ||
-        process.env.SMTP_FROM ||
-        "GetHired Feedback <onboarding@resend.dev>";
+      const resend = new Resend(process.env.RESEND_API_KEY.trim());
 
       const resendResponse = await resend.emails.send({
         from: fromEmail,
         to: recipientEmail,
-        replyTo: email && email.includes("@") ? email : undefined,
+        replyTo: isValidReplyEmail ? email.trim() : undefined,
         subject,
         text: textContent,
         html: htmlContent,
       });
 
       if (resendResponse.error) {
-        console.warn("[Email Service - Resend Error]:", resendResponse.error);
-      } else {
-        console.log(
-          `[Email Service - Resend] Feedback email delivered to ${recipientEmail} (ID: ${resendResponse.data?.id})`
-        );
-        return { success: true, messageId: resendResponse.data?.id, provider: "resend" };
+        const errorMsg = resendResponse.error.message || JSON.stringify(resendResponse.error);
+        console.error(`[Email Service - Resend Error]:`, resendResponse.error);
+        return {
+          success: false,
+          delivered: false,
+          provider: "resend",
+          error: errorMsg,
+        };
       }
+
+      const messageId = resendResponse.data?.id || "resend_ok";
+      console.log(`[Email Service - Resend Success] Feedback email accepted by Resend (ID: ${messageId}) for ${recipientEmail}`);
+
+      return {
+        success: true,
+        delivered: true,
+        provider: "resend",
+        messageId,
+        error: null,
+      };
     } catch (resendErr) {
-      console.warn("[Email Service - Resend Exception]:", resendErr.message);
+      console.error(`[Email Service - Resend Exception]:`, resendErr.message);
+      return {
+        success: false,
+        delivered: false,
+        provider: "resend",
+        error: resendErr.message || "Resend API connection error",
+      };
     }
   }
 
-  // 2. Try Nodemailer if SMTP / Gmail credentials are configured
+  // 2. Try Nodemailer if SMTP credentials are configured
   const transporter = getEmailTransporter();
   if (transporter) {
     try {
-      const fromSender =
+      const fromSender = (
         process.env.SMTP_FROM ||
         process.env.SMTP_USER ||
-        '"GetHired Feedback" <no-reply@gethired.ai>';
+        '"GetHired Feedback" <no-reply@gethired.ai>'
+      ).trim();
+
+      console.log(`[Email Service - SMTP] Dispatching via SMTP transporter to ${recipientEmail}`);
 
       const info = await transporter.sendMail({
         from: fromSender,
         to: recipientEmail,
-        replyTo: email && email.includes("@") ? email : undefined,
+        replyTo: isValidReplyEmail ? email.trim() : undefined,
         subject,
         text: textContent,
         html: htmlContent,
       });
 
-      console.log(
-        `[Email Service - SMTP] Feedback email delivered to ${recipientEmail} (Message ID: ${info.messageId})`
-      );
-      return { success: true, messageId: info.messageId, provider: "smtp" };
+      console.log(`[Email Service - SMTP Success] Feedback delivered to ${recipientEmail} (ID: ${info.messageId})`);
+      return {
+        success: true,
+        delivered: true,
+        provider: "smtp",
+        messageId: info.messageId,
+        error: null,
+      };
     } catch (smtpErr) {
-      console.warn("[Email Service - SMTP Error]:", smtpErr.message);
+      console.error(`[Email Service - SMTP Error]:`, smtpErr.message);
+      return {
+        success: false,
+        delivered: false,
+        provider: "smtp",
+        error: smtpErr.message || "SMTP transmission error",
+      };
     }
   }
 
-  // 3. Fallback: Log full feedback payload when no live email credentials are set in environment
-  console.log(`[Email Service - Local Logging] Feedback queued for ${recipientEmail}:`);
-  console.log(textContent);
+  // 3. Fallback when neither RESEND_API_KEY nor SMTP credentials are set on the host
+  const missingConfigWarning = "RESEND_API_KEY is not configured in server environment variables";
+  console.warn(`[Email Service - Warning] ${missingConfigWarning}. Feedback saved to database only.`);
 
-  return { success: true, simulated: true };
+  return {
+    success: true,
+    delivered: false,
+    provider: "none",
+    simulated: true,
+    error: missingConfigWarning,
+  };
 }

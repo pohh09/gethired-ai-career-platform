@@ -35,6 +35,27 @@ const feedbackSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    deliveryStatus: {
+      type: String,
+      enum: ["delivered", "failed", "logged"],
+      default: "logged",
+    },
+    emailError: {
+      type: String,
+      default: null,
+    },
+    emailProvider: {
+      type: String,
+      default: null,
+    },
+    emailMessageId: {
+      type: String,
+      default: null,
+    },
+    deliveredAt: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
