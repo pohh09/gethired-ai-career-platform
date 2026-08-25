@@ -343,6 +343,9 @@ export const getUserAnalytics = async (req, res) => {
       ]),
     ]);
 
+    const appMap = new Map(appCounts.map((a) => [String(a._id), a.count]));
+    const aiMap = new Map(aiCounts.map((a) => [String(a._id), a.count]));
+
     const computeSessionStatus = (u) => {
       const lastLogin = u.lastLoginAt ? new Date(u.lastLoginAt).getTime() : (u.createdAt ? new Date(u.createdAt).getTime() : 0);
       const lastLogout = u.lastLogoutAt ? new Date(u.lastLogoutAt).getTime() : 0;
