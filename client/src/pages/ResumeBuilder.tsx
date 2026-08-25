@@ -24,6 +24,7 @@ import Input from "../components/ui/Input";
 import Textarea from "../components/ui/Textarea";
 import * as aiService from "../services/aiWorkspaceService";
 import { useResumeStore } from "../store/resumeStore";
+import { useAuthStore } from "../store/authStore";
 import ShareDocumentModal from "../components/community/ShareDocumentModal";
 import toast from "react-hot-toast";
 
@@ -70,6 +71,7 @@ interface ResumeBuilderProps {
 
 export default function ResumeBuilder({ onBackToWorkspace }: ResumeBuilderProps = {}) {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const { addResume, setActiveResume } = useResumeStore();
 
   const handleBack = () => {
@@ -83,14 +85,14 @@ export default function ResumeBuilder({ onBackToWorkspace }: ResumeBuilderProps 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   // Form State
-  const [targetRole, setTargetRole] = useState("Senior Full Stack Engineer");
-  const [fullName, setFullName] = useState("Alex Morgan");
-  const [email, setEmail] = useState("alex.morgan@example.com");
-  const [phone, setPhone] = useState("+1 (555) 019-2834");
-  const [location, setLocation] = useState("San Francisco, CA (Open to Remote)");
-  const [portfolioUrl, setPortfolioUrl] = useState("https://alexmorgan.dev");
-  const [linkedinUrl, setLinkedinUrl] = useState("linkedin.com/in/alexmorgan");
-  const [githubUrl, setGithubUrl] = useState("github.com/alexmorgan");
+  const [targetRole, setTargetRole] = useState("Software Engineer");
+  const [fullName, setFullName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
+  const [portfolioUrl, setPortfolioUrl] = useState("");
+  const [linkedinUrl, setLinkedinUrl] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
 
   // Summary State
   const [summary, setSummary] = useState(

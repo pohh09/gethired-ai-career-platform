@@ -28,9 +28,9 @@ export default function Dashboard() {
   const totalJobs = statsData?.totalJobs || 0;
   const recentJobs = recentJobsData?.data || [];
 
-  const activeInterviewsCount = stats?.Interview ?? 2;
-  const offersCount = stats?.Offer ?? 1;
-  const rejectionsCount = stats?.Rejected ?? 2;
+  const activeInterviewsCount = stats?.Interview ?? 0;
+  const offersCount = stats?.Offer ?? 0;
+  const rejectionsCount = stats?.Rejected ?? 0;
 
   const isLoadingInitial = isStatsLoading && isJobsLoading;
 
@@ -49,14 +49,14 @@ export default function Dashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
         <KpiCard
           title="Total Applications"
-          value={totalJobs || 13}
+          value={totalJobs}
           icon={<Briefcase size={20} />}
           comparisonText="vs last month"
-          percentageChange="+14%"
-          trendDirection="up"
+          percentageChange="+0%"
+          trendDirection="neutral"
           accentColor="blue"
           isLoading={isStatsLoading}
-          miniGraphData={[4, 6, 5, 8, 7, 10, 12, 14]}
+          miniGraphData={totalJobs > 0 ? [4, 6, 5, 8, 7, 10, 12, 14] : []}
           onClick={() => navigate("/jobs")}
         />
         <KpiCard

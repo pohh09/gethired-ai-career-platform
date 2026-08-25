@@ -48,11 +48,15 @@ import type {
   CreateJobRequest,
 } from "../types/job";
 
+import { useAuthStore } from "../store/authStore";
+
 type WorkspaceTab = "applications" | "discover" | "saved" | "archived";
 
-const SAVED_JOBS_KEY = "jobflow_saved_jobs_v1";
+const getSavedJobsKey = (userId?: string | null) =>
+  userId ? `gethired_saved_jobs_${userId}` : "gethired_saved_jobs_guest";
 
 export default function Jobs() {
+  const { user } = useAuthStore();
   const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("applications");
   const [viewMode, setViewMode] = useState<"kanban" | "table">("kanban");
@@ -83,13 +87,27 @@ export default function Jobs() {
   const [isDiscoverLoading, setIsDiscoverLoading] = useState<boolean>(false);
 
   const [savedJobs, setSavedJobs] = useState<DiscoverJob[]>(() => {
+    if (!user?.id) return [];
     try {
-      const stored = localStorage.getItem(SAVED_JOBS_KEY);
+      const stored = localStorage.getItem(getSavedJobsKey(user.id));
       return stored ? JSON.parse(stored) : [];
     } catch (_e) {
       return [];
     }
   });
+
+  useEffect(() => {
+    if (!user?.id) {
+      setSavedJobs([]);
+      return;
+    }
+    try {
+      const stored = localStorage.getItem(getSavedJobsKey(user.id));
+      setSavedJobs(stored ? JSON.parse(stored) : []);
+    } catch (_e) {
+      setSavedJobs([]);
+    }
+  }, [user?.id]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
@@ -103,11 +121,12 @@ export default function Jobs() {
   const [deletingJob, setDeletingJob] = useState<Job | null>(null);
 
   useEffect(() => {
+    if (!user?.id) return;
     try {
-      localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(savedJobs));
+      localStorage.setItem(getSavedJobsKey(user.id), JSON.stringify(savedJobs));
     } catch (_e) {
     }
-  }, [savedJobs]);
+  }, [savedJobs, user?.id]);
 
   useEffect(() => {
     let isMounted = true;

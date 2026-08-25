@@ -24,56 +24,7 @@ export default function Calendar() {
 
   const eventsList: ExtendedCalendarEvent[] = useMemo(() => {
     const today = new Date().toISOString().split("T")[0];
-
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const tomorrowStr = tomorrow.toISOString().split("T")[0];
-
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 4);
-    const nextWeekStr = nextWeek.toISOString().split("T")[0];
-
-    const baseEvents: ExtendedCalendarEvent[] = [
-      {
-        id: "ev-1",
-        title: "Technical Round",
-        company: "Stripe",
-        type: "Technical Round",
-        time: "10:00 AM",
-        date: tomorrowStr,
-        meetingLink: "https://meet.google.com/stripe-tech-interview",
-        location: "Google Meet",
-        interviewer: "Sarah Connor (Staff Engineer)",
-        notes:
-          "Prepare system design tradeoffs, rate limiting, and cache invalidation strategies.",
-      },
-      {
-        id: "ev-2",
-        title: "System Design Assessment",
-        company: "Vercel",
-        type: "Assessment",
-        time: "02:00 PM",
-        date: nextWeekStr,
-        meetingLink: "https://meet.google.com/vercel-sys-design",
-        location: "Google Meet",
-        interviewer: "Guillermo Rauch",
-        notes:
-          "Focus on Edge Functions latency, SSR streaming, and global CDN caching.",
-      },
-      {
-        id: "ev-3",
-        title: "Offer Discussion & Compensation",
-        company: "Linear",
-        type: "Offer Discussion",
-        time: "11:30 AM",
-        date: today,
-        meetingLink: "https://meet.google.com/linear-offer-review",
-        location: "Google Meet",
-        interviewer: "Karri Saarinen",
-        notes:
-          "Review equity package, remote allowance, and start date timeline.",
-      },
-    ];
+    const events: ExtendedCalendarEvent[] = [];
 
     jobs.forEach((j) => {
       const jDate = j.appliedDate
@@ -85,7 +36,7 @@ export default function Calendar() {
         j.status === "Assessment" ||
         j.status === "HR Round"
       ) {
-        baseEvents.push({
+        events.push({
           id: `job-ev-${j._id}`,
           title: j.role,
           company: j.company,
@@ -99,7 +50,7 @@ export default function Calendar() {
       }
     });
 
-    return baseEvents;
+    return events;
   }, [jobs]);
 
   const [scheduledEvents, setScheduledEvents] = useState<

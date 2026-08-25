@@ -28,43 +28,57 @@ import Textarea from "../components/ui/Textarea";
 import Button from "../components/ui/Button";
 import { useAuthStore } from "../store/authStore";
 
-const PROFILE_STORAGE_KEY = "jobflow_user_extended_profile_v1";
+import { useEffect } from "react";
+
+const getProfileStorageKey = (userId?: string | null) =>
+  userId ? `gethired_profile_${userId}` : "gethired_profile_guest";
 
 export default function Profile() {
   const { user, updateUser } = useAuthStore();
 
+  const createDefaultProfile = (u?: typeof user) => ({
+    name: u?.name || "",
+    email: u?.email || "",
+    phone: "",
+    location: "",
+    linkedin: "",
+    github: "",
+    portfolio: "",
+    skills: "",
+    experience: "",
+    education: "",
+    objective: "",
+    preferredRole: "",
+    preferredLocation: "",
+    expectedSalary: "",
+  });
+
   const [profile, setProfile] = useState(() => {
+    if (!user?.id) return createDefaultProfile(user);
     try {
-      const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
-      return stored
-        ? JSON.parse(stored)
-        : {
-            name: user?.name || "Alex Morgan",
-            email: user?.email || "alex.morgan@example.com",
-            phone: "+1 (555) 234-5678",
-            location: "San Francisco, CA",
-            linkedin: "https://linkedin.com/in/alexmorgan",
-            github: "https://github.com/alexmorgan",
-            portfolio: "https://alexmorgan.dev",
-            skills:
-              "React, TypeScript, Node.js, Next.js, Tailwind CSS, PostgreSQL, GraphQL",
-            experience:
-              "6+ years of Senior Full-Stack Engineering experience in SaaS & Cloud Startups.",
-            education:
-              "B.S. in Computer Science - University of California, Berkeley (2020)",
-            objective:
-              "Seeking Senior/Staff Engineering leadership roles building developer toolings & AI platforms.",
-            preferredRole: "Senior / Staff Software Engineer",
-            preferredLocation: "San Francisco, CA / Remote",
-            expectedSalary: "$175,000 - $210,000 / yr",
-          };
+      const stored = localStorage.getItem(getProfileStorageKey(user.id));
+      return stored ? JSON.parse(stored) : createDefaultProfile(user);
     } catch (_e) {
-      return {
-        name: user?.name || "",
-        email: user?.email || "",
-      };
+      return createDefaultProfile(user);
     }
   });
+
+  useEffect(() => {
+    if (!user?.id) {
+      setProfile(createDefaultProfile(user));
+      return;
+    }
+    try {
+      const stored = localStorage.getItem(getProfileStorageKey(user.id));
+      if (stored) {
+        setProfile(JSON.parse(stored));
+      } else {
+        setProfile(createDefaultProfile(user));
+      }
+    } catch (_e) {
+      setProfile(createDefaultProfile(user));
+    }
+  }, [user?.id]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,8 +87,11 @@ export default function Profile() {
     setIsLoading(true);
     setTimeout(() => {
       try {
-        localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
-        if (user) {
+        if (user?.id) {
+          localStorage.setItem(
+            getProfileStorageKey(user.id),
+            JSON.stringify(profile),
+          );
           updateUser({ ...user, name: profile.name, email: profile.email });
         }
         toast.success("Profile changes saved successfully!");

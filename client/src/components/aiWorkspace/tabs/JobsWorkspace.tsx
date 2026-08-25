@@ -45,9 +45,9 @@ export default function JobsWorkspace() {
   const [searchParams] = useSearchParams();
   const { activeResumeText, activeResumeFileName } = useResumeStore();
 
-  const [companyName, setCompanyName] = useState("Razorpay");
-  const [targetRole, setTargetRole] = useState("Senior Full Stack Developer");
-  const [location, setLocation] = useState("Bangalore, India");
+  const [companyName, setCompanyName] = useState("");
+  const [targetRole, setTargetRole] = useState("");
+  const [location, setLocation] = useState("");
   const [jobDescription, setJobDescription] = useState("");
 
   const handleApplyPreset = (preset: (typeof SAMPLE_PRESETS)[0]) => {

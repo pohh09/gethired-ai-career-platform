@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { User } from "../types/auth";
+import { queryClient } from "../lib/queryClient";
+import { useResumeStore } from "./resumeStore";
+import { useReminderStore } from "./reminderStore";
+import { useDocumentStore } from "./documentStore";
 
 interface AuthState {
   user: User | null;
@@ -17,17 +21,31 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
 
-      login: (user, token) =>
+      login: (user, token) => {
+        try {
+          queryClient.clear();
+        } catch {}
+        useResumeStore.getState().initUser(user.id);
+        useReminderStore.getState().initUser(user.id);
+        useDocumentStore.getState().initUser(user.id);
         set({
           user,
           token,
-        }),
+        });
+      },
 
-      logout: () =>
+      logout: () => {
+        try {
+          queryClient.clear();
+        } catch {}
+        useResumeStore.getState().reset();
+        useReminderStore.getState().reset();
+        useDocumentStore.getState().reset();
         set({
           user: null,
           token: null,
-        }),
+        });
+      },
 
       updateUser: (updatedFields) =>
         set((state) => ({
@@ -36,6 +54,18 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: "jobflow-auth",
+      onRehydrateStorage: () => (state) => {
+        if (state?.user?.id) {
+          useResumeStore.getState().initUser(state.user.id);
+          useReminderStore.getState().initUser(state.user.id);
+          useDocumentStore.getState().initUser(state.user.id);
+        } else {
+          useResumeStore.getState().reset();
+          useReminderStore.getState().reset();
+          useDocumentStore.getState().reset();
+        }
+      },
     },
   ),
 );
+

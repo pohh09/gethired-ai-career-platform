@@ -39,6 +39,19 @@ export default function ResumeWorkspace() {
   );
 
   useEffect(() => {
+    setResumeText(activeResumeText || "");
+    setDocMeta(
+      activeResumeFileName && activeResumeText
+        ? {
+            fileName: activeResumeFileName,
+            wordCount: (activeResumeText || "").split(/\s+/).length,
+            pageCount: 1,
+          }
+        : null,
+    );
+  }, [activeResumeText, activeResumeFileName]);
+
+  useEffect(() => {
     if (searchParams.get("mode") === "builder") {
       setShowBuilder(true);
     }

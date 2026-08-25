@@ -21,67 +21,47 @@ import { useUIStore, type ThemeMode } from "../store/uiStore";
 import { useResumeStore } from "../store/resumeStore";
 import { useAuthStore } from "../store/authStore";
 
+import { useEffect } from "react";
+
 export default function Settings() {
   const { theme, setTheme } = useUIStore();
   const { resumes, defaultResumeId, setDefaultResume } = useResumeStore();
-  const { logout } = useAuthStore();
+  const { user, logout } = useAuthStore();
 
-  const SETTINGS_KEY = "gethired_user_settings";
+  const getSettingsKey = (userId?: string | null) =>
+    userId ? `gethired_settings_${userId}` : "gethired_settings_guest";
 
-  const [language, setLanguage] = useState(() => {
+  const [language, setLanguage] = useState("en-US");
+  const [timeZone, setTimeZone] = useState("America/Los_Angeles");
+  const [emailAlerts, setEmailAlerts] = useState(true);
+  const [browserNotifs, setBrowserNotifs] = useState(true);
+  const [weeklyDigest, setWeeklyDigest] = useState(true);
+
+  useEffect(() => {
+    if (!user?.id) return;
     try {
-      const saved = localStorage.getItem(SETTINGS_KEY);
-      return saved ? JSON.parse(saved).language || "en-US" : "en-US";
-    } catch {
-      return "en-US";
-    }
-  });
-
-  const [timeZone, setTimeZone] = useState(() => {
-    try {
-      const saved = localStorage.getItem(SETTINGS_KEY);
-      return saved ? JSON.parse(saved).timeZone || "America/Los_Angeles" : "America/Los_Angeles";
-    } catch {
-      return "America/Los_Angeles";
-    }
-  });
-
-  const [emailAlerts, setEmailAlerts] = useState(() => {
-    try {
-      const saved = localStorage.getItem(SETTINGS_KEY);
-      return saved ? JSON.parse(saved).emailAlerts ?? true : true;
-    } catch {
-      return true;
-    }
-  });
-
-  const [browserNotifs, setBrowserNotifs] = useState(() => {
-    try {
-      const saved = localStorage.getItem(SETTINGS_KEY);
-      return saved ? JSON.parse(saved).browserNotifs ?? true : true;
-    } catch {
-      return true;
-    }
-  });
-
-  const [weeklyDigest, setWeeklyDigest] = useState(() => {
-    try {
-      const saved = localStorage.getItem(SETTINGS_KEY);
-      return saved ? JSON.parse(saved).weeklyDigest ?? true : true;
-    } catch {
-      return true;
-    }
-  });
+      const saved = localStorage.getItem(getSettingsKey(user.id));
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.language) setLanguage(parsed.language);
+        if (parsed.timeZone) setTimeZone(parsed.timeZone);
+        if (parsed.emailAlerts !== undefined) setEmailAlerts(parsed.emailAlerts);
+        if (parsed.browserNotifs !== undefined) setBrowserNotifs(parsed.browserNotifs);
+        if (parsed.weeklyDigest !== undefined) setWeeklyDigest(parsed.weeklyDigest);
+      }
+    } catch {}
+  }, [user?.id]);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteConfirmText, setDeleteConfirmText] = useState("");
 
   const persistSettings = (key: string, value: any) => {
+    if (!user?.id) return;
     try {
-      const current = localStorage.getItem(SETTINGS_KEY);
+      const current = localStorage.getItem(getSettingsKey(user.id));
       const parsed = current ? JSON.parse(current) : {};
       parsed[key] = value;
-      localStorage.setItem(SETTINGS_KEY, JSON.stringify(parsed));
+      localStorage.setItem(getSettingsKey(user.id), JSON.stringify(parsed));
     } catch (_e) {}
   };
 

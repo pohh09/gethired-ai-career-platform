@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 export interface JobReminder {
   id: string;
@@ -15,7 +14,10 @@ export interface JobReminder {
 }
 
 interface ReminderState {
+  currentUserId: string | null;
   reminders: JobReminder[];
+  initUser: (userId: string | null) => void;
+  reset: () => void;
   addReminder: (
     reminder: Omit<JobReminder, "id" | "isCompleted" | "createdAt">,
   ) => void;
@@ -24,72 +26,83 @@ interface ReminderState {
   getRemindersForJob: (jobId: string) => JobReminder[];
 }
 
-const INITIAL_REMINDERS: JobReminder[] = [
-  {
-    id: "rem-1",
-    jobId: "demo-1",
-    company: "Stripe",
-    role: "Senior Frontend Engineer",
-    type: "Interview",
-    title: "Technical System Architecture Interview Today at 2:00 PM",
-    dueDate: new Date().toISOString().split("T")[0],
-    notes:
-      "Review React fiber architecture, virtual DOM batching, and Stripe API design.",
-    isCompleted: false,
-    createdAt: "2026-08-01",
+const getReminderStorageKey = (userId: string | null) =>
+  userId ? `gethired_reminders_${userId}` : "gethired_reminders_guest";
+
+const loadRemindersFromStorage = (userId: string | null): JobReminder[] => {
+  if (!userId) return [];
+  try {
+    const raw = localStorage.getItem(getReminderStorageKey(userId));
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveRemindersToStorage = (
+  userId: string | null,
+  reminders: JobReminder[],
+) => {
+  if (!userId) return;
+  try {
+    localStorage.setItem(
+      getReminderStorageKey(userId),
+      JSON.stringify(reminders),
+    );
+  } catch {}
+};
+
+export const useReminderStore = create<ReminderState>()((set, get) => ({
+  currentUserId: null,
+  reminders: [],
+
+  initUser: (userId) => {
+    const reminders = loadRemindersFromStorage(userId);
+    set({
+      currentUserId: userId,
+      reminders,
+    });
   },
-  {
-    id: "rem-2",
-    jobId: "demo-2",
-    company: "Vercel",
-    role: "Staff Product Engineer",
-    type: "Follow-up",
-    title: "Follow up with Recruiter regarding Next.js assessment feedback",
-    dueDate: "2026-08-06",
-    notes: "Send polite check-in email if response pending.",
-    isCompleted: false,
-    createdAt: "2026-08-02",
+
+  reset: () => {
+    set({
+      currentUserId: null,
+      reminders: [],
+    });
   },
-];
 
-export const useReminderStore = create<ReminderState>()(
-  persist(
-    (set, get) => ({
-      reminders: INITIAL_REMINDERS,
+  addReminder: (reminder) => {
+    const { currentUserId, reminders } = get();
+    const newReminder: JobReminder = {
+      ...reminder,
+      id: `rem-${Date.now()}`,
+      isCompleted: false,
+      createdAt: new Date().toISOString().split("T")[0],
+    };
 
-      addReminder: (reminder) => {
-        const newReminder: JobReminder = {
-          ...reminder,
-          id: `rem-${Date.now()}`,
-          isCompleted: false,
-          createdAt: new Date().toISOString().split("T")[0],
-        };
+    const updated = [newReminder, ...reminders];
+    saveRemindersToStorage(currentUserId, updated);
+    set({ reminders: updated });
+  },
 
-        set((state) => ({
-          reminders: [newReminder, ...state.reminders],
-        }));
-      },
+  toggleCompleteReminder: (id) => {
+    const { currentUserId, reminders } = get();
+    const updated = reminders.map((r) =>
+      r.id === id ? { ...r, isCompleted: !r.isCompleted } : r,
+    );
+    saveRemindersToStorage(currentUserId, updated);
+    set({ reminders: updated });
+  },
 
-      toggleCompleteReminder: (id) => {
-        set((state) => ({
-          reminders: state.reminders.map((r) =>
-            r.id === id ? { ...r, isCompleted: !r.isCompleted } : r,
-          ),
-        }));
-      },
+  deleteReminder: (id) => {
+    const { currentUserId, reminders } = get();
+    const updated = reminders.filter((r) => r.id !== id);
+    saveRemindersToStorage(currentUserId, updated);
+    set({ reminders: updated });
+  },
 
-      deleteReminder: (id) => {
-        set((state) => ({
-          reminders: state.reminders.filter((r) => r.id !== id),
-        }));
-      },
+  getRemindersForJob: (jobId) => {
+    return get().reminders.filter((r) => r.jobId === jobId);
+  },
+}));
 
-      getRemindersForJob: (jobId) => {
-        return get().reminders.filter((r) => r.jobId === jobId);
-      },
-    }),
-    {
-      name: "jobflow_reminder_store_v1",
-    },
-  ),
-);
