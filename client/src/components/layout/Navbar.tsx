@@ -13,6 +13,8 @@ import {
   Calendar,
   Settings as SettingsIcon,
   User as UserIcon,
+  Sun,
+  Moon,
 } from "lucide-react";
 import Breadcrumbs from "../common/Breadcrumbs";
 import SearchBar from "./SearchBar";
@@ -40,8 +42,18 @@ const ROUTE_CONFIG: Record<
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { toggleMobileDrawer } = useUIStore();
+  const { toggleMobileDrawer, theme, setTheme } = useUIStore();
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
 
   const currentRoute =
     ROUTE_CONFIG[location.pathname] || {
@@ -121,6 +133,21 @@ export default function Navbar() {
           >
             Quick Add
           </Button>
+
+          {/* Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200 active:scale-90 cursor-pointer"
+            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            title={`Switch to ${isDark ? "light" : "dark"} mode`}
+          >
+            {isDark ? (
+              <Sun size={18} className="text-amber-400 hover:rotate-45 transition-transform" />
+            ) : (
+              <Moon size={18} className="text-slate-600 hover:-rotate-12 transition-transform" />
+            )}
+          </button>
 
           <NotificationDropdown />
 
