@@ -64,11 +64,16 @@ export default function JobAiActionsMenu({
   };
 
   return (
-    <div className={`relative inline-block ${className}`} ref={menuRef}>
+    <div
+      className={`relative inline-block ${isOpen ? "z-50" : ""} ${className}`}
+      ref={menuRef}
+    >
       {variant === "icon" ? (
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
           className="p-1.5 rounded-lg text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-all cursor-pointer"
           title="AI Productivity Actions"
         >
@@ -79,6 +84,8 @@ export default function JobAiActionsMenu({
           variant="outline"
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
           leftIcon={
             <Sparkles size={13} className="text-purple-500 animate-pulse" />
           }

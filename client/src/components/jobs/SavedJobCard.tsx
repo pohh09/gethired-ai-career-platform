@@ -29,7 +29,7 @@ export default function SavedJobCard({
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs flex flex-col justify-between space-y-4 hover:border-indigo-300 dark:hover:border-indigo-800/80 transition-all"
+      className="relative hover:z-10 focus-within:z-30 [&:has([aria-expanded=true])]:z-30 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xs flex flex-col justify-between space-y-4 hover:border-indigo-300 dark:hover:border-indigo-800/80 transition-all"
     >
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
