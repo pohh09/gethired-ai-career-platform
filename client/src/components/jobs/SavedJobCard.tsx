@@ -8,7 +8,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Button from "../ui/Button";
-import JobAiActionsMenu from "./JobAiActionsMenu";
 import type { DiscoverJob } from "../../types/job";
 
 export interface SavedJobCardProps {
@@ -117,7 +116,7 @@ export default function SavedJobCard({
           Move to My Applications
         </Button>
 
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-2 gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -127,8 +126,6 @@ export default function SavedJobCard({
           >
             Details
           </Button>
-
-          <JobAiActionsMenu job={job} variant="button" />
 
           <Button
             variant="ghost"

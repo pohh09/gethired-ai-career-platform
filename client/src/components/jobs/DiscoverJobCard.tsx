@@ -9,7 +9,6 @@ import {
   Check,
 } from "lucide-react";
 import Button from "../ui/Button";
-import JobAiActionsMenu from "./JobAiActionsMenu";
 import type { DiscoverJob } from "../../types/job";
 
 export interface DiscoverJobCardProps {
@@ -165,13 +164,13 @@ export default function DiscoverJobCard({
           </span>
         </div>
 
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-2 gap-2">
           <Button
             variant="outline"
             size="sm"
             onClick={() => onViewDetails(job)}
             leftIcon={<Eye size={13} />}
-            className="text-[11px] sm:text-xs font-bold px-1 sm:px-1.5"
+            className="text-[11px] sm:text-xs font-bold px-2"
           >
             Details
           </Button>
@@ -181,12 +180,10 @@ export default function DiscoverJobCard({
             size="sm"
             onClick={() => onSaveJob(job)}
             leftIcon={isSaved ? <Check size={13} /> : <Bookmark size={13} />}
-            className={`text-[11px] sm:text-xs font-bold px-1 sm:px-1.5 ${isSaved ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200" : ""}`}
+            className={`text-[11px] sm:text-xs font-bold px-2 ${isSaved ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200" : ""}`}
           >
             {isSaved ? "Tracked" : "Track"}
           </Button>
-
-          <JobAiActionsMenu job={job} variant="button" />
         </div>
       </div>
     </motion.div>
